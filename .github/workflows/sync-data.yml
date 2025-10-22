@@ -1,0 +1,39 @@
+name: Sync Investment Data
+
+on:
+  schedule:
+    # 每小時執行一次（UTC 時間）
+    - cron: '0 * * * *'
+  workflow_dispatch:  # 允許手動觸發
+
+jobs:
+  sync-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      - name: Run data sync script
+        env:
+          ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
+        run: |
+          python sync_data.py
+          
+      - name: Commit and push if changed
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions@github.com'
+          git add data/*.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update investment data - $(date +'%Y-%m-%d %H:%M:%S UTC')" && git push)
+

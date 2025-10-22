@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投資儀表板 | Investment Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 投資儀表板</h1>
+            <p class="subtitle">即時市場數據與分析</p>
+            <button id="refreshBtn" class="refresh-btn">🔄 刷新數據</button>
+        </header>
+
+        <div class="dashboard-grid">
+            <!-- 恐懼貪婪指數 -->
+            <div class="card">
+                <h2>😱 恐懼貪婪指數</h2>
+                <div id="fearGreedIndex" class="loading">載入中...</div>
+                <div id="fearGreedStatus" class="status"></div>
+                <p class="timestamp" id="fearGreedTimestamp"></p>
+            </div>
+
+            <!-- HIBOR 利率 -->
+            <div class="card">
+                <h2>💰 HIBOR 利率</h2>
+                <div id="hiborRates" class="loading">載入中...</div>
+                <p class="timestamp" id="hiborTimestamp"></p>
+            </div>
+
+            <!-- 市場廣度 -->
+            <div class="card">
+                <h2>📈 市場廣度</h2>
+                <div id="marketBreadth" class="loading">載入中...</div>
+                <p class="timestamp" id="marketBreadthTimestamp"></p>
+            </div>
+
+            <!-- 資金流向 -->
+            <div class="card">
+                <h2>💵 資金流向</h2>
+                <div id="fundFlows" class="loading">載入中...</div>
+                <p class="timestamp" id="fundFlowsTimestamp"></p>
+            </div>
+        </div>
+
+        <footer>
+            <p>數據來源：HKMA, CNN Business, Alpha Vantage | 更新時間：<span id="lastUpdate">--</span></p>
+            <p class="disclaimer">⚠️ 本儀表板僅供參考，不構成投資建議</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
