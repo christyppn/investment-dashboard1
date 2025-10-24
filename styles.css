@@ -154,23 +154,27 @@ header h1 {
     color: #333;
 }
 
-.metric-item {
+/* New styles for multi-metric display and charts */
+.metric-item, .flow-item {
     padding: 10px 0;
     border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.metric-item:last-child {
+.metric-item:last-child, .flow-item:last-child {
     border-bottom: none;
 }
 
-.metric-name {
+.metric-name, .flow-sector {
     font-weight: 600;
     color: #667eea;
-    margin-bottom: 5px;
+    flex: 1;
 }
 
-.metric-value {
-    font-size: 1.5rem;
+.metric-value, .flow-amount {
+    font-size: 1.1rem;
     font-weight: bold;
     color: #333;
 }
@@ -183,25 +187,9 @@ header h1 {
     color: #ff4444;
 }
 
-.flow-item {
-    padding: 10px 0;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.flow-item:last-child {
-    border-bottom: none;
-}
-
-.flow-sector {
-    font-weight: 600;
-    color: #667eea;
-    margin-bottom: 5px;
-}
-
-.flow-amount {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #333;
+/* Ensure chart containers have some space */
+#fearGreedChart, #marketBreadthChart, #fundFlowsChart {
+    margin-top: 15px;
 }
 
 .timestamp {
@@ -242,4 +230,3 @@ footer p {
         font-size: 2rem;
     }
 }
-
