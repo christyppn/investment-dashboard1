@@ -31,9 +31,10 @@ def fetch_hibor_rates():
         
         # 轉換為所需格式
         hibor_data = [
-            {"id": "1", "term": "1M", "rate": float(latest_data.get("HIBOR_1M", 0)), "timestamp": datetime.now().isoformat() + "Z"},
-            {"id": "2", "term": "3M", "rate": float(latest_data.get("HIBOR_3M", 0)), "timestamp": datetime.now().isoformat() + "Z"},
-            {"id": "3", "term": "6M", "rate": float(latest_data.get("HIBOR_6M", 0)), "timestamp": datetime.now().isoformat() + "Z"},
+            {"id": "1", "term": "1M", "rate": float(latest_data.get("ir_1m", 0)), "timestamp": datetime.now().isoformat() + "Z"},
+            {"id": "2", "term": "3M", "rate": float(latest_data.get("ir_3m", 0)), "timestamp": datetime.now().isoformat() + "Z"},
+            {"id": "3", "term": "6M", "rate": float(latest_data.get("ir_6m", 0)), "timestamp": datetime.now().isoformat() + "Z"},
+
         ]
         print(f"Fetched HIBOR rates: {hibor_data}")
         return hibor_data
