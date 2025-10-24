@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "id": "1",
+    "metric_name": "SPY Daily Change",
+    "region": "US",
+    "value": 0.59,
+    "timestamp": "2025-10-24T01:49:51.800140Z"
+  }
+]
