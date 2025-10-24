@@ -17,7 +17,7 @@ def fetch_hibor_rates():
     print("Fetching HIBOR rates...")
     url = "https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily"
     try:
-        response = requests.get(url, timeout=30)
+        response = requests.get(url, timeout=30 )
         response.raise_for_status()
         data = response.json()
         
@@ -43,22 +43,25 @@ def fetch_hibor_rates():
 
 def fetch_fear_greed_index():
     print("Fetching Fear & Greed Index...")
-    url = "https://production.dataviz.cnn.io/index/fearandgreed/graphdata"
+    # New source: Alternative public API for Fear & Greed Index
+    url = "https://api.alternative.me/fng/"
     try:
-        response = requests.get(url, timeout=30)
+        response = requests.get(url, params={"limit": 1}, timeout=30 )
         response.raise_for_status()
         data = response.json()
         
         # 提取當前指數值
-        score = data.get("fear_and_greed", {}).get("score")
-        rating = data.get("fear_and_greed", {}).get("rating")
-        
-        if score is not None:
+        data_points = data.get("data")
+        if data_points:
+            latest = data_points[0]
+            score = latest.get("value")
+            rating = latest.get("value_classification")
+            
             fng_data = [
                 {
                     "id": "1",
                     "indicator_name": "Fear & Greed Index",
-                    "region": "US",
+                    "region": "Global",
                     "value": int(score),
                     "status": rating or "Unknown",
                     "timestamp": datetime.now().isoformat() + "Z"
@@ -83,7 +86,7 @@ def fetch_alpha_vantage_data(symbol, function, outputsize="compact"):
         "outputsize": outputsize
     }
     try:
-        response = requests.get(base_url, params=params, timeout=30)
+        response = requests.get(base_url, params=params, timeout=30 )
         response.raise_for_status()
         data = response.json()
         if "Error Message" in data:
@@ -186,6 +189,10 @@ def main():
         write_to_file(fund_flows_data, "fund_flows.json")
     
     print("Data synchronization process finished.")
+
+if __name__ == "__main__":
+    main()
+
 
 if __name__ == "__main__":
     main()
