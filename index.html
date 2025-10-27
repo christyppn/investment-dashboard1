@@ -12,6 +12,11 @@
         <header>
             <h1>📊 投資儀表板</h1>
             <p class="subtitle">即時市場數據與分析</p>
+            <nav class="main-nav">
+                <a href="index.html" class="active">📈 市場總覽</a>
+                <a href="fund_flow.html">💵 資金流向</a>
+                <!-- 未來新增：<a href="money_fund.html">💰 貨幣基金</a> -->
+            </nav>
             <button id="refreshBtn" class="refresh-btn">🔄 刷新數據</button>
         </header>
 
@@ -39,14 +44,8 @@
                 <div id="marketBreadthChart"></div>
                 <p class="timestamp" id="marketBreadthTimestamp"></p>
             </div>
-
-            <!-- 資金流向 -->
-            <div class="card">
-                <h2>💵 資金流向</h2>
-                <div id="fundFlows" class="loading">載入中...</div>
-                <div id="fundFlowsChart"></div>
-                <p class="timestamp" id="fundFlowsTimestamp"></p>
-            </div>
+            
+            <!-- 資金流向卡片已移除 -->
         </div>
 
         <footer>
