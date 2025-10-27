@@ -1,0 +1,1892 @@
+[
+  {
+    "date": "2025-09-15T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 0.0,
+    "volume": 63772412,
+    "close": 660.91
+  },
+  {
+    "date": "2025-09-16T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": -0.14,
+    "volume": 61168953,
+    "close": 660.0
+  },
+  {
+    "date": "2025-09-17T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": -0.12,
+    "volume": 101952244,
+    "close": 659.18
+  },
+  {
+    "date": "2025-09-18T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 0.47,
+    "volume": 90459242,
+    "close": 662.26
+  },
+  {
+    "date": "2025-09-19T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 0.22,
+    "volume": 97945620,
+    "close": 663.7
+  },
+  {
+    "date": "2025-09-22T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 0.47,
+    "volume": 69452201,
+    "close": 666.84
+  },
+  {
+    "date": "2025-09-23T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": -0.54,
+    "volume": 81708872,
+    "close": 663.21
+  },
+  {
+    "date": "2025-09-24T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": -0.32,
+    "volume": 68082229,
+    "close": 661.1
+  },
+  {
+    "date": "2025-09-25T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": -0.46,
+    "volume": 89622067,
+    "close": 658.05
+  },
+  {
+    "date": "2025-09-26T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 0.57,
+    "volume": 69179209,
+    "close": 661.82
+  },
+  {
+    "date": "2025-09-29T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 0.28,
+    "volume": 73499015,
+    "close": 663.68
+  },
+  {
+    "date": "2025-09-30T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 0.38,
+    "volume": 86288028,
+    "close": 666.18
+  },
+  {
+    "date": "2025-10-01T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 0.34,
+    "volume": 72545369,
+    "close": 668.45
+  },
+  {
+    "date": "2025-10-02T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 0.12,
+    "volume": 56895993,
+    "close": 669.22
+  },
+  {
+    "date": "2025-10-03T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": -0.0,
+    "volume": 70494350,
+    "close": 669.21
+  },
+  {
+    "date": "2025-10-06T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 0.36,
+    "volume": 54623260,
+    "close": 671.61
+  },
+  {
+    "date": "2025-10-07T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": -0.37,
+    "volume": 72020067,
+    "close": 669.12
+  },
+  {
+    "date": "2025-10-08T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 0.6,
+    "volume": 60702241,
+    "close": 673.11
+  },
+  {
+    "date": "2025-10-09T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": -0.29,
+    "volume": 66501941,
+    "close": 671.16
+  },
+  {
+    "date": "2025-10-10T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": -2.7,
+    "volume": 159422589,
+    "close": 653.02
+  },
+  {
+    "date": "2025-10-13T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 1.53,
+    "volume": 79560517,
+    "close": 663.04
+  },
+  {
+    "date": "2025-10-14T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": -0.12,
+    "volume": 88779560,
+    "close": 662.23
+  },
+  {
+    "date": "2025-10-15T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 0.44,
+    "volume": 81702555,
+    "close": 665.17
+  },
+  {
+    "date": "2025-10-16T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": -0.68,
+    "volume": 110563346,
+    "close": 660.64
+  },
+  {
+    "date": "2025-10-17T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 0.57,
+    "volume": 96500870,
+    "close": 664.39
+  },
+  {
+    "date": "2025-10-20T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 1.04,
+    "volume": 60493350,
+    "close": 671.3
+  },
+  {
+    "date": "2025-10-21T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": -0.0,
+    "volume": 56249034,
+    "close": 671.29
+  },
+  {
+    "date": "2025-10-22T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": -0.52,
+    "volume": 80564006,
+    "close": 667.8
+  },
+  {
+    "date": "2025-10-23T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 0.59,
+    "volume": 65604461,
+    "close": 671.76
+  },
+  {
+    "date": "2025-10-24T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 0.82,
+    "volume": 74356527,
+    "close": 677.25
+  },
+  {
+    "date": "2025-09-15T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": 0.0,
+    "volume": 44360315,
+    "close": 591.68
+  },
+  {
+    "date": "2025-09-16T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": -0.08,
+    "volume": 36942130,
+    "close": 591.18
+  },
+  {
+    "date": "2025-09-17T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": -0.2,
+    "volume": 69384820,
+    "close": 590.0
+  },
+  {
+    "date": "2025-09-18T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": 0.9,
+    "volume": 61069294,
+    "close": 595.32
+  },
+  {
+    "date": "2025-09-19T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": 0.68,
+    "volume": 58196109,
+    "close": 599.35
+  },
+  {
+    "date": "2025-09-22T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": 0.48,
+    "volume": 57154769,
+    "close": 602.2
+  },
+  {
+    "date": "2025-09-23T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": -0.66,
+    "volume": 64635486,
+    "close": 598.2
+  },
+  {
+    "date": "2025-09-24T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": -0.35,
+    "volume": 49850301,
+    "close": 596.1
+  },
+  {
+    "date": "2025-09-25T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": -0.43,
+    "volume": 70920209,
+    "close": 593.53
+  },
+  {
+    "date": "2025-09-26T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": 0.41,
+    "volume": 54337416,
+    "close": 595.97
+  },
+  {
+    "date": "2025-09-29T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": 0.46,
+    "volume": 48332934,
+    "close": 598.73
+  },
+  {
+    "date": "2025-09-30T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": 0.27,
+    "volume": 46533814,
+    "close": 600.37
+  },
+  {
+    "date": "2025-10-01T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": 0.48,
+    "volume": 46899612,
+    "close": 603.25
+  },
+  {
+    "date": "2025-10-02T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": 0.41,
+    "volume": 43765410,
+    "close": 605.73
+  },
+  {
+    "date": "2025-10-03T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": -0.42,
+    "volume": 46482098,
+    "close": 603.18
+  },
+  {
+    "date": "2025-10-06T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": 0.75,
+    "volume": 41962115,
+    "close": 607.71
+  },
+  {
+    "date": "2025-10-07T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": -0.53,
+    "volume": 58209463,
+    "close": 604.51
+  },
+  {
+    "date": "2025-10-08T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": 1.15,
+    "volume": 50629754,
+    "close": 611.44
+  },
+  {
+    "date": "2025-10-09T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": -0.12,
+    "volume": 45550958,
+    "close": 610.7
+  },
+  {
+    "date": "2025-10-10T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": -3.47,
+    "volume": 97614783,
+    "close": 589.5
+  },
+  {
+    "date": "2025-10-13T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": 2.12,
+    "volume": 65872584,
+    "close": 602.01
+  },
+  {
+    "date": "2025-10-14T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": -0.67,
+    "volume": 69203187,
+    "close": 598.0
+  },
+  {
+    "date": "2025-10-15T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": 0.71,
+    "volume": 62805456,
+    "close": 602.22
+  },
+  {
+    "date": "2025-10-16T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": -0.37,
+    "volume": 70981963,
+    "close": 599.99
+  },
+  {
+    "date": "2025-10-17T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": 0.66,
+    "volume": 72024872,
+    "close": 603.93
+  },
+  {
+    "date": "2025-10-20T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": 1.26,
+    "volume": 45761697,
+    "close": 611.54
+  },
+  {
+    "date": "2025-10-21T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": -0.03,
+    "volume": 44538161,
+    "close": 611.38
+  },
+  {
+    "date": "2025-10-22T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": -0.96,
+    "volume": 61478802,
+    "close": 605.49
+  },
+  {
+    "date": "2025-10-23T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": 0.84,
+    "volume": 42844298,
+    "close": 610.58
+  },
+  {
+    "date": "2025-10-24T00:00:00Z",
+    "metric_name": "NASDAQ 100 Daily Change",
+    "change": 1.07,
+    "volume": 47632473,
+    "close": 617.1
+  },
+  {
+    "date": "2025-09-15T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 0.0,
+    "volume": 4862187,
+    "close": 460.07
+  },
+  {
+    "date": "2025-09-16T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": -0.28,
+    "volume": 4526064,
+    "close": 458.78
+  },
+  {
+    "date": "2025-09-17T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 0.54,
+    "volume": 5998016,
+    "close": 461.26
+  },
+  {
+    "date": "2025-09-18T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 0.3,
+    "volume": 6681016,
+    "close": 462.63
+  },
+  {
+    "date": "2025-09-19T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 0.07,
+    "volume": 5871474,
+    "close": 462.94
+  },
+  {
+    "date": "2025-09-22T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 0.16,
+    "volume": 4074879,
+    "close": 463.67
+  },
+  {
+    "date": "2025-09-23T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": -0.17,
+    "volume": 5904580,
+    "close": 462.87
+  },
+  {
+    "date": "2025-09-24T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": -0.4,
+    "volume": 4588788,
+    "close": 461.02
+  },
+  {
+    "date": "2025-09-25T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": -0.34,
+    "volume": 4767189,
+    "close": 459.43
+  },
+  {
+    "date": "2025-09-26T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 0.62,
+    "volume": 4167209,
+    "close": 462.28
+  },
+  {
+    "date": "2025-09-29T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 0.16,
+    "volume": 3752701,
+    "close": 463.04
+  },
+  {
+    "date": "2025-09-30T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 0.15,
+    "volume": 4253321,
+    "close": 463.74
+  },
+  {
+    "date": "2025-10-01T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 0.11,
+    "volume": 4551576,
+    "close": 464.26
+  },
+  {
+    "date": "2025-10-02T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 0.18,
+    "volume": 5458620,
+    "close": 465.11
+  },
+  {
+    "date": "2025-10-03T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 0.52,
+    "volume": 9693908,
+    "close": 467.51
+  },
+  {
+    "date": "2025-10-06T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": -0.14,
+    "volume": 7405391,
+    "close": 466.84
+  },
+  {
+    "date": "2025-10-07T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": -0.19,
+    "volume": 7368743,
+    "close": 465.97
+  },
+  {
+    "date": "2025-10-08T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 0.02,
+    "volume": 4621175,
+    "close": 466.07
+  },
+  {
+    "date": "2025-10-09T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": -0.55,
+    "volume": 5410969,
+    "close": 463.5
+  },
+  {
+    "date": "2025-10-10T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": -1.86,
+    "volume": 9309145,
+    "close": 454.87
+  },
+  {
+    "date": "2025-10-13T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 1.28,
+    "volume": 6272494,
+    "close": 460.68
+  },
+  {
+    "date": "2025-10-14T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 0.44,
+    "volume": 7827371,
+    "close": 462.71
+  },
+  {
+    "date": "2025-10-15T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 0.0,
+    "volume": 6187089,
+    "close": 462.71
+  },
+  {
+    "date": "2025-10-16T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": -0.68,
+    "volume": 8149547,
+    "close": 459.56
+  },
+  {
+    "date": "2025-10-17T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 0.48,
+    "volume": 8439860,
+    "close": 461.78
+  },
+  {
+    "date": "2025-10-20T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 1.13,
+    "volume": 4556554,
+    "close": 467.02
+  },
+  {
+    "date": "2025-10-21T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 0.47,
+    "volume": 5951558,
+    "close": 469.22
+  },
+  {
+    "date": "2025-10-22T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": -0.73,
+    "volume": 7604676,
+    "close": 465.78
+  },
+  {
+    "date": "2025-10-23T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 0.32,
+    "volume": 5144161,
+    "close": 467.29
+  },
+  {
+    "date": "2025-10-24T00:00:00Z",
+    "metric_name": "Dow 30 Daily Change",
+    "change": 1.05,
+    "volume": 7228912,
+    "close": 472.21
+  },
+  {
+    "date": "2025-09-15T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": 0.0,
+    "volume": 31922018,
+    "close": 53.68
+  },
+  {
+    "date": "2025-09-16T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": -0.22,
+    "volume": 28482510,
+    "close": 53.56
+  },
+  {
+    "date": "2025-09-17T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": 0.97,
+    "volume": 47976104,
+    "close": 54.08
+  },
+  {
+    "date": "2025-09-18T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": 0.09,
+    "volume": 36609074,
+    "close": 54.13
+  },
+  {
+    "date": "2025-09-19T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": 0.22,
+    "volume": 46731380,
+    "close": 54.25
+  },
+  {
+    "date": "2025-09-22T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": -0.46,
+    "volume": 32393009,
+    "close": 54.0
+  },
+  {
+    "date": "2025-09-23T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": -0.44,
+    "volume": 28698894,
+    "close": 53.76
+  },
+  {
+    "date": "2025-09-24T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": -0.28,
+    "volume": 23893354,
+    "close": 53.61
+  },
+  {
+    "date": "2025-09-25T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": -0.26,
+    "volume": 24757541,
+    "close": 53.47
+  },
+  {
+    "date": "2025-09-26T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": 0.73,
+    "volume": 30686069,
+    "close": 53.86
+  },
+  {
+    "date": "2025-09-29T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": 0.5,
+    "volume": 20713832,
+    "close": 54.13
+  },
+  {
+    "date": "2025-09-30T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": -0.48,
+    "volume": 32442206,
+    "close": 53.87
+  },
+  {
+    "date": "2025-10-01T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": -0.89,
+    "volume": 33210082,
+    "close": 53.39
+  },
+  {
+    "date": "2025-10-02T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": -0.07,
+    "volume": 32443383,
+    "close": 53.35
+  },
+  {
+    "date": "2025-10-03T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": 0.69,
+    "volume": 32111601,
+    "close": 53.72
+  },
+  {
+    "date": "2025-10-06T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": -0.04,
+    "volume": 32001339,
+    "close": 53.7
+  },
+  {
+    "date": "2025-10-07T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": 0.13,
+    "volume": 31250466,
+    "close": 53.77
+  },
+  {
+    "date": "2025-10-08T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": -0.48,
+    "volume": 26848679,
+    "close": 53.51
+  },
+  {
+    "date": "2025-10-09T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": -0.36,
+    "volume": 33922435,
+    "close": 53.32
+  },
+  {
+    "date": "2025-10-10T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": -2.18,
+    "volume": 73596160,
+    "close": 52.16
+  },
+  {
+    "date": "2025-10-13T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": 0.96,
+    "volume": 39651855,
+    "close": 52.66
+  },
+  {
+    "date": "2025-10-14T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": 1.1,
+    "volume": 62588716,
+    "close": 53.24
+  },
+  {
+    "date": "2025-10-15T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": 0.0,
+    "volume": 39526563,
+    "close": 53.24
+  },
+  {
+    "date": "2025-10-16T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": -2.78,
+    "volume": 85420094,
+    "close": 51.76
+  },
+  {
+    "date": "2025-10-17T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": 0.81,
+    "volume": 52288856,
+    "close": 52.18
+  },
+  {
+    "date": "2025-10-20T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": 1.17,
+    "volume": 39479562,
+    "close": 52.79
+  },
+  {
+    "date": "2025-10-21T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": -0.11,
+    "volume": 31213574,
+    "close": 52.73
+  },
+  {
+    "date": "2025-10-22T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": -0.57,
+    "volume": 53727459,
+    "close": 52.43
+  },
+  {
+    "date": "2025-10-23T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": 0.21,
+    "volume": 29483687,
+    "close": 52.54
+  },
+  {
+    "date": "2025-10-24T00:00:00Z",
+    "metric_name": "Financial Sector Volume",
+    "change": 1.08,
+    "volume": 31947795,
+    "close": 53.11
+  },
+  {
+    "date": "2025-09-15T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 0.0,
+    "volume": 8134011,
+    "close": 273.32
+  },
+  {
+    "date": "2025-09-16T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": -0.35,
+    "volume": 8040731,
+    "close": 272.37
+  },
+  {
+    "date": "2025-09-17T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": -0.35,
+    "volume": 9474263,
+    "close": 271.43
+  },
+  {
+    "date": "2025-09-18T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 1.73,
+    "volume": 10441665,
+    "close": 276.12
+  },
+  {
+    "date": "2025-09-19T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 1.01,
+    "volume": 7835381,
+    "close": 278.92
+  },
+  {
+    "date": "2025-09-22T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 1.34,
+    "volume": 7885581,
+    "close": 282.66
+  },
+  {
+    "date": "2025-09-23T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": -0.86,
+    "volume": 8228561,
+    "close": 280.22
+  },
+  {
+    "date": "2025-09-24T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": -0.62,
+    "volume": 6735506,
+    "close": 278.49
+  },
+  {
+    "date": "2025-09-25T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": -0.18,
+    "volume": 10674849,
+    "close": 278.0
+  },
+  {
+    "date": "2025-09-26T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 0.3,
+    "volume": 8267024,
+    "close": 278.84
+  },
+  {
+    "date": "2025-09-29T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 0.53,
+    "volume": 8053739,
+    "close": 280.33
+  },
+  {
+    "date": "2025-09-30T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 0.55,
+    "volume": 9107570,
+    "close": 281.86
+  },
+  {
+    "date": "2025-10-01T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 0.98,
+    "volume": 8705622,
+    "close": 284.62
+  },
+  {
+    "date": "2025-10-02T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 0.54,
+    "volume": 8803914,
+    "close": 286.16
+  },
+  {
+    "date": "2025-10-03T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": -0.5,
+    "volume": 8728957,
+    "close": 284.72
+  },
+  {
+    "date": "2025-10-06T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 1.01,
+    "volume": 8972822,
+    "close": 287.6
+  },
+  {
+    "date": "2025-10-07T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": -0.67,
+    "volume": 7794189,
+    "close": 285.68
+  },
+  {
+    "date": "2025-10-08T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 1.75,
+    "volume": 7019342,
+    "close": 290.69
+  },
+  {
+    "date": "2025-10-09T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": -0.17,
+    "volume": 5994716,
+    "close": 290.2
+  },
+  {
+    "date": "2025-10-10T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": -4.07,
+    "volume": 22287291,
+    "close": 278.39
+  },
+  {
+    "date": "2025-10-13T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 2.44,
+    "volume": 11015162,
+    "close": 285.17
+  },
+  {
+    "date": "2025-10-14T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": -1.28,
+    "volume": 13478388,
+    "close": 281.51
+  },
+  {
+    "date": "2025-10-15T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 0.99,
+    "volume": 10468784,
+    "close": 284.3
+  },
+  {
+    "date": "2025-10-16T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 0.07,
+    "volume": 11583102,
+    "close": 284.51
+  },
+  {
+    "date": "2025-10-17T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 0.18,
+    "volume": 12755769,
+    "close": 285.01
+  },
+  {
+    "date": "2025-10-20T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 1.12,
+    "volume": 6902570,
+    "close": 288.19
+  },
+  {
+    "date": "2025-10-21T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 0.05,
+    "volume": 6251939,
+    "close": 288.34
+  },
+  {
+    "date": "2025-10-22T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": -0.99,
+    "volume": 10361631,
+    "close": 285.49
+  },
+  {
+    "date": "2025-10-23T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 1.26,
+    "volume": 5961749,
+    "close": 289.09
+  },
+  {
+    "date": "2025-10-24T00:00:00Z",
+    "metric_name": "Technology Sector Volume",
+    "change": 1.55,
+    "volume": 7179779,
+    "close": 293.58
+  },
+  {
+    "date": "2025-09-15T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": 0.0,
+    "volume": 11644282,
+    "close": 88.3
+  },
+  {
+    "date": "2025-09-16T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": 1.68,
+    "volume": 20796728,
+    "close": 89.78
+  },
+  {
+    "date": "2025-09-17T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": 0.23,
+    "volume": 13022429,
+    "close": 89.99
+  },
+  {
+    "date": "2025-09-18T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": -0.31,
+    "volume": 14356524,
+    "close": 89.71
+  },
+  {
+    "date": "2025-09-19T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": -1.33,
+    "volume": 14989567,
+    "close": 88.52
+  },
+  {
+    "date": "2025-09-22T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": -0.96,
+    "volume": 11251171,
+    "close": 87.67
+  },
+  {
+    "date": "2025-09-23T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": 1.72,
+    "volume": 22107394,
+    "close": 89.18
+  },
+  {
+    "date": "2025-09-24T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": 1.3,
+    "volume": 17703067,
+    "close": 90.34
+  },
+  {
+    "date": "2025-09-25T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": 0.9,
+    "volume": 15943599,
+    "close": 91.15
+  },
+  {
+    "date": "2025-09-26T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": 0.92,
+    "volume": 20080840,
+    "close": 91.99
+  },
+  {
+    "date": "2025-09-29T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": -1.84,
+    "volume": 18837241,
+    "close": 90.3
+  },
+  {
+    "date": "2025-09-30T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": -1.06,
+    "volume": 23772378,
+    "close": 89.34
+  },
+  {
+    "date": "2025-10-01T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": 0.0,
+    "volume": 13830612,
+    "close": 89.34
+  },
+  {
+    "date": "2025-10-02T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": -1.01,
+    "volume": 15896803,
+    "close": 88.44
+  },
+  {
+    "date": "2025-10-03T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": 0.53,
+    "volume": 12023978,
+    "close": 88.91
+  },
+  {
+    "date": "2025-10-06T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": 0.49,
+    "volume": 10744236,
+    "close": 89.35
+  },
+  {
+    "date": "2025-10-07T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": 0.16,
+    "volume": 12662283,
+    "close": 89.49
+  },
+  {
+    "date": "2025-10-08T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": -0.58,
+    "volume": 10012105,
+    "close": 88.97
+  },
+  {
+    "date": "2025-10-09T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": -1.36,
+    "volume": 11698944,
+    "close": 87.76
+  },
+  {
+    "date": "2025-10-10T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": -2.89,
+    "volume": 22446124,
+    "close": 85.22
+  },
+  {
+    "date": "2025-10-13T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": 1.36,
+    "volume": 11444788,
+    "close": 86.38
+  },
+  {
+    "date": "2025-10-14T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": -0.01,
+    "volume": 12542293,
+    "close": 86.37
+  },
+  {
+    "date": "2025-10-15T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": -0.06,
+    "volume": 12133536,
+    "close": 86.32
+  },
+  {
+    "date": "2025-10-16T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": -1.2,
+    "volume": 14596926,
+    "close": 85.28
+  },
+  {
+    "date": "2025-10-17T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": 0.82,
+    "volume": 12036032,
+    "close": 85.98
+  },
+  {
+    "date": "2025-10-20T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": 1.06,
+    "volume": 12676177,
+    "close": 86.89
+  },
+  {
+    "date": "2025-10-21T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": -0.23,
+    "volume": 12942606,
+    "close": 86.69
+  },
+  {
+    "date": "2025-10-22T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": 1.28,
+    "volume": 16407037,
+    "close": 87.8
+  },
+  {
+    "date": "2025-10-23T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": 1.33,
+    "volume": 23654420,
+    "close": 88.97
+  },
+  {
+    "date": "2025-10-24T00:00:00Z",
+    "metric_name": "Energy Sector Volume",
+    "change": -1.01,
+    "volume": 10595450,
+    "close": 88.07
+  },
+  {
+    "date": "2025-09-15T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": 0.0,
+    "volume": 14872158,
+    "close": 79.4
+  },
+  {
+    "date": "2025-09-16T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": 0.45,
+    "volume": 16171003,
+    "close": 79.76
+  },
+  {
+    "date": "2025-09-17T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": 0.6,
+    "volume": 14408743,
+    "close": 80.24
+  },
+  {
+    "date": "2025-09-18T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": -0.87,
+    "volume": 21046133,
+    "close": 79.54
+  },
+  {
+    "date": "2025-09-19T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": -0.2,
+    "volume": 13349336,
+    "close": 79.38
+  },
+  {
+    "date": "2025-09-22T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": -1.79,
+    "volume": 11993741,
+    "close": 77.96
+  },
+  {
+    "date": "2025-09-23T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": 0.5,
+    "volume": 9703661,
+    "close": 78.35
+  },
+  {
+    "date": "2025-09-24T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": 0.22,
+    "volume": 10634176,
+    "close": 78.52
+  },
+  {
+    "date": "2025-09-25T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": -0.96,
+    "volume": 12046315,
+    "close": 77.77
+  },
+  {
+    "date": "2025-09-26T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": 0.24,
+    "volume": 11548183,
+    "close": 77.96
+  },
+  {
+    "date": "2025-09-29T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": 0.19,
+    "volume": 11490635,
+    "close": 78.11
+  },
+  {
+    "date": "2025-09-30T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": 0.33,
+    "volume": 12306195,
+    "close": 78.37
+  },
+  {
+    "date": "2025-10-01T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": -0.15,
+    "volume": 10125356,
+    "close": 78.25
+  },
+  {
+    "date": "2025-10-02T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": -0.4,
+    "volume": 8422275,
+    "close": 77.94
+  },
+  {
+    "date": "2025-10-03T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": 0.12,
+    "volume": 8426602,
+    "close": 78.03
+  },
+  {
+    "date": "2025-10-06T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": -0.73,
+    "volume": 10739977,
+    "close": 77.46
+  },
+  {
+    "date": "2025-10-07T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": 0.93,
+    "volume": 12084218,
+    "close": 78.18
+  },
+  {
+    "date": "2025-10-08T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": -0.5,
+    "volume": 9503197,
+    "close": 77.79
+  },
+  {
+    "date": "2025-10-09T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": 0.32,
+    "volume": 9316010,
+    "close": 78.04
+  },
+  {
+    "date": "2025-10-10T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": 0.08,
+    "volume": 20763544,
+    "close": 78.1
+  },
+  {
+    "date": "2025-10-13T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": -0.33,
+    "volume": 12692054,
+    "close": 77.84
+  },
+  {
+    "date": "2025-10-14T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": 1.61,
+    "volume": 12884079,
+    "close": 79.09
+  },
+  {
+    "date": "2025-10-15T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": 0.18,
+    "volume": 9111212,
+    "close": 79.23
+  },
+  {
+    "date": "2025-10-16T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": -0.69,
+    "volume": 13599959,
+    "close": 78.68
+  },
+  {
+    "date": "2025-10-17T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": 1.33,
+    "volume": 13984288,
+    "close": 79.73
+  },
+  {
+    "date": "2025-10-20T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": -0.09,
+    "volume": 13002573,
+    "close": 79.66
+  },
+  {
+    "date": "2025-10-21T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": -0.46,
+    "volume": 17471383,
+    "close": 79.29
+  },
+  {
+    "date": "2025-10-22T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": 0.57,
+    "volume": 13294716,
+    "close": 79.74
+  },
+  {
+    "date": "2025-10-23T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": -0.49,
+    "volume": 10809866,
+    "close": 79.35
+  },
+  {
+    "date": "2025-10-24T00:00:00Z",
+    "metric_name": "Consumer Staples Volume",
+    "change": -0.33,
+    "volume": 12735872,
+    "close": 79.09
+  },
+  {
+    "date": "2025-09-15T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": 0.0,
+    "volume": 6880181,
+    "close": 240.7
+  },
+  {
+    "date": "2025-09-16T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": 0.61,
+    "volume": 4343794,
+    "close": 242.18
+  },
+  {
+    "date": "2025-09-17T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": -0.25,
+    "volume": 7662195,
+    "close": 241.57
+  },
+  {
+    "date": "2025-09-18T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": -0.45,
+    "volume": 5410302,
+    "close": 240.48
+  },
+  {
+    "date": "2025-09-19T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": 0.38,
+    "volume": 6288096,
+    "close": 241.39
+  },
+  {
+    "date": "2025-09-22T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": -0.5,
+    "volume": 6141802,
+    "close": 240.18
+  },
+  {
+    "date": "2025-09-23T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": -0.94,
+    "volume": 4848202,
+    "close": 237.92
+  },
+  {
+    "date": "2025-09-24T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": 0.71,
+    "volume": 4931141,
+    "close": 239.6
+  },
+  {
+    "date": "2025-09-25T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": -1.41,
+    "volume": 5795400,
+    "close": 236.22
+  },
+  {
+    "date": "2025-09-26T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": 1.48,
+    "volume": 4875141,
+    "close": 239.71
+  },
+  {
+    "date": "2025-09-29T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": 0.44,
+    "volume": 5622480,
+    "close": 240.76
+  },
+  {
+    "date": "2025-09-30T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": -0.47,
+    "volume": 6490958,
+    "close": 239.64
+  },
+  {
+    "date": "2025-10-01T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": 0.63,
+    "volume": 5629227,
+    "close": 241.14
+  },
+  {
+    "date": "2025-10-02T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": -0.72,
+    "volume": 6595778,
+    "close": 239.4
+  },
+  {
+    "date": "2025-10-03T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": -0.64,
+    "volume": 6967231,
+    "close": 237.86
+  },
+  {
+    "date": "2025-10-06T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": 0.86,
+    "volume": 5231382,
+    "close": 239.9
+  },
+  {
+    "date": "2025-10-07T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": -1.75,
+    "volume": 7312021,
+    "close": 235.7
+  },
+  {
+    "date": "2025-10-08T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": 0.3,
+    "volume": 3955149,
+    "close": 236.4
+  },
+  {
+    "date": "2025-10-09T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": -0.5,
+    "volume": 4879133,
+    "close": 235.22
+  },
+  {
+    "date": "2025-10-10T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": -2.75,
+    "volume": 8989204,
+    "close": 228.75
+  },
+  {
+    "date": "2025-10-13T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": 2.23,
+    "volume": 5430143,
+    "close": 233.86
+  },
+  {
+    "date": "2025-10-14T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": 0.21,
+    "volume": 6266913,
+    "close": 234.35
+  },
+  {
+    "date": "2025-10-15T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": 0.15,
+    "volume": 5417991,
+    "close": 234.69
+  },
+  {
+    "date": "2025-10-16T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": -0.97,
+    "volume": 6518410,
+    "close": 232.42
+  },
+  {
+    "date": "2025-10-17T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": 0.86,
+    "volume": 5884862,
+    "close": 234.42
+  },
+  {
+    "date": "2025-10-20T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": 0.79,
+    "volume": 4178234,
+    "close": 236.28
+  },
+  {
+    "date": "2025-10-21T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": 1.22,
+    "volume": 4337519,
+    "close": 239.17
+  },
+  {
+    "date": "2025-10-22T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": -0.78,
+    "volume": 6374803,
+    "close": 237.3
+  },
+  {
+    "date": "2025-10-23T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": 0.45,
+    "volume": 5643416,
+    "close": 238.37
+  },
+  {
+    "date": "2025-10-24T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume",
+    "change": -0.3,
+    "volume": 3240849,
+    "close": 237.66
+  },
+  {
+    "date": "2025-09-15T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 0.0,
+    "volume": 33014031,
+    "close": 239.35
+  },
+  {
+    "date": "2025-09-16T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": -0.45,
+    "volume": 37059322,
+    "close": 238.28
+  },
+  {
+    "date": "2025-09-17T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 0.26,
+    "volume": 79955604,
+    "close": 238.89
+  },
+  {
+    "date": "2025-09-18T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 2.49,
+    "volume": 49167670,
+    "close": 244.84
+  },
+  {
+    "date": "2025-09-19T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": -0.76,
+    "volume": 56092037,
+    "close": 242.98
+  },
+  {
+    "date": "2025-09-22T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 0.58,
+    "volume": 53572930,
+    "close": 244.39
+  },
+  {
+    "date": "2025-09-23T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": -0.23,
+    "volume": 41854513,
+    "close": 243.84
+  },
+  {
+    "date": "2025-09-24T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": -0.92,
+    "volume": 36002182,
+    "close": 241.6
+  },
+  {
+    "date": "2025-09-25T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": -0.96,
+    "volume": 37209480,
+    "close": 239.29
+  },
+  {
+    "date": "2025-09-26T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 0.86,
+    "volume": 28942766,
+    "close": 241.34
+  },
+  {
+    "date": "2025-09-29T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 0.12,
+    "volume": 26391483,
+    "close": 241.62
+  },
+  {
+    "date": "2025-09-30T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 0.14,
+    "volume": 33447721,
+    "close": 241.96
+  },
+  {
+    "date": "2025-10-01T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 0.22,
+    "volume": 28519998,
+    "close": 242.49
+  },
+  {
+    "date": "2025-10-02T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 0.63,
+    "volume": 28687401,
+    "close": 244.02
+  },
+  {
+    "date": "2025-10-03T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 0.74,
+    "volume": 34579610,
+    "close": 245.83
+  },
+  {
+    "date": "2025-10-06T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 0.4,
+    "volume": 31507374,
+    "close": 246.81
+  },
+  {
+    "date": "2025-10-07T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": -1.07,
+    "volume": 31766601,
+    "close": 244.16
+  },
+  {
+    "date": "2025-10-08T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 1.05,
+    "volume": 25824957,
+    "close": 246.72
+  },
+  {
+    "date": "2025-10-09T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": -0.64,
+    "volume": 26243148,
+    "close": 245.13
+  },
+  {
+    "date": "2025-10-10T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": -2.99,
+    "volume": 70569415,
+    "close": 237.79
+  },
+  {
+    "date": "2025-10-13T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 2.78,
+    "volume": 36298626,
+    "close": 244.41
+  },
+  {
+    "date": "2025-10-14T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 1.43,
+    "volume": 45320805,
+    "close": 247.9
+  },
+  {
+    "date": "2025-10-15T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 0.98,
+    "volume": 45369046,
+    "close": 250.33
+  },
+  {
+    "date": "2025-10-16T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": -2.11,
+    "volume": 52740394,
+    "close": 245.06
+  },
+  {
+    "date": "2025-10-17T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": -0.67,
+    "volume": 55379514,
+    "close": 243.41
+  },
+  {
+    "date": "2025-10-20T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 1.95,
+    "volume": 32545025,
+    "close": 248.16
+  },
+  {
+    "date": "2025-10-21T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": -0.47,
+    "volume": 26337895,
+    "close": 246.99
+  },
+  {
+    "date": "2025-10-22T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": -1.48,
+    "volume": 46578446,
+    "close": 243.34
+  },
+  {
+    "date": "2025-10-23T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 1.27,
+    "volume": 28591002,
+    "close": 246.42
+  },
+  {
+    "date": "2025-10-24T00:00:00Z",
+    "metric_name": "Small Cap (Russell 2000) Volume",
+    "change": 1.22,
+    "volume": 26627005,
+    "close": 249.43
+  }
+]

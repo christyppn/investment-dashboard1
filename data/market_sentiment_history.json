@@ -1,0 +1,183 @@
+[
+  {
+    "date": "2025-09-28T00:00:00Z",
+    "value": 37,
+    "status": "Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-09-29T00:00:00Z",
+    "value": 50,
+    "status": "Neutral",
+    "region": "US"
+  },
+  {
+    "date": "2025-09-30T00:00:00Z",
+    "value": 50,
+    "status": "Neutral",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-01T00:00:00Z",
+    "value": 49,
+    "status": "Neutral",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-02T00:00:00Z",
+    "value": 64,
+    "status": "Greed",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-03T00:00:00Z",
+    "value": 63,
+    "status": "Greed",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-04T00:00:00Z",
+    "value": 71,
+    "status": "Greed",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-05T00:00:00Z",
+    "value": 74,
+    "status": "Greed",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-06T00:00:00Z",
+    "value": 71,
+    "status": "Greed",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-07T00:00:00Z",
+    "value": 70,
+    "status": "Greed",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-08T00:00:00Z",
+    "value": 60,
+    "status": "Greed",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-09T00:00:00Z",
+    "value": 70,
+    "status": "Greed",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-10T00:00:00Z",
+    "value": 64,
+    "status": "Greed",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-11T00:00:00Z",
+    "value": 27,
+    "status": "Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-12T00:00:00Z",
+    "value": 24,
+    "status": "Extreme Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-13T00:00:00Z",
+    "value": 38,
+    "status": "Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-14T00:00:00Z",
+    "value": 38,
+    "status": "Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-15T00:00:00Z",
+    "value": 34,
+    "status": "Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-16T00:00:00Z",
+    "value": 28,
+    "status": "Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-17T00:00:00Z",
+    "value": 22,
+    "status": "Extreme Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-18T00:00:00Z",
+    "value": 23,
+    "status": "Extreme Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-19T00:00:00Z",
+    "value": 29,
+    "status": "Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-20T00:00:00Z",
+    "value": 29,
+    "status": "Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-21T00:00:00Z",
+    "value": 34,
+    "status": "Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-22T00:00:00Z",
+    "value": 25,
+    "status": "Extreme Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-23T00:00:00Z",
+    "value": 27,
+    "status": "Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-24T00:00:00Z",
+    "value": 30,
+    "status": "Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-25T00:00:00Z",
+    "value": 37,
+    "status": "Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-26T00:00:00Z",
+    "value": 40,
+    "status": "Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-27T00:00:00Z",
+    "value": 51,
+    "status": "Neutral",
+    "region": "US",
+    "is_latest": true
+  }
+]
