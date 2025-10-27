@@ -97,7 +97,7 @@ async function loadFearGreedIndex() {
             renderChart('fearGreedChart', seriesData, categories, '30天趨勢', '指數分數');
 
         } else {
-            document.getElementById('fearGreedIndex').innerHTML = '<p>暫無數據</p>';
+            document.getElementById('fearGreedIndex').innerHTML = '<p>載入失敗</p>';
         }
     } catch (error) {
         console.error('載入恐懼貪婪指數失敗:', error);
@@ -117,7 +117,7 @@ function getStatusClass(status) {
     return '';
 }
 
-// 載入 HIBOR 利率 (不變)
+// 載入 HIBOR 利率
 async function loadHiborRates() {
     try {
         const response = await fetch(`${DATA_BASE_URL}hibor_rates.json`);
@@ -136,7 +136,7 @@ async function loadHiborRates() {
             document.getElementById('hiborRates').innerHTML = html;
             document.getElementById('hiborTimestamp').textContent = `更新時間：${formatTimestamp(data[0].timestamp)}`;
         } else {
-            document.getElementById('hiborRates').innerHTML = '<p>暫無數據</p>';
+            document.getElementById('hiborRates').innerHTML = '<p>載入失敗</p>';
         }
     } catch (error) {
         console.error('載入 HIBOR 利率失敗:', error);
@@ -144,7 +144,7 @@ async function loadHiborRates() {
     }
 }
 
-// 載入市場廣度與資金流向 (新邏輯，從 market_data_history.json 讀取)
+// 載入市場廣度 (只處理市場廣度，資金流向已移至 fund_flow.js)
 async function loadMarketData() {
     try {
         const response = await fetch(`${DATA_BASE_URL}market_data_history.json`);
@@ -186,75 +186,31 @@ async function loadMarketData() {
                 }
             });
 
-            document.getElementById('marketBreadth').innerHTML = latestBreadthHtml || '<p>暫無數據</p>';
+            document.getElementById('marketBreadth').innerHTML = latestBreadthHtml || '<p>載入失敗</p>';
             if (breadthSeries.length > 0) {
                 renderChart('marketBreadthChart', breadthSeries, breadthCategories, '市場廣度 (日變動)', '百分比');
             }
             document.getElementById('marketBreadthTimestamp').textContent = `更新時間：${formatTimestamp(breadthData[breadthData.length - 1].date)}`;
 
-
-            // --- 2. 資金流向 (Volume) ---
-            const flowMetrics = ['Technology Sector Volume', 'Financial Sector Volume', 'Energy Sector Volume', 'Consumer Staples Volume', 'Consumer Discretionary Volume', 'Small Cap (Russell 2000) Volume'];
-            const flowData = historyData.filter(d => flowMetrics.includes(d.metric_name));
-
-            let latestFlowHtml = '';
-            const flowSeries = [];
-            let flowCategories = [];
-
-            flowMetrics.forEach(metric => {
-                const metricHistory = flowData.filter(d => d.metric_name === metric);
-                if (metricHistory.length > 0) {
-                    // Get latest value for the card
-                    const latest = metricHistory[metricHistory.length - 1];
-                    latestFlowHtml += `
-                        <div class="flow-item">
-                            <div class="flow-sector">${metric.replace(' Volume', '')}</div>
-                            <div class="flow-amount">${latest.volume.toLocaleString()}</div>
-                        </div>
-                    `;
-                    
-                    // Prepare series data for chart
-                    flowSeries.push({
-                        name: metric.replace(' Volume', ''),
-                        data: metricHistory.map(d => latest.volume) // Note: Using latest volume for all points in the series for simplicity
-                    });
-                    // Use categories from the first metric
-                    if (flowCategories.length === 0) {
-                        flowCategories = metricHistory.map(d => new Date(d.date).toLocaleDateString('zh-TW', { month: '2-digit', day: '2-digit' }));
-                    }
-                }
-            });
-
-            document.getElementById('fundFlows').innerHTML = latestFlowHtml || '<p>暫無數據</p>';
-            if (flowSeries.length > 0) {
-                renderChart('fundFlowsChart', flowSeries, flowCategories, '資金流向 (成交量)', '成交量', true); // isVolume = true for bar chart
-            }
-            document.getElementById('fundFlowsTimestamp').textContent = `更新時間：${formatTimestamp(flowData[flowData.length - 1].date)}`;
-
-
         } else {
-            document.getElementById('marketBreadth').innerHTML = '<p>暫無數據</p>';
-            document.getElementById('fundFlows').innerHTML = '<p>暫無數據</p>';
+            document.getElementById('marketBreadth').innerHTML = '<p>載入失敗</p>';
         }
     } catch (error) {
-        console.error('載入市場數據失敗:', error);
+        console.error('載入市場廣度失敗:', error);
         document.getElementById('marketBreadth').innerHTML = '<p>載入失敗</p>';
-        document.getElementById('fundFlows').innerHTML = '<p>載入失敗</p>';
     }
 }
 
-
-// 載入所有數據
+// 載入所有數據 (只載入主頁面數據)
 async function loadAllData() {
     document.getElementById('lastUpdate').textContent = '載入中...';
     
     await Promise.all([
         loadFearGreedIndex(),
         loadHiborRates(),
-        loadMarketData() // 合併市場廣度與資金流向
+        loadMarketData()
     ]);
     
-    // 由於數據來源更新時間不同，這裡只顯示當前時間
     document.getElementById('lastUpdate').textContent = formatTimestamp(new Date().toISOString());
 }
 
@@ -265,5 +221,8 @@ document.getElementById('refreshBtn').addEventListener('click', () => {
 
 // 頁面載入時自動載入數據
 window.addEventListener('DOMContentLoaded', () => {
-    loadAllData();
+    // 確保只在主頁面運行 loadAllData
+    if (document.getElementById('fearGreedIndex')) {
+        loadAllData();
+    }
 });
