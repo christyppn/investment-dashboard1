@@ -16,11 +16,10 @@ def fetch_hibor_rates():
     print("Fetching HIBOR rates...")
     url = "https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily"
     try:
-        response = requests.get(url, timeout=30 )
+        response = requests.get(url, timeout=30)
         response.raise_for_status()
         data = response.json()
         
-        # 提取最新數據
         records = data.get("result", {}).get("records", [])
         if not records:
             print("No HIBOR data found in API response")
@@ -28,7 +27,6 @@ def fetch_hibor_rates():
             
         latest_data = records[0]
         
-        # 轉換為所需格式 (已修正為 ir_1m, ir_3m, ir_6m)
         hibor_data = [
             {"id": "1", "term": "1M", "rate": float(latest_data.get("ir_1m", 0)), "timestamp": datetime.now().isoformat() + "Z"},
             {"id": "2", "term": "3M", "rate": float(latest_data.get("ir_3m", 0)), "timestamp": datetime.now().isoformat() + "Z"},
@@ -42,20 +40,16 @@ def fetch_hibor_rates():
 
 def fetch_fear_greed_index_history():
     print("Fetching Fear & Greed Index History...")
-    # Alternative.me API supports historical data up to 30 days
     url = "https://api.alternative.me/fng/"
     try:
-        # Fetch last 30 data points for trend
-        response = requests.get(url, params={"limit": 30}, timeout=30 )
+        response = requests.get(url, params={"limit": 30}, timeout=30)
         response.raise_for_status()
         data = response.json()
         
         history = []
         data_points = data.get("data", [])
         
-        # Reformat data for frontend charting (oldest first)
         for dp in reversed(data_points):
-            # Convert timestamp from seconds (string) to ISO format
             ts = datetime.fromtimestamp(int(dp.get("timestamp"))).isoformat() + "Z"
             history.append({
                 "date": ts,
@@ -65,7 +59,6 @@ def fetch_fear_greed_index_history():
             })
         
         print(f"Fetched {len(history)} Fear & Greed Index historical points.")
-        # Also include the latest status for the main card
         latest = history[-1] if history else None
         if latest:
             latest["is_latest"] = True
@@ -86,7 +79,7 @@ def fetch_alpha_vantage_data(symbol, function, outputsize="compact"):
         "outputsize": outputsize
     }
     try:
-        response = requests.get(base_url, params=params, timeout=30 )
+        response = requests.get(base_url, params=params, timeout=30)
         response.raise_for_status()
         data = response.json()
         if "Error Message" in data:
@@ -94,7 +87,6 @@ def fetch_alpha_vantage_data(symbol, function, outputsize="compact"):
             return None
         if "Note" in data:
             print(f"Alpha Vantage Note: {data['Note']}")
-            # This is often a rate limit note, we treat it as a temporary failure
             return None
         return data
     except Exception as e:
@@ -109,26 +101,23 @@ def process_time_series_data(symbol, data, metric_name):
     time_series = data["Time Series (Daily)"]
     history = []
     
-    # Get last 30 days of data for trend
     dates = sorted(time_series.keys(), reverse=True)[:30]
-    dates.reverse() # Oldest first for charting
+    dates.reverse() 
 
     for i, date_str in enumerate(dates):
         day_data = time_series[date_str]
         
-        # Calculate daily change for market breadth
         if i > 0:
             previous_close = float(time_series[dates[i-1]]["4. close"])
             latest_close = float(day_data["4. close"])
             change = (latest_close - previous_close) / previous_close * 100
         else:
-            change = 0.0 # No change for the first day
+            change = 0.0 
 
-        # Use volume for fund flow
         volume = int(day_data["5. volume"])
 
         history.append({
-            "date": date_str + "T00:00:00Z", # Add time component for consistency
+            "date": date_str + "T00:00:00Z",
             "metric_name": metric_name,
             "change": round(change, 2),
             "volume": volume,
@@ -140,17 +129,10 @@ def process_time_series_data(symbol, data, metric_name):
 def fetch_market_data_for_trend():
     print("Fetching market data for trend analysis (Market Breadth and Fund Flows)...")
     
-    # Symbols for Market Breadth (Daily Change) and Fund Flow (Volume)
-    # Using major ETFs as proxies for indices and sectors
     symbols_to_fetch = {
-        # Market Breadth (Daily Change)
-        "SPY": "S&P 500 Daily Change",      # US (S&P 500)
-        "QQQ": "NASDAQ 100 Daily Change",   # US (NASDAQ 100)
-        "DIA": "Dow 30 Daily Change",       # US (Dow Jones)
-        # Note: Alpha Vantage does not have HK index data (HSI) easily accessible via free API.
-        # We will use the US proxies for now and note the limitation.
-
-        # Fund Flows (Volume)
+        "SPY": "S&P 500 Daily Change",
+        "QQQ": "NASDAQ 100 Daily Change",
+        "DIA": "Dow 30 Daily Change",
         "XLF": "Financial Sector Volume",
         "XLK": "Technology Sector Volume",
         "XLE": "Energy Sector Volume",
@@ -162,7 +144,6 @@ def fetch_market_data_for_trend():
     all_market_data = []
 
     for symbol, metric_name in symbols_to_fetch.items():
-        # Use TIME_SERIES_DAILY for both change (breadth) and volume (flow)
         data = fetch_alpha_vantage_data(symbol, "TIME_SERIES_DAILY", outputsize="full")
         
         if data:
@@ -172,7 +153,48 @@ def fetch_market_data_for_trend():
     print(f"Fetched {len(all_market_data)} total market data points.")
     return all_market_data
 
-# --- File Writing Function --- #
+def fetch_money_fund_data():
+    print("Fetching Money Fund data...")
+    fund_symbols = {
+        "VFIAX": "Vanguard 500 Index Fund",
+        "VTSAX": "Vanguard Total Stock Market Index Fund",
+        # Add more fund symbols as needed
+    }
+    fund_data = []
+
+    for symbol, name in fund_symbols.items():
+        ts_data = fetch_alpha_vantage_data(symbol, "TIME_SERIES_DAILY", outputsize="compact")
+        
+        if ts_data and "Time Series (Daily)" in ts_data:
+            time_series = ts_data["Time Series (Daily)"]
+            latest_date = sorted(time_series.keys(), reverse=True)[0]
+            latest_day_data = time_series[latest_date]
+            
+            previous_date = sorted(time_series.keys(), reverse=True)[1] if len(time_series) > 1 else None
+            previous_close = float(time_series[previous_date]["4. close"]) if previous_date else float(latest_day_data.get("4. close", 0))
+
+            try:
+                latest_close = float(latest_day_data.get("4. close", 0))
+                change = latest_close - previous_close
+                change_percent = (change / previous_close * 100) if previous_close != 0 else 0
+                
+                latest_data = {
+                    "fund_name": name,
+                    "symbol": symbol,
+                    "price": latest_close,
+                    "change": round(change, 2),
+                    "change_percent": f"{round(change_percent, 2)}%",
+                    "latest_trading_day": latest_date,
+                    "timestamp": datetime.now().isoformat() + "Z"
+                }
+                fund_data.append(latest_data)
+                print(f"Fetched time series data for {name}")
+            except Exception as e:
+                print(f"Error processing time series for {name}: {e}")
+        else:
+            print(f"No TIME_SERIES_DAILY data found for {name}.")
+    
+    return fund_data
 
 def write_to_file(data, filename):
     try:
@@ -189,7 +211,6 @@ def write_to_file(data, filename):
 
 def main():
     print("Starting data synchronization process...")
-    # We assume the user has set the API key by now
     print(f"Alpha Vantage API Key: {'Set' if ALPHA_VANTAGE_API_KEY != 'YOUR_ALPHA_VANTAGE_API_KEY' else 'Not Set'}")
     
     # 1. Fetch and write HIBOR rates (Latest data only)
@@ -200,25 +221,18 @@ def main():
     # 2. Fetch and write Fear & Greed Index (Historical data for trend)
     fng_history = fetch_fear_greed_index_history()
     if fng_history:
-        # The frontend will use this file for both latest status and trend chart
         write_to_file(fng_history, "market_sentiment_history.json")
     
     # 3. Fetch and write Market Breadth/Fund Flows (Historical data for trend)
     market_data_history = fetch_market_data_for_trend()
     if market_data_history:
-        # This single file will contain all historical data for market breadth (change) and fund flows (volume)
         write_to_file(market_data_history, "market_data_history.json")
 
-   # 4. Fetch and write Money Fund data (Latest data only)
+    # 4. Fetch and write Money Fund data (Latest data only)
     money_fund_data = fetch_money_fund_data()
     if money_fund_data:
         write_to_file(money_fund_data, "money_fund_data.json")
 
-    # The original market_breadth.json and fund_flows.json are now obsolete or need to be simplified
-    # For simplicity and to avoid breaking the existing frontend structure, let's keep the old files for latest data
-    # and use the new files for historical/expanded data.
-    
-    # Extract latest data for the original files (to keep the current dashboard cards working)
     if market_data_history:
         latest_spy = next((d for d in reversed(market_data_history) if d["metric_name"] == "S&P 500 Daily Change"), None)
         if latest_spy:
@@ -247,5 +261,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
