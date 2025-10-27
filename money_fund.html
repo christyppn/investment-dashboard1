@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>貨幣基金分析 | Money Fund Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 貨幣基金分析</h1>
+            <p class="subtitle">不同類型基金的最新價格與變動</p>
+            <nav class="main-nav">
+                <a href="index.html">📈 市場總覽</a>
+                <a href="fund_flow.html">💵 資金流向</a>
+                <a href="money_fund.html" class="active">💰 貨幣基金</a>
+            </nav>
+            <button id="refreshBtn" class="refresh-btn">🔄 刷新數據</button>
+        </header>
+
+        <div class="dashboard-grid full-width-grid">
+            <!-- 貨幣基金詳細列表 -->
+            <div class="card full-width">
+                <h2>主要基金類型概覽</h2>
+                <div id="moneyFundDetails" class="loading">載入中...</div>
+                <p class="timestamp" id="moneyFundTimestamp"></p>
+            </div>
+        </div>
+
+        <footer>
+            <p>數據來源：Alpha Vantage | 更新時間：<span id="lastUpdate">--</span></p>
+            <p class="disclaimer">⚠️ 本儀表板僅供參考 ，不構成投資建議</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="money_fund.js"></script>
+</body>
+</html>
