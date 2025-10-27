@@ -280,3 +280,26 @@ footer p {
     flex: 2; /* Give sector more space */
 }
 
+/* --- Fund Flow Trend Styles --- */
+.flow-amount {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.flow-trend {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+
+.flow-trend.positive {
+    color: #44cc44;
+    background-color: rgba(68, 204, 68, 0.1);
+}
+
+.flow-trend.negative {
+    color: #ff4444;
+    background-color: rgba(255, 68, 68, 0.1);
+}
