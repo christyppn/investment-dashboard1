@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>資金流向分析 | Fund Flow Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💵 資金流向分析</h1>
+            <p class="subtitle">各板塊資金流向與趨勢</p>
+            <nav class="main-nav">
+                <a href="index.html">📈 市場總覽</a>
+                <a href="fund_flow.html" class="active">💵 資金流向</a>
+                <!-- 未來新增：<a href="money_fund.html">💰 貨幣基金</a> -->
+            </nav>
+            <button id="refreshBtn" class="refresh-btn">🔄 刷新數據</button>
+        </header>
+
+        <div class="dashboard-grid full-width-grid">
+            <!-- 資金流向詳細列表 -->
+            <div class="card full-width">
+                <h2>板塊資金流向 (成交量 )</h2>
+                <div id="fundFlowsDetails" class="loading">載入中...</div>
+                <div id="fundFlowsChart"></div>
+                <p class="timestamp" id="fundFlowsTimestamp"></p>
+            </div>
+        </div>
+
+        <footer>
+            <p>數據來源：Alpha Vantage | 更新時間：<span id="lastUpdate">--</span></p>
+            <p class="disclaimer">⚠️ 本儀表板僅供參考，不構成投資建議</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="fund_flow.js"></script>
+</body>
+</html>
