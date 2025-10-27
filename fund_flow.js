@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// 格式化時間戳 (從 script.js 繼承)
+// function formatTimestamp(timestamp) { ... }
+// function renderChart(elementId, seriesData, categories, chartTitle, yAxisTitle, isVolume = false) { ... }
+
 // 載入資金流向詳細數據
 async function loadFundFlowsDetails() {
     const DATA_BASE_URL = './data/';
@@ -16,7 +20,14 @@ async function loadFundFlowsDetails() {
         const historyData = await response.json();
 
         if (historyData && historyData.length > 0) {
-            const flowMetrics = ['Technology Sector Volume', 'Financial Sector Volume', 'Energy Sector Volume', 'Consumer Staples Volume', 'Consumer Discretionary Volume', 'Small Cap (Russell 2000) Volume'];
+            const flowMetrics = [
+                'Technology Sector Volume', 
+                'Financial Sector Volume', 
+                'Energy Sector Volume', 
+                'Consumer Staples Volume', 
+                'Consumer Discretionary Volume', 
+                'Small Cap (Russell 2000) Volume'
+            ];
             const flowData = historyData.filter(d => flowMetrics.includes(d.metric_name));
             
             let latestFlowHtml = '';
@@ -29,12 +40,18 @@ async function loadFundFlowsDetails() {
             flowMetrics.forEach(metric => {
                 const metricHistory = flowData.filter(d => d.metric_name === metric);
                 if (metricHistory.length > 0) {
-                    // Get latest value for the card
+                    // Get latest value and volume change for the card
                     const latest = metricHistory[metricHistory.length - 1];
+                    const trendClass = latest.volume_change >= 0 ? 'positive' : 'negative';
+                    const trendSign = latest.volume_change >= 0 ? '▲' : '▼';
+                    
                     latestFlowHtml += `
                         <div class="flow-item">
                             <div class="flow-sector">${metric.replace(' Volume', '')}</div>
-                            <div class="flow-amount">${latest.volume.toLocaleString()}</div>
+                            <div class="flow-amount">
+                                <span>${latest.volume.toLocaleString()}</span>
+                                <span class="flow-trend ${trendClass}">${trendSign} ${Math.abs(latest.volume_change).toFixed(2)}%</span>
+                            </div>
                         </div>
                     `;
                     
@@ -66,23 +83,6 @@ async function loadFundFlowsDetails() {
         console.error('載入資金流向失敗:', error);
         document.getElementById(elementId).innerHTML = '<p>載入失敗</p>';
     }
-}
-
-// 重新定義主頁面的 loadAllData，因為 fund flow 已經移出
-async function loadAllData() {
-    const DATA_BASE_URL = './data/';
-    document.getElementById('lastUpdate').textContent = '載入中...';
-    
-    // 確保主頁面只載入主頁面的數據
-    if (document.getElementById('fearGreedIndex')) {
-        await Promise.all([
-            loadFearGreedIndex(),
-            loadHiborRates(),
-            loadMarketData()
-        ]);
-    }
-    
-    document.getElementById('lastUpdate').textContent = formatTimestamp(new Date().toISOString());
 }
 
 // 由於 fund_flow.js 已經引入了 script.js，我們只需要確保主頁面的 loadAllData 被調用
