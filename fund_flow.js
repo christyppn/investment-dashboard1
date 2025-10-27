@@ -1,0 +1,89 @@
+// 資金流向頁面專用邏輯
+document.addEventListener('DOMContentLoaded', () => {
+    // 確保只在 fund_flow.html 頁面運行
+    if (document.getElementById('fundFlowsDetails')) {
+        loadFundFlowsDetails();
+    }
+});
+
+// 載入資金流向詳細數據
+async function loadFundFlowsDetails() {
+    const DATA_BASE_URL = './data/';
+    const elementId = 'fundFlowsDetails';
+
+    try {
+        const response = await fetch(`${DATA_BASE_URL}market_data_history.json`);
+        const historyData = await response.json();
+
+        if (historyData && historyData.length > 0) {
+            const flowMetrics = ['Technology Sector Volume', 'Financial Sector Volume', 'Energy Sector Volume', 'Consumer Staples Volume', 'Consumer Discretionary Volume', 'Small Cap (Russell 2000) Volume'];
+            const flowData = historyData.filter(d => flowMetrics.includes(d.metric_name));
+            
+            let latestFlowHtml = '';
+            const flowSeries = [];
+            let flowCategories = [];
+
+            // 提取最新的時間戳
+            const latestTimestamp = flowData[flowData.length - 1].date;
+
+            flowMetrics.forEach(metric => {
+                const metricHistory = flowData.filter(d => d.metric_name === metric);
+                if (metricHistory.length > 0) {
+                    // Get latest value for the card
+                    const latest = metricHistory[metricHistory.length - 1];
+                    latestFlowHtml += `
+                        <div class="flow-item">
+                            <div class="flow-sector">${metric.replace(' Volume', '')}</div>
+                            <div class="flow-amount">${latest.volume.toLocaleString()}</div>
+                        </div>
+                    `;
+                    
+                    // Prepare series data for chart
+                    flowSeries.push({
+                        name: metric.replace(' Volume', ''),
+                        data: metricHistory.map(d => d.volume)
+                    });
+                    // Use categories from the first metric
+                    if (flowCategories.length === 0) {
+                        flowCategories = metricHistory.map(d => new Date(d.date).toLocaleDateString('zh-TW', { month: '2-digit', day: '2-digit' }));
+                    }
+                }
+            });
+
+            document.getElementById(elementId).innerHTML = latestFlowHtml || '<p>暫無數據</p>';
+            
+            // 繪製趨勢圖
+            if (flowSeries.length > 0) {
+                renderChart('fundFlowsChart', flowSeries, flowCategories, '資金流向 (成交量) 趨勢', '成交量', true);
+            }
+            document.getElementById('fundFlowsTimestamp').textContent = `更新時間：${formatTimestamp(latestTimestamp)}`;
+            document.getElementById('lastUpdate').textContent = formatTimestamp(new Date().toISOString());
+
+        } else {
+            document.getElementById(elementId).innerHTML = '<p>暫無數據</p>';
+        }
+    } catch (error) {
+        console.error('載入資金流向失敗:', error);
+        document.getElementById(elementId).innerHTML = '<p>載入失敗</p>';
+    }
+}
+
+// 重新定義主頁面的 loadAllData，因為 fund flow 已經移出
+async function loadAllData() {
+    const DATA_BASE_URL = './data/';
+    document.getElementById('lastUpdate').textContent = '載入中...';
+    
+    // 確保主頁面只載入主頁面的數據
+    if (document.getElementById('fearGreedIndex')) {
+        await Promise.all([
+            loadFearGreedIndex(),
+            loadHiborRates(),
+            loadMarketData()
+        ]);
+    }
+    
+    document.getElementById('lastUpdate').textContent = formatTimestamp(new Date().toISOString());
+}
+
+// 由於 fund_flow.js 已經引入了 script.js，我們只需要確保主頁面的 loadAllData 被調用
+// 這裡不需要額外的 DOMContentLoaded 監聽器，因為 script.js 已經處理了。
