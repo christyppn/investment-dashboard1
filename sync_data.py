@@ -208,7 +208,12 @@ def main():
     if market_data_history:
         # This single file will contain all historical data for market breadth (change) and fund flows (volume)
         write_to_file(market_data_history, "market_data_history.json")
-    
+
+   # 4. Fetch and write Money Fund data (Latest data only)
+    money_fund_data = fetch_money_fund_data()
+    if money_fund_data:
+        write_to_file(money_fund_data, "money_fund_data.json")
+
     # The original market_breadth.json and fund_flows.json are now obsolete or need to be simplified
     # For simplicity and to avoid breaking the existing frontend structure, let's keep the old files for latest data
     # and use the new files for historical/expanded data.
