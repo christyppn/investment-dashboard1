@@ -2,6 +2,7 @@ import os
 import json
 import requests
 from datetime import datetime, timedelta
+import time 
 
 # --- Configuration --- #
 DATA_DIR = "data"  # 數據將儲存在此目錄
@@ -70,7 +71,8 @@ def fetch_fear_greed_index_history():
         return []
 
 def fetch_alpha_vantage_data(symbol, function, outputsize="compact"):
-    print(f"Fetching Alpha Vantage data for {symbol} ({function})...")
+	time.sleep(15) # <-- 新增這行
+	print(f"Fetching Alpha Vantage data for {symbol} ({function})...")
     base_url = "https://www.alphavantage.co/query"
     params = {
         "function": function,
