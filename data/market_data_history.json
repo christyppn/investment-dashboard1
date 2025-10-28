@@ -1,15 +1,8 @@
 [
   {
-    "date": "2025-09-16T00:00:00Z",
-    "metric_name": "S&P 500 Daily Change",
-    "change": 0.0,
-    "volume": 61168953,
-    "close": 660.0
-  },
-  {
     "date": "2025-09-17T00:00:00Z",
     "metric_name": "S&P 500 Daily Change",
-    "change": -0.12,
+    "change": 0.0,
     "volume": 101952244,
     "close": 659.18
   },
@@ -208,6 +201,13 @@
     "change": 1.18,
     "volume": 63339790,
     "close": 685.24
+  },
+  {
+    "date": "2025-10-28T00:00:00Z",
+    "metric_name": "S&P 500 Daily Change",
+    "change": 0.26,
+    "volume": 61666363,
+    "close": 687.05
   },
   {
     "date": "2025-09-17T00:00:00Z",
@@ -416,7 +416,7 @@
     "date": "2025-10-28T00:00:00Z",
     "metric_name": "NASDAQ 100 Daily Change",
     "change": 0.77,
-    "volume": 60679162,
+    "volume": 61045034,
     "close": 632.92
   },
   {
@@ -626,7 +626,7 @@
     "date": "2025-10-28T00:00:00Z",
     "metric_name": "Dow 30 Daily Change",
     "change": 0.38,
-    "volume": 9389545,
+    "volume": 9432191,
     "close": 477.16
   },
   {
@@ -1046,13 +1046,20 @@
     "date": "2025-10-28T00:00:00Z",
     "metric_name": "Communication Services Volume (XLC)",
     "change": -0.5,
-    "volume": 4919834,
+    "volume": 4920114,
     "close": 116.58
+  },
+  {
+    "date": "2025-09-16T00:00:00Z",
+    "metric_name": "Consumer Discretionary Volume (XLY)",
+    "change": 0.0,
+    "volume": 4343794,
+    "close": 242.18
   },
   {
     "date": "2025-09-17T00:00:00Z",
     "metric_name": "Consumer Discretionary Volume (XLY)",
-    "change": 0.0,
+    "change": -0.25,
     "volume": 7662195,
     "close": 241.57
   },
@@ -1253,16 +1260,16 @@
     "close": 241.08
   },
   {
-    "date": "2025-10-28T00:00:00Z",
-    "metric_name": "Consumer Discretionary Volume (XLY)",
-    "change": 0.01,
-    "volume": 4498562,
-    "close": 241.1
+    "date": "2025-09-16T00:00:00Z",
+    "metric_name": "Consumer Staples Volume (XLP)",
+    "change": 0.0,
+    "volume": 16171003,
+    "close": 79.76
   },
   {
     "date": "2025-09-17T00:00:00Z",
     "metric_name": "Consumer Staples Volume (XLP)",
-    "change": 0.0,
+    "change": 0.6,
     "volume": 14408743,
     "close": 80.24
   },
@@ -1461,13 +1468,6 @@
     "change": 0.16,
     "volume": 13984710,
     "close": 79.22
-  },
-  {
-    "date": "2025-10-28T00:00:00Z",
-    "metric_name": "Consumer Staples Volume (XLP)",
-    "change": -1.02,
-    "volume": 8906567,
-    "close": 78.41
   },
   {
     "date": "2025-09-17T00:00:00Z",
@@ -1676,7 +1676,7 @@
     "date": "2025-10-28T00:00:00Z",
     "metric_name": "Health Care Volume (XLV)",
     "change": -0.65,
-    "volume": 8637437,
+    "volume": 8643652,
     "close": 145.42
   },
   {
@@ -1886,7 +1886,7 @@
     "date": "2025-10-28T00:00:00Z",
     "metric_name": "Financial Sector Volume (XLF)",
     "change": -0.65,
-    "volume": 33621640,
+    "volume": 33630118,
     "close": 52.985
   },
   {
@@ -2096,7 +2096,7 @@
     "date": "2025-10-28T00:00:00Z",
     "metric_name": "Energy Sector Volume (XLE)",
     "change": -1.03,
-    "volume": 11232002,
+    "volume": 11235385,
     "close": 87.37
   },
   {
@@ -2306,7 +2306,7 @@
     "date": "2025-10-28T00:00:00Z",
     "metric_name": "Industrial Sector Volume (XLI)",
     "change": -0.71,
-    "volume": 9022181,
+    "volume": 9022194,
     "close": 154.69
   },
   {
@@ -2516,7 +2516,7 @@
     "date": "2025-10-28T00:00:00Z",
     "metric_name": "Materials Sector Volume (XLB)",
     "change": 0.12,
-    "volume": 6524718,
+    "volume": 6524728,
     "close": 89.075
   },
   {
@@ -2730,9 +2730,16 @@
     "close": 91.64
   },
   {
-    "date": "2025-09-17T00:00:00Z",
+    "date": "2025-09-16T00:00:00Z",
     "metric_name": "Gold Fund Volume (GLD)",
     "change": 0.0,
+    "volume": 12161527,
+    "close": 339.59
+  },
+  {
+    "date": "2025-09-17T00:00:00Z",
+    "metric_name": "Gold Fund Volume (GLD)",
+    "change": -0.77,
     "volume": 16535307,
     "close": 336.97
   },
@@ -2931,13 +2938,6 @@
     "change": -2.78,
     "volume": 23657603,
     "close": 367.01
-  },
-  {
-    "date": "2025-10-28T00:00:00Z",
-    "metric_name": "Gold Fund Volume (GLD)",
-    "change": -0.72,
-    "volume": 19100295,
-    "close": 364.37
   },
   {
     "date": "2025-09-17T00:00:00Z",
@@ -3146,7 +3146,7 @@
     "date": "2025-10-28T00:00:00Z",
     "metric_name": "Robotics & AI Volume (ROBO)",
     "change": -1.0,
-    "volume": 101163,
+    "volume": 101166,
     "close": 69.56
   },
   {
@@ -3356,20 +3356,13 @@
     "date": "2025-10-28T00:00:00Z",
     "metric_name": "Semiconductor Volume (SMH)",
     "change": 0.88,
-    "volume": 5065016,
+    "volume": 5075003,
     "close": 363.11
-  },
-  {
-    "date": "2025-09-16T00:00:00Z",
-    "metric_name": "Small Cap Volume (IWM)",
-    "change": 0.0,
-    "volume": 37059322,
-    "close": 238.28
   },
   {
     "date": "2025-09-17T00:00:00Z",
     "metric_name": "Small Cap Volume (IWM)",
-    "change": 0.26,
+    "change": 0.0,
     "volume": 79955604,
     "close": 238.89
   },
@@ -3568,5 +3561,12 @@
     "change": 0.35,
     "volume": 31798148,
     "close": 250.3
+  },
+  {
+    "date": "2025-10-28T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": -0.54,
+    "volume": 28041629,
+    "close": 248.94
   }
 ]
