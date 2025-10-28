@@ -133,12 +133,21 @@ def fetch_market_data_for_trend():
         "SPY": "S&P 500 Daily Change",
         "QQQ": "NASDAQ 100 Daily Change",
         "DIA": "Dow 30 Daily Change",
-        "XLF": "Financial Sector Volume",
-        "XLK": "Technology Sector Volume",
-        "XLE": "Energy Sector Volume",
-        "XLP": "Consumer Staples Volume",
-        "XLY": "Consumer Discretionary Volume",
-        "IWM": "Small Cap (Russell 2000) Volume"
+     	"XLK": "Technology Sector Volume (XLK)",        # 科技
+	    "XLC": "Communication Services Volume (XLC)",   # 通訊服務
+	    "XLY": "Consumer Discretionary Volume (XLY)",   # 非必需消費品
+	    "XLP": "Consumer Staples Volume (XLP)",         # 必需消費品
+	    "XLV": "Health Care Volume (XLV)",              # 醫療保健
+	    "XLF": "Financial Sector Volume (XLF)",         # 金融
+	    "XLE": "Energy Sector Volume (XLE)",            # 能源
+	    "XLI": "Industrial Sector Volume (XLI)",        # 工業
+	    "XLB": "Materials Sector Volume (XLB)",         # 原材料
+	    "XLU": "Utilities Sector Volume (XLU)",         # 公用事業
+	    "GLD": "Gold Fund Volume (GLD)",                # 黃金/貴金屬
+	    "ROBO": "Robotics & AI Volume (ROBO)",          # 機器人/AI
+	    "SMH": "Semiconductor Volume (SMH)",            # 半導體
+	    "IWM": "Small Cap Volume (IWM)"                 # 小型股
+
     }
 
     all_market_data = []
