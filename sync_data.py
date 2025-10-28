@@ -2,7 +2,7 @@ import os
 import json
 import requests
 from datetime import datetime, timedelta
-import time 
+import time # <-- 確保這行在頂部，沒有縮排
 
 # --- Configuration --- #
 DATA_DIR = "data"  # 數據將儲存在此目錄
@@ -71,9 +71,12 @@ def fetch_fear_greed_index_history():
         return []
 
 def fetch_alpha_vantage_data(symbol, function, outputsize="compact"):
-	time.sleep(15) # <-- 新增這行
-	print(f"Fetching Alpha Vantage data for {symbol} ({function})...")
+    # 為了避免 Alpha Vantage 免費 API 的頻率限制 (每分鐘 5 次)，加入 15 秒延遲
+    time.sleep(15) # <-- 確保這行有 4 個空格的縮排 (與 print(f"Fetching... 的縮排一致)
+    
+    print(f"Fetching Alpha Vantage data for {symbol} ({function})...")
     base_url = "https://www.alphavantage.co/query"
+	
     params = {
         "function": function,
         "symbol": symbol,
@@ -149,7 +152,6 @@ def fetch_market_data_for_trend():
 	    "ROBO": "Robotics & AI Volume (ROBO)",          # 機器人/AI
 	    "SMH": "Semiconductor Volume (SMH)",            # 半導體
 	    "IWM": "Small Cap Volume (IWM)"                 # 小型股
-
     }
 
     all_market_data = []
