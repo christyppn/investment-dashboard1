@@ -206,7 +206,7 @@
     "date": "2025-10-27T00:00:00Z",
     "metric_name": "S&P 500 Daily Change",
     "change": 1.18,
-    "volume": 61224473,
+    "volume": 63339790,
     "close": 685.24
   },
   {
@@ -416,7 +416,7 @@
     "date": "2025-10-27T00:00:00Z",
     "metric_name": "NASDAQ 100 Daily Change",
     "change": 1.78,
-    "volume": 52909807,
+    "volume": 54098611,
     "close": 628.09
   },
   {
@@ -626,7 +626,7 @@
     "date": "2025-10-27T00:00:00Z",
     "metric_name": "Dow 30 Daily Change",
     "change": 0.66,
-    "volume": 4565138,
+    "volume": 4720172,
     "close": 475.35
   },
   {
@@ -836,7 +836,7 @@
     "date": "2025-10-27T00:00:00Z",
     "metric_name": "Financial Sector Volume",
     "change": 0.41,
-    "volume": 26728395,
+    "volume": 27154144,
     "close": 53.33
   },
   {
@@ -1046,7 +1046,7 @@
     "date": "2025-10-27T00:00:00Z",
     "metric_name": "Technology Sector Volume",
     "change": 1.85,
-    "volume": 7563173,
+    "volume": 7583495,
     "close": 299.0
   },
   {
@@ -1256,7 +1256,7 @@
     "date": "2025-10-27T00:00:00Z",
     "metric_name": "Energy Sector Volume",
     "change": 0.24,
-    "volume": 9760137,
+    "volume": 9798614,
     "close": 88.28
   },
   {
@@ -1466,7 +1466,7 @@
     "date": "2025-10-27T00:00:00Z",
     "metric_name": "Consumer Staples Volume",
     "change": 0.16,
-    "volume": 13803469,
+    "volume": 13984710,
     "close": 79.22
   },
   {
@@ -1676,7 +1676,7 @@
     "date": "2025-10-27T00:00:00Z",
     "metric_name": "Consumer Discretionary Volume",
     "change": 1.44,
-    "volume": 3701479,
+    "volume": 3704035,
     "close": 241.08
   },
   {
