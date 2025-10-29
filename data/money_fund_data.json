@@ -2,19 +2,19 @@
   {
     "fund_name": "Vanguard 500 Index Fund",
     "symbol": "VFIAX",
-    "price": 634.89,
-    "change": 7.71,
-    "change_percent": "1.23%",
-    "latest_trading_day": "2025-10-27",
-    "timestamp": "2025-10-29T10:25:09.985054Z"
+    "price": 636.35,
+    "change": 1.46,
+    "change_percent": "0.23%",
+    "latest_trading_day": "2025-10-28",
+    "timestamp": "2025-10-29T11:20:53.078946Z"
   },
   {
     "fund_name": "Vanguard Total Stock Market Index Fund",
     "symbol": "VTSAX",
-    "price": 164.31,
-    "change": 1.87,
-    "change_percent": "1.15%",
-    "latest_trading_day": "2025-10-27",
-    "timestamp": "2025-10-29T10:25:25.065887Z"
+    "price": 164.47,
+    "change": 0.16,
+    "change_percent": "0.1%",
+    "latest_trading_day": "2025-10-28",
+    "timestamp": "2025-10-29T11:21:08.262779Z"
   }
 ]
