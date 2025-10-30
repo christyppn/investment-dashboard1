@@ -1,11 +1,5 @@
 [
   {
-    "date": "2025-09-30T00:00:00Z",
-    "value": 50,
-    "status": "Neutral",
-    "region": "US"
-  },
-  {
     "date": "2025-10-01T00:00:00Z",
     "value": 49,
     "status": "Neutral",
@@ -177,6 +171,12 @@
     "date": "2025-10-29T00:00:00Z",
     "value": 51,
     "status": "Neutral",
+    "region": "US"
+  },
+  {
+    "date": "2025-10-30T00:00:00Z",
+    "value": 34,
+    "status": "Fear",
     "region": "US",
     "is_latest": true
   }
