@@ -3358,5 +3358,215 @@
     "change": 1.51,
     "volume": 8102599,
     "close": 368.61
+  },
+  {
+    "date": "2025-09-18T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": 0.0,
+    "volume": 49167670,
+    "close": 244.84
+  },
+  {
+    "date": "2025-09-19T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": -0.76,
+    "volume": 56092037,
+    "close": 242.98
+  },
+  {
+    "date": "2025-09-22T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": 0.58,
+    "volume": 53572930,
+    "close": 244.39
+  },
+  {
+    "date": "2025-09-23T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": -0.23,
+    "volume": 41854513,
+    "close": 243.84
+  },
+  {
+    "date": "2025-09-24T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": -0.92,
+    "volume": 36002182,
+    "close": 241.6
+  },
+  {
+    "date": "2025-09-25T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": -0.96,
+    "volume": 37209480,
+    "close": 239.29
+  },
+  {
+    "date": "2025-09-26T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": 0.86,
+    "volume": 28942766,
+    "close": 241.34
+  },
+  {
+    "date": "2025-09-29T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": 0.12,
+    "volume": 26391483,
+    "close": 241.62
+  },
+  {
+    "date": "2025-09-30T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": 0.14,
+    "volume": 33447721,
+    "close": 241.96
+  },
+  {
+    "date": "2025-10-01T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": 0.22,
+    "volume": 28519998,
+    "close": 242.49
+  },
+  {
+    "date": "2025-10-02T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": 0.63,
+    "volume": 28687401,
+    "close": 244.02
+  },
+  {
+    "date": "2025-10-03T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": 0.74,
+    "volume": 34579610,
+    "close": 245.83
+  },
+  {
+    "date": "2025-10-06T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": 0.4,
+    "volume": 31507374,
+    "close": 246.81
+  },
+  {
+    "date": "2025-10-07T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": -1.07,
+    "volume": 31766601,
+    "close": 244.16
+  },
+  {
+    "date": "2025-10-08T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": 1.05,
+    "volume": 25824957,
+    "close": 246.72
+  },
+  {
+    "date": "2025-10-09T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": -0.64,
+    "volume": 26243148,
+    "close": 245.13
+  },
+  {
+    "date": "2025-10-10T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": -2.99,
+    "volume": 70569415,
+    "close": 237.79
+  },
+  {
+    "date": "2025-10-13T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": 2.78,
+    "volume": 36298626,
+    "close": 244.41
+  },
+  {
+    "date": "2025-10-14T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": 1.43,
+    "volume": 45320805,
+    "close": 247.9
+  },
+  {
+    "date": "2025-10-15T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": 0.98,
+    "volume": 45369046,
+    "close": 250.33
+  },
+  {
+    "date": "2025-10-16T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": -2.11,
+    "volume": 52740394,
+    "close": 245.06
+  },
+  {
+    "date": "2025-10-17T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": -0.67,
+    "volume": 55379514,
+    "close": 243.41
+  },
+  {
+    "date": "2025-10-20T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": 1.95,
+    "volume": 32545025,
+    "close": 248.16
+  },
+  {
+    "date": "2025-10-21T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": -0.47,
+    "volume": 26337895,
+    "close": 246.99
+  },
+  {
+    "date": "2025-10-22T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": -1.48,
+    "volume": 46578446,
+    "close": 243.34
+  },
+  {
+    "date": "2025-10-23T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": 1.27,
+    "volume": 28591002,
+    "close": 246.42
+  },
+  {
+    "date": "2025-10-24T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": 1.22,
+    "volume": 26627005,
+    "close": 249.43
+  },
+  {
+    "date": "2025-10-27T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": 0.35,
+    "volume": 31798148,
+    "close": 250.3
+  },
+  {
+    "date": "2025-10-28T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": -0.54,
+    "volume": 28075893,
+    "close": 248.96
+  },
+  {
+    "date": "2025-10-29T00:00:00Z",
+    "metric_name": "Small Cap Volume (IWM)",
+    "change": -0.85,
+    "volume": 55951795,
+    "close": 246.84
   }
 ]
