@@ -28,7 +28,13 @@ async function loadFundFlowsDetails() {
                 'Consumer Discretionary Volume', 
                 'Small Cap (Russell 2000) Volume'
             ];
-            const flowData = historyData.filter(d => flowMetrics.includes(d.metric_name));
+        // 篩選出資金流向數據 (包含 Volume 的指標)
+        const fundFlowData = allMarketData.filter(d => d.metric_name.includes('Volume'));
+
+        // 由於 market_data_history 包含歷史數據，我們需要過濾出最新的數據點
+        // 這裡我們只取最新的數據點
+        const latestDate = fundFlowData.length > 0 ? fundFlowData[fundFlowData.length - 1].date : null;
+        const latestFundFlowData = fundFlowData.filter(d => d.date === latestDate);
             
             let latestFlowHtml = '';
             const flowSeries = [];
