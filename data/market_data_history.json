@@ -836,7 +836,7 @@
     "date": "2025-10-31T00:00:00Z",
     "metric_name": "Technology Sector Volume (XLK)",
     "change": 0.1,
-    "volume": 8130178,
+    "volume": 8151914,
     "close": 300.68
   },
   {
@@ -1046,7 +1046,7 @@
     "date": "2025-10-31T00:00:00Z",
     "metric_name": "Communication Services Volume (XLC)",
     "change": 0.43,
-    "volume": 5220717,
+    "volume": 5249701,
     "close": 114.81
   },
   {
@@ -1256,7 +1256,7 @@
     "date": "2025-10-31T00:00:00Z",
     "metric_name": "Consumer Discretionary Volume (XLY)",
     "change": 2.64,
-    "volume": 6701061,
+    "volume": 6707242,
     "close": 239.93
   },
   {
@@ -1466,7 +1466,7 @@
     "date": "2025-10-31T00:00:00Z",
     "metric_name": "Consumer Staples Volume (XLP)",
     "change": -0.29,
-    "volume": 14645307,
+    "volume": 14658320,
     "close": 76.28
   },
   {
@@ -1676,7 +1676,7 @@
     "date": "2025-10-31T00:00:00Z",
     "metric_name": "Health Care Volume (XLV)",
     "change": -0.03,
-    "volume": 10578268,
+    "volume": 10581213,
     "close": 144.25
   },
   {
@@ -1886,7 +1886,7 @@
     "date": "2025-10-31T00:00:00Z",
     "metric_name": "Financial Sector Volume (XLF)",
     "change": 0.27,
-    "volume": 40282947,
+    "volume": 40425805,
     "close": 52.37
   },
   {
@@ -2096,7 +2096,7 @@
     "date": "2025-10-31T00:00:00Z",
     "metric_name": "Energy Sector Volume (XLE)",
     "change": 0.73,
-    "volume": 13419094,
+    "volume": 13492682,
     "close": 88.13
   },
   {
@@ -2306,7 +2306,7 @@
     "date": "2025-10-31T00:00:00Z",
     "metric_name": "Industrial Sector Volume (XLI)",
     "change": 0.24,
-    "volume": 10403370,
+    "volume": 10414852,
     "close": 155.06
   },
   {
@@ -2516,7 +2516,7 @@
     "date": "2025-10-31T00:00:00Z",
     "metric_name": "Materials Sector Volume (XLB)",
     "change": -0.58,
-    "volume": 8762096,
+    "volume": 8764440,
     "close": 85.67
   },
   {
@@ -2726,7 +2726,7 @@
     "date": "2025-10-31T00:00:00Z",
     "metric_name": "Utilities Sector Volume (XLU)",
     "change": -0.69,
-    "volume": 9188069,
+    "volume": 9217393,
     "close": 89.1
   },
   {
@@ -3146,7 +3146,7 @@
     "date": "2025-10-31T00:00:00Z",
     "metric_name": "Robotics & AI Volume (ROBO)",
     "change": 1.02,
-    "volume": 89194,
+    "volume": 89706,
     "close": 69.62
   },
   {
