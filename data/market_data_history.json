@@ -206,7 +206,7 @@
     "date": "2025-10-31T00:00:00Z",
     "metric_name": "S&P 500 Daily Change",
     "change": 0.33,
-    "volume": 80268705,
+    "volume": 87164122,
     "close": 682.06
   },
   {
@@ -416,7 +416,7 @@
     "date": "2025-10-31T00:00:00Z",
     "metric_name": "NASDAQ 100 Daily Change",
     "change": 0.48,
-    "volume": 66061993,
+    "volume": 66305147,
     "close": 629.07
   },
   {
@@ -626,7 +626,7 @@
     "date": "2025-10-31T00:00:00Z",
     "metric_name": "Dow 30 Daily Change",
     "change": 0.14,
-    "volume": 7845756,
+    "volume": 7990939,
     "close": 475.67
   },
   {
@@ -2936,7 +2936,7 @@
     "date": "2025-10-31T00:00:00Z",
     "metric_name": "Gold Fund Volume (GLD)",
     "change": -0.54,
-    "volume": 11004337,
+    "volume": 11077910,
     "close": 368.12
   },
   {
@@ -3356,7 +3356,7 @@
     "date": "2025-10-31T00:00:00Z",
     "metric_name": "Semiconductor Volume (SMH)",
     "change": -0.2,
-    "volume": 4903156,
+    "volume": 4917864,
     "close": 363.02
   },
   {
