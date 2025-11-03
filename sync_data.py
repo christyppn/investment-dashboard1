@@ -99,6 +99,7 @@ def fetch_alpha_vantage_data(symbol, function, outputsize="compact"):
         return None
 
 def process_time_series_data(symbol, data, metric_name):
+    """Processes Alpha Vantage Time Series data for trend analysis."""
     if not data or "Time Series (Daily)" not in data:
         return []
 
@@ -106,31 +107,28 @@ def process_time_series_data(symbol, data, metric_name):
     history = []
     
     dates = sorted(time_series.keys(), reverse=True)[:30]
-    dates.reverse()
+    dates.reverse() 
 
     for i, date_str in enumerate(dates):
         day_data = time_series[date_str]
-        latest_close = float(day_data["4. close"])
-        volume = int(day_data["5. volume"])
-
+        
         if i > 0:
             previous_close = float(time_series[dates[i-1]]["4. close"])
-            previous_volume = float(time_series[dates[i-1]]["5. volume"])
+            latest_close = float(day_data["4. close"])
             change = (latest_close - previous_close) / previous_close * 100
-            volume_change = ((volume - previous_volume) / previous_volume * 100) if previous_volume != 0 else 0
         else:
-            change = 0.0
-            volume_change = 0.0
+            change = 0.0 
+
+        volume = int(day_data["5. volume"])
 
         history.append({
             "date": date_str + "T00:00:00Z",
             "metric_name": metric_name,
             "change": round(change, 2),
             "volume": volume,
-            "volume_change": round(volume_change, 2),
-            "close": latest_close
+            "close": float(day_data["4. close"])
         })
-
+    
     return history
 
 def fetch_market_data_for_trend():
