@@ -6,7 +6,7 @@
     "change": 1.7,
     "change_percent": "0.27%",
     "latest_trading_day": "2025-10-31",
-    "timestamp": "2025-11-03T10:26:24.826791Z"
+    "timestamp": "2025-11-03T11:20:22.340921Z"
   },
   {
     "fund_name": "Vanguard Total Stock Market Index Fund",
@@ -15,7 +15,7 @@
     "change": 0.59,
     "change_percent": "0.36%",
     "latest_trading_day": "2025-10-31",
-    "timestamp": "2025-11-03T10:26:40.006216Z"
+    "timestamp": "2025-11-03T11:20:37.453995Z"
   },
   {
     "fund_name": "Vanguard Total Bond Market Index Fund",
@@ -24,7 +24,7 @@
     "change": -0.01,
     "change_percent": "-0.1%",
     "latest_trading_day": "2025-10-31",
-    "timestamp": "2025-11-03T10:26:55.189504Z"
+    "timestamp": "2025-11-03T11:20:52.572634Z"
   },
   {
     "fund_name": "Vanguard Money Market Fund",
@@ -33,6 +33,6 @@
     "change": 0.0,
     "change_percent": "0.0%",
     "latest_trading_day": "2021-07-16",
-    "timestamp": "2025-11-03T10:27:10.395429Z"
+    "timestamp": "2025-11-03T11:21:07.744701Z"
   }
 ]
