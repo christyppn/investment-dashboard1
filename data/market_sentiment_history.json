@@ -1,11 +1,5 @@
 [
   {
-    "date": "2025-10-04T00:00:00Z",
-    "value": 71,
-    "status": "Greed",
-    "region": "US"
-  },
-  {
     "date": "2025-10-05T00:00:00Z",
     "value": 74,
     "status": "Greed",
@@ -176,6 +170,12 @@
   {
     "date": "2025-11-02T00:00:00Z",
     "value": 37,
+    "status": "Fear",
+    "region": "US"
+  },
+  {
+    "date": "2025-11-03T00:00:00Z",
+    "value": 42,
     "status": "Fear",
     "region": "US",
     "is_latest": true
