@@ -18,7 +18,6 @@ async function loadFundFlowsDetails() {
         if (allMarketData && allMarketData.length > 0) {
             
             // 1. 篩選出資金流向數據 (包含 'Volume' 且不包含 'Daily Change' 的指標)
-            // 這是最精確的過濾方式，因為市場廣度是 Daily Change，資金流向是 Volume
             const fundFlowData = allMarketData.filter(d => 
                 d.metric_name.includes('Volume') && !d.metric_name.includes('Daily Change')
             );
@@ -29,7 +28,6 @@ async function loadFundFlowsDetails() {
             }
 
             // 2. 找出最新的日期
-            // 由於數據已經按日期排序，最新日期是最後一個數據點的日期
             const latestDate = fundFlowData[fundFlowData.length - 1].date;
 
             // 3. 過濾出最新日期的所有行業數據
