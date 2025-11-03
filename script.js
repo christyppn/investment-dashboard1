@@ -75,8 +75,8 @@ async function loadFearGreedIndex() {
     try {
         // 載入歷史數據
         // 新增隨機參數以避免瀏覽器緩存
-        const response = await fetch(`${DATA_BASE_URL}market_data_history.json?v=${new Date().getTime()}`);
-        const historyData = await historyResponse.json();
+        const response = await fetch(`${DATA_BASE_URL}market_sentiment_history.json?v=${new Date().getTime()}`);
+        const historyData = await response.json(); // <-- 直接將結果賦值給 historyData
 
         if (historyData && historyData.length > 0) {
             // 找出最新數據 (sync_data.py 中已標記 is_latest)
