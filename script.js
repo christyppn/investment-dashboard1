@@ -74,7 +74,8 @@ function renderChart(elementId, seriesData, categories, chartTitle, yAxisTitle, 
 async function loadFearGreedIndex() {
     try {
         // 載入歷史數據
-        const historyResponse = await fetch(`${DATA_BASE_URL}market_sentiment_history.json`);
+        // 新增隨機參數以避免瀏覽器緩存
+        const response = await fetch(`${DATA_BASE_URL}market_data_history.json?v=${new Date().getTime()}`);
         const historyData = await historyResponse.json();
 
         if (historyData && historyData.length > 0) {
