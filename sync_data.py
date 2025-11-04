@@ -1,284 +1,260 @@
-import os
-import json
 import requests
-from datetime import datetime, timedelta
+import json
+import os
 import time
+from datetime import datetime, timedelta
 
-# --- Configuration --- #
-DATA_DIR = "data"  # 數據將儲存在此目錄
-ALPHA_VANTAGE_API_KEY = os.environ.get("ALPHA_VANTAGE_API_KEY", "YOUR_ALPHA_VANTAGE_API_KEY")
+# --- Configuration ---
+# Alpha Vantage API Key is stored as a GitHub Secret (ALPHAVANTAGE_API_KEY)
+ALPHA_VANTAGE_API_KEY = os.environ.get("ALPHAVANTAGE_API_KEY")
+DATA_DIR = "data"
 
-# 確保數據目錄存在
+# List of symbols to fetch from Alpha Vantage
+# Expanded to include major indices, sector ETFs, and thematic ETFs
+SYMBOLS_TO_FETCH = [
+    # Major Indices/Breadth
+    "SPY", "QQQ", "DIA",
+    # Sector ETFs (11)
+    "XLK", "XLC", "XLY", "XLP", "XLV", "XLF", "XLE", "XLI", "XLB", "XLU", "VNQ", # VNQ for Real Estate
+    # Thematic/Commodity ETFs (4)
+    "GLD", "ROBO", "SMH", "IWM",
+    # Money Market Funds (4)
+    "VFIAX", "VTSAX", "VBTLX", "VMMXX",
+]
+
+# Ensure data directory exists
 os.makedirs(DATA_DIR, exist_ok=True)
 
-# --- Utility Functions --- #
+# --- Helper Functions ---
 
-def write_to_file(data, filename):
-    """將數據寫入 JSON 文件"""
-    filepath = os.path.join(DATA_DIR, filename)
-    try:
-        with open(filepath, 'w', encoding='utf-8') as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-        print(f"Successfully wrote {filename}")
-        return True
-    except Exception as e:
-        print(f"Error writing {filename}: {e}")
-        return False
+def save_json(data, filename):
+    """Saves data to a JSON file in the data directory."""
+    path = os.path.join(DATA_DIR, filename)
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+    print(f"Successfully saved data to {path}")
 
-def fetch_alpha_vantage_data(symbol, function, outputsize="compact"):
-    """從 Alpha Vantage 獲取數據，並加入延遲以避免頻率限制"""
-    # 為了避免 Alpha Vantage 免費 API 的頻率限制 (每分鐘 5 次)，加入 15 秒延遲
-    time.sleep(15)
+def get_previous_day_data(time_series_list, current_date):
+    """Finds the data for the trading day immediately preceding the current_date."""
+    # Sort by date descending
+    sorted_list = sorted(time_series_list, key=lambda x: x['date'], reverse=True)
     
-    print(f"Fetching Alpha Vantage data for {symbol} ({function})...")
-    base_url = "https://www.alphavantage.co/query"
-    params = {
-        "function": function,
-        "symbol": symbol,
-        "apikey": ALPHA_VANTAGE_API_KEY,
-        "outputsize": outputsize
-    }
-    
-    try:
-        response = requests.get(base_url, params=params, timeout=30 )
-        response.raise_for_status()
-        data = response.json()
-        
-        if "Error Message" in data:
-            print(f"Alpha Vantage Error for {symbol}: {data['Error Message']}")
-            return None
-        if "Note" in data:
-            print(f"Alpha Vantage Note for {symbol}: {data['Note']}")
-            return None
+    # Find the first entry whose date is less than the current_date
+    for entry in sorted_list:
+        if entry['date'] < current_date:
+            return entry
+    return None
+
+def process_time_series_data(symbol, time_series_data):
+    """
+    Processes raw Alpha Vantage time series data to calculate daily changes,
+    and includes the critical division-by-zero check and 30-day truncation.
+    """
+    if not time_series_data:
+        print(f"Warning: No time series data found for {symbol}")
+        return []
+
+    # Convert raw data into a list of dictionaries for easier processing
+    time_series_list = []
+    for date_str, data in time_series_data.items():
+        try:
+            # Alpha Vantage keys are prefixed with numbers, e.g., '1. open'
+            close_price = float(data['4. close'])
+            volume = int(data['6. volume'])
             
-        return data
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching Alpha Vantage data for {symbol}: {e}")
-        return None
+            time_series_list.append({
+                'date': date_str,
+                'close': close_price,
+                'volume': volume,
+                'change_percent': 0.0,
+                'volume_change_percent': 0.0,
+            })
+        except (ValueError, KeyError) as e:
+            print(f"Error processing data for {symbol} on {date_str}: {e}")
+            continue
 
-# --- Data Fetching Functions --- #
+    # Sort the list by date ascending to ensure correct calculation of previous day
+    time_series_list.sort(key=lambda x: x['date'])
+
+    # Calculate daily changes
+    for i in range(1, len(time_series_list)):
+        current = time_series_list[i]
+        previous = time_series_list[i-1]
+
+        # --- Price Change Calculation with Division-by-Zero Check ---
+        latest_close = current['close']
+        previous_close = previous['close']
+        
+        if previous_close is not None and previous_close != 0:
+            change_percent = ((latest_close - previous_close) / previous_close) * 100
+            current['change_percent'] = round(change_percent, 2)
+        else:
+            # If previous close is 0 or None, change is undefined or 0
+            current['change_percent'] = 0.0
+
+        # --- Volume Change Calculation with Division-by-Zero Check ---
+        latest_volume = current['volume']
+        previous_volume = previous['volume']
+        
+        if previous_volume is not None and previous_volume != 0:
+            volume_change = ((latest_volume - previous_volume) / previous_volume) * 100
+            current['volume_change_percent'] = round(volume_change, 2)
+        else:
+            # If previous volume is 0 or None, volume change is undefined or 0
+            current['volume_change_percent'] = 0.0
+
+    # Final Optimization: Only keep the latest 30 trading days for frontend display
+    # This resolves the chart overcrowding issue.
+    return time_series_list[-30:]
+
+# --- Data Fetching Functions ---
 
 def fetch_hibor_rates():
-    """獲取香港 HIBOR 利率"""
+    """Fetches HIBOR rates from HKMA API."""
     print("Fetching HIBOR rates...")
-    url = "https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily"
+    url = "https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/er-ir-hkr-m"
+    
     try:
-        response = requests.get(url, timeout=30 )
+        response = requests.get(url, timeout=10 )
         response.raise_for_status()
         data = response.json()
         
-        records = data.get("result", {}).get("records", [])
-        if not records:
-            print("No HIBOR data found in API response")
-            return []
+        if data and data.get('result') and data['result'].get('records'):
+            # Get the latest record
+            latest_record = data['result']['records'][0]
             
-        latest_data = records[0]
-        
-        # 修正後的鍵名：ir_1m, ir_3m, ir_6m
-        hibor_data = [
-            {"id": "1", "term": "1M", "rate": float(latest_data.get("ir_1m", 0)), "timestamp": datetime.now().isoformat() + "Z"},
-            {"id": "2", "term": "3M", "rate": float(latest_data.get("ir_3m", 0)), "timestamp": datetime.now().isoformat() + "Z"},
-            {"id": "3", "term": "6M", "rate": float(latest_data.get("ir_6m", 0)), "timestamp": datetime.now().isoformat() + "Z"},
-        ]
-        return hibor_data
-    except Exception as e:
+            # Corrected keys based on HKMA API structure
+            hibor_data = {
+                "date": latest_record.get('end_of_month'),
+                "ir_1m": latest_record.get('ir_1m'),
+                "ir_3m": latest_record.get('ir_3m'),
+                "ir_6m": latest_record.get('ir_6m'),
+            }
+            save_json(hibor_data, "hibor_rates.json")
+        else:
+            print("Error: HKMA API returned no records.")
+            
+    except requests.RequestException as e:
         print(f"Error fetching HIBOR rates: {e}")
-        return []
 
 def fetch_fear_greed_index():
-    """獲取恐懼與貪婪指數歷史數據"""
-    print("Fetching Fear & Greed Index History...")
-    url = "https://production.dataviz.cnn.io/index/fearandgreed/graphdata"
+    """Fetches Fear & Greed Index from alternative.me API."""
+    print("Fetching Fear & Greed Index...")
+    url = "https://api.alternative.me/fng/?limit=30" # Limit to 30 days
+    
     try:
-        response = requests.get(url, timeout=30 )
+        response = requests.get(url, timeout=10 )
         response.raise_for_status()
         data = response.json()
         
-        fng_data = []
-        # 獲取歷史數據，只取最近 30 天
-        history = data.get("fear_and_greed_historical", [])
-        for item in history[-30:]:
-            fng_data.append({
-                "date": datetime.fromtimestamp(item["timestamp"] / 1000).isoformat() + "Z",
-                "value": item["score"],
-                "rating": item["rating"]
-            })
+        if data and data.get('data'):
+            # Data is already sorted by date descending, reverse it for the frontend chart
+            history_data = sorted(data['data'], key=lambda x: int(x['timestamp']))
             
-        print(f"Fetched {len(fng_data)} Fear & Greed Index historical points.")
-        return fng_data
-    except Exception as e:
+            # Format the data for the frontend
+            formatted_data = []
+            for record in history_data:
+                # Convert timestamp to YYYY-MM-DD format
+                date_str = datetime.fromtimestamp(int(record['timestamp'])).strftime('%Y-%m-%d')
+                formatted_data.append({
+                    "date": date_str,
+                    "value": int(record['value']),
+                    "sentiment": record['value_classification']
+                })
+            
+            save_json(formatted_data, "market_sentiment_history.json")
+        else:
+            print("Error: Fear & Greed API returned no data.")
+            
+    except requests.RequestException as e:
         print(f"Error fetching Fear & Greed Index: {e}")
-        return []
 
-def process_time_series_data(data, symbol, name):
-    """處理 Alpha Vantage 的 TIME_SERIES_DAILY 數據，計算日變動和成交量變動"""
-    time_series = data.get("Time Series (Daily)", {})
-    if not time_series:
-        return []
+def fetch_alpha_vantage_data():
+    """Fetches time series data for all configured symbols from Alpha Vantage."""
+    if not ALPHA_VANTAGE_API_KEY:
+        print("Error: ALPHAVANTAGE_API_KEY environment variable not set.")
+        return
 
-    # 獲取最新的 30 天數據
-    dates = sorted(time_series.keys(), reverse=True)[:30]
-    processed_data = []
+    base_url = "https://www.alphavantage.co/query"
+    
+    # Initialize data structures for combined output
+    market_data_history = {}
+    money_fund_data = {}
 
-    for i, date in enumerate(dates):
-        latest_day_data = time_series[date]
+    for i, symbol in enumerate(SYMBOLS_TO_FETCH ):
+        print(f"Fetching data for {symbol} ({i+1}/{len(SYMBOLS_TO_FETCH)})...")
         
-        # 獲取前一天的數據
-        previous_date = dates[i+1] if i + 1 < len(dates) else None
-        
-        # --- Price Change Calculation ---
-        previous_close = float(time_series[previous_date]["4. close"]) if previous_date else float(latest_day_data.get("4. close", 0))
-        latest_close = float(latest_day_data.get("4. close", 0))
-        
-        # 避免除以零錯誤
-        if previous_close == 0:
-            change_percent = 0
-        else:
-            change_percent = (latest_close - previous_close) / previous_close * 100
-        
-        # --- Volume Change Calculation ---
-        previous_volume = float(time_series[previous_date]["5. volume"]) if previous_date else 0
-        latest_volume = float(latest_day_data.get("5. volume", 0))
-        
-        # 避免除以零錯誤
-        if previous_volume == 0:
-            volume_change = 0
-        else:
-            volume_change = (latest_volume - previous_volume) / previous_volume * 100
-        
-        processed_data.append({
-            "date": datetime.strptime(date, "%Y-%m-%d").isoformat() + "Z",
+        params = {
+            "function": "TIME_SERIES_DAILY",
             "symbol": symbol,
-            "metric_name": name,
-            "close": latest_close,
-            "change": round(change_percent, 2),
-            "volume": int(latest_day_data.get("5. volume", 0)),
-            "volume_change": round(volume_change, 2)
-        })
-
-    return processed_data
-
-def fetch_market_data_for_trend():
-    """獲取所有市場廣度和資金流向的歷史數據"""
-    print("Fetching market data for trend analysis (Market Breadth and Fund Flows)...")
-    
-    # 擴展後的 ETF 列表，用於市場廣度和資金流向
-    symbols_to_fetch = {
-        # Market Breadth (Daily Change)
-        "SPY": "S&P 500 Daily Change",
-        "QQQ": "NASDAQ 100 Daily Change",
-        "DIA": "Dow 30 Daily Change",
+            "outputsize": "full", # Request full history to ensure 30 trading days are available
+            "apikey": ALPHA_VANTAGE_API_KEY
+        }
         
-        # Fund Flows (Volume) - 擴展後的行業板塊
-        "XLK": "Technology Sector Volume (XLK)",
-        "XLC": "Communication Services Volume (XLC)",
-        "XLY": "Consumer Discretionary Volume (XLY)",
-        "XLP": "Consumer Staples Volume (XLP)",
-        "XLV": "Health Care Volume (XLV)",
-        "XLF": "Financial Sector Volume (XLF)",
-        "XLE": "Energy Sector Volume (XLE)",
-        "XLI": "Industrial Sector Volume (XLI)",
-        "XLB": "Materials Sector Volume (XLB)",
-        "XLU": "Utilities Sector Volume (XLU)",
-        "GLD": "Gold Fund Volume (GLD)",
-        "ROBO": "Robotics & AI Volume (ROBO)",
-        "SMH": "Semiconductor Volume (SMH)",
-        "IWM": "Small Cap Volume (IWM)"
-    }
-    
-    all_market_data = []
-    for symbol, name in symbols_to_fetch.items():
-        data = fetch_alpha_vantage_data(symbol, "TIME_SERIES_DAILY", "compact")
-        if data:
-            all_market_data.extend(process_time_series_data(data, symbol, name))
+        try:
+            response = requests.get(base_url, params=params, timeout=15)
+            response.raise_for_status()
+            data = response.json()
             
-    print(f"Fetched {len(all_market_data)} total market data points.")
-    return all_market_data
-
-def fetch_money_fund_data():
-    """獲取貨幣基金數據 (使用 TIME_SERIES_DAILY 替代 FUND_HOLDINGS)"""
-    print("Fetching Money Fund data...")
-    
-    # 使用 TIME_SERIES_DAILY 獲取基金價格數據
-    funds_to_fetch = {
-        "VFIAX": "Vanguard 500 Index Fund",
-        "VTSAX": "Vanguard Total Stock Market Index Fund",
-        "VBTLX": "Vanguard Total Bond Market Index Fund", # 債券
-        "VMMXX": "Vanguard Money Market Fund" # 貨幣
-    }
-    
-    fund_data = []
-    for symbol, name in funds_to_fetch.items():
-        data = fetch_alpha_vantage_data(symbol, "TIME_SERIES_DAILY", "compact")
-        if data:
-            time_series = data.get("Time Series (Daily)", {})
-            if not time_series:
+            # Check for API call error (e.g., invalid key, rate limit)
+            if "Error Message" in data:
+                print(f"Alpha Vantage Error for {symbol}: {data['Error Message']}")
                 continue
-                
-            dates = sorted(time_series.keys(), reverse=True)
-            latest_date = dates[0]
-            latest_day_data = time_series[latest_date]
-            
-            # 獲取前一天的數據
-            previous_date = dates[1] if len(dates) > 1 else None
-            previous_close = float(time_series[previous_date]["4. close"]) if previous_date else float(latest_day_data.get("4. close", 0))
+            if "Note" in data:
+                print(f"Alpha Vantage Note for {symbol}: {data['Note']}")
+                # Continue, as rate limit note might still contain some data
 
-            try:
-                latest_close = float(latest_day_data.get("4. close", 0))
+            time_series_key = "Time Series (Daily)"
+            if time_series_key in data:
+                raw_time_series = data[time_series_key]
                 
-                # 避免除以零錯誤
-                if previous_close == 0:
-                    change = 0
-                    change_percent = 0
+                # Process and truncate the data
+                processed_data = process_time_series_data(symbol, raw_time_series)
+                
+                # Separate data based on symbol type
+                if symbol in ["VFIAX", "VTSAX", "VBTLX", "VMMXX"]:
+                    # Money Fund Data: Only need the latest data point
+                    if processed_data:
+                        latest_data = processed_data[-1]
+                        money_fund_data[symbol] = {
+                            "date": latest_data['date'],
+                            "close": latest_data['close'],
+                            "change_percent": latest_data['change_percent']
+                        }
                 else:
-                    change = latest_close - previous_close
-                    change_percent = (change / previous_close) * 100
-                
-                latest_data = {
-                    "fund_name": name,
-                    "symbol": symbol,
-                    "price": round(latest_close, 2),
-                    "change": round(change, 2),
-                    "change_percent": f"{round(change_percent, 2)}%",
-                    "latest_trading_day": latest_date,
-                    "timestamp": datetime.now().isoformat() + "Z"
-                }
-                fund_data.append(latest_data)
-                print(f"Fetched time series data for {name}")
-            except Exception as e:
-                print(f"Error processing time series for {name}: {e}")
-        else:
-            print(f"No TIME_SERIES_DAILY data found for {name}.")
-            
-    return fund_data
+                    # Market Breadth and Fund Flow Data: Need the 30-day history
+                    market_data_history[symbol] = processed_data
+            else:
+                print(f"Warning: Time Series data not found in response for {symbol}.")
 
-# --- Main Sync Logic --- #
+        except requests.RequestException as e:
+            print(f"Error fetching Alpha Vantage data for {symbol}: {e}")
+        except Exception as e:
+            print(f"An unexpected error occurred for {symbol}: {e}")
 
-def main():
-    print("Starting data synchronization process...")
-    print(f"Alpha Vantage API Key: {'Set' if ALPHA_VANTAGE_API_KEY != 'YOUR_ALPHA_VANTAGE_API_KEY' else 'Not Set'}")
-    
-    # 1. Fetch and write HIBOR rates
-    hibor_data = fetch_hibor_rates()
-    if hibor_data:
-        write_to_file(hibor_data, "hibor_rates.json")
-    
-    # 2. Fetch and write Fear & Greed Index History
-    fng_data = fetch_fear_greed_index()
-    if fng_data:
-        write_to_file(fng_data, "market_sentiment_history.json")
-    
-    # 3. Fetch and write Market Breadth/Fund Flows (Historical data for trend)
-    market_data_history = fetch_market_data_for_trend()
-    if market_data_history:
-        write_to_file(market_data_history, "market_data_history.json")
+        # Rate limit compliance: 5 calls per minute (12 seconds per call)
+        # We use 15 seconds to be safe.
+        if i < len(SYMBOLS_TO_FETCH) - 1:
+            print("Waiting 15 seconds for Alpha Vantage rate limit...")
+            time.sleep(15)
 
-    # 4. Fetch and write Money Fund data (Latest data only)
-    money_fund_data = fetch_money_fund_data()
-    if money_fund_data:
-        write_to_file(money_fund_data, "money_fund_data.json")
-    
-    print("Data synchronization process finished.")
+    # Save the combined data files
+    save_json(market_data_history, "market_data_history.json")
+    save_json(money_fund_data, "money_fund_data.json")
+
+
+# --- Main Execution ---
 
 if __name__ == "__main__":
-    main()
+    print("Starting data synchronization script...")
+    
+    # 1. Fetch HIBOR rates
+    fetch_hibor_rates()
+    
+    # 2. Fetch Fear & Greed Index
+    fetch_fear_greed_index()
+    
+    # 3. Fetch Alpha Vantage data (Indices, ETFs, Money Funds)
+    fetch_alpha_vantage_data()
+    
+    print("Data synchronization complete.")
