@@ -10,10 +10,12 @@ ALPHA_VANTAGE_API_KEY = os.environ.get("ALPHAVANTAGE_API_KEY")
 DATA_DIR = "data"
 
 # List of symbols to fetch from Alpha Vantage
-# Expanded to include major indices, sector ETFs, and thematic ETFs
+# Expanded to include major indices, sector ETFs, thematic ETFs, and new global indices/VIX
 SYMBOLS_TO_FETCH = [
-    # Major Indices/Breadth
+    # Major Indices/Breadth (US)
     "SPY", "QQQ", "DIA",
+    # New Global Indices and VIX
+    "^VIX", "^HSI", "^N225",
     # Sector ETFs (11)
     "XLK", "XLC", "XLY", "XLP", "XLV", "XLF", "XLE", "XLI", "XLB", "XLU", "VNQ", # VNQ for Real Estate
     # Thematic/Commodity ETFs (4)
@@ -60,7 +62,8 @@ def process_time_series_data(symbol, time_series_data):
         try:
             # Alpha Vantage keys are prefixed with numbers, e.g., '1. open'
             close_price = float(data['4. close'])
-            volume = int(data['6. volume'])
+            # Volume is not always available for indices like VIX, HSI, N225. Default to 0 if not found.
+            volume = int(data.get('6. volume', 0))
             
             time_series_list.append({
                 'date': date_str,
@@ -96,7 +99,8 @@ def process_time_series_data(symbol, time_series_data):
         latest_volume = current['volume']
         previous_volume = previous['volume']
         
-        if previous_volume is not None and previous_volume != 0:
+        # Only calculate volume change if volume data is present (i.e., not 0 for indices)
+        if previous_volume is not None and previous_volume != 0 and latest_volume != 0:
             volume_change = ((latest_volume - previous_volume) / previous_volume) * 100
             current['volume_change_percent'] = round(volume_change, 2)
         else:
@@ -115,7 +119,7 @@ def fetch_hibor_rates():
     url = "https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/er-ir-hkr-m"
     
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(url, timeout=10 )
         response.raise_for_status()
         data = response.json()
         
@@ -143,7 +147,7 @@ def fetch_fear_greed_index():
     url = "https://api.alternative.me/fng/?limit=30" # Limit to 30 days
     
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(url, timeout=10 )
         response.raise_for_status()
         data = response.json()
         
@@ -181,7 +185,7 @@ def fetch_alpha_vantage_data():
     market_data_history = {}
     money_fund_data = {}
 
-    for i, symbol in enumerate(SYMBOLS_TO_FETCH):
+    for i, symbol in enumerate(SYMBOLS_TO_FETCH ):
         print(f"Fetching data for {symbol} ({i+1}/{len(SYMBOLS_TO_FETCH)})...")
         
         params = {
@@ -258,4 +262,3 @@ if __name__ == "__main__":
     fetch_alpha_vantage_data()
     
     print("Data synchronization complete.")
-
