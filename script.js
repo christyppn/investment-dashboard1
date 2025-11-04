@@ -1,220 +1,152 @@
-// API 端點配置
-const DATA_BASE_URL = './data/'; // GitHub Pages 會從同一儲存庫讀取
+const DATA_BASE_URL = './data/';
 
-// 格式化時間戳
+// --- Helper Functions ---
+
+/**
+ * Formats a timestamp string (YYYY-MM-DD) into a more readable format.
+ * @param {string} timestamp - The timestamp string.
+ * @returns {string} Formatted time string.
+ */
 function formatTimestamp(timestamp) {
-    if (!timestamp) return '--';
-    // 確保只取日期部分，避免時間戳過長
-    const date = new Date(timestamp);
-    return date.toLocaleString('zh-TW', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: false
-    });
+    if (!timestamp) return '未知時間';
+    // Assuming timestamp is YYYY-MM-DD or YYYY-MM-DD HH:MM:SS
+    return `更新時間: ${timestamp}`;
 }
 
-// --- 繪製趨勢圖函數 ---
-function renderChart(elementId, seriesData, categories, chartTitle, yAxisTitle, isVolume = false) {
+/**
+ * Renders an ApexChart.
+ * (This function is kept simple as the main rendering logic is now in renderIndexCard)
+ */
+function renderChart(elementId, series, categories, title, yAxisTitle, showLabels = true) {
     const options = {
-        series: seriesData,
+        series: series,
         chart: {
-            type: isVolume ? 'bar' : 'line',
-            height: 150,
-            toolbar: {
-                show: false
-            }
+            type: 'line',
+            height: showLabels ? 250 : 100,
+            sparkline: { enabled: !showLabels }
         },
         title: {
-            text: chartTitle,
+            text: title,
             align: 'left',
-            style: {
-                fontSize: '14px'
-            }
+            style: { fontSize: '14px' }
         },
         xaxis: {
             categories: categories,
-            labels: {
-                show: false // 隱藏 X 軸標籤，保持簡潔
-            }
+            labels: { show: showLabels },
+            tooltip: { enabled: false }
         },
         yaxis: {
-            title: {
-                text: yAxisTitle,
-                style: {
-                    fontSize: '10px'
+            title: { text: yAxisTitle },
+            labels: { show: showLabels }
+        },
+        stroke: {
+            curve: 'smooth',
+            width: 2
+        },
+        tooltip: {
+            x: { show: showLabels },
+            y: {
+                formatter: function(val) {
+                    return val.toFixed(2) + (yAxisTitle.includes('%') ? '%' : '');
                 }
             }
         },
-        tooltip: {
-            x: {
-                format: 'MM/dd'
-            }
-        },
-        dataLabels: {
-            enabled: false
+        grid: {
+            show: showLabels,
+            padding: { left: 0, right: 0 }
         }
     };
 
-    // 銷毀舊圖表（如果存在）
-    const chartElement = document.getElementById(elementId);
-    if (chartElement.chart) {
-        chartElement.chart.destroy();
-    }
-    
-    chartElement.chart = new ApexCharts(chartElement, options);
-    chartElement.chart.render();
-}
-
-// --- 載入數據函數 ---
-
-// 載入恐懼貪婪指數 (包含歷史趨勢)
-async function loadFearGreedIndex() {
-    try {
-        // 載入歷史數據
-        // 新增隨機參數以避免瀏覽器緩存
-        const response = await fetch(`${DATA_BASE_URL}market_sentiment_history.json?v=${new Date().getTime()}`);
-        const historyData = await response.json(); // <-- 直接將結果賦值給 historyData
-
-        if (historyData && historyData.length > 0) {
-            // 找出最新數據 (sync_data.py 中已標記 is_latest)
-            const latest = historyData[historyData.length - 1];
-            
-            // 1. 更新主卡片顯示
-            document.getElementById('fearGreedIndex').innerHTML = `<div class="value">${latest.value}</div>`;
-            const statusElement = document.getElementById('fearGreedStatus');
-            statusElement.textContent = latest.status || '未知';
-            statusElement.className = 'status ' + getStatusClass(latest.status);
-            document.getElementById('fearGreedTimestamp').textContent = `更新時間：${formatTimestamp(latest.date)}`;
-
-            // 2. 繪製趨勢圖
-            const categories = historyData.map(d => new Date(d.date).toLocaleDateString('zh-TW', { month: '2-digit', day: '2-digit' }));
-            const seriesData = [{
-                name: '指數',
-                data: historyData.map(d => d.value)
-            }];
-            renderChart('fearGreedChart', seriesData, categories, '30天趨勢', '指數分數');
-
-        } else {
-            document.getElementById('fearGreedIndex').innerHTML = '<p>載入失敗</p>';
-        }
-    } catch (error) {
-        console.error('載入恐懼貪婪指數失敗:', error);
-        document.getElementById('fearGreedIndex').innerHTML = '<p>載入失敗</p>';
+    // Check if chart exists, if so, update it, otherwise create new
+    if (ApexCharts.getChartByID(elementId)) {
+        ApexCharts.exec(elementId, 'updateOptions', options);
+    } else {
+        const chart = new ApexCharts(document.getElementById(elementId), options);
+        chart.render();
     }
 }
 
-// 根據狀態返回 CSS 類別
-function getStatusClass(status) {
-    if (!status) return '';
-    const lowerStatus = status.toLowerCase();
-    if (lowerStatus.includes('extreme fear')) return 'extreme-fear';
-    if (lowerStatus.includes('fear')) return 'fear';
-    if (lowerStatus.includes('neutral')) return 'neutral';
-    if (lowerStatus.includes('extreme greed')) return 'extreme-greed';
-    if (lowerStatus.includes('greed')) return 'greed';
-    return '';
+/**
+ * Sets the current value and change percentage for a card, including color coding.
+ * @param {string} valueId - ID of the element for the current value.
+ * @param {string} changeId - ID of the element for the change percentage.
+ * @param {number} value - The current value.
+ * @param {number} change - The change percentage.
+ */
+function setCardData(valueId, changeId, value, change) {
+    const valueEl = document.getElementById(valueId);
+    const changeEl = document.getElementById(changeId);
+
+    if (valueEl) {
+        valueEl.textContent = value.toFixed(2);
+    }
+
+    if (changeEl) {
+        changeEl.textContent = (change > 0 ? '+' : '') + change.toFixed(2) + '%';
+        changeEl.className = 'change-percent ' + (change > 0 ? 'positive' : (change < 0 ? 'negative' : 'neutral'));
+    }
 }
 
-// 載入 HIBOR 利率
+// --- Data Loading Functions ---
+
+/**
+ * Loads and displays HIBOR rates.
+ */
 async function loadHiborRates() {
     try {
-        const response = await fetch(`${DATA_BASE_URL}hibor_rates.json`);
+        const response = await fetch(`${DATA_BASE_URL}hibor_rates.json?v=${new Date().getTime()}`);
         const data = await response.json();
-        
-        if (data && data.length > 0) {
-            let html = '';
-            data.forEach(rate => {
-                html += `
-                    <div class="rate-item">
-                        <span class="rate-term">${rate.term}</span>
-                        <span class="rate-value">${rate.rate.toFixed(2)}%</span>
-                    </div>
-                `;
-            });
-            document.getElementById('hiborRates').innerHTML = html;
-            document.getElementById('hiborTimestamp').textContent = `更新時間：${formatTimestamp(data[0].timestamp)}`;
-        } else {
-            document.getElementById('hiborRates').innerHTML = '<p>載入失敗</p>';
-        }
+
+        document.getElementById('hibor-1m').textContent = `${data.ir_1m}%`;
+        document.getElementById('hibor-3m').textContent = `${data.ir_3m}%`;
+        document.getElementById('hibor-6m').textContent = `${data.ir_6m}%`;
+        document.getElementById('hibor-timestamp').textContent = formatTimestamp(data.date);
+
     } catch (error) {
-        console.error('載入 HIBOR 利率失敗:', error);
-        document.getElementById('hiborRates').innerHTML = '<p>載入失敗</p>';
+        console.error("Error loading HIBOR rates:", error);
     }
 }
 
-// 載入市場廣度 (只處理市場廣度，資金流向已移至 fund_flow.js)
-async function loadMarketData() {
+/**
+ * Loads and displays Fear & Greed Index data.
+ */
+async function loadFearGreedIndex() {
     try {
-        const response = await fetch(`${DATA_BASE_URL}market_data_history.json`);
+        const response = await fetch(`${DATA_BASE_URL}market_sentiment_history.json?v=${new Date().getTime()}`);
         const historyData = await response.json();
 
         if (historyData && historyData.length > 0) {
-            // --- 1. 市場廣度 (Daily Change) ---
-            const breadthMetrics = ['S&P 500 Daily Change', 'NASDAQ 100 Daily Change', 'Dow 30 Daily Change'];
-            const breadthData = historyData.filter(d => breadthMetrics.includes(d.metric_name));
-            
-            let latestBreadthHtml = '';
-            const breadthSeries = [];
-            let breadthCategories = [];
+            const latest = historyData[historyData.length - 1];
+            document.getElementById('fng-value').textContent = latest.value;
+            document.getElementById('fng-sentiment').textContent = latest.sentiment;
+            document.getElementById('fng-timestamp').textContent = formatTimestamp(latest.date);
 
-            // Group by metric_name to prepare for charting
-            breadthMetrics.forEach(metric => {
-                const metricHistory = breadthData.filter(d => d.metric_name === metric);
-                if (metricHistory.length > 0) {
-                    // Get latest value for the card
-                    const latest = metricHistory[metricHistory.length - 1];
-                    const valueClass = latest.change >= 0 ? 'positive' : 'negative';
-                    const sign = latest.change >= 0 ? '+' : '';
-                    latestBreadthHtml += `
-                        <div class="metric-item">
-                            <div class="metric-name">${metric.replace(' Daily Change', '')}</div>
-                            <div class="metric-value ${valueClass}">${sign}${latest.change}%</div>
-                        </div>
-                    `;
-                    
-                    // Prepare series data for chart
-                    breadthSeries.push({
-                        name: metric.replace(' Daily Change', ''),
-                        data: metricHistory.map(d => d.change)
-                    });
-                    // Use categories from the first metric
-                    if (breadthCategories.length === 0) {
-                        breadthCategories = metricHistory.map(d => new Date(d.date).toLocaleDateString('zh-TW', { month: '2-digit', day: '2-digit' }));
-                    }
-                }
-            });
+            const categories = historyData.map(d => d.date);
+            const seriesData = historyData.map(d => d.value);
 
-            document.getElementById('marketBreadth').innerHTML = latestBreadthHtml || '<p>載入失敗</p>';
-            if (breadthSeries.length > 0) {
-                renderChart('marketBreadthChart', breadthSeries, breadthCategories, '市場廣度 (日變動)', '百分比');
-            }
-            document.getElementById('marketBreadthTimestamp').textContent = `更新時間：${formatTimestamp(breadthData[breadthData.length - 1].date)}`;
-
-        } else {
-            document.getElementById('marketBreadth').innerHTML = '<p>載入失敗</p>';
+            renderChart('fng-chart', [{ name: '指數分數', data: seriesData }], categories, '30天趨勢', '指數分數', true);
         }
     } catch (error) {
-        console.error('載入市場廣度失敗:', error);
-        document.getElementById('marketBreadth').innerHTML = '<p>載入失敗</p>';
+        console.error("Error loading Fear & Greed Index:", error);
     }
 }
 
-// 輔助函數：根據百分比變化設置顏色
-function setChangeColor(elementId, change) {
-    const element = document.getElementById(elementId);
-    if (element) {
-        element.textContent = (change > 0 ? '+' : '') + change.toFixed(2) + '%';
-        element.className = 'change-percent ' + (change > 0 ? 'positive' : (change < 0 ? 'negative' : 'neutral'));
-    }
-}
-
-// 輔助函數：渲染單個指數卡片
+/**
+ * Renders a single index card (SPY, QQQ, DIA, VIX, HSI, N225).
+ * @param {string} symbol - The stock/index symbol (e.g., 'SPY', '^VIX').
+ * @param {string} name - The display name.
+ * @param {Array<Object>} data - The 30-day historical data.
+ */
 function renderIndexCard(symbol, name, data) {
+    // Clean symbol for element IDs (e.g., '^VIX' -> 'vix')
+    const cleanSymbol = symbol.toLowerCase().replace('^', '');
+    
+    // Fallback for missing data
     if (!data || data.length === 0) {
         console.warn(`No data for ${symbol}`);
+        document.getElementById(`${cleanSymbol}-value`).textContent = '--';
+        document.getElementById(`${cleanSymbol}-change`).textContent = '無數據';
+        document.getElementById(`${cleanSymbol}-change`).className = 'change-percent neutral';
         return;
     }
 
@@ -222,12 +154,11 @@ function renderIndexCard(symbol, name, data) {
     const categories = data.map(d => d.date);
     const seriesData = data.map(d => d.close);
 
-    // 1. 更新數值和顏色
-    document.getElementById(`${symbol.toLowerCase().replace('^', '')}-value`).textContent = latest.close.toFixed(2);
-    setChangeColor(`${symbol.toLowerCase().replace('^', '')}-change`, latest.change_percent);
+    // 1. Update value and change percentage
+    setCardData(`${cleanSymbol}-value`, `${cleanSymbol}-change`, latest.close, latest.change_percent);
 
-    // 2. 渲染趨勢圖
-    const chartId = `${symbol.toLowerCase().replace('^', '')}-chart`;
+    // 2. Render the sparkline chart
+    const chartId = `${cleanSymbol}-chart`;
     const options = {
         chart: {
             type: 'line',
@@ -245,7 +176,7 @@ function renderIndexCard(symbol, name, data) {
             width: 2,
             curve: 'smooth'
         },
-        colors: [latest.change_percent >= 0 ? '#4CAF50' : '#F44336'], // 根據最新變化設置顏色
+        colors: [latest.change_percent >= 0 ? '#4CAF50' : '#F44336'], // Color based on latest change
         tooltip: {
             enabled: true,
             x: { show: false },
@@ -257,7 +188,7 @@ function renderIndexCard(symbol, name, data) {
         }
     };
 
-    // 檢查圖表是否已存在，如果存在則更新，否則新建
+    // Check if chart exists, if so, update it, otherwise create new
     if (ApexCharts.getChartByID(chartId)) {
         ApexCharts.exec(chartId, 'updateOptions', options);
     } else {
@@ -266,19 +197,21 @@ function renderIndexCard(symbol, name, data) {
     }
 }
 
-// 擴展 loadMarketData 函數以處理 VIX, HSI, N225
+/**
+ * Loads and displays all market data (SPY, QQQ, DIA, VIX, HSI, N225).
+ */
 async function loadMarketData() {
-    const DATA_BASE_URL = './data/';
     try {
-        // 新增隨機參數以避免瀏覽器緩存
+        // Use cache-busting to ensure the latest file is fetched
         const response = await fetch(`${DATA_BASE_URL}market_data_history.json?v=${new Date().getTime()}`);
         const marketData = await response.json();
 
-        // --- 處理市場廣度 (SPY, QQQ, DIA) ---
-        // (保留您現有的市場廣度處理邏輯)
-        // ... (現有的 SPY, QQQ, DIA 處理代碼) ...
+        // --- Market Breadth (US Indices) ---
+        renderIndexCard('SPY', 'S&P 500 ETF', marketData['SPY']);
+        renderIndexCard('QQQ', 'NASDAQ 100 ETF', marketData['QQQ']);
+        renderIndexCard('DIA', 'Dow Jones ETF', marketData['DIA']);
         
-        // --- 處理 VIX, HSI, N225 ---
+        // --- Global Indices and Volatility ---
         renderIndexCard('^VIX', 'VIX 波動率指數', marketData['^VIX']);
         renderIndexCard('^HSI', '恒生指數', marketData['^HSI']);
         renderIndexCard('^N225', '日經 225 指數', marketData['^N225']);
@@ -288,35 +221,28 @@ async function loadMarketData() {
     }
 }
 
-// 確保在頁面加載完成後調用 loadMarketData
-document.addEventListener('DOMContentLoaded', () => {
-    // ... (保留現有的 loadFearGreedIndex, loadHiborRates, loadMoneyFundData 調用) ...
-    loadMarketData(); // 確保調用
-});
+/**
+ * Loads and displays money fund data.
+ */
+async function loadMoneyFundData() {
+    try {
+        const response = await fetch(`${DATA_BASE_URL}money_fund_data.json?v=${new Date().getTime()}`);
+        const data = await response.json();
 
+        // This function is typically for the money_fund.html page, 
+        // but we keep the structure for completeness.
+        console.log("Money Fund Data Loaded (for money_fund.html):", data);
 
-// 載入所有數據 (只載入主頁面數據)
-async function loadAllData() {
-    document.getElementById('lastUpdate').textContent = '載入中...';
-    
-    await Promise.all([
-        loadFearGreedIndex(),
-        loadHiborRates(),
-        loadMarketData()
-    ]);
-    
-    document.getElementById('lastUpdate').textContent = formatTimestamp(new Date().toISOString());
+    } catch (error) {
+        console.error("Error loading money fund data:", error);
+    }
 }
 
-// 刷新按鈕事件
-document.getElementById('refreshBtn').addEventListener('click', () => {
-    loadAllData();
-});
+// --- Initialization ---
 
-// 頁面載入時自動載入數據
-window.addEventListener('DOMContentLoaded', () => {
-    // 確保只在主頁面運行 loadAllData
-    if (document.getElementById('fearGreedIndex')) {
-        loadAllData();
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    loadHiborRates();
+    loadFearGreedIndex();
+    loadMarketData();
+    // loadMoneyFundData(); // Only needed for money_fund.html
 });
