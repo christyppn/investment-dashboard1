@@ -202,6 +202,99 @@ async function loadMarketData() {
     }
 }
 
+// 輔助函數：根據百分比變化設置顏色
+function setChangeColor(elementId, change) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.textContent = (change > 0 ? '+' : '') + change.toFixed(2) + '%';
+        element.className = 'change-percent ' + (change > 0 ? 'positive' : (change < 0 ? 'negative' : 'neutral'));
+    }
+}
+
+// 輔助函數：渲染單個指數卡片
+function renderIndexCard(symbol, name, data) {
+    if (!data || data.length === 0) {
+        console.warn(`No data for ${symbol}`);
+        return;
+    }
+
+    const latest = data[data.length - 1];
+    const categories = data.map(d => d.date);
+    const seriesData = data.map(d => d.close);
+
+    // 1. 更新數值和顏色
+    document.getElementById(`${symbol.toLowerCase().replace('^', '')}-value`).textContent = latest.close.toFixed(2);
+    setChangeColor(`${symbol.toLowerCase().replace('^', '')}-change`, latest.change_percent);
+
+    // 2. 渲染趨勢圖
+    const chartId = `${symbol.toLowerCase().replace('^', '')}-chart`;
+    const options = {
+        chart: {
+            type: 'line',
+            height: 100,
+            sparkline: { enabled: true }
+        },
+        series: [{
+            name: name,
+            data: seriesData
+        }],
+        xaxis: {
+            categories: categories,
+        },
+        stroke: {
+            width: 2,
+            curve: 'smooth'
+        },
+        colors: [latest.change_percent >= 0 ? '#4CAF50' : '#F44336'], // 根據最新變化設置顏色
+        tooltip: {
+            enabled: true,
+            x: { show: false },
+            y: {
+                formatter: function(val) {
+                    return val.toFixed(2);
+                }
+            }
+        }
+    };
+
+    // 檢查圖表是否已存在，如果存在則更新，否則新建
+    if (ApexCharts.getChartByID(chartId)) {
+        ApexCharts.exec(chartId, 'updateOptions', options);
+    } else {
+        const chart = new ApexCharts(document.getElementById(chartId), options);
+        chart.render();
+    }
+}
+
+// 擴展 loadMarketData 函數以處理 VIX, HSI, N225
+async function loadMarketData() {
+    const DATA_BASE_URL = './data/';
+    try {
+        // 新增隨機參數以避免瀏覽器緩存
+        const response = await fetch(`${DATA_BASE_URL}market_data_history.json?v=${new Date().getTime()}`);
+        const marketData = await response.json();
+
+        // --- 處理市場廣度 (SPY, QQQ, DIA) ---
+        // (保留您現有的市場廣度處理邏輯)
+        // ... (現有的 SPY, QQQ, DIA 處理代碼) ...
+        
+        // --- 處理 VIX, HSI, N225 ---
+        renderIndexCard('^VIX', 'VIX 波動率指數', marketData['^VIX']);
+        renderIndexCard('^HSI', '恒生指數', marketData['^HSI']);
+        renderIndexCard('^N225', '日經 225 指數', marketData['^N225']);
+
+    } catch (error) {
+        console.error("Error loading market data:", error);
+    }
+}
+
+// 確保在頁面加載完成後調用 loadMarketData
+document.addEventListener('DOMContentLoaded', () => {
+    // ... (保留現有的 loadFearGreedIndex, loadHiborRates, loadMoneyFundData 調用) ...
+    loadMarketData(); // 確保調用
+});
+
+
 // 載入所有數據 (只載入主頁面數據)
 async function loadAllData() {
     document.getElementById('lastUpdate').textContent = '載入中...';
