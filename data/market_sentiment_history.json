@@ -1,183 +1,152 @@
 [
-  {
-    "date": "2025-10-05T00:00:00Z",
-    "value": 74,
-    "status": "Greed",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-06T00:00:00Z",
-    "value": 71,
-    "status": "Greed",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-07T00:00:00Z",
-    "value": 70,
-    "status": "Greed",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-08T00:00:00Z",
-    "value": 60,
-    "status": "Greed",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-09T00:00:00Z",
-    "value": 70,
-    "status": "Greed",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-10T00:00:00Z",
-    "value": 64,
-    "status": "Greed",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-11T00:00:00Z",
-    "value": 27,
-    "status": "Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-12T00:00:00Z",
-    "value": 24,
-    "status": "Extreme Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-13T00:00:00Z",
-    "value": 38,
-    "status": "Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-14T00:00:00Z",
-    "value": 38,
-    "status": "Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-15T00:00:00Z",
-    "value": 34,
-    "status": "Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-16T00:00:00Z",
-    "value": 28,
-    "status": "Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-17T00:00:00Z",
-    "value": 22,
-    "status": "Extreme Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-18T00:00:00Z",
-    "value": 23,
-    "status": "Extreme Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-19T00:00:00Z",
-    "value": 29,
-    "status": "Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-20T00:00:00Z",
-    "value": 29,
-    "status": "Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-21T00:00:00Z",
-    "value": 34,
-    "status": "Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-22T00:00:00Z",
-    "value": 25,
-    "status": "Extreme Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-23T00:00:00Z",
-    "value": 27,
-    "status": "Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-24T00:00:00Z",
-    "value": 30,
-    "status": "Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-25T00:00:00Z",
-    "value": 37,
-    "status": "Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-26T00:00:00Z",
-    "value": 40,
-    "status": "Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-27T00:00:00Z",
-    "value": 51,
-    "status": "Neutral",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-28T00:00:00Z",
-    "value": 50,
-    "status": "Neutral",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-29T00:00:00Z",
-    "value": 51,
-    "status": "Neutral",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-30T00:00:00Z",
-    "value": 34,
-    "status": "Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-10-31T00:00:00Z",
-    "value": 29,
-    "status": "Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-11-01T00:00:00Z",
-    "value": 33,
-    "status": "Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-11-02T00:00:00Z",
-    "value": 37,
-    "status": "Fear",
-    "region": "US"
-  },
-  {
-    "date": "2025-11-03T00:00:00Z",
-    "value": 42,
-    "status": "Fear",
-    "region": "US",
-    "is_latest": true
-  }
+    {
+        "date": "2025-10-06",
+        "value": 71,
+        "sentiment": "Greed"
+    },
+    {
+        "date": "2025-10-07",
+        "value": 70,
+        "sentiment": "Greed"
+    },
+    {
+        "date": "2025-10-08",
+        "value": 60,
+        "sentiment": "Greed"
+    },
+    {
+        "date": "2025-10-09",
+        "value": 70,
+        "sentiment": "Greed"
+    },
+    {
+        "date": "2025-10-10",
+        "value": 64,
+        "sentiment": "Greed"
+    },
+    {
+        "date": "2025-10-11",
+        "value": 27,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-10-12",
+        "value": 24,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-10-13",
+        "value": 38,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-10-14",
+        "value": 38,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-10-15",
+        "value": 34,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-10-16",
+        "value": 28,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-10-17",
+        "value": 22,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-10-18",
+        "value": 23,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-10-19",
+        "value": 29,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-10-20",
+        "value": 29,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-10-21",
+        "value": 34,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-10-22",
+        "value": 25,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-10-23",
+        "value": 27,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-10-24",
+        "value": 30,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-10-25",
+        "value": 37,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-10-26",
+        "value": 40,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-10-27",
+        "value": 51,
+        "sentiment": "Neutral"
+    },
+    {
+        "date": "2025-10-28",
+        "value": 50,
+        "sentiment": "Neutral"
+    },
+    {
+        "date": "2025-10-29",
+        "value": 51,
+        "sentiment": "Neutral"
+    },
+    {
+        "date": "2025-10-30",
+        "value": 34,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-10-31",
+        "value": 29,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-11-01",
+        "value": 33,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-11-02",
+        "value": 37,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-11-03",
+        "value": 42,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-11-04",
+        "value": 21,
+        "sentiment": "Extreme Fear"
+    }
 ]
