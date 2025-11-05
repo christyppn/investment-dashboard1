@@ -26,13 +26,14 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          
-      - name: Run data sync script
+
+      - name: Run python sync_data.py
+        run: python sync_data.py
         env:
-          ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
+          # 確保您的 Secret 名稱與此處完全匹配
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
-        run: |
-          python sync_data.py
+          # 如果您還在使用 Alpha Vantage，也請確保它被正確傳遞
+          ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
           
       - name: Commit and push if changed
         run: |
