@@ -9,16 +9,17 @@ from datetime import datetime, timedelta
 FINNHUB_API_KEY = os.environ.get("FINNHUB_API_KEY")
 DATA_DIR = "data"
 
-# Finnhub Symbol Mapping (Finnhub uses different symbols for indices)
+# Finnhub Symbol Mapping (Adjusted for common Finnhub index formats)
 FINNHUB_SYMBOLS = {
-    # Market Breadth (US) - Finnhub uses the standard ETF tickers
+    # Market Breadth (US) - Standard ETF tickers
     "SPY": "SPY",
     "QQQ": "QQQ",
     "DIA": "DIA",
-    # Global Indices and VIX - Finnhub uses exchange-prefixed symbols
-    "^VIX": "VIX", # VIX is often just 'VIX' or 'CBOE:VIX' on Finnhub, using 'VIX' for simplicity
-    "^HSI": "HSI", # Hang Seng Index
-    "^N225": "N225", # Nikkei 225
+    # Global Indices and VIX - Using confirmed Finnhub symbols
+    # Note: Finnhub's free tier may not support all indices or may require specific exchange prefixes.
+    "VIX": "VIX", # VIX is often just 'VIX' or 'CBOE:VIX' on Finnhub, using 'VIX'
+    "HSI": "HSI", # Hang Seng Index
+    "N225": "N225", # Nikkei 225
     # Sector ETFs (11)
     "XLK": "XLK", "XLC": "XLC", "XLY": "XLY", "XLP": "XLP", "XLV": "XLV", "XLF": "XLF", 
     "XLE": "XLE", "XLI": "XLI", "XLB": "XLB", "XLU": "XLU", "VNQ": "VNQ",
@@ -49,7 +50,7 @@ def process_finnhub_data(symbol, raw_data):
     and includes the critical division-by-zero check and 30-day truncation.
     """
     if not raw_data or raw_data.get('s') != 'ok' or not raw_data.get('c'):
-        print(f"Warning: No valid Finnhub data found for {symbol}")
+        print(f"Warning: No valid Finnhub data found for {symbol}. Raw response: {raw_data}")
         return []
 
     # 'c' is close price, 't' is timestamp (epoch seconds)
@@ -212,7 +213,13 @@ def fetch_market_data():
                     # Market Breadth and Fund Flow Data: Need the 30-day history
                     market_data_history[symbol] = processed_data
             else:
-                print(f"Finnhub Error for {symbol} ({finnhub_symbol}): {data.get('error', 'Unknown error')}")
+                # Log the error message from Finnhub
+                error_message = data.get('error', 'Unknown error')
+                print(f"Finnhub API Error for {symbol} ({finnhub_symbol}): {error_message}")
+                
+                # Critical check: If the error is related to invalid symbol or API key, it will fail.
+                if "Invalid symbol" in error_message or "API limit" in error_message:
+                    print(f"CRITICAL: Finnhub symbol {finnhub_symbol} may be incorrect or API key is invalid/rate-limited.")
 
         except requests.RequestException as e:
             print(f"Error fetching Finnhub data for {symbol}: {e}")
