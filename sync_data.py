@@ -5,24 +5,31 @@ import time
 from datetime import datetime, timedelta
 
 # --- Configuration ---
-# Alpha Vantage API Key is stored as a GitHub Secret (ALPHAVANTAGE_API_KEY)
-ALPHA_VANTAGE_API_KEY = os.environ.get("ALPHAVANTAGE_API_KEY")
+# API Keys are stored as GitHub Secrets
+FINNHUB_API_KEY = os.environ.get("FINNHUB_API_KEY")
 DATA_DIR = "data"
 
-# List of symbols to fetch from Alpha Vantage
-# Expanded to include major indices, sector ETFs, thematic ETFs, and new global indices/VIX
-SYMBOLS_TO_FETCH = [
-    # Major Indices/Breadth (US)
-    "SPY", "QQQ", "DIA",
-    # New Global Indices and VIX
-    "^VIX", "^HSI", "^N225",
+# Finnhub Symbol Mapping (Finnhub uses different symbols for indices)
+FINNHUB_SYMBOLS = {
+    # Market Breadth (US) - Finnhub uses the standard ETF tickers
+    "SPY": "SPY",
+    "QQQ": "QQQ",
+    "DIA": "DIA",
+    # Global Indices and VIX - Finnhub uses exchange-prefixed symbols
+    "^VIX": "VIX", # VIX is often just 'VIX' or 'CBOE:VIX' on Finnhub, using 'VIX' for simplicity
+    "^HSI": "HSI", # Hang Seng Index
+    "^N225": "N225", # Nikkei 225
     # Sector ETFs (11)
-    "XLK", "XLC", "XLY", "XLP", "XLV", "XLF", "XLE", "XLI", "XLB", "XLU", "VNQ", # VNQ for Real Estate
+    "XLK": "XLK", "XLC": "XLC", "XLY": "XLY", "XLP": "XLP", "XLV": "XLV", "XLF": "XLF", 
+    "XLE": "XLE", "XLI": "XLI", "XLB": "XLB", "XLU": "XLU", "VNQ": "VNQ",
     # Thematic/Commodity ETFs (4)
-    "GLD", "ROBO", "SMH", "IWM",
+    "GLD": "GLD", "ROBO": "ROBO", "SMH": "SMH", "IWM": "IWM",
     # Money Market Funds (4)
-    "VFIAX", "VTSAX", "VBTLX", "VMMXX",
-]
+    "VFIAX": "VFIAX", "VTSAX": "VTSAX", "VBTLX": "VBTLX", "VMMXX": "VMMXX",
+}
+
+# List of symbols to fetch (keys from the mapping)
+SYMBOLS_TO_FETCH = list(FINNHUB_SYMBOLS.keys())
 
 # Ensure data directory exists
 os.makedirs(DATA_DIR, exist_ok=True)
@@ -36,47 +43,33 @@ def save_json(data, filename):
         json.dump(data, f, ensure_ascii=False, indent=4)
     print(f"Successfully saved data to {path}")
 
-def get_previous_day_data(time_series_list, current_date):
-    """Finds the data for the trading day immediately preceding the current_date."""
-    # Sort by date descending
-    sorted_list = sorted(time_series_list, key=lambda x: x['date'], reverse=True)
-    
-    # Find the first entry whose date is less than the current_date
-    for entry in sorted_list:
-        if entry['date'] < current_date:
-            return entry
-    return None
-
-def process_time_series_data(symbol, time_series_data):
+def process_finnhub_data(symbol, raw_data):
     """
-    Processes raw Alpha Vantage time series data to calculate daily changes,
+    Processes raw Finnhub time series data (candles) to calculate daily changes,
     and includes the critical division-by-zero check and 30-day truncation.
     """
-    if not time_series_data:
-        print(f"Warning: No time series data found for {symbol}")
+    if not raw_data or raw_data.get('s') != 'ok' or not raw_data.get('c'):
+        print(f"Warning: No valid Finnhub data found for {symbol}")
         return []
 
-    # Convert raw data into a list of dictionaries for easier processing
-    time_series_list = []
-    for date_str, data in time_series_data.items():
-        try:
-            # Alpha Vantage keys are prefixed with numbers, e.g., '1. open'
-            close_price = float(data['4. close'])
-            # Volume is not always available for indices like VIX, HSI, N225. Default to 0 if not found.
-            volume = int(data.get('6. volume', 0))
-            
-            time_series_list.append({
-                'date': date_str,
-                'close': close_price,
-                'volume': volume,
-                'change_percent': 0.0,
-                'volume_change_percent': 0.0,
-            })
-        except (ValueError, KeyError) as e:
-            print(f"Error processing data for {symbol} on {date_str}: {e}")
-            continue
+    # 'c' is close price, 't' is timestamp (epoch seconds)
+    close_prices = raw_data['c']
+    timestamps = raw_data['t']
+    volumes = raw_data.get('v', [0] * len(close_prices)) # Volume might be missing for indices
 
-    # Sort the list by date ascending to ensure correct calculation of previous day
+    time_series_list = []
+    for i in range(len(close_prices)):
+        date_str = datetime.fromtimestamp(timestamps[i]).strftime('%Y-%m-%d')
+        
+        time_series_list.append({
+            'date': date_str,
+            'close': close_prices[i],
+            'volume': volumes[i],
+            'change_percent': 0.0,
+            'volume_change_percent': 0.0,
+        })
+
+    # Sort the list by date ascending (Finnhub usually returns sorted, but for safety)
     time_series_list.sort(key=lambda x: x['date'])
 
     # Calculate daily changes
@@ -92,29 +85,28 @@ def process_time_series_data(symbol, time_series_data):
             change_percent = ((latest_close - previous_close) / previous_close) * 100
             current['change_percent'] = round(change_percent, 2)
         else:
-            # If previous close is 0 or None, change is undefined or 0
             current['change_percent'] = 0.0
 
         # --- Volume Change Calculation with Division-by-Zero Check ---
         latest_volume = current['volume']
         previous_volume = previous['volume']
         
-        # Only calculate volume change if volume data is present (i.e., not 0 for indices)
         if previous_volume is not None and previous_volume != 0 and latest_volume != 0:
             volume_change = ((latest_volume - previous_volume) / previous_volume) * 100
             current['volume_change_percent'] = round(volume_change, 2)
         else:
-            # If previous volume is 0 or None, volume change is undefined or 0
             current['volume_change_percent'] = 0.0
 
     # Final Optimization: Only keep the latest 30 trading days for frontend display
-    # This resolves the chart overcrowding issue.
     return time_series_list[-30:]
 
 # --- Data Fetching Functions ---
 
 def fetch_hibor_rates():
-    """Fetches HIBOR rates from HKMA API."""
+    """
+    Fetches HIBOR rates from HKMA API. 
+    NOTE: This API is for the Monthly Statistical Bulletin and may not be updated daily.
+    """
     print("Fetching HIBOR rates...")
     url = "https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/er-ir-hkr-m"
     
@@ -127,7 +119,6 @@ def fetch_hibor_rates():
             # Get the latest record
             latest_record = data['result']['records'][0]
             
-            # Corrected keys based on HKMA API structure
             hibor_data = {
                 "date": latest_record.get('end_of_month'),
                 "ir_1m": latest_record.get('ir_1m'),
@@ -136,7 +127,7 @@ def fetch_hibor_rates():
             }
             save_json(hibor_data, "hibor_rates.json")
         else:
-            print("Error: HKMA API returned no records.")
+            print("Error: HKMA API returned no records. Data may be delayed as this is a monthly bulletin.")
             
     except requests.RequestException as e:
         print(f"Error fetching HIBOR rates: {e}")
@@ -144,7 +135,7 @@ def fetch_hibor_rates():
 def fetch_fear_greed_index():
     """Fetches Fear & Greed Index from alternative.me API."""
     print("Fetching Fear & Greed Index...")
-    url = "https://api.alternative.me/fng/?limit=30" # Limit to 30 days
+    url = "https://api.alternative.me/fng/?limit=30"
     
     try:
         response = requests.get(url, timeout=10 )
@@ -152,13 +143,10 @@ def fetch_fear_greed_index():
         data = response.json()
         
         if data and data.get('data'):
-            # Data is already sorted by date descending, reverse it for the frontend chart
             history_data = sorted(data['data'], key=lambda x: int(x['timestamp']))
             
-            # Format the data for the frontend
             formatted_data = []
             for record in history_data:
-                # Convert timestamp to YYYY-MM-DD format
                 date_str = datetime.fromtimestamp(int(record['timestamp'])).strftime('%Y-%m-%d')
                 formatted_data.append({
                     "date": date_str,
@@ -173,26 +161,32 @@ def fetch_fear_greed_index():
     except requests.RequestException as e:
         print(f"Error fetching Fear & Greed Index: {e}")
 
-def fetch_alpha_vantage_data():
-    """Fetches time series data for all configured symbols from Alpha Vantage."""
-    if not ALPHA_VANTAGE_API_KEY:
-        print("Error: ALPHAVANTAGE_API_KEY environment variable not set.")
+def fetch_market_data():
+    """Fetches time series data for all configured symbols from Finnhub."""
+    if not FINNHUB_API_KEY:
+        print("Error: FINNHUB_API_KEY environment variable not set. Market data will not be updated.")
         return
 
-    base_url = "https://www.alphavantage.co/query"
+    base_url = "https://finnhub.io/api/v1/stock/candle"
+    
+    # Calculate start and end time for the last 30 trading days (approx 45 calendar days )
+    end_time = int(time.time())
+    start_time = int((datetime.now() - timedelta(days=45)).timestamp())
     
     # Initialize data structures for combined output
     market_data_history = {}
     money_fund_data = {}
 
-    for i, symbol in enumerate(SYMBOLS_TO_FETCH ):
-        print(f"Fetching data for {symbol} ({i+1}/{len(SYMBOLS_TO_FETCH)})...")
+    for i, symbol in enumerate(SYMBOLS_TO_FETCH):
+        finnhub_symbol = FINNHUB_SYMBOLS[symbol]
+        print(f"Fetching data for {symbol} ({finnhub_symbol}) ({i+1}/{len(SYMBOLS_TO_FETCH)})...")
         
         params = {
-            "function": "TIME_SERIES_DAILY",
-            "symbol": symbol,
-            "outputsize": "full", # Request full history to ensure 30 trading days are available
-            "apikey": ALPHA_VANTAGE_API_KEY
+            "symbol": finnhub_symbol,
+            "resolution": "D", # Daily resolution
+            "from": start_time,
+            "to": end_time,
+            "token": FINNHUB_API_KEY
         }
         
         try:
@@ -200,20 +194,9 @@ def fetch_alpha_vantage_data():
             response.raise_for_status()
             data = response.json()
             
-            # Check for API call error (e.g., invalid key, rate limit)
-            if "Error Message" in data:
-                print(f"Alpha Vantage Error for {symbol}: {data['Error Message']}")
-                continue
-            if "Note" in data:
-                print(f"Alpha Vantage Note for {symbol}: {data['Note']}")
-                # Continue, as rate limit note might still contain some data
-
-            time_series_key = "Time Series (Daily)"
-            if time_series_key in data:
-                raw_time_series = data[time_series_key]
-                
+            if data.get('s') == 'ok':
                 # Process and truncate the data
-                processed_data = process_time_series_data(symbol, raw_time_series)
+                processed_data = process_finnhub_data(symbol, data)
                 
                 # Separate data based on symbol type
                 if symbol in ["VFIAX", "VTSAX", "VBTLX", "VMMXX"]:
@@ -229,18 +212,17 @@ def fetch_alpha_vantage_data():
                     # Market Breadth and Fund Flow Data: Need the 30-day history
                     market_data_history[symbol] = processed_data
             else:
-                print(f"Warning: Time Series data not found in response for {symbol}.")
+                print(f"Finnhub Error for {symbol} ({finnhub_symbol}): {data.get('error', 'Unknown error')}")
 
         except requests.RequestException as e:
-            print(f"Error fetching Alpha Vantage data for {symbol}: {e}")
+            print(f"Error fetching Finnhub data for {symbol}: {e}")
         except Exception as e:
             print(f"An unexpected error occurred for {symbol}: {e}")
 
-        # Rate limit compliance: 5 calls per minute (12 seconds per call)
-        # We use 15 seconds to be safe.
+        # Rate limit compliance: Finnhub free tier is 30 calls/min. We use 2 seconds to be safe.
         if i < len(SYMBOLS_TO_FETCH) - 1:
-            print("Waiting 15 seconds for Alpha Vantage rate limit...")
-            time.sleep(15)
+            print("Waiting 2 seconds for Finnhub rate limit...")
+            time.sleep(2)
 
     # Save the combined data files
     save_json(market_data_history, "market_data_history.json")
@@ -252,13 +234,13 @@ def fetch_alpha_vantage_data():
 if __name__ == "__main__":
     print("Starting data synchronization script...")
     
-    # 1. Fetch HIBOR rates
+    # 1. Fetch HIBOR rates (Monthly Bulletin)
     fetch_hibor_rates()
     
     # 2. Fetch Fear & Greed Index
     fetch_fear_greed_index()
     
-    # 3. Fetch Alpha Vantage data (Indices, ETFs, Money Funds)
-    fetch_alpha_vantage_data()
+    # 3. Fetch Market Data (Indices, ETFs, Money Funds) using Finnhub
+    fetch_market_data()
     
     print("Data synchronization complete.")
