@@ -3,93 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>貨幣基金分析 | Money Fund Analysis</title>
+    <title>貨幣基金概覽 | Money Fund Overview</title>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Assuming you have a styles.css for common styles -->
+    <style>
+        /* Specific styles for this page */
+        .money-fund-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr ));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .fund-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            color: #333;
+            transition: transform 0.3s;
+        }
+
+        .fund-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .fund-header {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .fund-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 5px;
+        }
+
+        .fund-change {
+            font-size: 1.2em;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .fund-date {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .positive {
+            color: #4CAF50; /* Green */
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+
+        .negative {
+            color: #F44336; /* Red */
+            background-color: rgba(244, 67, 54, 0.1);
+        }
+
+        .neutral {
+            color: #9E9E9E; /* Gray */
+            background-color: rgba(158, 158, 158, 0.1);
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>💰 貨幣基金分析</h1>
-            <p class="subtitle">不同類型基金的最新價格與變動</p>
-            <nav class="main-nav">
-                <a href="index.html">📈 市場總覽</a>
-                <a href="fund_flow.html">💵 資金流向</a>
-                <a href="money_fund.html" class="active">💰 貨幣基金</a>
-            </nav>
-            <button id="refreshBtn" class="refresh-btn">🔄 刷新數據</button>
-        </header>
+    <header>
+        <div class="dashboard-title">投資儀表板</div>
+        <nav>
+            <a href="index.html">市場總覽</a>
+            <a href="fund_flow.html">資金流向</a>
+            <a href="money_fund.html" class="active">貨幣基金</a>
+        </nav>
+    </header>
 
-        <div class="dashboard-grid full-width-grid">
-            <!-- 貨幣基金詳細列表 -->
-            <div class="card full-width">
-                <h2>主要基金類型概覽</h2>
-                <div id="moneyFundDetails" class="loading">載入中...</div>
-                <p class="timestamp" id="moneyFundTimestamp"></p>
+    <div class="main-content">
+        <div class="section-title">主要基金類型概覽</div>
+        <p>此頁面顯示了幾種常見的貨幣市場基金或低波動性基金的最新收盤價和日變動百分比，作為現金替代品的參考。</p>
+
+        <div class="money-fund-container">
+            <!-- VFIAX Card -->
+            <div class="fund-card">
+                <div class="fund-header">VFIAX (Vanguard 500 Index Fund)</div>
+                <div class="fund-value" id="vfiax-value">--</div>
+                <div class="fund-change" id="vfiax-change">載入中...</div>
+                <div class="fund-date" id="vfiax-date"></div>
+            </div>
+
+            <!-- VTSAX Card -->
+            <div class="fund-card">
+                <div class="fund-header">VTSAX (Vanguard Total Stock Market Index Fund)</div>
+                <div class="fund-value" id="vtsax-value">--</div>
+                <div class="fund-change" id="vtsax-change">載入中...</div>
+                <div class="fund-date" id="vtsax-date"></div>
+            </div>
+
+            <!-- VBTLX Card -->
+            <div class="fund-card">
+                <div class="fund-header">VBTLX (Vanguard Total Bond Market Index Fund)</div>
+                <div class="fund-value" id="vbtlx-value">--</div>
+                <div class="fund-change" id="vbtlx-change">載入中...</div>
+                <div class="fund-date" id="vbtlx-date"></div>
+            </div>
+
+            <!-- VMMXX Card -->
+            <div class="fund-card">
+                <div class="fund-header">VMMXX (Vanguard Prime Money Market Fund)</div>
+                <div class="fund-value" id="vmmxx-value">--</div>
+                <div class="fund-change" id="vmmxx-change">載入中...</div>
+                <div class="fund-date" id="vmmxx-date"></div>
             </div>
         </div>
-
-        <footer>
-            <p>數據來源：Alpha Vantage | 更新時間：<span id="lastUpdate">--</span></p>
-            <p class="disclaimer">⚠️ 本儀表板僅供參考 ，不構成投資建議</p>
-        </footer>
     </div>
 
-    <script src="script.js"></script>
     <script src="money_fund.js"></script>
 </body>
 </html>
-
-// 貨幣基金頁面專用邏輯
-document.addEventListener('DOMContentLoaded', () => {
-    // 確保只在 money_fund.html 頁面運行
-    if (document.getElementById('moneyFundDetails')) {
-        loadMoneyFundDetails();
-    }
-});
-
-// 載入貨幣基金詳細數據
-async function loadMoneyFundDetails() {
-    const DATA_BASE_URL = './data/';
-    const elementId = 'moneyFundDetails';
-
-    try {
-        const response = await fetch(`${DATA_BASE_URL}money_fund_data.json`);
-        const fundData = await response.json();
-
-        if (fundData && fundData.length > 0) {
-            let html = '';
-            let latestTimestamp = fundData[0].timestamp;
-
-            fundData.forEach(fund => {
-                const changeClass = fund.change >= 0 ? 'positive' : 'negative';
-                const changeSign = fund.change >= 0 ? '+' : '';
-                
-                html += `
-                    <div class="fund-item">
-                        <div class="fund-name">${fund.fund_name} (${fund.symbol})</div>
-                        <div class="fund-price">
-                            價格: <span>${fund.price.toFixed(2)}</span>
-                        </div>
-                        <div class="fund-change ${changeClass}">
-                            變動: <span>${changeSign}${fund.change.toFixed(2)} (${fund.change_percent.replace('%', '')}%)</span>
-                        </div>
-                    </div>
-                `;
-            });
-
-            document.getElementById(elementId).innerHTML = html;
-            document.getElementById('moneyFundTimestamp').textContent = `更新時間：${formatTimestamp(latestTimestamp)}`;
-            document.getElementById('lastUpdate').textContent = formatTimestamp(new Date().toISOString());
-
-        } else {
-            document.getElementById(elementId).innerHTML = '<p>暫無數據</p>';
-        }
-    } catch (error) {
-        console.error('載入貨幣基金數據失敗:', error);
-        document.getElementById(elementId).innerHTML = '<p>載入失敗</p>';
-    }
-}
-
-// 由於 money_fund.js 已經引入了 script.js，我們只需要確保主頁面的 loadAllData 被調用
-// 這裡不需要額外的 DOMContentLoaded 監聽器，因為 script.js 已經處理了。
