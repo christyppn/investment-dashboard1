@@ -34,11 +34,11 @@ jobs:
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
           # 雖然我們切換到了 Finnhub，但保留這個 Secret 以防萬一
           ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
-          
-      - name: Commit and push if changed
+
+      - name: Commit and Push Data
         run: |
           git config --global user.name 'GitHub Actions Bot'
           git config --global user.email 'actions@github.com'
           git add data/*.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update investment data - $(date +'%Y-%m-%d %H:%M:%S UTC')" && git push)
-
+          # 檢查是否有更改，如果有則提交並強制推送
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update investment data - $(date +'%Y-%m-%d %H:%M:%S UTC')" && git push --force)
