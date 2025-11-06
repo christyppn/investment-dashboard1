@@ -9,7 +9,7 @@ from datetime import datetime, timedelta
 FINNHUB_API_KEY = os.environ.get("FINNHUB_API_KEY")
 DATA_DIR = "data"
 
-# Finnhub Symbol Mapping (Adjusted for common Finnhub index formats)
+# Finnhub Symbol Mapping (Adjusted for stability and to replace unsupported Mutual Funds with ETFs)
 FINNHUB_SYMBOLS = {
     # Market Breadth (US) - Standard ETF tickers
     "SPY": "SPY",
@@ -24,8 +24,11 @@ FINNHUB_SYMBOLS = {
     "XLE": "XLE", "XLI": "XLI", "XLB": "XLB", "XLU": "XLU", "VNQ": "VNQ",
     # Thematic/Commodity ETFs (4)
     "GLD": "GLD", "ROBO": "ROBO", "SMH": "SMH", "IWM": "IWM",
-    # Money Market Funds (4)
-    "VFIAX": "VFIAX", "VTSAX": "VBTLX", "VMMXX": "VMMXX",
+    # Money Market Funds (4) - Replaced unsupported Mutual Funds with highly liquid ETFs
+    "VFIAX": "VOO",   # VOO (Vanguard S&P 500 ETF) replaces VFIAX
+    "VTSAX": "VTI",   # VTI (Vanguard Total Stock Market ETF) replaces VTSAX
+    "VBTLX": "BND",   # BND (Vanguard Total Bond Market ETF) replaces VBTLX
+    "VMMXX": "BIL",   # BIL (SPDR Bloomberg 1-3 Month T-Bill ETF) replaces VMMXX
 }
 
 # List of symbols to fetch (keys from the mapping)
@@ -105,14 +108,13 @@ def process_finnhub_data(symbol, raw_data):
 def fetch_hibor_rates():
     """
     Fetches HIBOR rates from HKMA API using the daily figures endpoint.
-    The previous endpoint was for the monthly bulletin and was causing a 400 error.
     """
     print("Fetching HIBOR rates...")
     # New, more stable daily HIBOR API endpoint
     url = "https://api.hkma.gov.hk/public/market-data-and-statistics/market-data/interest-rate/hk-interbank-interest-rates-daily"
     
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(url, timeout=10 )
         response.raise_for_status()
         data = response.json()
         
@@ -146,7 +148,7 @@ def fetch_fear_greed_index():
     url = "https://api.alternative.me/fng/?limit=30"
     
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(url, timeout=10 )
         response.raise_for_status()
         data = response.json()
         
@@ -177,7 +179,7 @@ def fetch_market_data():
 
     base_url = "https://finnhub.io/api/v1/stock/candle"
     
-    # Calculate start and end time for the last 30 trading days (approx 45 calendar days)
+    # Calculate start and end time for the last 30 trading days (approx 45 calendar days )
     end_time = int(time.time())
     start_time = int((datetime.now() - timedelta(days=45)).timestamp())
     
@@ -248,7 +250,7 @@ def fetch_market_data():
 if __name__ == "__main__":
     print("Starting data synchronization script...")
     
-    # 1. Fetch HIBOR rates (Monthly Bulletin)
+    # 1. Fetch HIBOR rates (Daily)
     fetch_hibor_rates()
     
     # 2. Fetch Fear & Greed Index
