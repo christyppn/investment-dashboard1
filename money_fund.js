@@ -1,53 +1,86 @@
-// 貨幣基金頁面專用邏輯
-document.addEventListener('DOMContentLoaded', () => {
-    // 確保只在 money_fund.html 頁面運行
-    if (document.getElementById('moneyFundDetails')) {
-        loadMoneyFundDetails();
-    }
-});
+const DATA_BASE_URL = './data/';
 
-// 載入貨幣基金詳細數據
-async function loadMoneyFundDetails() {
-    const DATA_BASE_URL = './data/';
-    const elementId = 'moneyFundDetails';
+/**
+ * Formats a timestamp string (YYYY-MM-DD) into a more readable format.
+ * @param {string} timestamp - The timestamp string.
+ * @returns {string} Formatted time string.
+ */
+function formatTimestamp(timestamp) {
+    if (!timestamp) return '未知時間';
+    // Assuming timestamp is YYYY-MM-DD or YYYY-MM-DD HH:MM:SS
+    return `更新時間: ${timestamp}`;
+}
 
-    try {
-        const response = await fetch(`${DATA_BASE_URL}money_fund_data.json`);
-        const fundData = await response.json();
+/**
+ * Sets the current value and change percentage for a fund card, including color coding.
+ * @param {string} symbol - The fund symbol (e.g., 'VFIAX').
+ * @param {Object} data - The fund data object.
+ */
+function renderFundCard(symbol, data) {
+    const cleanSymbol = symbol.toLowerCase();
+    
+    const valueEl = document.getElementById(`${cleanSymbol}-value`);
+    const changeEl = document.getElementById(`${cleanSymbol}-change`);
+    const dateEl = document.getElementById(`${cleanSymbol}-date`);
 
-        if (fundData && fundData.length > 0) {
-            let html = '';
-            let latestTimestamp = fundData[0].timestamp;
-
-            fundData.forEach(fund => {
-                const changeClass = fund.change >= 0 ? 'positive' : 'negative';
-                const changeSign = fund.change >= 0 ? '+' : '';
-                
-                html += `
-                    <div class="fund-item">
-                        <div class="fund-name">${fund.fund_name} (${fund.symbol})</div>
-                        <div class="fund-price">
-                            價格: <span>${fund.price.toFixed(2)}</span>
-                        </div>
-                        <div class="fund-change ${changeClass}">
-                            變動: <span>${changeSign}${fund.change.toFixed(2)} (${fund.change_percent.replace('%', '')}%)</span>
-                        </div>
-                    </div>
-                `;
-            });
-
-            document.getElementById(elementId).innerHTML = html;
-            document.getElementById('moneyFundTimestamp').textContent = `更新時間：${formatTimestamp(latestTimestamp)}`;
-            document.getElementById('lastUpdate').textContent = formatTimestamp(new Date().toISOString());
-
-        } else {
-            document.getElementById(elementId).innerHTML = '<p>暫無數據</p>';
+    if (!data || Object.keys(data).length === 0) {
+        if (valueEl) valueEl.textContent = '--';
+        if (changeEl) {
+            changeEl.textContent = '無數據';
+            changeEl.className = 'fund-change neutral';
         }
-    } catch (error) {
-        console.error('載入貨幣基金數據失敗:', error);
-        document.getElementById(elementId).innerHTML = '<p>載入失敗</p>';
+        if (dateEl) dateEl.textContent = '數據文件為空或符號無效';
+        return;
+    }
+
+    const value = data.close;
+    const change = data.change_percent;
+    const date = data.date;
+
+    if (valueEl) {
+        valueEl.textContent = value.toFixed(4); // Use 4 decimal places for funds
+    }
+
+    if (changeEl) {
+        changeEl.textContent = (change > 0 ? '+' : '') + change.toFixed(2) + '%';
+        changeEl.className = 'fund-change ' + (change > 0 ? 'positive' : (change < 0 ? 'negative' : 'neutral'));
+    }
+
+    if (dateEl) {
+        dateEl.textContent = formatTimestamp(date);
     }
 }
 
-// 由於 money_fund.js 已經引入了 script.js，我們只需要確保主頁面的 loadAllData 被調用
-// 這裡不需要額外的 DOMContentLoaded 監聽器，因為 script.js 已經處理了。
+/**
+ * Loads and displays money fund data.
+ */
+async function loadMoneyFundData() {
+    try {
+        // Use cache-busting to ensure the latest file is fetched
+        const response = await fetch(`${DATA_BASE_URL}money_fund_data.json?v=${new Date().getTime()}`);
+        const data = await response.json();
+
+        // The symbols are hardcoded in the HTML
+        const symbols = ["VFIAX", "VTSAX", "VBTLX", "VMMXX"];
+
+        symbols.forEach(symbol => {
+            renderFundCard(symbol, data[symbol]);
+        });
+
+    } catch (error) {
+        console.error("Error loading money fund data:", error);
+        // Display error on cards if fetch fails completely
+        const symbols = ["VFIAX", "VTSAX", "VBTLX", "VMMXX"];
+        symbols.forEach(symbol => {
+            const cleanSymbol = symbol.toLowerCase();
+            const dateEl = document.getElementById(`${cleanSymbol}-date`);
+            if (dateEl) dateEl.textContent = `載入失敗: ${error.message}`;
+        });
+    }
+}
+
+// --- Initialization ---
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadMoneyFundData();
+});
