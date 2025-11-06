@@ -32,7 +32,7 @@ jobs:
         env:
           # 確保您的 Secret 名稱與此處完全匹配
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
-          # 如果您還在使用 Alpha Vantage，也請確保它被正確傳遞
+          # 雖然我們切換到了 Finnhub，但保留這個 Secret 以防萬一
           ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
           
       - name: Commit and push if changed
