@@ -1,20 +1,6 @@
 {
     "SPY": [
         {
-            "date": "2025-09-25",
-            "close": 658.0499877929688,
-            "volume": 89622100,
-            "change_percent": -0.4613504621998388,
-            "volume_change_percent": 31.64
-        },
-        {
-            "date": "2025-09-26",
-            "close": 661.8200073242188,
-            "volume": 69179200,
-            "change_percent": 0.57290777314567,
-            "volume_change_percent": -22.81
-        },
-        {
             "date": "2025-09-29",
             "close": 663.6799926757812,
             "volume": 73499000,
@@ -204,11 +190,25 @@
             "volume_change_percent": 36.84
         },
         {
+            "date": "2025-11-05",
+            "close": 677.5800170898438,
+            "volume": 74402400,
+            "change_percent": 0.34654743340312155,
+            "volume_change_percent": -5.13
+        },
+        {
+            "date": "2025-11-06",
+            "close": 670.3099975585938,
+            "volume": 85035300,
+            "change_percent": -1.0729388925125316,
+            "volume_change_percent": 14.29
+        },
+        {
             "date": "2025-11-07",
             "close": 670.969970703125,
             "volume": 91404192,
-            "change_percent": -0.6323706523613692,
-            "volume_change_percent": 16.55
+            "change_percent": 0.09845789961884233,
+            "volume_change_percent": 7.49
         }
     ],
     "QQQ": [
