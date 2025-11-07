@@ -1,10 +1,5 @@
 [
     {
-        "date": "2025-10-08",
-        "value": 60,
-        "sentiment": "Greed"
-    },
-    {
         "date": "2025-10-09",
         "value": 70,
         "sentiment": "Greed"
@@ -148,5 +143,10 @@
         "date": "2025-11-06",
         "value": 27,
         "sentiment": "Fear"
+    },
+    {
+        "date": "2025-11-07",
+        "value": 24,
+        "sentiment": "Extreme Fear"
     }
 ]
