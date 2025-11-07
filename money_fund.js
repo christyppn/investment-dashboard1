@@ -1,86 +1,82 @@
 const DATA_BASE_URL = './data/';
 
+// List of Sector ETFs to display on this page
+const SECTOR_ETFS = [
+    { symbol: "XLK", name: "科技 (Technology)" },
+    { symbol: "XLC", name: "通訊服務 (Communication Services)" },
+    { symbol: "XLY", name: "非必需消費品 (Consumer Discretionary)" },
+    { symbol: "XLP", name: "必需消費品 (Consumer Staples)" },
+    { symbol: "XLV", name: "醫療保健 (Health Care)" },
+    { symbol: "XLF", name: "金融 (Financial)" },
+    { symbol: "XLE", name: "能源 (Energy)" },
+    { symbol: "XLI", name: "工業 (Industrial)" },
+    { symbol: "XLB", name: "材料 (Materials)" },
+    { symbol: "XLU", name: "公用事業 (Utilities)" },
+    { symbol: "VNQ", name: "房地產 (Real Estate)" },
+    { symbol: "GLD", name: "黃金 (Gold)" },
+    { symbol: "ROBO", name: "機器人/自動化 (Robotics)" },
+    { symbol: "SMH", name: "半導體 (Semiconductors)" },
+    { symbol: "IWM", name: "羅素2000 (Small Cap)" },
+];
+
 /**
- * Formats a timestamp string (YYYY-MM-DD) into a more readable format.
- * @param {string} timestamp - The timestamp string.
- * @returns {string} Formatted time string.
+ * Creates and appends a fund flow card to the container.
+ * @param {string} symbol - The ETF symbol.
+ * @param {string} name - The ETF name.
+ * @param {Object} data - The latest data point for the ETF.
  */
-function formatTimestamp(timestamp) {
-    if (!timestamp) return '未知時間';
-    // Assuming timestamp is YYYY-MM-DD or YYYY-MM-DD HH:MM:SS
-    return `更新時間: ${timestamp}`;
+function createFundFlowCard(symbol, name, data) {
+    const container = document.getElementById('fund-flow-container');
+    const card = document.createElement('div');
+    card.className = 'flow-card';
+
+    let valueText = '--';
+    let changeText = '無數據';
+    let changeClass = 'neutral';
+
+    if (data && data.volume_change_percent !== undefined) {
+        const change = data.volume_change_percent;
+        valueText = data.volume.toLocaleString(); // Display raw volume
+        changeText = (change > 0 ? '+' : '') + change.toFixed(2) + '%';
+        changeClass = change > 0 ? 'positive' : (change < 0 ? 'negative' : 'neutral');
+    }
+
+    card.innerHTML = `
+        <div class="flow-header">${symbol} - ${name}</div>
+        <div class="flow-value">${valueText}</div>
+        <div class="flow-change ${changeClass}">${changeText}</div>
+        <p style="font-size: 0.8em; color: #666; margin-top: 10px;">成交量 (Volume)</p>
+    `;
+
+    container.appendChild(card);
 }
 
 /**
- * Sets the current value and change percentage for a fund card, including color coding.
- * @param {string} symbol - The fund symbol (e.g., 'VFIAX').
- * @param {Object} data - The fund data object.
+ * Loads and displays fund flow data.
  */
-function renderFundCard(symbol, data) {
-    const cleanSymbol = symbol.toLowerCase();
-    
-    const valueEl = document.getElementById(`${cleanSymbol}-value`);
-    const changeEl = document.getElementById(`${cleanSymbol}-change`);
-    const dateEl = document.getElementById(`${cleanSymbol}-date`);
-
-    if (!data || Object.keys(data).length === 0) {
-        if (valueEl) valueEl.textContent = '--';
-        if (changeEl) {
-            changeEl.textContent = '無數據';
-            changeEl.className = 'fund-change neutral';
-        }
-        if (dateEl) dateEl.textContent = '數據文件為空或符號無效';
-        return;
-    }
-
-    const value = data.close;
-    const change = data.change_percent;
-    const date = data.date;
-
-    if (valueEl) {
-        valueEl.textContent = value.toFixed(4); // Use 4 decimal places for funds
-    }
-
-    if (changeEl) {
-        changeEl.textContent = (change > 0 ? '+' : '') + change.toFixed(2) + '%';
-        changeEl.className = 'fund-change ' + (change > 0 ? 'positive' : (change < 0 ? 'negative' : 'neutral'));
-    }
-
-    if (dateEl) {
-        dateEl.textContent = formatTimestamp(date);
-    }
-}
-
-/**
- * Loads and displays money fund data.
- */
-async function loadMoneyFundData() {
+async function loadFundFlowData() {
     try {
         // Use cache-busting to ensure the latest file is fetched
-        const response = await fetch(`${DATA_BASE_URL}money_fund_data.json?v=${new Date().getTime()}`);
-        const data = await response.json();
+        const response = await fetch(`${DATA_BASE_URL}market_data_history.json?v=${new Date().getTime()}`);
+        const marketData = await response.json();
 
-        // The symbols are hardcoded in the HTML
-        const symbols = ["VFIAX", "VTSAX", "VBTLX", "VMMXX"];
-
-        symbols.forEach(symbol => {
-            renderFundCard(symbol, data[symbol]);
+        SECTOR_ETFS.forEach(etf => {
+            const history = marketData[etf.symbol];
+            // We only need the latest data point for the card
+            const latestData = history && history.length > 0 ? history[history.length - 1] : null;
+            
+            createFundFlowCard(etf.symbol, etf.name, latestData);
         });
 
     } catch (error) {
-        console.error("Error loading money fund data:", error);
-        // Display error on cards if fetch fails completely
-        const symbols = ["VFIAX", "VTSAX", "VBTLX", "VMMXX"];
-        symbols.forEach(symbol => {
-            const cleanSymbol = symbol.toLowerCase();
-            const dateEl = document.getElementById(`${cleanSymbol}-date`);
-            if (dateEl) dateEl.textContent = `載入失敗: ${error.message}`;
-        });
+        console.error("Error loading fund flow data:", error);
+        const container = document.getElementById('fund-flow-container');
+        container.innerHTML = `<p style="color: red;">數據載入失敗，請檢查 market_data_history.json 文件和控制台錯誤。</p>`;
     }
 }
 
 // --- Initialization ---
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadMoneyFundData();
+    loadFundFlowData();
 });
