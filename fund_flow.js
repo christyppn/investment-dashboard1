@@ -1,97 +1,89 @@
-// 資金流向頁面專用邏輯
-document.addEventListener('DOMContentLoaded', () => {
-    // 確保只在 fund_flow.html 頁面運行
-    if (document.getElementById('fundFlowsDetails')) {
-        loadFundFlowsDetails();
+const DATA_BASE_URL = './data/';
+
+// List of Sector ETFs to display on this page
+const SECTOR_ETFS = [
+    { symbol: "XLK", name: "科技 (Technology)" },
+    { symbol: "XLC", name: "通訊服務 (Communication Services)" },
+    { symbol: "XLY", name: "非必需消費品 (Consumer Discretionary)" },
+    { symbol: "XLP", name: "必需消費品 (Consumer Staples)" },
+    { symbol: "XLV", name: "醫療保健 (Health Care)" },
+    { symbol: "XLF", name: "金融 (Financial)" },
+    { symbol: "XLE", name: "能源 (Energy)" },
+    { symbol: "XLI", name: "工業 (Industrial)" },
+    { symbol: "XLB", name: "材料 (Materials)" },
+    { symbol: "XLU", name: "公用事業 (Utilities)" },
+    { symbol: "VNQ", name: "房地產 (Real Estate)" },
+    { symbol: "GLD", name: "黃金 (Gold)" },
+    { symbol: "ROBO", name: "機器人/自動化 (Robotics)" },
+    { symbol: "SMH", name: "半導體 (Semiconductors)" },
+    { symbol: "IWM", name: "羅素2000 (Small Cap)" },
+];
+
+/**
+ * Creates and appends a fund flow card to the container.
+ * @param {string} symbol - The ETF symbol.
+ * @param {string} name - The ETF name.
+ * @param {Object} data - The latest data point for the ETF.
+ */
+function createFundFlowCard(symbol, name, data) {
+    const container = document.getElementById('fund-flow-container');
+    const card = document.createElement('div');
+    card.className = 'flow-card';
+
+    let valueText = '--';
+    let changeText = '無數據';
+    let changeClass = 'neutral';
+
+    if (data && data.volume_change_percent !== undefined) {
+        const change = data.volume_change_percent;
+        valueText = data.volume.toLocaleString(); // Display raw volume
+        changeText = (change > 0 ? '+' : '') + change.toFixed(2) + '%';
+        changeClass = change > 0 ? 'positive' : (change < 0 ? 'negative' : 'neutral');
     }
-});
 
-// 載入資金流向詳細數據
-async function loadFundFlowsDetails() {
-    const DATA_BASE_URL = './data/';
-    const elementId = 'fundFlowsDetails';
+    card.innerHTML = `
+        <div class="flow-header">${symbol} - ${name}</div>
+        <div class="flow-value">${valueText}</div>
+        <div class="flow-change ${changeClass}">${changeText}</div>
+        <p style="font-size: 0.8em; color: #666; margin-top: 10px;">成交量 (Volume)</p>
+    `;
 
+    container.appendChild(card);
+}
+
+/**
+ * Loads and displays fund flow data.
+ */
+async function loadFundFlowData() {
     try {
-        const response = await fetch(`${DATA_BASE_URL}market_data_history.json`);
-        const allMarketData = await response.json();
+        // Use cache-busting to ensure the latest file is fetched
+        const response = await fetch(`${DATA_BASE_URL}market_data_history.json?v=${new Date().getTime()}`);
+        const marketData = await response.json();
 
-        if (allMarketData && allMarketData.length > 0) {
-            
-            // 1. 篩選出資金流向數據 (包含 'Volume' 且不包含 'Daily Change' 的指標)
-            const fundFlowData = allMarketData.filter(d => 
-                d.metric_name.includes('Volume') && !d.metric_name.includes('Daily Change')
-            );
-            
-            if (fundFlowData.length === 0) {
-                document.getElementById(elementId).innerHTML = '<p>暫無資金流向數據</p>';
-                return;
-            }
-
-            // 2. 找出最新的日期
-            const latestDate = fundFlowData[fundFlowData.length - 1].date;
-
-            // 3. 過濾出最新日期的所有行業數據
-            const latestFundFlowData = fundFlowData.filter(d => d.date === latestDate);
-
-            // 4. 繪製趨勢圖 (使用所有數據)
-            const chartData = {};
-            const categories = [];
-            
-            // 整理趨勢圖數據
-            fundFlowData.forEach(d => {
-                if (!chartData[d.metric_name]) {
-                    chartData[d.metric_name] = [];
-                }
-                chartData[d.metric_name].push(d.volume_change);
-                
-                // 確保 categories (日期) 不重複
-                if (!categories.includes(formatTimestamp(d.date, true))) {
-                    categories.push(formatTimestamp(d.date, true));
-                }
-            });
-
-            // 轉換為 ApexCharts 格式
-            const series = Object.keys(chartData).map(name => ({
-                name: name.replace(' Volume', '').replace(/\s\(.*\)/, ''), // 清理名稱
-                data: chartData[name]
-            }));
-
-            // 繪製圖表
-            renderChart('fundFlowsChart', series, categories, '各板塊成交量變動趨勢', '日變動 (%)', false);
-
-
-            // 5. 顯示最新的詳細列表
-            let html = '';
-            latestFundFlowData.forEach(fund => {
-                const trend = fund.volume_change;
-                const trendClass = trend >= 0 ? 'positive' : 'negative';
-                const trendSign = trend >= 0 ? '▲' : '▼';
-                
-                // 清理名稱，移除 Volume (ETF)
-                const cleanName = fund.metric_name.replace(' Volume', '').replace(/\s\(.*\)/, '');
-
-                html += `
-                    <div class="fund-item">
-                        <div class="fund-name">${cleanName}</div>
-                        <div class="fund-price">
-                            成交量: <span>${fund.volume.toLocaleString()}</span>
-                        </div>
-                        <div class="fund-change ${trendClass}">
-                            日變動: <span class="flow-trend ${trendClass}">${trendSign} ${Math.abs(trend).toFixed(2)}%</span>
-                        </div>
-                    </div>
-                `;
-            });
-
-            document.getElementById(elementId).innerHTML = html;
-            document.getElementById('fundFlowsTimestamp').textContent = `更新時間：${formatTimestamp(latestDate)}`;
-            document.getElementById('lastUpdate').textContent = formatTimestamp(new Date().toISOString());
-
-        } else {
-            document.getElementById(elementId).innerHTML = '<p>載入失敗或數據為空</p>';
+        // Check if marketData is empty
+        if (Object.keys(marketData).length === 0) {
+            const container = document.getElementById('fund-flow-container');
+            container.innerHTML = `<p style="color: red;">數據文件 market_data_history.json 為空，請檢查 sync_data.py 運行日誌。</p>`;
+            return;
         }
+
+        SECTOR_ETFS.forEach(etf => {
+            const history = marketData[etf.symbol];
+            // We only need the latest data point for the card
+            const latestData = history && history.length > 0 ? history[history.length - 1] : null;
+            
+            createFundFlowCard(etf.symbol, etf.name, latestData);
+        });
+
     } catch (error) {
-        console.error('載入資金流向詳細數據失敗:', error);
-        document.getElementById(elementId).innerHTML = '<p>載入失敗</p>';
+        console.error("Error loading fund flow data:", error);
+        const container = document.getElementById('fund-flow-container');
+        container.innerHTML = `<p style="color: red;">數據載入失敗，請檢查 market_data_history.json 文件和控制台錯誤。</p>`;
     }
 }
+
+// --- Initialization ---
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadFundFlowData();
+});
