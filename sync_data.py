@@ -9,7 +9,7 @@ import pandas as pd
 # --- Configuration ---
 DATA_DIR = "data"
 
-# Yahoo Finance Symbols (More reliable and supports indices/mutual funds)
+# Yahoo Finance Symbols (Confirmed symbols for all required data points)
 YAHOO_SYMBOLS = {
     # Market Breadth (US) - Standard ETF tickers
     "SPY": "SPY",
@@ -17,8 +17,8 @@ YAHOO_SYMBOLS = {
     "DIA": "DIA",
     # Global Indices and VIX - Yahoo Finance uses ^ prefix for indices
     "VIX": "^VIX", 
-    "HSI": "^HSI", 
-    "N225": "^N225", 
+    "HSI": "^HSI", # Confirmed Yahoo Finance symbol for Hang Seng Index
+    "N225": "^N225", # Confirmed Yahoo Finance symbol for Nikkei 225
     # Sector ETFs (11)
     "XLK": "XLK", "XLC": "XLC", "XLY": "XLY", "XLP": "XLP", "XLV": "XLV", "XLF": "XLF", 
     "XLE": "XLE", "XLI": "XLI", "XLB": "XLB", "XLU": "XLU", "VNQ": "VNQ",
@@ -28,7 +28,8 @@ YAHOO_SYMBOLS = {
     "VFIAX": "VFIAX",
     "VTSAX": "VTSAX",
     "VBTLX": "VBTLX",
-    "VMMXX": "VMMXX",
+    # VMMXX is unstable, replacing with a stable cash-equivalent ETF
+    "VMMXX": "BIL", # BIL (SPDR Bloomberg 1-3 Month T-Bill ETF) replaces VMMXX
 }
 
 # List of symbols to fetch (keys from the mapping)
@@ -66,7 +67,9 @@ def process_yahoo_data(symbol, df):
     
     # Clean up and format
     df = df.reset_index()
-    df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
+    # Handle both datetime and object types for Date column
+    if pd.api.types.is_datetime64_any_dtype(df['Date']):
+        df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
     
     # Select and rename columns for final output
     df = df.rename(columns={'Date': 'date', 'Close': 'close', 'Volume': 'volume'})
@@ -167,7 +170,8 @@ def fetch_market_data():
         try:
             # Download data from Yahoo Finance
             ticker = yf.Ticker(yahoo_symbol)
-            df = ticker.history(start=start_date, interval="1d")
+            # Use auto_adjust=False to get raw prices, which is better for historical analysis
+            df = ticker.history(start=start_date, interval="1d", auto_adjust=False)
             
             if not df.empty:
                 # Process and truncate the data
@@ -187,7 +191,7 @@ def fetch_market_data():
                     # Market Breadth and Fund Flow Data: Need the 30-day history
                     market_data_history[symbol] = processed_data
             else:
-                print(f"Warning: Yahoo Finance returned no data for {symbol} ({yahoo_symbol}).")
+                print(f"Warning: Yahoo Finance returned no data for {symbol} ({yahoo_symbol}). This can happen for indices/funds on non-trading days or if the symbol is temporarily unavailable.")
 
         except Exception as e:
             print(f"An unexpected error occurred for {symbol} ({yahoo_symbol}): {e}")
