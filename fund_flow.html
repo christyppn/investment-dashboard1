@@ -6,37 +6,86 @@
     <title>資金流向分析 | Fund Flow Analysis</title>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Specific styles for this page */
+        .fund-flow-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr ));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .flow-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            color: #333;
+            transition: transform 0.3s;
+        }
+
+        .flow-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .flow-header {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .flow-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 5px;
+        }
+
+        .flow-change {
+            font-size: 1.2em;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .positive {
+            color: #4CAF50; /* Green */
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+
+        .negative {
+            color: #F44336; /* Red */
+            background-color: rgba(244, 67, 54, 0.1);
+        }
+
+        .neutral {
+            color: #9E9E9E; /* Gray */
+            background-color: rgba(158, 158, 158, 0.1);
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>💵 資金流向分析</h1>
-            <p class="subtitle">各板塊資金流向與趨勢</p>
-            <nav class="main-nav">
-                <a href="index.html">📈 市場總覽</a>
-                <a href="fund_flow.html" class="active">💵 資金流向</a>
-                <a href="money_fund.html">💰 貨幣基金</a>
-            </nav>
-            <button id="refreshBtn" class="refresh-btn">🔄 刷新數據</button>
-        </header>
+    <header>
+        <div class="dashboard-title">投資儀表板</div>
+        <nav>
+            <a href="index.html">市場總覽</a>
+            <a href="fund_flow.html" class="active">資金流向</a>
+            <a href="money_fund.html">貨幣基金</a>
+        </nav>
+    </header>
 
-        <div class="dashboard-grid full-width-grid">
-            <!-- 資金流向詳細列表 -->
-            <div class="card full-width">
-                <h2>板塊資金流向 (成交量 )</h2>
-                <div id="fundFlowsDetails" class="loading">載入中...</div>
-                <div id="fundFlowsChart"></div>
-                <p class="timestamp" id="fundFlowsTimestamp"></p>
-            </div>
+    <div class="main-content">
+        <div class="section-title">板塊資金流向分析 (成交量變化)</div>
+        <p>此頁面顯示了各行業板塊 ETF 的成交量變化百分比，作為資金流向的參考指標。正值表示資金流入，負值表示資金流出。</p>
+
+        <div class="fund-flow-container" id="fund-flow-container">
+            <!-- Cards will be injected here by fund_flow.js -->
         </div>
-
-        <footer>
-            <p>數據來源：Alpha Vantage | 更新時間：<span id="lastUpdate">--</span></p>
-            <p class="disclaimer">⚠️ 本儀表板僅供參考，不構成投資建議</p>
-        </footer>
     </div>
 
-    <script src="script.js"></script>
     <script src="fund_flow.js"></script>
 </body>
 </html>
