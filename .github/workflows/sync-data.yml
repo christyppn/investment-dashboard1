@@ -30,6 +30,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run python sync_data.py
+        # 關鍵修復：直接運行 sync_data.py，因為它現在位於正確的工作目錄
         run: python sync_data.py
         env:
           FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
