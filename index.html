@@ -5,234 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>投資儀表板 | Investment Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <style>
-        /* Base Styles */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100% );
-            color: #fff;
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-        }
-
-        /* Header and Navigation */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .dashboard-title {
-            font-size: 2.5em;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.1em;
-            margin-left: 20px;
-            padding: 5px 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        nav a:hover, nav a.active {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Layout */
-        .main-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .section-title {
-            grid-column: 1 / -1;
-            font-size: 1.8em;
-            font-weight: 600;
-            margin-top: 20px;
-            margin-bottom: 10px;
-            color: #fff;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
-            padding-bottom: 5px;
-        }
-
-        /* Card Styles */
-        .card {
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-            color: #333;
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card-header {
-            font-size: 1.2em;
-            font-weight: 600;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-        }
-
-        .card-header .icon {
-            margin-right: 10px;
-            font-size: 1.5em;
-        }
-
-        /* Specific Card Styles */
-        /* Fear & Greed Index */
-        .fng-value {
-            font-size: 4em;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 5px;
-        }
-
-        .fng-sentiment {
-            font-size: 1.5em;
-            font-weight: 500;
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .fng-chart-container {
-            margin-top: 10px;
-        }
-
-        /* HIBOR Rates */
-        .hibor-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .hibor-list li {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-            font-size: 1.1em;
-        }
-
-        .hibor-list li:last-child {
-            border-bottom: none;
-        }
-
-        .hibor-list .term {
-            font-weight: 500;
-        }
-
-        .hibor-list .rate {
-            font-weight: 700;
-            color: #007bff;
-        }
-
-        .hibor-timestamp {
-            font-size: 0.8em;
-            color: #666;
-            text-align: right;
-            margin-top: 10px;
-        }
-
-        /* Market Cards (SPY, QQQ, DIA, VIX, HSI, N225) */
-        .market-card {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 180px;
-        }
-
-        .market-card .card-header {
-            justify-content: space-between;
-            margin-bottom: 5px;
-        }
-
-        .market-card .symbol {
-            font-size: 1.5em;
-            font-weight: 700;
-        }
-
-        .market-card .name {
-            font-size: 0.9em;
-            color: #666;
-        }
-
-        .market-card .card-body {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-bottom: 10px;
-        }
-
-        .market-card .current-value {
-            font-size: 2em;
-            font-weight: 700;
-        }
-
-        .change-percent {
-            font-size: 1.5em;
-            font-weight: 600;
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-
-        .positive {
-            color: #4CAF50; /* Green */
-            background-color: rgba(76, 175, 80, 0.1);
-        }
-
-        .negative {
-            color: #F44336; /* Red */
-            background-color: rgba(244, 67, 54, 0.1);
-        }
-
-        .neutral {
-            color: #9E9E9E; /* Gray */
-            background-color: rgba(158, 158, 158, 0.1);
-        }
-
-        .market-timestamp {
-            font-size: 0.8em;
-            color: #666;
-            text-align: right;
-            margin-top: 5px;
-        }
-
-        /* Card Grid for Market Breadth and Global Indices */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            grid-column: 1 / -1;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-            .dashboard-title {
-                font-size: 2em;
-            }
-            nav a {
-                margin-left: 10px;
-            }
-            .card-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
@@ -245,8 +18,8 @@
     </header>
 
     <div class="main-content">
-        <!-- 恐懼與貪婪指數 (Fear & Greed Index) -->
-        <div class="card">
+        <!-- First Row of Cards -->
+        <div class="card" id="fear-greed-card">
             <div class="card-header"><span class="icon">🤔</span>恐懼貪婪指數</div>
             <div class="fng-value" id="fng-value">--</div>
             <div class="fng-sentiment" id="fng-sentiment">載入中...</div>
@@ -256,8 +29,7 @@
             <div class="hibor-timestamp" id="fng-timestamp"></div>
         </div>
 
-        <!-- HIBOR 利率 (HIBOR Rates) -->
-        <div class="card">
+        <div class="card" id="hibor-card">
             <div class="card-header"><span class="icon">💰</span>HIBOR 利率</div>
             <ul class="hibor-list" id="hibor-list">
                 <li><span class="term">1M</span><span class="rate" id="hibor-1m">--</span></li>
@@ -267,90 +39,88 @@
             <div class="hibor-timestamp" id="hibor-timestamp"></div>
         </div>
 
-        <!-- 市場廣度 (Market Breadth) -->
-        <div class="section-title">市場廣度 (主要指數)</div>
-        <div class="card-grid">
-            <!-- SPY Card -->
-            <div class="card market-card" id="spy-card">
-                <div class="card-header">
-                    <span class="symbol">SPY</span>
-                    <span class="name">S&P 500 ETF</span>
-                </div>
-                <div class="card-body">
-                    <div class="current-value" id="spy-value">--</div>
-                    <div class="change-percent" id="spy-change">--</div>
-                </div>
-                <div class="card-chart" id="spy-chart"></div>
-            </div>
+        <!-- Market Breadth Section Title -->
+        <div class="section-title" style="grid-column: 1 / -1;">市場廣度 (主要指數 )</div>
 
-            <!-- QQQ Card -->
-            <div class="card market-card" id="qqq-card">
-                <div class="card-header">
-                    <span class="symbol">QQQ</span>
-                    <span class="name">NASDAQ 100 ETF</span>
-                </div>
-                <div class="card-body">
-                    <div class="current-value" id="qqq-value">--</div>
-                    <div class="change-percent" id="qqq-change">--</div>
-                </div>
-                <div class="card-chart" id="qqq-chart"></div>
+        <!-- SPY Card -->
+        <div class="card market-card" id="SPY-card">
+            <div class="card-header">
+                <span class="symbol">SPY</span>
+                <span class="name">S&P 500 ETF</span>
             </div>
-
-            <!-- DIA Card -->
-            <div class="card market-card" id="dia-card">
-                <div class="card-header">
-                    <span class="symbol">DIA</span>
-                    <span class="name">Dow Jones ETF</span>
-                </div>
-                <div class="card-body">
-                    <div class="current-value" id="dia-value">--</div>
-                    <div class="change-percent" id="dia-change">--</div>
-                </div>
-                <div class="card-chart" id="dia-chart"></div>
+            <div class="card-body">
+                <div class="current-value" id="SPY-value">--</div>
+                <div class="change-percent" id="SPY-change">--</div>
             </div>
+            <div class="card-chart" id="SPY-chart"></div>
         </div>
 
-        <!-- 全球市場與波動率 (Global Indices and Volatility) -->
-        <div class="section-title">全球市場與波動率</div>
-        <div class="card-grid">
-            <!-- VIX Volatility Index Card -->
-            <div class="card market-card" id="vix-card">
-                <div class="card-header">
-                    <span class="symbol">^VIX</span>
-                    <span class="name">VIX 波動率指數</span>
-                </div>
-                <div class="card-body">
-                    <div class="current-value" id="vix-value">--</div>
-                    <div class="change-percent" id="vix-change">--</div>
-                </div>
-                <div class="card-chart" id="vix-chart"></div>
+        <!-- QQQ Card -->
+        <div class="card market-card" id="QQQ-card">
+            <div class="card-header">
+                <span class="symbol">QQQ</span>
+                <span class="name">NASDAQ 100 ETF</span>
             </div>
+            <div class="card-body">
+                <div class="current-value" id="QQQ-value">--</div>
+                <div class="change-percent" id="QQQ-change">--</div>
+            </div>
+            <div class="card-chart" id="QQQ-chart"></div>
+        </div>
 
-            <!-- Hang Seng Index (HSI) Card -->
-            <div class="card market-card" id="hsi-card">
-                <div class="card-header">
-                    <span class="symbol">^HSI</span>
-                    <span class="name">恒生指數</span>
-                </div>
-                <div class="card-body">
-                    <div class="current-value" id="hsi-value">--</div>
-                    <div class="change-percent" id="hsi-change">--</div>
-                </div>
-                <div class="card-chart" id="hsi-chart"></div>
+        <!-- DIA Card -->
+        <div class="card market-card" id="DIA-card">
+            <div class="card-header">
+                <span class="symbol">DIA</span>
+                <span class="name">Dow Jones ETF</span>
             </div>
+            <div class="card-body">
+                <div class="current-value" id="DIA-value">--</div>
+                <div class="change-percent" id="DIA-change">--</div>
+            </div>
+            <div class="card-chart" id="DIA-chart"></div>
+        </div>
 
-            <!-- Nikkei 225 (N225) Card -->
-            <div class="card market-card" id="n225-card">
-                <div class="card-header">
-                    <span class="symbol">^N225</span>
-                    <span class="name">日經 225 指數</span>
-                </div>
-                <div class="card-body">
-                    <div class="current-value" id="n225-value">--</div>
-                    <div class="change-percent" id="n225-change">--</div>
-                </div>
-                <div class="card-chart" id="n225-chart"></div>
+        <!-- Global Markets Section Title -->
+        <div class="section-title" style="grid-column: 1 / -1;">全球市場與波動率</div>
+
+        <!-- VIX Card -->
+        <div class="card market-card" id="VIX-card">
+            <div class="card-header">
+                <span class="symbol">^VIX</span>
+                <span class="name">VIX 波動率指數</span>
             </div>
+            <div class="card-body">
+                <div class="current-value" id="VIX-value">--</div>
+                <div class="change-percent" id="VIX-change">--</div>
+            </div>
+            <div class="card-chart" id="VIX-chart"></div>
+        </div>
+
+        <!-- HSI Card -->
+        <div class="card market-card" id="HSI-card">
+            <div class="card-header">
+                <span class="symbol">^HSI</span>
+                <span class="name">恒生指數</span>
+            </div>
+            <div class="card-body">
+                <div class="current-value" id="HSI-value">--</div>
+                <div class="change-percent" id="HSI-change">--</div>
+            </div>
+            <div class="card-chart" id="HSI-chart"></div>
+        </div>
+
+        <!-- N225 Card -->
+        <div class="card market-card" id="N225-card">
+            <div class="card-header">
+                <span class="symbol">^N225</span>
+                <span class="name">日經 225 指數</span>
+            </div>
+            <div class="card-body">
+                <div class="current-value" id="N225-value">--</div>
+                <div class="change-percent" id="N225-change">--</div>
+            </div>
+            <div class="card-chart" id="N225-chart"></div>
         </div>
     </div>
 
