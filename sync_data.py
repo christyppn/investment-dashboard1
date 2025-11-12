@@ -95,7 +95,7 @@ def fetch_hibor_rates():
     url = "https://api.hkma.gov.hk/public/market-data-and-statistics/market-data/interest-rate/hk-interbank-interest-rates-daily"
     
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(url, timeout=10 )
         response.raise_for_status()
         data = response.json()
         
@@ -145,7 +145,7 @@ def fetch_fear_greed_index():
     url = "https://api.alternative.me/fng/?limit=30"
     
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(url, timeout=10 )
         response.raise_for_status()
         data = response.json()
         
@@ -234,4 +234,3 @@ if __name__ == "__main__":
     fetch_market_data()
     
     print("Data synchronization complete.")
-
