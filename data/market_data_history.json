@@ -1,13 +1,6 @@
 {
   "SPY": [
     {
-      "date": "2025-09-30",
-      "close": 666.1799926757812,
-      "volume": 86288000,
-      "change_percent": 0.3766875644270362,
-      "volume_change_percent": 17.4
-    },
-    {
       "date": "2025-10-01",
       "close": 668.4500122070312,
       "volume": 72545400,
@@ -206,19 +199,19 @@
     {
       "date": "2025-11-10",
       "close": 681.4400024414062,
-      "volume": 75709700,
+      "volume": 75842900,
       "change_percent": 1.560432239211762,
-      "volume_change_percent": -24.74
+      "volume_change_percent": -24.6
+    },
+    {
+      "date": "2025-11-11",
+      "close": 683.0,
+      "volume": 58113909,
+      "change_percent": 0.22892661907207845,
+      "volume_change_percent": -23.38
     }
   ],
   "QQQ": [
-    {
-      "date": "2025-09-30",
-      "close": 600.3699951171875,
-      "volume": 46533800,
-      "change_percent": 0.27391557161602353,
-      "volume_change_percent": -3.72
-    },
     {
       "date": "2025-10-01",
       "close": 603.25,
@@ -418,19 +411,19 @@
     {
       "date": "2025-11-10",
       "close": 623.22998046875,
-      "volume": 55745700,
+      "volume": 55919900,
       "change_percent": 2.2124168416753687,
-      "volume_change_percent": -31.88
+      "volume_change_percent": -31.67
+    },
+    {
+      "date": "2025-11-11",
+      "close": 621.5700073242188,
+      "volume": 44634630,
+      "change_percent": -0.26635001469004216,
+      "volume_change_percent": -20.18
     }
   ],
   "DIA": [
-    {
-      "date": "2025-09-30",
-      "close": 463.739990234375,
-      "volume": 4253300,
-      "change_percent": 0.15117088729605932,
-      "volume_change_percent": 13.34
-    },
     {
       "date": "2025-10-01",
       "close": 464.260009765625,
@@ -630,19 +623,19 @@
     {
       "date": "2025-11-10",
       "close": 473.82000732421875,
-      "volume": 5635200,
+      "volume": 5636600,
       "change_percent": 0.8428089422624963,
-      "volume_change_percent": -34.51
+      "volume_change_percent": -34.49
+    },
+    {
+      "date": "2025-11-11",
+      "close": 479.4100036621094,
+      "volume": 4592543,
+      "change_percent": 1.1797721184166,
+      "volume_change_percent": -18.52
     }
   ],
   "VIX": [
-    {
-      "date": "2025-09-30",
-      "close": 16.280000686645508,
-      "volume": 0,
-      "change_percent": 0.9925548330164791,
-      "volume_change_percent": 0
-    },
     {
       "date": "2025-10-01",
       "close": 16.290000915527344,
@@ -845,6 +838,13 @@
       "volume": 0,
       "change_percent": -7.756811049026757,
       "volume_change_percent": 0
+    },
+    {
+      "date": "2025-11-11",
+      "close": 17.280000686645508,
+      "volume": 0,
+      "change_percent": -1.8181800448205276,
+      "volume_change_percent": 0
     }
   ],
   "HSI": [
@@ -1039,9 +1039,9 @@
     },
     {
       "date": "2025-11-11",
-      "close": 26595.970703125,
+      "close": 26696.41015625,
       "volume": 0,
-      "change_percent": -0.1992184439545852,
+      "change_percent": 0.17767834363884294,
       "volume_change_percent": -100.0
     }
   ],
@@ -1243,21 +1243,14 @@
       "volume_change_percent": -11.59
     },
     {
-      "date": "2025-11-11",
-      "close": 51076.390625,
+      "date": "2025-11-12",
+      "close": 50934.171875,
       "volume": 0,
-      "change_percent": 0.3233612444202061,
+      "change_percent": 0.04401764050869783,
       "volume_change_percent": -100.0
     }
   ],
   "XLK": [
-    {
-      "date": "2025-09-30",
-      "close": 281.8599853515625,
-      "volume": 9107600,
-      "change_percent": 0.5457849151298211,
-      "volume_change_percent": 13.09
-    },
     {
       "date": "2025-10-01",
       "close": 284.6199951171875,
@@ -1457,19 +1450,19 @@
     {
       "date": "2025-11-10",
       "close": 295.5299987792969,
-      "volume": 9140800,
+      "volume": 9143200,
       "change_percent": 2.557605158080656,
-      "volume_change_percent": -28.44
+      "volume_change_percent": -28.42
+    },
+    {
+      "date": "2025-11-11",
+      "close": 293.010009765625,
+      "volume": 7410548,
+      "change_percent": -0.8527015951276806,
+      "volume_change_percent": -18.95
     }
   ],
   "XLC": [
-    {
-      "date": "2025-09-30",
-      "close": 118.37000274658203,
-      "volume": 5740500,
-      "change_percent": -0.15183492243117103,
-      "volume_change_percent": 17.73
-    },
     {
       "date": "2025-10-01",
       "close": 116.70999908447266,
@@ -1672,16 +1665,16 @@
       "volume": 4724100,
       "change_percent": 1.0436162363532064,
       "volume_change_percent": -36.68
+    },
+    {
+      "date": "2025-11-11",
+      "close": 114.19999694824219,
+      "volume": 3646296,
+      "change_percent": 0.8121452850098798,
+      "volume_change_percent": -22.82
     }
   ],
   "XLY": [
-    {
-      "date": "2025-09-30",
-      "close": 239.63999938964844,
-      "volume": 6491000,
-      "change_percent": -0.4651915362772985,
-      "volume_change_percent": 15.45
-    },
     {
       "date": "2025-10-01",
       "close": 241.13999938964844,
@@ -1884,16 +1877,16 @@
       "volume": 5217400,
       "change_percent": 1.3143415990390483,
       "volume_change_percent": -9.28
+    },
+    {
+      "date": "2025-11-11",
+      "close": 239.5500030517578,
+      "volume": 6351783,
+      "change_percent": 0.246901707948588,
+      "volume_change_percent": 21.74
     }
   ],
   "XLP": [
-    {
-      "date": "2025-09-30",
-      "close": 78.37000274658203,
-      "volume": 12306100,
-      "change_percent": 0.33286664216978235,
-      "volume_change_percent": 7.1
-    },
     {
       "date": "2025-10-01",
       "close": 78.25,
@@ -2093,19 +2086,19 @@
     {
       "date": "2025-11-10",
       "close": 76.43000030517578,
-      "volume": 16803400,
+      "volume": 16805900,
       "change_percent": -0.3650094937278525,
-      "volume_change_percent": -0.92
+      "volume_change_percent": -0.91
+    },
+    {
+      "date": "2025-11-11",
+      "close": 77.43000030517578,
+      "volume": 19741957,
+      "change_percent": 1.308386753901769,
+      "volume_change_percent": 17.47
     }
   ],
   "XLV": [
-    {
-      "date": "2025-09-30",
-      "close": 139.1699981689453,
-      "volume": 19313500,
-      "change_percent": 2.406184267345668,
-      "volume_change_percent": 149.67
-    },
     {
       "date": "2025-10-01",
       "close": 143.47000122070312,
@@ -2305,19 +2298,19 @@
     {
       "date": "2025-11-10",
       "close": 147.27999877929688,
-      "volume": 12304800,
+      "volume": 12305900,
       "change_percent": 0.780073487347499,
       "volume_change_percent": -15.27
+    },
+    {
+      "date": "2025-11-11",
+      "close": 150.67999267578125,
+      "volume": 12523515,
+      "change_percent": 2.3085238489031656,
+      "volume_change_percent": 1.77
     }
   ],
   "XLF": [
-    {
-      "date": "2025-09-30",
-      "close": 53.869998931884766,
-      "volume": 32442200,
-      "change_percent": -0.4803290801773552,
-      "volume_change_percent": 56.62
-    },
     {
       "date": "2025-10-01",
       "close": 53.38999938964844,
@@ -2517,19 +2510,19 @@
     {
       "date": "2025-11-10",
       "close": 52.970001220703125,
-      "volume": 42009800,
+      "volume": 42010600,
       "change_percent": 0.3599894766969536,
-      "volume_change_percent": -9.11
+      "volume_change_percent": -9.1
+    },
+    {
+      "date": "2025-11-11",
+      "close": 53.209999084472656,
+      "volume": 29935705,
+      "change_percent": 0.4530826094746754,
+      "volume_change_percent": -28.74
     }
   ],
   "XLE": [
-    {
-      "date": "2025-09-30",
-      "close": 89.33999633789062,
-      "volume": 23772400,
-      "change_percent": -1.0631303227276012,
-      "volume_change_percent": 26.2
-    },
     {
       "date": "2025-10-01",
       "close": 89.33999633789062,
@@ -2729,19 +2722,19 @@
     {
       "date": "2025-11-10",
       "close": 90.3499984741211,
-      "volume": 15630600,
+      "volume": 15632300,
       "change_percent": 0.9046208960371782,
-      "volume_change_percent": -11.84
+      "volume_change_percent": -11.83
+    },
+    {
+      "date": "2025-11-11",
+      "close": 91.52999877929688,
+      "volume": 19315390,
+      "change_percent": 1.3060324572266246,
+      "volume_change_percent": 23.56
     }
   ],
   "XLI": [
-    {
-      "date": "2025-09-30",
-      "close": 154.22999572753906,
-      "volume": 8211200,
-      "change_percent": 0.7709850717103173,
-      "volume_change_percent": 14.4
-    },
     {
       "date": "2025-10-01",
       "close": 153.8000030517578,
@@ -2941,19 +2934,19 @@
     {
       "date": "2025-11-10",
       "close": 154.1999969482422,
-      "volume": 10899900,
+      "volume": 10900400,
       "change_percent": 0.56740044792154,
       "volume_change_percent": -19.37
+    },
+    {
+      "date": "2025-11-11",
+      "close": 154.24000549316406,
+      "volume": 8630856,
+      "change_percent": 0.025945879191757726,
+      "volume_change_percent": -20.82
     }
   ],
   "XLB": [
-    {
-      "date": "2025-09-30",
-      "close": 89.62000274658203,
-      "volume": 4704100,
-      "change_percent": 0.49338690278151187,
-      "volume_change_percent": 0.31
-    },
     {
       "date": "2025-10-01",
       "close": 88.68000030517578,
@@ -3156,16 +3149,16 @@
       "volume": 7616700,
       "change_percent": 0.94383309423689,
       "volume_change_percent": -15.25
+    },
+    {
+      "date": "2025-11-11",
+      "close": 87.52999877929688,
+      "volume": 5575855,
+      "change_percent": 1.0389028678439605,
+      "volume_change_percent": -26.79
     }
   ],
   "XLU": [
-    {
-      "date": "2025-09-30",
-      "close": 87.20999908447266,
-      "volume": 10980000,
-      "change_percent": 0.17229672649363703,
-      "volume_change_percent": 28.19
-    },
     {
       "date": "2025-10-01",
       "close": 88.05000305175781,
@@ -3365,19 +3358,19 @@
     {
       "date": "2025-11-10",
       "close": 89.66000366210938,
-      "volume": 8968800,
+      "volume": 8973600,
       "change_percent": -0.03344718305305916,
-      "volume_change_percent": -26.3
+      "volume_change_percent": -26.26
+    },
+    {
+      "date": "2025-11-11",
+      "close": 89.70999908447266,
+      "volume": 7198154,
+      "change_percent": 0.055761120144159904,
+      "volume_change_percent": -19.79
     }
   ],
   "VNQ": [
-    {
-      "date": "2025-09-30",
-      "close": 91.41999816894531,
-      "volume": 3002800,
-      "change_percent": 0.40636474990249916,
-      "volume_change_percent": -4.83
-    },
     {
       "date": "2025-10-01",
       "close": 91.55999755859375,
@@ -3580,16 +3573,16 @@
       "volume": 3398100,
       "change_percent": -0.055417322284700976,
       "volume_change_percent": -35.62
+    },
+    {
+      "date": "2025-11-11",
+      "close": 91.19000244140625,
+      "volume": 3169723,
+      "change_percent": 1.1199846227684107,
+      "volume_change_percent": -6.72
     }
   ],
   "GLD": [
-    {
-      "date": "2025-09-30",
-      "close": 355.4700012207031,
-      "volume": 13312400,
-      "change_percent": 0.8540004081594166,
-      "volume_change_percent": -15.31
-    },
     {
       "date": "2025-10-01",
       "close": 356.0299987792969,
@@ -3789,19 +3782,19 @@
     {
       "date": "2025-11-10",
       "close": 378.3800048828125,
-      "volume": 13421100,
+      "volume": 13456200,
       "change_percent": 2.734111859838051,
-      "volume_change_percent": 21.34
+      "volume_change_percent": 21.66
+    },
+    {
+      "date": "2025-11-11",
+      "close": 379.8699951171875,
+      "volume": 10097758,
+      "change_percent": 0.39378144065420617,
+      "volume_change_percent": -24.96
     }
   ],
   "ROBO": [
-    {
-      "date": "2025-09-30",
-      "close": 65.55999755859375,
-      "volume": 38700,
-      "change_percent": 0.4443096835338167,
-      "volume_change_percent": -31.38
-    },
     {
       "date": "2025-10-01",
       "close": 66.33000183105469,
@@ -4004,16 +3997,16 @@
       "volume": 435600,
       "change_percent": 1.5721418354490035,
       "volume_change_percent": 105.96
+    },
+    {
+      "date": "2025-11-11",
+      "close": 68.79000091552734,
+      "volume": 88005,
+      "change_percent": -0.49182171473877156,
+      "volume_change_percent": -79.8
     }
   ],
   "SMH": [
-    {
-      "date": "2025-09-30",
-      "close": 326.3599853515625,
-      "volume": 7459900,
-      "change_percent": 1.146712219506374,
-      "volume_change_percent": 27.88
-    },
     {
       "date": "2025-10-01",
       "close": 333.69000244140625,
@@ -4213,19 +4206,19 @@
     {
       "date": "2025-11-10",
       "close": 358.7900085449219,
-      "volume": 9171800,
+      "volume": 9180700,
       "change_percent": 3.0650389455918914,
-      "volume_change_percent": -37.71
+      "volume_change_percent": -37.64
+    },
+    {
+      "date": "2025-11-11",
+      "close": 351.04998779296875,
+      "volume": 7566992,
+      "change_percent": -2.157256491991766,
+      "volume_change_percent": -17.58
     }
   ],
   "IWM": [
-    {
-      "date": "2025-09-30",
-      "close": 241.9600067138672,
-      "volume": 33447700,
-      "change_percent": 0.1407216304738279,
-      "volume_change_percent": 26.74
-    },
     {
       "date": "2025-10-01",
       "close": 242.49000549316406,
@@ -4425,9 +4418,16 @@
     {
       "date": "2025-11-10",
       "close": 244.02999877929688,
-      "volume": 31179400,
+      "volume": 31238000,
       "change_percent": 1.001613411213098,
-      "volume_change_percent": -43.29
+      "volume_change_percent": -43.18
+    },
+    {
+      "date": "2025-11-11",
+      "close": 244.24000549316406,
+      "volume": 27274756,
+      "change_percent": 0.08605774491565743,
+      "volume_change_percent": -12.69
     }
   ]
 }
