@@ -1053,9 +1053,9 @@
     },
     {
       "date": "2025-11-13",
-      "close": 26789.83984375,
+      "close": 26792.529296875,
       "volume": 0,
-      "change_percent": -0.4936001017959546,
+      "change_percent": -0.4836105759262743,
       "volume_change_percent": -100.0
     }
   ],
@@ -1265,9 +1265,9 @@
     },
     {
       "date": "2025-11-13",
-      "close": 51158.62890625,
+      "close": 51166.78125,
       "volume": 0,
-      "change_percent": 0.18667085060695143,
+      "change_percent": 0.20263602006913572,
       "volume_change_percent": -100.0
     }
   ],
