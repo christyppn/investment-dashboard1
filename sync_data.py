@@ -90,29 +90,29 @@ def process_yahoo_data(symbol, df):
 def fetch_hibor_rates():
     """
     Generates static HIBOR data as a final fallback due to API/Scraping instability.
+    Uses the latest rates manually extracted from HKAB website.
     """
     print("Generating static HIBOR rates as a final fallback...")
     
-    # Use a recent, static HIBOR rate to ensure the file is generated and the frontend works
-    # Data as of 2025-11-17 (Example data)
+    # Data manually extracted from HKAB website on 2025-11-17
     current_time = datetime.now().isoformat()
     hibor_data = [
         {
             "id": "1M",
             "term": "1M",
-            "rate": 5.012,
+            "rate": 3.00429, # Corrected rate
             "timestamp": current_time
         },
         {
             "id": "3M",
             "term": "3M",
-            "rate": 5.155,
+            "rate": 3.43476, # Corrected rate
             "timestamp": current_time
         },
         {
             "id": "6M",
             "term": "6M",
-            "rate": 5.288,
+            "rate": 3.41250, # Corrected rate
             "timestamp": current_time
         }
     ]
