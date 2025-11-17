@@ -849,13 +849,6 @@
   ],
   "HSI": [
     {
-      "date": "2025-10-03",
-      "close": 27140.919921875,
-      "volume": 1392000000,
-      "change_percent": -0.535781069436303,
-      "volume_change_percent": -40.12
-    },
-    {
       "date": "2025-10-06",
       "close": 26957.76953125,
       "volume": 1131600000,
@@ -1054,13 +1047,6 @@
   ],
   "N225": [
     {
-      "date": "2025-10-03",
-      "close": 45769.5,
-      "volume": 117600000,
-      "change_percent": 1.8532045446188583,
-      "volume_change_percent": -10.3
-    },
-    {
       "date": "2025-10-06",
       "close": 47944.76171875,
       "volume": 178300000,
@@ -1255,6 +1241,13 @@
       "volume": 149300000,
       "change_percent": -1.7653365882224992,
       "volume_change_percent": 10.02
+    },
+    {
+      "date": "2025-11-17",
+      "close": 50151.76171875,
+      "volume": 0,
+      "change_percent": -0.4461790553512923,
+      "volume_change_percent": -100.0
     }
   ],
   "XLK": [
