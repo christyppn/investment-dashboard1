@@ -70,7 +70,8 @@ function renderSparklineChart(elementId, data, colorClass) {
         tooltip: {
             enabled: true,
             x: {
-                show: false
+                show: true,
+                format: 'dd MMM yyyy' // Show date on hover
             },
             y: {
                 formatter: function(value) {
@@ -545,7 +546,8 @@ function renderFearGreedChart(elementId, data) {
         xaxis: {
             type: 'datetime',
             tooltip: {
-                enabled: false
+                enabled: true,
+                format: 'dd MMM yyyy' // Show date on hover
             }
         },
         yaxis: {
@@ -560,7 +562,7 @@ function renderFearGreedChart(elementId, data) {
         },
         tooltip: {
             x: {
-                format: 'dd MMM'
+                format: 'dd MMM yyyy'
             }
         },
         grid: {
