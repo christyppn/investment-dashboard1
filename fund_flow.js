@@ -2,25 +2,25 @@
 
 // --- Configuration ---
 const DATA_DIR = "data/";
-// Map of ETF symbols to their full names in Chinese/English
+
+// ETF Full Names Map
 const SECTOR_ETFS_MAP = {
     "XLK": "科技 (Technology)",
     "XLC": "通訊服務 (Communication Services)",
-    "XLY": "非必需消費 (Consumer Discretionary)",
-    "XLP": "必需消費 (Consumer Staples)",
+    "XLY": "非必需消費品 (Consumer Discretionary)",
+    "XLP": "必需消費品 (Consumer Staples)",
     "XLV": "醫療保健 (Health Care)",
     "XLF": "金融 (Financial)",
     "XLE": "能源 (Energy)",
     "XLI": "工業 (Industrial)",
-    "XLB": "原材料 (Materials)",
+    "XLB": "材料 (Materials)",
     "XLU": "公用事業 (Utilities)",
     "VNQ": "房地產 (Real Estate)",
     "GLD": "黃金 (Gold)",
-    "ROBO": "機器人 (Robotics)",
+    "ROBO": "機器人與自動化 (Robotics & Automation)",
     "SMH": "半導體 (Semiconductors)",
-    "IWM": "羅素2000 (Small Cap)"
+    "IWM": "羅素2000 (Russell 2000)"
 };
-const SECTOR_ETFS = Object.keys(SECTOR_ETFS_MAP);
 
 // --- Helper Functions ---
 
@@ -45,52 +45,48 @@ async function fetchData(path) {
 }
 
 /**
- * Renders a simple bar chart for volume change using ApexCharts.
+ * Renders a simple sparkline chart for volume change using ApexCharts.
  * @param {string} elementId - The ID of the element to render the chart in.
  * @param {Array<Object>} data - The time series data for the chart.
+ * @param {string} colorClass - The class to determine the line color.
  */
-function renderVolumeChangeChart(elementId, data) {
-    // Filter out data points where volume_change_percent is missing or null
-    const validData = data.filter(item => item.volume_change_percent !== null && item.volume_change_percent !== undefined);
-    
-    const dates = validData.map(item => item.date);
-    const volumeChanges = validData.map(item => item.volume_change_percent);
+function renderVolumeSparklineChart(elementId, data, colorClass) {
+    const color = colorClass === 'text-success' ? '#28a745' : '#dc3545';
     
     const options = {
         series: [{
             name: 'Volume Change %',
-            data: volumeChanges
+            data: data
         }],
         chart: {
-            type: 'bar',
+            type: 'area',
             height: 150,
-            toolbar: {
-                show: false
-            },
             sparkline: {
                 enabled: true
+            },
+            animations: {
+                enabled: false
             }
         },
-        // Set colors based on the value of the bar
-        colors: volumeChanges.map(change => change >= 0 ? '#28a745' : '#dc3545'), 
-        plotOptions: {
-            bar: {
-                columnWidth: '80%',
-                colors: {
-                    ranges: [{
-                        from: -Infinity,
-                        to: 0,
-                        color: '#dc3545' // Red for negative
-                    }, {
-                        from: 0,
-                        to: Infinity,
-                        color: '#28a745' // Green for positive
-                    }]
+        stroke: {
+            curve: 'smooth',
+            width: 2
+        },
+        colors: [color],
+        tooltip: {
+            enabled: true,
+            x: {
+                show: true,
+                format: 'dd MMM yyyy' // Show date on hover
+            },
+            y: {
+                formatter: function(value) {
+                    return value.toFixed(2) + '%';
                 }
             }
         },
         xaxis: {
-            categories: dates,
+            type: 'datetime',
             labels: {
                 show: false
             }
@@ -100,22 +96,22 @@ function renderVolumeChangeChart(elementId, data) {
                 show: false
             }
         },
-        tooltip: {
-            enabled: true,
-            x: {
-                show: true,
-                formatter: function(val) {
-                    return val;
-                }
-            },
-            y: {
-                formatter: function(val) {
-                    return val.toFixed(2) + '%';
-                }
-            }
-        },
         grid: {
             show: false
+        },
+        fill: {
+            opacity: 0.3,
+            type: 'gradient',
+            gradient: {
+                shade: 'dark',
+                type: 'vertical',
+                shadeIntensity: 0.5,
+                gradientToColors: [color],
+                inverseColors: false,
+                opacityFrom: 0.5,
+                opacityTo: 0,
+                stops: [0, 100]
+            }
         }
     };
 
@@ -126,76 +122,74 @@ function renderVolumeChangeChart(elementId, data) {
     }
 }
 
-// --- Main Function ---
+
+// --- Fund Flow Data ---
 
 /**
- * Loads and displays Fund Flow data (Sector ETFs).
+ * Loads and displays Fund Flow data (Sector ETFs, etc.) with volume change charts.
  * Assumes market_data_history.json is an object: { "XLK": [history], "XLC": [history], ... }
  */
 async function loadFundFlowData() {
     const marketData = await fetchData("market_data_history.json");
     const container = document.getElementById("fund-flow-container");
-
-    if (!container) {
-        console.error("Fund flow container not found.");
-        return;
-    }
+    
+    // Filter for the ETFs we want to display in the fund flow section
+    const fundFlowSymbols = Object.keys(SECTOR_ETFS_MAP);
 
     if (!marketData || Object.keys(marketData).length === 0) {
-        container.innerHTML = "<p class='text-danger'>資金流向數據不可用或為空。請檢查 `market_data_history.json` 文件。</p>";
+        if (container) container.innerHTML = "<p class='text-danger'>Fund Flow data is not available or empty.</p>";
         return;
     }
 
-    let html = `
-        <p class="text-muted small">數據來源：Yahoo Finance (yfinance) - 過去 30 個交易日的成交量變化</p>
-        <div class="row">
-    `;
+    let html = "<div class='row'>";
     
-    SECTOR_ETFS.forEach(symbol => {
+    fundFlowSymbols.forEach(symbol => {
         const history = marketData[symbol];
-        const fullName = SECTOR_ETFS_MAP[symbol] || symbol; // Get the full name
+        const fullName = SECTOR_ETFS_MAP[symbol] || symbol;
         
         if (history && history.length > 0) {
             const latest = history[history.length - 1];
-            // Ensure volume_change_percent exists and is a number
-            const volumeChange = latest.volume_change_percent !== undefined && latest.volume_change_percent !== null 
-                               ? parseFloat(latest.volume_change_percent).toFixed(2) 
-                               : 'N/A';
+            const price = parseFloat(latest.close).toFixed(2);
+            const change = parseFloat(latest.change_percent).toFixed(2);
+            const volume = latest.volume.toLocaleString(); // Format volume with commas
+            const changeClass = change >= 0 ? 'text-success' : 'text-danger';
+            const changeIcon = change >= 0 ? '▲' : '▼';
             
-            const isNumeric = volumeChange !== 'N/A';
-            const changeClass = isNumeric ? (parseFloat(volumeChange) >= 0 ? 'text-success' : 'text-danger') : 'text-muted';
-            const changeIcon = isNumeric ? (parseFloat(volumeChange) >= 0 ? '▲' : '▼') : '';
-            
-            // Get the last 10 days of data for the sparkline chart
-            const chartData = history.slice(-10);
-
             html += `
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-body">
                             <h5 class="card-title mb-1">${symbol} - ${fullName}</h5>
-                            <p class="card-text small text-muted">成交量變化</p>
-                            <p class="card-text h4 ${changeClass}">${changeIcon} ${volumeChange}${isNumeric ? '%' : ''}</p>
-                            <div id="chart-volume-${symbol}" style="height: 150px;"></div>
+                            <p class="card-text h4 mb-1">${price} <span class="small text-muted">USD</span></p>
+                            <p class="card-text ${changeClass}">${changeIcon} ${change}%</p>
+                            <p class="card-text small text-muted">Volume: ${volume}</p>
+                            <div class="mt-3">
+                                <h6 class="card-subtitle mb-2 text-muted">Volume Change Trend (%)</h6>
+                                <div id="chart-volume-${symbol}" style="height: 150px;"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             `;
             
+            // Prepare data for ApexCharts (Volume Change %)
+            const seriesData = history.map(item => ({
+                x: new Date(item.date).getTime(),
+                y: item.volume_change_percent
+            }));
+
             // Render chart after the HTML is inserted (in the main init function)
-            if (isNumeric) {
-                setTimeout(() => {
-                    renderVolumeChangeChart(`chart-volume-${symbol}`, chartData);
-                }, 0);
-            }
+            setTimeout(() => {
+                renderVolumeSparklineChart(`chart-volume-${symbol}`, seriesData, changeClass);
+            }, 0);
 
         } else {
             html += `
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-body">
                             <h5 class="card-title">${symbol} - ${fullName}</h5>
-                            <p class="text-warning">數據未找到。</p>
+                            <p class="text-warning">Data not found.</p>
                         </div>
                     </div>
                 </div>
@@ -203,10 +197,21 @@ async function loadFundFlowData() {
         }
     });
 
-    html += "</div>";
-    container.innerHTML = html;
+    if (container) {
+        html += "</div>";
+        container.innerHTML = html;
+    }
 }
+
 
 // --- Initialization ---
 
-document.addEventListener("DOMContentLoaded", loadFundFlowData);
+/**
+ * Main function to load all data and render the dashboard.
+ */
+function initFundFlowDashboard() {
+    loadFundFlowData();
+}
+
+// Run the initialization when the document is ready
+document.addEventListener("DOMContentLoaded", initFundFlowDashboard);
