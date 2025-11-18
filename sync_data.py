@@ -127,7 +127,7 @@ def fetch_fear_greed_index():
     url = "https://api.alternative.me/fng/?limit=30"
     
     try:
-        response = requests.get(url, timeout=10)
+        response = requests.get(url, timeout=10 )
         response.raise_for_status()
         data = response.json()
         
