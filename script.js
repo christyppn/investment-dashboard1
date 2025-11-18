@@ -252,7 +252,7 @@ function renderMarketBreadth(period = 'ALL') {
     if (!container) return; // Exit if container is not found
 
     if (!fullMarketData || Object.keys(fullMarketData).length === 0) {
-        container.innerHTML = "<p class='text-danger'>Market Breadth data is not available or empty.</p>";
+        container.innerHTML = "<p class='text-danger'>Market Breadth data is not available or empty. Please run sync_data.py.</p>";
         return;
     }
 
@@ -341,7 +341,7 @@ function renderGlobalMarkets(period = 'ALL') {
     if (!container) return; // Exit if container is not found
 
     if (!fullMarketData || Object.keys(fullMarketData).length === 0) {
-        container.innerHTML = "<p class='text-danger'>Global Markets data is not available or empty.</p>";
+        container.innerHTML = "<p class='text-danger'>Global Markets data is not available or empty. Please run sync_data.py.</p>";
         return;
     }
 
@@ -560,8 +560,10 @@ function renderFearGreedChart(elementId, data) {
 async function initDashboard() {
     // Fetch market data first and store it globally
     const marketData = await fetchData("market_data_history.json");
-    if (marketData) {
+    if (marketData && Object.keys(marketData).length > 0) {
         fullMarketData = { ...fullMarketData, ...marketData };
+    } else {
+        console.error("FATAL ERROR: market_data_history.json is empty or failed to load.");
     }
 
     loadHiborRates();
