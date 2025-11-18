@@ -249,8 +249,10 @@ function renderMarketBreadth(period = 'ALL') {
     const container = document.getElementById("market-breadth-container");
     const symbols = ["SPY", "QQQ", "DIA"];
 
+    if (!container) return; // Exit if container is not found
+
     if (!fullMarketData || Object.keys(fullMarketData).length === 0) {
-        if (container) container.innerHTML = "<p class='text-danger'>Market Breadth data is not available or empty.</p>";
+        container.innerHTML = "<p class='text-danger'>Market Breadth data is not available or empty.</p>";
         return;
     }
 
@@ -259,7 +261,8 @@ function renderMarketBreadth(period = 'ALL') {
     let filterHtml = '<div class="btn-group mb-3" role="group" aria-label="Time Filter">';
     periods.forEach(p => {
         const activeClass = p === period ? 'btn-primary' : 'btn-outline-primary';
-        filterHtml += `<button type="button" class="btn ${activeClass}" onclick="renderMarketBreadth('${p}')">${p}</button>`;
+        // Use window.renderMarketBreadth to ensure the function is globally accessible from the onclick attribute
+        filterHtml += `<button type="button" class="btn ${activeClass}" onclick="window.renderMarketBreadth('${p}')">${p}</button>`;
     });
     filterHtml += '</div>';
 
@@ -316,24 +319,8 @@ function renderMarketBreadth(period = 'ALL') {
 
     cardsHtml += "</div>";
 
-    if (container) {
-        container.innerHTML = filterHtml + cardsHtml;
-    }
-}
-
-/**
- * Loads and displays Market Breadth data (SPY, QQQ, DIA) with charts.
- * This function is only called once during initialization to fetch data.
- */
-async function loadMarketBreadth() {
-    const marketData = await fetchData("market_data_history.json");
-    
-    if (marketData) {
-        // Store the full data globally
-        fullMarketData = { ...fullMarketData, ...marketData };
-        // Initial render with 'ALL' data
-        renderMarketBreadth('ALL');
-    }
+    // Update the container content
+    container.innerHTML = filterHtml + cardsHtml;
 }
 
 // --- Global Markets and Volatility ---
@@ -351,8 +338,10 @@ function renderGlobalMarkets(period = 'ALL') {
         "N225": "日經 225 指數"
     };
 
+    if (!container) return; // Exit if container is not found
+
     if (!fullMarketData || Object.keys(fullMarketData).length === 0) {
-        if (container) container.innerHTML = "<p class='text-danger'>Global Markets data is not available or empty.</p>";
+        container.innerHTML = "<p class='text-danger'>Global Markets data is not available or empty.</p>";
         return;
     }
 
@@ -361,7 +350,8 @@ function renderGlobalMarkets(period = 'ALL') {
     let filterHtml = '<div class="btn-group mb-3" role="group" aria-label="Time Filter">';
     periods.forEach(p => {
         const activeClass = p === period ? 'btn-primary' : 'btn-outline-primary';
-        filterHtml += `<button type="button" class="btn ${activeClass}" onclick="renderGlobalMarkets('${p}')">${p}</button>`;
+        // Use window.renderGlobalMarkets to ensure the function is globally accessible from the onclick attribute
+        filterHtml += `<button type="button" class="btn ${activeClass}" onclick="window.renderGlobalMarkets('${p}')">${p}</button>`;
     });
     filterHtml += '</div>';
 
@@ -419,20 +409,9 @@ function renderGlobalMarkets(period = 'ALL') {
 
     cardsHtml += "</div>";
 
-    if (container) {
-        container.innerHTML = filterHtml + cardsHtml;
-    }
+    // Update the container content
+    container.innerHTML = filterHtml + cardsHtml;
 }
-
-/**
- * Loads and displays Global Markets and Volatility data (VIX, HSI, N225).
- * This function is only called once during initialization to fetch data.
- */
-async function loadGlobalMarkets() {
-    // Data is fetched in loadMarketBreadth, so we just need to render
-    renderGlobalMarkets('ALL');
-}
-
 
 // --- Fear & Greed Index ---
 
@@ -587,7 +566,12 @@ async function initDashboard() {
 
     loadHiborRates();
     loadFearGreedIndex();
-    // Call the render functions directly after data is loaded
+    
+    // Make render functions globally accessible for onclick events
+    window.renderMarketBreadth = renderMarketBreadth;
+    window.renderGlobalMarkets = renderGlobalMarkets;
+
+    // Initial render with 'ALL' data
     renderMarketBreadth('ALL');
     renderGlobalMarkets('ALL');
 }
