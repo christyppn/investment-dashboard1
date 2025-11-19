@@ -196,8 +196,15 @@ def fetch_market_data():
         except Exception as e:
             print(f"An unexpected error occurred for {symbol} ({yahoo_symbol}): {e}")
 
-    # Save the combined data files
-    save_json(market_data_history, "market_data_history.json")
+    # Add a check to ensure market_data_history is not empty
+    if not market_data_history:
+        print("FATAL WARNING: market_data_history is empty. Saving an empty file.")
+        # Save an empty file to prevent frontend from crashing, but the issue is with yfinance data fetching.
+        save_json({}, "market_data_history.json")
+    else:
+        # Save the combined data files
+        save_json(market_data_history, "market_data_history.json")
+        
     save_json(money_fund_data, "money_fund_data.json")
 
 
