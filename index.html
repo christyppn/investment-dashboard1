@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投資儀表板 | Investment Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="dashboard-title">投資儀表板</div>
+        <nav>
+            <a href="index.html" class="active">市場總覽</a>
+            <a href="fund_flow.html">資金流向</a>
+            <a href="money_fund.html">貨幣基金</a>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <!-- First Row of Cards -->
+        <div class="card" id="fear-greed-card">
+            <div class="card-header"><span class="icon">🤔</span>恐懼貪婪指數</div>
+            <div class="fng-value" id="fng-value">--</div>
+            <div class="fng-sentiment" id="fng-sentiment">載入中...</div>
+            <div class="fng-chart-container">
+                <div id="fng-chart"></div>
+            </div>
+            <div class="hibor-timestamp" id="fng-timestamp"></div>
+        </div>
+
+        <div class="card" id="hibor-card">
+            <div class="card-header"><span class="icon">💰</span>HIBOR 利率</div>
+            <ul class="hibor-list" id="hibor-list">
+                <li><span class="term">1M</span><span class="rate" id="hibor-1m">--</span></li>
+                <li><span class="term">3M</span><span class="rate" id="hibor-3m">--</span></li>
+                <li><span class="term">6M</span><span class="rate" id="hibor-6m">--</span></li>
+            </ul>
+            <div class="hibor-timestamp" id="hibor-timestamp"></div>
+        </div>
+
+        <!-- Market Breadth Section Title -->
+        <div class="section-title" style="grid-column: 1 / -1;">市場廣度 (主要指數)</div>
+
+        <!-- SPY Card -->
+        <div class="card market-card" id="SPY-card">
+            <div class="card-header">
+                <span class="symbol">SPY</span>
+                <span class="name">S&P 500 ETF</span>
+            </div>
+            <div class="card-body">
+                <div class="current-value" id="SPY-value">--</div>
+                <div class="change-percent" id="SPY-change">--</div>
+            </div>
+            <div class="card-chart" id="SPY-chart"></div>
+        </div>
+
+        <!-- QQQ Card -->
+        <div class="card market-card" id="QQQ-card">
+            <div class="card-header">
+                <span class="symbol">QQQ</span>
+                <span class="name">NASDAQ 100 ETF</span>
+            </div>
+            <div class="card-body">
+                <div class="current-value" id="QQQ-value">--</div>
+                <div class="change-percent" id="QQQ-change">--</div>
+            </div>
+            <div class="card-chart" id="QQQ-chart"></div>
+        </div>
+
+        <!-- DIA Card -->
+        <div class="card market-card" id="DIA-card">
+            <div class="card-header">
+                <span class="symbol">DIA</span>
+                <span class="name">Dow Jones ETF</span>
+            </div>
+            <div class="card-body">
+                <div class="current-value" id="DIA-value">--</div>
+                <div class="change-percent" id="DIA-change">--</div>
+            </div>
+            <div class="card-chart" id="DIA-chart"></div>
+        </div>
+
+        <!-- Global Markets Section Title -->
+        <div class="section-title" style="grid-column: 1 / -1;">全球市場與波動率</div>
+
+        <!-- VIX Card -->
+        <div class="card market-card" id="VIX-card">
+            <div class="card-header">
+                <span class="symbol">^VIX</span>
+                <span class="name">VIX 波動率指數</span>
+            </div>
+            <div class="card-body">
+                <div class="current-value" id="VIX-value">--</div>
+                <div class="change-percent" id="VIX-change">--</div>
+            </div>
+            <div class="card-chart" id="VIX-chart"></div>
+        </div>
+
+        <!-- HSI Card -->
+        <div class="card market-card" id="HSI-card">
+            <div class="card-header">
+                <span class="symbol">^HSI</span>
+                <span class="name">恒生指數</span>
+            </div>
+            <div class="card-body">
+                <div class="current-value" id="HSI-value">--</div>
+                <div class="change-percent" id="HSI-change">--</div>
+            </div>
+            <div class="card-chart" id="HSI-chart"></div>
+        </div>
+
+        <!-- N225 Card -->
+        <div class="card market-card" id="N225-card">
+            <div class="card-header">
+                <span class="symbol">^N225</span>
+                <span class="name">日經 225 指數</span>
+            </div>
+            <div class="card-body">
+                <div class="current-value" id="N225-value">--</div>
+                <div class="change-percent" id="N225-change">--</div>
+            </div>
+            <div class="card-chart" id="N225-chart"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
