@@ -209,9 +209,11 @@ function applyInitialTheme() {
     const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     if (savedTheme === 'dark') {
         document.body.classList.add('dark-mode');
-        document.getElementById('theme-icon').textContent = '☀️';
+        const icon = document.getElementById('theme-icon');
+        if (icon) icon.textContent = '☀️';
     } else {
-        document.getElementById('theme-icon').textContent = '🌙';
+        const icon = document.getElementById('theme-icon');
+        if (icon) icon.textContent = '🌙';
     }
     
     const toggleButton = document.getElementById('theme-toggle');
@@ -259,7 +261,7 @@ async function loadFundFlowData() {
     const container = document.getElementById("fund-flow-container");
 
     if (!container) {
-        console.error("Fund flow container not found.");
+        console.error("Fund flow container not found. Check fund_flow.html for id='fund-flow-container'.");
         return;
     }
 
@@ -271,7 +273,7 @@ async function loadFundFlowData() {
     // Render global timestamp
     renderGlobalTimestamp(marketData);
 
-    let html = "";
+    let html = "<div class='row'>";
     
     SECTOR_ETFS.forEach(symbol => {
         const history = marketData[symbol];
@@ -332,6 +334,7 @@ async function loadFundFlowData() {
         }
     });
 
+    html += "</div>";
     container.innerHTML = html;
 }
 
