@@ -1050,6 +1050,13 @@
       "volume": 3957900000,
       "change_percent": -2.3825709043944654,
       "volume_change_percent": 32.85
+    },
+    {
+      "date": "2025-11-24",
+      "close": 25589.0,
+      "volume": 0,
+      "change_percent": 1.4630459278304642,
+      "volume_change_percent": -100.0
     }
   ],
   "N225": [
