@@ -1,0 +1,77 @@
+name: Automatic 13F Data Update
+
+on:
+  schedule:
+    # Run at 2 AM UTC on the 15th and 30th of each month
+    - cron: '0 2 15,30 * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  update-13f-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4 pandas lxml
+      
+      - name: Create scripts directory
+        run: mkdir -p scripts
+      
+      - name: Fetch 13F data from SEC EDGAR
+        run: python scripts/fetch-13f-data.py
+        env:
+          SEC_API_KEY: ${{ secrets.SEC_API_KEY }}
+        continue-on-error: true
+      
+      - name: Update HTML files with new data
+        run: python scripts/update-html-data.py
+        continue-on-error: true
+      
+      - name: Check if files changed
+        id: verify
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Commit and push changes
+        if: steps.verify.outputs.changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add dist/index.html dist/multi-fund-comparison.html scripts/13f-data.json 2>/dev/null || true
+          git commit -m "chore: Update 13F data - $(date +'%Y-%m-%d %H:%M:%S UTC')" || echo "No changes to commit"
+          git push
+      
+      - name: Create success summary
+        if: success()
+        run: |
+          echo "## ✅ 13F Data Update Successful" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Updated at:** $(date +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "- **Files updated:** dist/index.html, dist/multi-fund-comparison.html" >> $GITHUB_STEP_SUMMARY
+          echo "- **Data source:** SEC EDGAR" >> $GITHUB_STEP_SUMMARY
+      
+      - name: Create failure summary
+        if: failure()
+        run: |
+          echo "## ⚠️ 13F Data Update - Partial Success" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status:** Using fallback data" >> $GITHUB_STEP_SUMMARY
+          echo "- **Attempted at:** $(date +'%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "- **Note:** Website will display cached data until next successful update" >> $GITHUB_STEP_SUMMARY
+
