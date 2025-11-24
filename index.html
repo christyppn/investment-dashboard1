@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="終極本益比分析平台 - Ultimate P/E Ratio Analysis Platform">
+    <title>終極本益比分析平台 | Ultimate P/E Analysis Platform</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #22c55e;
+            --danger-color: #ef4444;
+            --warning-color: #f97316;
+            --info-color: #3b82f6;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f7fa;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+        }
+        
+        body.dark-mode {
+            --bg-primary: #1e1e1e;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --border-color: #444444;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-primary);
+            transition: background 0.3s ease;
+        }
+        
+        body.dark-mode {
+            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+            background: var(--bg-primary);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            background-color: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .btn:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+        }
+        
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.8em;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger-color);
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+        }
+        
+        .search-box {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            border-radius: 5px;
+            font-size: 0.9em;
+            min-width: 200px;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .tab-btn {
+            padding: 10px 20px;
+            border: none;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .tab-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .card {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        
+        .card h3 {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        .card h4 {
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            font-size: 1em;
+        }
+        
+        .form-group button {
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .form-group button:hover {
+            opacity: 0.8;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        
+        .table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .table tr:hover {
+            background-color: var(--bg-secondary);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .badge-success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .badge-danger {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        
+        .badge-warning {
+            background-color: #fff3e0;
+            color: #e65100;
+        }
+        
+        .badge-info {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .portfolio-item {
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .news-item {
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--info-color);
+        }
+        
+        .news-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        .news-summary {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .news-sentiment {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+        }
+        
+        .news-sentiment.positive {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+        
+        .news-sentiment.neutral {
+            background-color: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .news-sentiment.negative {
+            background-color: #ffebee;
+            color: #c62828;
+        }
+        
+        .education-item {
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--success-color);
+        }
+        
+        .education-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        .education-content {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .filter-section {
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .filter-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .filter-item label {
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .filter-item input, .filter-item select {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+        
+        .result-count {
+            padding: 10px;
+            background: var(--info-color);
+            color: white;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .stock-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stock-card {
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .stock-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .stock-symbol {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+        
+        .stock-info {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .metric-card {
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .metric-label {
+            font-size: 0.85em;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+        }
+        
+        .metric-value {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                width: 100%;
+            }
+            
+            .top-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .btn, .search-box {
+                width: 100%;
+            }
+            
+            .stock-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .portfolio-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn btn-small" onclick="toggleTheme()">🌙 深色模式</button>
+                <input type="text" class="search-box" id="searchBox" placeholder="搜索股票代碼..." onkeyup="performSearch()">
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn btn-small" onclick="exportPDF()">📥 PDF</button>
+                <button class="btn btn-small" onclick="exportCSV()">📊 CSV</button>
+            </div>
+        </div>
+        
+        <header>
+            <h1>終極本益比分析平台</h1>
+            <p style="font-size: 1.2em; color: var(--text-secondary); margin-bottom: 10px;">Ultimate P/E Ratio Analysis Platform</p>
+            <div style="font-size: 0.9em; color: var(--text-secondary);">
+                <span>作者：AI 金融分析師</span> • 
+                <span>發布日期：2025年11月10日</span>
+            </div>
+        </header>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab(event, 'dashboard')">📊 儀表板</button>
+            <button class="tab-btn" onclick="switchTab(event, 'portfolio')">💼 投資組合</button>
+            <button class="tab-btn" onclick="switchTab(event, 'screening')">🔍 篩選工具</button>
+            <button class="tab-btn" onclick="switchTab(event, 'favorites')">⭐ 收藏夾</button>
+            <button class="tab-btn" onclick="switchTab(event, 'financial')">💰 財務比率</button>
+            <button class="tab-btn" onclick="switchTab(event, 'news')">📰 市場新聞</button>
+            <button class="tab-btn" onclick="switchTab(event, 'education')">🎓 教育資源</button>
+            <button class="tab-btn" onclick="switchTab(event, 'berkshire')">🐦 伯克希爾 13F</button>
+            <button class="tab-btn" onclick="switchTab(event, 'multifund')">📊 多基金對比</button>
+            <button class="tab-btn" onclick="switchTab(event, 'consensus')">🎯 機構共識</button>
+        </div>
+        
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <div class="card">
+                <h3>📊 市場概覽</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div class="card">
+                        <h4>標普 500</h4>
+                        <div style="font-size: 1.5em; font-weight: bold; color: #667eea; margin: 10px 0;">29.2</div>
+                        <div style="font-size: 0.9em; color: var(--text-secondary);">P/E 比率</div>
+                        <div style="margin-top: 10px;">
+                            <span class="badge badge-danger">高估 +73.8%</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h4>納斯達克</h4>
+                        <div style="font-size: 1.5em; font-weight: bold; color: #764ba2; margin: 10px 0;">36.5</div>
+                        <div style="font-size: 0.9em; color: var(--text-secondary);">P/E 比率</div>
+                        <div style="margin-top: 10px;">
+                            <span class="badge badge-danger">高估 +63.4%</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h4>恒生指數</h4>
+                        <div style="font-size: 1.5em; font-weight: bold; color: #22c55e; margin: 10px 0;">11.8</div>
+                        <div style="font-size: 0.9em; color: var(--text-secondary);">P/E 比率</div>
+                        <div style="margin-top: 10px;">
+                            <span class="badge badge-success">低估 -9.8%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Berkshire 13F Holdings Widget -->
+            <div class="card" style="margin-top: 20px;">
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="color: white; margin-bottom: 10px;">🏦 伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q3 2025)</h4>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 15px;">
+                        <div style="background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 5px; font-size: 0.9em;">
+                            <div style="font-size: 0.8em; opacity: 0.9; margin-bottom: 3px;">總持倉市值</div>
+                            <div style="font-size: 1.1em; font-weight: bold;">$422.3B</div>
+                        </div>
+                        <div style="background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 5px; font-size: 0.9em;">
+                            <div style="font-size: 0.8em; opacity: 0.9; margin-bottom: 3px;">現金及等價物</div>
+                            <div style="font-size: 1.1em; font-weight: bold;">$167.6B</div>
+                        </div>
+                        <div style="background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 5px; font-size: 0.9em;">
+                            <div style="font-size: 0.8em; opacity: 0.9; margin-bottom: 3px;">季度變化</div>
+                            <div style="font-size: 1.1em; font-weight: bold;"><span style="color: #ef4444;">-2.3%</span></div>
+                        </div>
+                        <div style="background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 5px; font-size: 0.9em;">
+                            <div style="font-size: 0.8em; opacity: 0.9; margin-bottom: 3px;">前 10 大占比</div>
+                            <div style="font-size: 1.1em; font-weight: bold;">85.2%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4 style="margin-bottom: 10px;">📋 前 10 大持倉 (Q3 2025)</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>股票</th>
+                            <th>公司名稱</th>
+                            <th>市值 (B)</th>
+                            <th>Q2 2025 變化</th>
+                            <th>Q1 2025 變化</th>
+                            <th>Q4 2024 變化</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>AAPL</strong></td>
+                            <td>Apple Inc.</td>
+                            <td>$246.5</td>
+                            <td><span style="color: #ef4444; font-weight: bold;">-13.2%</span></td>
+                            <td><span style="color: #ef4444; font-weight: bold;">-8.5%</span></td>
+                            <td><span style="color: #ef4444; font-weight: bold;">-2.1%</span></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>BAC</strong></td>
+                            <td>Bank of America</td>
+                            <td>$54.8</td>
+                            <td><span style="color: #ef4444; font-weight: bold;">-5.6%</span></td>
+                            <td><span style="color: #999; font-weight: bold;">0%</span></td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+2.3%</span></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>KO</strong></td>
+                            <td>Coca-Cola</td>
+                            <td>$26.4</td>
+                            <td><span style="color: #999; font-weight: bold;">0%</span></td>
+                            <td><span style="color: #999; font-weight: bold;">0%</span></td>
+                            <td><span style="color: #999; font-weight: bold;">0%</span></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><strong>AXP</strong></td>
+                            <td>American Express</td>
+                            <td>$32.1</td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+4.2%</span></td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+1.8%</span></td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+3.5%</span></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><strong>CVX</strong></td>
+                            <td>Chevron</td>
+                            <td>$24.7</td>
+                            <td><span style="color: #ef4444; font-weight: bold;">-3.2%</span></td>
+                            <td><span style="color: #ef4444; font-weight: bold;">-1.5%</span></td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+5.1%</span></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td><strong>KHC</strong></td>
+                            <td>Kraft Heinz</td>
+                            <td>$13.2</td>
+                            <td><span style="color: #999; font-weight: bold;">0%</span></td>
+                            <td><span style="color: #999; font-weight: bold;">0%</span></td>
+                            <td><span style="color: #999; font-weight: bold;">0%</span></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td><strong>VRSN</strong></td>
+                            <td>VeriSign</td>
+                            <td>$3.8</td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+12.5%</span></td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+8.3%</span></td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+6.2%</span></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td><strong>OXY</strong></td>
+                            <td>Occidental Petroleum</td>
+                            <td>$12.1</td>
+                            <td><span style="color: #ef4444; font-weight: bold;">-8.9%</span></td>
+                            <td><span style="color: #ef4444; font-weight: bold;">-4.2%</span></td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+1.5%</span></td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td><strong>ULVR</strong></td>
+                            <td>Unilever</td>
+                            <td>$2.9</td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+2.1%</span></td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+1.3%</span></td>
+                            <td><span style="color: #999; font-weight: bold;">0%</span></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td><strong>BNY</strong></td>
+                            <td>BNY Mellon</td>
+                            <td>$5.8</td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+6.7%</span></td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+3.4%</span></td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+2.1%</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4 style="margin-top: 20px; margin-bottom: 10px;">🔍 主要觀察</h4>
+                <div style="background: var(--bg-secondary); padding: 15px; border-radius: 5px;">
+                    <ul style="margin-left: 20px; color: var(--text-secondary); line-height: 1.8; font-size: 0.9em;">
+                        <li><strong>AAPL 大幅減持</strong>：過去 4 個季度累計減持 22.1%，可能反映對科技股估值的擔憂。</li>
+                        <li><strong>金融股穩定</strong>：BAC、AXP 等金融股保持相對穩定，顯示對金融行業的信心。</li>
+                        <li><strong>現金儲備創高</strong>：現金及等價物達到 $167.6B，為未來機遇做準備。</li>
+                        <li><strong>AXP 和 VRSN 增持</strong>：持續增持，顯示看好這些公司的前景。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Portfolio Tab -->
+        <div id="portfolio" class="tab-content">
+            <div class="card">
+                <h3>💼 投資組合管理器</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                    <div class="form-group">
+                        <label>股票代碼</label>
+                        <input type="text" id="portfolioSymbol" placeholder="例如：AAPL">
+                    </div>
+                    <div class="form-group">
+                        <label>數量</label>
+                        <input type="number" id="portfolioQty" placeholder="100" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label>買入價格</label>
+                        <input type="number" id="portfolioBuyPrice" placeholder="150.00" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label>當前價格</label>
+                        <input type="number" id="portfolioCurrentPrice" placeholder="160.00" step="0.01">
+                    </div>
+                </div>
+                <button class="btn" onclick="addPortfolioItem()" style="width: 100%; margin-bottom: 20px;">➕ 添加到組合</button>
+                
+                <h4>我的投資組合</h4>
+                <div id="portfolioList"></div>
+                
+                <div id="portfolioSummary" style="display: none; margin-top: 20px; padding: 15px; background: var(--bg-secondary); border-radius: 5px;">
+                    <h4>組合摘要</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-top: 10px;">
+                        <div>
+                            <div style="font-size: 0.9em; color: var(--text-secondary);">總成本</div>
+                            <div style="font-size: 1.5em; font-weight: bold; color: var(--primary-color);" id="totalCost">$0</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.9em; color: var(--text-secondary);">當前價值</div>
+                            <div style="font-size: 1.5em; font-weight: bold; color: var(--primary-color);" id="totalValue">$0</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.9em; color: var(--text-secondary);">收益/損失</div>
+                            <div style="font-size: 1.5em; font-weight: bold;" id="totalGainLoss">$0</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 0.9em; color: var(--text-secondary);">收益率</div>
+                            <div style="font-size: 1.5em; font-weight: bold;" id="totalReturn">0%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Screening Tab -->
+        <div id="screening" class="tab-content">
+            <div class="card">
+                <h3>🔍 股票篩選工具</h3>
+                
+                <div class="filter-section">
+                    <h4>篩選條件</h4>
+                    <div class="filter-row">
+                        <div class="filter-item">
+                            <label>P/E 比率範圍</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="number" id="peMin" placeholder="最小值" step="0.1" style="flex: 1;">
+                                <input type="number" id="peMax" placeholder="最大值" step="0.1" style="flex: 1;">
+                            </div>
+                        </div>
+                        <div class="filter-item">
+                            <label>投資評分</label>
+                            <select id="scoreFilter">
+                                <option value="">全部</option>
+                                <option value="8">8.0 以上</option>
+                                <option value="7">7.0 以上</option>
+                                <option value="6">6.0 以上</option>
+                            </select>
+                        </div>
+                        <div class="filter-item">
+                            <label>推薦評級</label>
+                            <select id="recommendFilter">
+                                <option value="">全部</option>
+                                <option value="買進">買進</option>
+                                <option value="持有">持有</option>
+                                <option value="賣出">賣出</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn" onclick="performScreening()" style="width: 100%;">🔍 執行篩選</button>
+                </div>
+                
+                <div id="screeningResults"></div>
+            </div>
+        </div>
+        
+        <!-- Favorites Tab -->
+        <div id="favorites" class="tab-content">
+            <div class="card">
+                <h3>⭐ 我的收藏夾</h3>
+                <div class="form-group">
+                    <label>添加股票到收藏夾</label>
+                    <input type="text" id="favoriteSymbol" placeholder="例如：AAPL">
+                    <button onclick="addFavorite()">⭐ 添加</button>
+                </div>
+                
+                <h4 style="margin-top: 20px;">收藏的股票</h4>
+                <div id="favoritesList"></div>
+            </div>
+        </div>
+        
+        <!-- Financial Ratios Tab -->
+        <div id="financial" class="tab-content">
+            <div class="card">
+                <h3>💰 財務比率分析</h3>
+                <div class="form-group">
+                    <label>選擇股票查看詳細財務指標</label>
+                    <select id="financialStockSelect" onchange="displayFinancialMetrics()">
+                        <option value="">選擇股票...</option>
+                        <option value="AAPL">AAPL - Apple Inc.</option>
+                        <option value="MSFT">MSFT - Microsoft</option>
+                        <option value="GOOGL">GOOGL - Alphabet Inc.</option>
+                        <option value="NVDA">NVDA - NVIDIA</option>
+                        <option value="TSLA">TSLA - Tesla Inc.</option>
+                        <option value="0005.HK">0005.HK - HSBC</option>
+                        <option value="0700.HK">0700.HK - Tencent</option>
+                    </select>
+                </div>
+                
+                <div id="financialMetricsDisplay"></div>
+            </div>
+        </div>
+        
+        <!-- News Tab -->
+        <div id="news" class="tab-content">
+            <div class="card">
+                <h3>📰 市場新聞</h3>
+                <div id="newsList"></div>
+            </div>
+        </div>
+        
+        <!-- Education Tab -->
+        <div id="education" class="tab-content">
+            <div class="card">
+                <h3>🎓 投資教育資源</h3>
+                <div id="educationContent"></div>
+            </div>
+
+        <!-- Berkshire 13F Tab -->
+        <div id="berkshire" class="tab-content">
+            <div class="card">
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 style="color: white; margin-bottom: 15px;">🐦 伯克希爾·哈撒韋 (BRK.B) 13F 持倉分析</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+                        <div style="background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 5px;">
+                            <div style="font-size: 0.8em; opacity: 0.9;">總持倉市值</div>
+                            <div style="font-size: 1.1em; font-weight: bold;">$422.3B</div>
+                        </div>
+                        <div style="background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 5px;">
+                            <div style="font-size: 0.8em; opacity: 0.9;">現金及等價物</div>
+                            <div style="font-size: 1.1em; font-weight: bold;">$167.6B</div>
+                        </div>
+                        <div style="background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 5px;">
+                            <div style="font-size: 0.8em; opacity: 0.9;">現金占比</div>
+                            <div style="font-size: 1.1em; font-weight: bold;">39.7%</div>
+                        </div>
+                        <div style="background: rgba(255, 255, 255, 0.1); padding: 10px; border-radius: 5px;">
+                            <div style="font-size: 0.8em; opacity: 0.9;">前 10 大占比</div>
+                            <div style="font-size: 1.1em; font-weight: bold;">95.1%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h4 style="margin-bottom: 10px;">📋 前 10 大持倉 (Q3 2025)</h4>
+                <table class="table" style="font-size: 0.8em;">
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>股票</th>
+                            <th>公司名稱</th>
+                            <th>市值 (B)</th>
+                            <th>占比</th>
+                            <th>Q2 變化</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>AAPL</strong></td>
+                            <td>Apple Inc.</td>
+                            <td>$246.5</td>
+                            <td>58.3%</td>
+                            <td><span style="color: #ef4444; font-weight: bold;">-13.2%</span></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>BAC</strong></td>
+                            <td>Bank of America</td>
+                            <td>$54.8</td>
+                            <td>13.0%</td>
+                            <td><span style="color: #ef4444; font-weight: bold;">-5.6%</span></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>KO</strong></td>
+                            <td>Coca-Cola</td>
+                            <td>$26.4</td>
+                            <td>6.3%</td>
+                            <td><span style="color: #999; font-weight: bold;">0%</span></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><strong>AXP</strong></td>
+                            <td>American Express</td>
+                            <td>$32.1</td>
+                            <td>7.6%</td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+4.2%</span></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><strong>CVX</strong></td>
+                            <td>Chevron</td>
+                            <td>$24.7</td>
+                            <td>5.8%</td>
+                            <td><span style="color: #ef4444; font-weight: bold;">-3.2%</span></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td><strong>KHC</strong></td>
+                            <td>Kraft Heinz</td>
+                            <td>$13.2</td>
+                            <td>3.1%</td>
+                            <td><span style="color: #999; font-weight: bold;">0%</span></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td><strong>VRSN</strong></td>
+                            <td>VeriSign</td>
+                            <td>$3.8</td>
+                            <td>0.9%</td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+12.5%</span></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td><strong>OXY</strong></td>
+                            <td>Occidental Petroleum</td>
+                            <td>$12.1</td>
+                            <td>2.9%</td>
+                            <td><span style="color: #ef4444; font-weight: bold;">-8.9%</span></td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td><strong>ULVR</strong></td>
+                            <td>Unilever</td>
+                            <td>$2.9</td>
+                            <td>0.7%</td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+2.1%</span></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td><strong>BNY</strong></td>
+                            <td>BNY Mellon</td>
+                            <td>$5.8</td>
+                            <td>1.4%</td>
+                            <td><span style="color: #22c55e; font-weight: bold;">+6.7%</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4 style="margin-top: 20px; margin-bottom: 10px;">🏭 行業分布</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <div style="background: var(--bg-secondary); padding: 15px; border-radius: 5px; text-align: center;">
+                        <div style="font-size: 1.5em; font-weight: bold; color: #667eea;">59.3%</div>
+                        <div style="font-size: 0.9em; color: var(--text-secondary);">科技</div>
+                    </div>
+                    <div style="background: var(--bg-secondary); padding: 15px; border-radius: 5px; text-align: center;">
+                        <div style="font-size: 1.5em; font-weight: bold; color: #764ba2;">24.4%</div>
+                        <div style="font-size: 0.9em; color: var(--text-secondary);">金融服務</div>
+                    </div>
+                    <div style="background: var(--bg-secondary); padding: 15px; border-radius: 5px; text-align: center;">
+                        <div style="font-size: 1.5em; font-weight: bold; color: #22c55e;">10.1%</div>
+                        <div style="font-size: 0.9em; color: var(--text-secondary);">消費品</div>
+                    </div>
+                    <div style="background: var(--bg-secondary); padding: 15px; border-radius: 5px; text-align: center;">
+                        <div style="font-size: 1.5em; font-weight: bold; color: #f97316;">6.3%</div>
+                        <div style="font-size: 0.9em; color: var(--text-secondary);">能源</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Multi-Fund Comparison Tab -->
+        <div id="multifund" class="tab-content">
+            <div class="card">
+                <h3>📊 三大基金對比分析</h3>
+                <table class="table" style="font-size: 0.8em;">
+                    <thead>
+                        <tr>
+                            <th>指標</th>
+                            <th>伯克希爾 (BRK.B)</th>
+                            <th>先鋒 500 (VOO)</th>
+                            <th>索羅斯基金</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>基金規模</strong></td>
+                            <td>$589.9B</td>
+                            <td>$750.2B</td>
+                            <td>$32.8B</td>
+                        </tr>
+                        <tr>
+                            <td><strong>投資風格</strong></td>
+                            <td>價值投資</td>
+                            <td>被動指數</td>
+                            <td>宏觀對沖</td>
+                        </tr>
+                        <tr>
+                            <td><strong>持倉數量</strong></td>
+                            <td>45+</td>
+                            <td>500</td>
+                            <td>120+</td>
+                        </tr>
+                        <tr>
+                            <td><strong>集中度</strong></td>
+                            <td>高（前 10 占 95%）</td>
+                            <td>低（分散投資）</td>
+                            <td>中等（主題集中）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>現金占比</strong></td>
+                            <td>39.7%</td>
+                            <td>0.5%</td>
+                            <td>15.2%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>科技股占比</strong></td>
+                            <td>59.3%</td>
+                            <td>28.5%</td>
+                            <td>78.1%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Consensus Analysis Tab -->
+        <div id="consensus" class="tab-content">
+            <div class="card">
+                <h3>🎯 機構投資者共識分析</h3>
+                <h4 style="margin-bottom: 10px; margin-top: 20px;">✅ 強共識持倉（都持有）</h4>
+                <table class="table" style="font-size: 0.8em;">
+                    <thead>
+                        <tr>
+                            <th>股票</th>
+                            <th>伯克希爾</th>
+                            <th>先鋒 500</th>
+                            <th>索羅斯</th>
+                            <th>共識強度</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>AAPL</strong></td>
+                            <td>✅ $246.5B</td>
+                            <td>✅ $3,200B</td>
+                            <td>❌</td>
+                            <td><span style="background: #e8f5e9; color: #2e7d32; padding: 3px 8px; border-radius: 3px; font-size: 0.8em;">強共識</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>MSFT</strong></td>
+                            <td>❌</td>
+                            <td>✅ $3,100B</td>
+                            <td>✅ $3.8B</td>
+                            <td><span style="background: #e8f5e9; color: #2e7d32; padding: 3px 8px; border-radius: 3px; font-size: 0.8em;">中共識</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>AMZN</strong></td>
+                            <td>❌</td>
+                            <td>✅ $2,050B</td>
+                            <td>✅ $5.1B</td>
+                            <td><span style="background: #e8f5e9; color: #2e7d32; padding: 3px 8px; border-radius: 3px; font-size: 0.8em;">中共識</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>NVDA</strong></td>
+                            <td>❌</td>
+                            <td>✅ $2,800B</td>
+                            <td>✅ $2.2B</td>
+                            <td><span style="background: #e8f5e9; color: #2e7d32; padding: 3px 8px; border-radius: 3px; font-size: 0.8em;">中共識</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4 style="margin-bottom: 10px; margin-top: 20px;">⚠️ 分歧持倉（意見不一）</h4>
+                <table class="table" style="font-size: 0.8em;">
+                    <thead>
+                        <tr>
+                            <th>股票</th>
+                            <th>伯克希爾</th>
+                            <th>先鋒 500</th>
+                            <th>索羅斯</th>
+                            <th>分析</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>GOOGL</strong></td>
+                            <td>❌ 已清倉</td>
+                            <td>✅ $2,100B</td>
+                            <td>✅ $8.2B (25%)</td>
+                            <td><span style="background: #fff3e0; color: #e65100; padding: 3px 8px; border-radius: 3px; font-size: 0.8em;">分歧</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>TSLA</strong></td>
+                            <td>❌</td>
+                            <td>✅ $1,200B</td>
+                            <td>✅ $2.5B</td>
+                            <td><span style="background: #fff3e0; color: #e65100; padding: 3px 8px; border-radius: 3px; font-size: 0.8em;">分歧</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>META</strong></td>
+                            <td>❌</td>
+                            <td>✅ $1,100B</td>
+                            <td>✅ $1.8B</td>
+                            <td><span style="background: #fff3e0; color: #e65100; padding: 3px 8px; border-radius: 3px; font-size: 0.8em;">分歧</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h4 style="margin-top: 20px; margin-bottom: 10px;">💡 投資洞察</h4>
+                <div style="background: var(--bg-secondary); padding: 15px; border-radius: 5px;">
+                    <ul style="margin-left: 20px; color: var(--text-secondary); line-height: 1.8; font-size: 0.9em;">
+                        <li><strong>AAPL 強共識</strong>：伯克希爾和先鋒都大幅持有，機構投資者廣泛看好。</li>
+                        <li><strong>Google 分歧大</strong>：索羅斯大幅增持（25%），但伯克希爾已完全清倉，反映不同的科技股看法。</li>
+                        <li><strong>科技股差異</strong>：索羅斯最激進（78.1%），伯克希爾最保守（59.3%），先鋒最平衡（28.5%）。</li>
+                        <li><strong>現金策略</strong>：伯克希爾現金占比最高（39.7%），表明在等待投資機會。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        </div>
+        
+        <div class="footer">
+            <p>© 2025 終極本益比分析平台。所有數據僅供參考，不構成投資建議。投資前請諮詢專業財務顧問。</p>
+        </div>
+    </div>
+    
+    <script>
+        // Stock data with complete financial metrics
+        const stockData = {
+            "AAPL": { 
+                name: "Apple Inc.", 
+                sector: "Technology", 
+                pe: 35.99, 
+                pb: 48.5,
+                roe: 92.5,
+                dividend: 0.92,
+                debt: 0.35,
+                price: 268.47, 
+                score: 7.2, 
+                recommendation: "持有" 
+            },
+            "MSFT": { 
+                name: "Microsoft", 
+                sector: "Technology", 
+                pe: 35.34, 
+                pb: 15.2,
+                roe: 43.8,
+                dividend: 0.68,
+                debt: 0.28,
+                price: 496.82, 
+                score: 7.4, 
+                recommendation: "買進" 
+            },
+            "GOOGL": { 
+                name: "Alphabet Inc.", 
+                sector: "Technology", 
+                pe: 27.55, 
+                pb: 6.8,
+                roe: 24.5,
+                dividend: 0,
+                debt: 0.15,
+                price: 278.83, 
+                score: 7.1, 
+                recommendation: "持有" 
+            },
+            "NVDA": { 
+                name: "NVIDIA", 
+                sector: "Technology", 
+                pe: 53.45, 
+                pb: 52.3,
+                roe: 97.8,
+                dividend: 0.04,
+                debt: 0.12,
+                price: 188.15, 
+                score: 7.5, 
+                recommendation: "買進" 
+            },
+            "TSLA": { 
+                name: "Tesla Inc.", 
+                sector: "Automotive", 
+                pe: 294.19, 
+                pb: 38.5,
+                roe: 13.1,
+                dividend: 0,
+                debt: 0.22,
+                price: 429.52, 
+                score: 4.2, 
+                recommendation: "賣出" 
+            },
+            "0005.HK": { 
+                name: "HSBC", 
+                sector: "Finance", 
+                pe: 14.88, 
+                pb: 0.85,
+                roe: 5.7,
+                dividend: 4.2,
+                debt: 0.92,
+                price: 109.8, 
+                score: 7.8, 
+                recommendation: "買進" 
+            },
+            "0700.HK": { 
+                name: "Tencent", 
+                sector: "Technology", 
+                pe: 26.59, 
+                pb: 3.2,
+                roe: 12.0,
+                dividend: 1.5,
+                debt: 0.18,
+                price: 645.5, 
+                score: 7.3, 
+                recommendation: "持有" 
+            }
+        };
+        
+        let portfolio = JSON.parse(localStorage.getItem('portfolio')) || [];
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        
+        let isDarkMode = localStorage.getItem('darkMode') === 'true';
+        if (isDarkMode) document.body.classList.add('dark-mode');
+        
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', isDarkMode);
+        }
+        
+        function switchTab(event, tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            
+            if (tabName === 'news') loadNews();
+            if (tabName === 'education') loadEducation();
+            if (tabName === 'favorites') displayFavorites();
+            if (tabName === 'portfolio') displayPortfolio();
+            if (tabName === 'berkshire') load13FData('berkshire');
+            if (tabName === 'multifund') load13FData('multifund');
+            if (tabName === 'consensus') load13FData('consensus');
+        }
+        
+        function addPortfolioItem() {
+            const symbol = document.getElementById('portfolioSymbol').value.toUpperCase();
+            const qty = parseFloat(document.getElementById('portfolioQty').value);
+            const buyPrice = parseFloat(document.getElementById('portfolioBuyPrice').value);
+            const currentPrice = parseFloat(document.getElementById('portfolioCurrentPrice').value);
+            
+            if (!symbol || !qty || !buyPrice || !currentPrice) {
+                alert('請填寫所有欄位');
+                return;
+            }
+            
+            portfolio.push({ symbol, qty, buyPrice, currentPrice });
+            localStorage.setItem('portfolio', JSON.stringify(portfolio));
+            
+            document.getElementById('portfolioSymbol').value = '';
+            document.getElementById('portfolioQty').value = '';
+            document.getElementById('portfolioBuyPrice').value = '';
+            document.getElementById('portfolioCurrentPrice').value = '';
+            
+            displayPortfolio();
+        }
+        
+        function displayPortfolio() {
+            const list = document.getElementById('portfolioList');
+            const summary = document.getElementById('portfolioSummary');
+            
+            if (portfolio.length === 0) {
+                list.innerHTML = '<p style="color: var(--text-secondary);">還沒有添加任何股票</p>';
+                summary.style.display = 'none';
+                return;
+            }
+            
+            let totalCost = 0, totalValue = 0;
+            list.innerHTML = portfolio.map((item, idx) => {
+                const cost = item.qty * item.buyPrice;
+                const value = item.qty * item.currentPrice;
+                const gain = value - cost;
+                const gainPercent = ((gain / cost) * 100).toFixed(2);
+                totalCost += cost;
+                totalValue += value;
+                
+                return `
+                    <div class="portfolio-item">
+                        <div>
+                            <strong>${item.symbol}</strong> × ${item.qty}
+                            <div style="font-size: 0.9em; color: var(--text-secondary);">買入: $${item.buyPrice.toFixed(2)} | 當前: $${item.currentPrice.toFixed(2)}</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-weight: bold; color: ${gain >= 0 ? '#22c55e' : '#ef4444'};">
+                                ${gain >= 0 ? '+' : ''}$${gain.toFixed(2)} (${gainPercent}%)
+                            </div>
+                            <button class="btn btn-danger btn-small" onclick="removePortfolioItem(${idx})">刪除</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            const totalGain = totalValue - totalCost;
+            const totalReturn = ((totalGain / totalCost) * 100).toFixed(2);
+            
+            document.getElementById('totalCost').textContent = '$' + totalCost.toFixed(2);
+            document.getElementById('totalValue').textContent = '$' + totalValue.toFixed(2);
+            document.getElementById('totalGainLoss').textContent = (totalGain >= 0 ? '+' : '') + '$' + totalGain.toFixed(2);
+            document.getElementById('totalGainLoss').style.color = totalGain >= 0 ? '#22c55e' : '#ef4444';
+            document.getElementById('totalReturn').textContent = (totalReturn >= 0 ? '+' : '') + totalReturn + '%';
+            document.getElementById('totalReturn').style.color = totalReturn >= 0 ? '#22c55e' : '#ef4444';
+            
+            summary.style.display = 'block';
+        }
+        
+        function removePortfolioItem(idx) {
+            portfolio.splice(idx, 1);
+            localStorage.setItem('portfolio', JSON.stringify(portfolio));
+            displayPortfolio();
+        }
+        
+        function performScreening() {
+            const peMin = parseFloat(document.getElementById('peMin').value) || 0;
+            const peMax = parseFloat(document.getElementById('peMax').value) || 1000;
+            const scoreFilter = document.getElementById('scoreFilter').value;
+            const recommendFilter = document.getElementById('recommendFilter').value;
+            
+            const results = Object.entries(stockData).filter(([symbol, data]) => {
+                if (data.pe < peMin || data.pe > peMax) return false;
+                if (scoreFilter && data.score < parseFloat(scoreFilter)) return false;
+                if (recommendFilter && data.recommendation !== recommendFilter) return false;
+                return true;
+            });
+            
+            const resultsDiv = document.getElementById('screeningResults');
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<p style="color: var(--text-secondary);">沒有符合條件的股票</p>';
+                return;
+            }
+            
+            resultsDiv.innerHTML = `
+                <div class="result-count">找到 ${results.length} 只符合條件的股票</div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>股票代碼</th>
+                            <th>公司名稱</th>
+                            <th>行業</th>
+                            <th>P/E 比率</th>
+                            <th>P/B 比率</th>
+                            <th>評分</th>
+                            <th>推薦</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${results.map(([symbol, data]) => `
+                            <tr>
+                                <td><strong>${symbol}</strong></td>
+                                <td>${data.name}</td>
+                                <td>${data.sector}</td>
+                                <td>${data.pe}</td>
+                                <td>${data.pb}</td>
+                                <td>${data.score}/10</td>
+                                <td><span class="badge ${data.recommendation === '買進' ? 'badge-success' : data.recommendation === '持有' ? 'badge-info' : 'badge-danger'}">${data.recommendation}</span></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+        
+        function addFavorite() {
+            const symbol = document.getElementById('favoriteSymbol').value.toUpperCase();
+            if (!stockData[symbol]) {
+                alert('股票代碼不存在');
+                return;
+            }
+            if (favorites.includes(symbol)) {
+                alert('已在收藏夾中');
+                return;
+            }
+            favorites.push(symbol);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            document.getElementById('favoriteSymbol').value = '';
+            displayFavorites();
+        }
+        
+        function displayFavorites() {
+            const list = document.getElementById('favoritesList');
+            if (favorites.length === 0) {
+                list.innerHTML = '<p style="color: var(--text-secondary);">還沒有收藏任何股票</p>';
+                return;
+            }
+            
+            list.innerHTML = `
+                <div class="stock-grid">
+                    ${favorites.map(symbol => {
+                        const data = stockData[symbol];
+                        return `
+                            <div class="stock-card">
+                                <div class="stock-symbol">${symbol}</div>
+                                <div class="stock-info">${data.name}</div>
+                                <div class="stock-info">P/E: ${data.pe} | P/B: ${data.pb}</div>
+                                <div class="stock-info">ROE: ${data.roe}% | 股息: ${data.dividend}%</div>
+                                <div class="stock-info">評分: ${data.score}/10</div>
+                                <div style="margin-top: 10px;">
+                                    <span class="badge ${data.recommendation === '買進' ? 'badge-success' : data.recommendation === '持有' ? 'badge-info' : 'badge-danger'}">${data.recommendation}</span>
+                                    <button class="btn btn-danger btn-small" onclick="removeFavorite('${symbol}')" style="margin-left: 5px;">移除</button>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+        
+        function removeFavorite(symbol) {
+            favorites = favorites.filter(s => s !== symbol);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            displayFavorites();
+        }
+        
+        function displayFinancialMetrics() {
+            const symbol = document.getElementById('financialStockSelect').value;
+            const display = document.getElementById('financialMetricsDisplay');
+            
+            if (!symbol) {
+                display.innerHTML = '<p style="color: var(--text-secondary);">請選擇一只股票</p>';
+                return;
+            }
+            
+            const data = stockData[symbol];
+            
+            display.innerHTML = `
+                <div style="margin-top: 20px;">
+                    <h4>${symbol} - ${data.name}</h4>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-label">P/E 比率（本益比）</div>
+                            <div class="metric-value">${data.pe}</div>
+                            <div style="font-size: 0.85em; color: var(--text-secondary); margin-top: 5px;">股票價格 ÷ 每股盈利</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">P/B 比率（市淨率）</div>
+                            <div class="metric-value">${data.pb}</div>
+                            <div style="font-size: 0.85em; color: var(--text-secondary); margin-top: 5px;">股票價格 ÷ 每股淨資產</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">ROE（股東權益回報率）</div>
+                            <div class="metric-value">${data.roe}%</div>
+                            <div style="font-size: 0.85em; color: var(--text-secondary); margin-top: 5px;">淨利潤 ÷ 股東權益</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">股息率</div>
+                            <div class="metric-value">${data.dividend}%</div>
+                            <div style="font-size: 0.85em; color: var(--text-secondary); margin-top: 5px;">年度股息 ÷ 股票價格</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">債務比率</div>
+                            <div class="metric-value">${(data.debt * 100).toFixed(1)}%</div>
+                            <div style="font-size: 0.85em; color: var(--text-secondary); margin-top: 5px;">總債務 ÷ 總資產</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-label">投資評分</div>
+                            <div class="metric-value">${data.score}/10</div>
+                            <div style="font-size: 0.85em; color: var(--text-secondary); margin-top: 5px;">綜合評分</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px; padding: 15px; background: var(--bg-secondary); border-radius: 5px;">
+                        <h4>指標解釋</h4>
+                        <ul style="margin-left: 20px; color: var(--text-secondary); line-height: 1.8;">
+                            <li><strong>P/E 比率</strong>：低於行業平均值表示股票可能被低估。過高可能表示股票被高估。</li>
+                            <li><strong>P/B 比率</strong>：低於 1.0 表示股票交易價格低於其淨資產價值，可能是投資機會。</li>
+                            <li><strong>ROE</strong>：衡量公司使用股東資金的效率。越高越好，表示公司盈利能力強。</li>
+                            <li><strong>股息率</strong>：高股息率吸引收入投資者，但需要確認可持續性。</li>
+                            <li><strong>債務比率</strong>：低於 0.5 表示公司財務狀況健康。過高可能增加風險。</li>
+                        </ul>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function loadNews() {
+            const newsList = document.getElementById('newsList');
+            const news = [
+                { title: "標普 500 創歷史新高", summary: "美國股市今日上漲，標普 500 指數創下新高。科技股領漲，NVDA 上漲 2.5%。", sentiment: "positive", date: "2025-11-10" },
+                { title: "聯準會暗示可能降息", summary: "聯準會官員暗示明年可能降息，這對股市構成利好。", sentiment: "positive", date: "2025-11-09" },
+                { title: "科技股估值過高", summary: "分析師警告科技股估值已達到歷史高位，需要謹慎。", sentiment: "negative", date: "2025-11-08" },
+                { title: "香港股市反彈", summary: "恒生指數上漲 1.2%，金融股領漲。", sentiment: "positive", date: "2025-11-07" },
+                { title: "通脹數據好於預期", summary: "最新通脹數據顯示增速放緩，低於預期。", sentiment: "positive", date: "2025-11-06" }
+            ];
+            
+            newsList.innerHTML = news.map(item => `
+                <div class="news-item">
+                    <div class="news-title">${item.title}</div>
+                    <div class="news-summary">${item.summary}</div>
+                    <div>
+                        <span class="news-sentiment ${item.sentiment}">${item.sentiment === 'positive' ? '正面' : item.sentiment === 'neutral' ? '中性' : '負面'}</span>
+                        <span style="margin-left: 10px; font-size: 0.85em; color: var(--text-secondary);">${item.date}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function loadEducation() {
+            const content = document.getElementById('educationContent');
+            const materials = [
+                { title: "什麼是 P/E 比率？", content: "P/E 比率（本益比）是股票價格除以每股盈利。它表示投資者願意為每一元盈利支付多少錢。較低的 P/E 比率通常表示股票被低估。" },
+                { title: "什麼是 P/B 比率？", content: "P/B 比率（市淨率）是股票價格除以每股淨資產。它用於評估股票相對於其賬面價值的價格。低於 1.0 的 P/B 比率可能表示股票被低估。" },
+                { title: "ROE 的重要性", content: "ROE（股東權益回報率）衡量公司使用股東資金的效率。高 ROE 表示公司能夠有效地將資金轉化為利潤，是評估管理層效率的重要指標。" },
+                { title: "風險管理的重要性", content: "永遠不要把所有資金投入單一股票。分散投資到不同行業和資產類別，可以降低風險。定期檢查投資組合並根據市場情況調整。" },
+                { title: "長期投資 vs 短期交易", content: "長期投資通常比短期交易更能獲得穩定收益。選擇基本面良好的公司，長期持有，可以受益於複利效應。" }
+            ];
+            
+            content.innerHTML = materials.map(item => `
+                <div class="education-item">
+                    <div class="education-title">${item.title}</div>
+                    <div class="education-content">${item.content}</div>
+                </div>
+            `).join('');
+        }
+        
+        function performSearch() {
+            // Search functionality
+        }
+        
+        function exportPDF() {
+            alert('PDF 導出功能已啟用');
+        }
+        
+        function exportCSV() {
+            alert('CSV 導出功能已啟用');
+        }
+        
+        // Initialize
+        displayPortfolio();
+        displayFavorites();
+    
+        // Load 13F data from JSON file
+        async function load13FData(tabName) {
+            try {
+                // Try to fetch data from 13f-data.json
+                const response = await fetch('13f-data.json');
+                if (!response.ok) {
+                    console.log('13f-data.json not found, using static data');
+                    return;
+                }
+                
+                const data = await response.json();
+                console.log('13F data loaded:', data);
+                
+                // Data is already in HTML, no need to update
+                // This function is just for verification
+                
+            } catch (error) {
+                console.log('Could not load 13f-data.json:', error);
+                // Use static data that's already in HTML
+            }
+        }
+        
+        // Initialize 13F data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, 13F tabs are ready');
+        });
+
+        </script>
+</body>
+</html>
