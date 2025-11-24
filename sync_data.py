@@ -5,7 +5,7 @@ import time
 from datetime import datetime, timedelta
 import yfinance as yf
 import pandas as pd
-from openai import OpenAI
+# from openai import OpenAI # Removed OpenAI dependency
 
 # --- Configuration ---
 DATA_DIR = "data"
@@ -124,6 +124,9 @@ def fetch_market_data():
             df.columns = df.columns.droplevel(1)
             
             # Calculate daily change percent and volume change percent
+            df['Close'] = df['Close'].ffill() # Forward fill to handle missing data
+            df['Volume'] = df['Volume'].fillna(0) # Fill volume with 0
+            
             df['change_percent'] = df['Close'].pct_change() * 100
             df['volume_change_percent'] = df['Volume'].pct_change() * 100
             
@@ -165,75 +168,69 @@ def fetch_market_data():
     save_json(money_fund_data, "money_fund_data.json")
 
 def generate_ai_analysis():
-    """Generates a market summary using the OpenAI API."""
-    print("Generating AI market analysis...")
+    """Generates a market summary and 7-day prediction using rule-based analysis."""
+    print("Generating rule-based market analysis...")
     
     # Load all necessary data
     market_data = load_json("market_data_history.json")
     sentiment_data = load_json("market_sentiment_history.json")
-    hibor_data = load_json("hibor_rates.json")
     
-    if not market_data or not sentiment_data or not hibor_data:
-        print("Warning: Missing data files for AI analysis. Skipping.")
-        save_json({"analysis": "數據不足，無法生成 AI 分析。"}, "ai_analysis.json")
+    if not market_data or not sentiment_data:
+        analysis_text = "數據不足，無法生成市場分析。請檢查 market_data_history.json 和 market_sentiment_history.json 文件。"
+        save_json({"analysis": analysis_text}, "ai_analysis.json")
         return
 
     # Extract latest data points
-    latest_sentiment = sentiment_data[-1] if sentiment_data else {"value": "N/A", "sentiment": "N/A"}
-    latest_hibor = {item['term']: item['rate'] for item in hibor_data}
+    latest_sentiment = sentiment_data[-1] if sentiment_data else {"value": 50, "sentiment": "Neutral"}
+    sentiment_value = latest_sentiment['value']
+    sentiment_text = latest_sentiment['sentiment']
     
     # Extract key index performance (last 1 day change)
-    key_performance = {}
-    for symbol in ["SPY", "QQQ", "VIX", "BTC-USD"]:
-        if symbol in market_data and market_data[symbol]:
-            latest_day = market_data[symbol][-1]
-            key_performance[symbol] = {
-                "close": latest_day['close'],
-                "change_percent": latest_day['change_percent']
-            }
-
-    # Construct the prompt
-    prompt = f"""
-    請根據以下最新的市場數據，生成一段簡潔、專業的市場總結和趨勢分析（約 150 字）。
+    spy_change = market_data.get('SPY', [{}])[-1].get('change_percent', 0)
+    qqq_change = market_data.get('QQQ', [{}])[-1].get('change_percent', 0)
+    vix_change = market_data.get('VIX', [{}])[-1].get('change_percent', 0)
+    btc_change = market_data.get('BTC-USD', [{}])[-1].get('change_percent', 0)
     
-    --- 最新數據 ---
-    1. 市場情緒 (Fear & Greed Index):
-       - 數值: {latest_sentiment['value']}
-       - 情緒: {latest_sentiment['sentiment']}
+    # --- Rule-Based Analysis ---
     
-    2. 關鍵指數表現 (日變化 %):
-       - SPY (S&P 500 ETF): {key_performance.get('SPY', {}).get('change_percent', 'N/A')} %
-       - QQQ (NASDAQ 100 ETF): {key_performance.get('QQQ', {}).get('change_percent', 'N/A')} %
-       - VIX (波動率指數): {key_performance.get('VIX', {}).get('change_percent', 'N/A')} %
-       - BTC-USD (Bitcoin): {key_performance.get('BTC-USD', {}).get('change_percent', 'N/A')} %
-       
-    3. 香港銀行同業拆息 (HIBOR):
-       - 1個月: {latest_hibor.get('1M', 'N/A')} %
-       - 3個月: {latest_hibor.get('3M', 'N/A')} %
-       
-    --- 分析要求 ---
-    - 總結當前市場情緒。
-    - 評論主要指數和加密貨幣的短期趨勢。
-    - 簡要提及 HIBOR 利率對市場的潛在影響。
-    - 語言：繁體中文。
-    """
-
-    try:
-        client = OpenAI()
-        response = client.chat.completions.create(
-            model="gpt-4.1-mini",
-            messages=[
-                {"role": "system", "content": "你是一位資深的金融分析師，請根據提供的數據進行客觀的市場分析。"},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.3
-        )
-        analysis_text = response.choices[0].message.content
-        save_json({"analysis": analysis_text}, "ai_analysis.json")
-        print("AI analysis generated successfully.")
-    except Exception as e:
-        print(f"Error generating AI analysis: {e}")
-        save_json({"analysis": "AI 分析生成失敗。請檢查 API Key 或網絡連接。"}, "ai_analysis.json")
+    summary = f"當前市場情緒為 **{sentiment_text}** (指數: {sentiment_value})。"
+    
+    # Rule 1: Sentiment
+    if sentiment_value <= 20:
+        summary += "市場處於極度恐懼狀態，通常預示著潛在的超賣和反彈機會。"
+    elif sentiment_value >= 80:
+        summary += "市場處於極度貪婪狀態，可能存在過熱和回調風險。"
+    
+    # Rule 2: VIX (Volatility)
+    if vix_change > 5:
+        summary += f"VIX (波動率指數) 日內上漲 {vix_change:.2f}%，顯示市場避險情緒急劇升溫。"
+    elif vix_change < -5:
+        summary += f"VIX 日內下跌 {abs(vix_change):.2f}%，表明市場恐慌情緒緩解，風險偏好回升。"
+        
+    # Rule 3: Index Performance
+    if spy_change > 0.5 and qqq_change > 0.5:
+        summary += "主要指數 SPY 和 QQQ 均強勁上漲，顯示市場整體樂觀，科技板塊領漲。"
+    elif spy_change < -0.5 and qqq_change < -0.5:
+        summary += "主要指數 SPY 和 QQQ 均顯著下跌，市場面臨拋售壓力。"
+        
+    # Rule 4: Bitcoin Trend
+    if btc_change > 2:
+        summary += f"比特幣 (BTC) 日內大漲 {btc_change:.2f}%，加密貨幣市場表現強勁。"
+    
+    # --- 7-Day Prediction (Rule-Based) ---
+    
+    prediction = "未來 7 天市場預測："
+    if sentiment_value <= 20 and vix_change < 0:
+        prediction += " **看漲 (Bullish)**。極度恐懼情緒配合波動率下降，可能迎來技術性反彈。"
+    elif sentiment_value >= 80 and vix_change > 0:
+        prediction += " **看跌 (Bearish)**。市場過熱且波動率上升，預計將出現回調。"
+    else:
+        prediction += " **盤整 (Sideways)**。市場缺乏明確方向，預計將在當前區間震盪。"
+        
+    final_analysis = f"{summary}\n\n{prediction}"
+    
+    save_json({"analysis": final_analysis}, "ai_analysis.json")
+    print("Rule-based analysis generated successfully.")
 
 
 # --- Main Execution ---
