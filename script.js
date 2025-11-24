@@ -195,9 +195,11 @@ function applyInitialTheme() {
     const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     if (savedTheme === 'dark') {
         document.body.classList.add('dark-mode');
-        document.getElementById('theme-icon').textContent = '☀️';
+        const icon = document.getElementById('theme-icon');
+        if (icon) icon.textContent = '☀️';
     } else {
-        document.getElementById('theme-icon').textContent = '🌙';
+        const icon = document.getElementById('theme-icon');
+        if (icon) icon.textContent = '🌙';
     }
     
     const toggleButton = document.getElementById('theme-toggle');
@@ -409,11 +411,15 @@ function renderMarketBreadth(period = 'ALL', chartType = 'price') {
  */
 function renderGlobalMarkets(period = 'ALL', chartType = 'price') {
     const container = document.getElementById("global-markets-container");
-    const symbols = ["VIX", "HSI", "N225"];
+    // --- Added Data Expansion Symbols ---
+    const symbols = ["VIX", "HSI", "N225", "GSPC", "IXIC", "BTC-USD"];
     const symbolMap = {
         "VIX": "VIX 波動率指數",
         "HSI": "恒生指數",
-        "N225": "日經 225 指數"
+        "N225": "日經 225 指數",
+        "GSPC": "S&P 500 指數",
+        "IXIC": "NASDAQ 綜合指數",
+        "BTC-USD": "Bitcoin (BTC)"
     };
 
     if (!container) return;
@@ -645,6 +651,35 @@ function renderFearGreedChart(elementId, data) {
     }
 }
 
+// --- AI Analysis ---
+
+/**
+ * Loads and displays the AI Analysis.
+ */
+async function loadAIAnalysis() {
+    const analysisData = await fetchData("ai_analysis.json");
+    const container = document.getElementById("ai-analysis-container");
+
+    if (!container) return;
+
+    if (!analysisData || !analysisData.analysis) {
+        container.innerHTML = "<p class='text-warning'>AI 分析數據不可用。</p>";
+        return;
+    }
+
+    const html = `
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                <span role="img" aria-label="emoji">🤖</span> AI 市場總結
+            </div>
+            <div class="card-body">
+                <p class="card-text">${analysisData.analysis}</p>
+            </div>
+        </div>
+    `;
+    container.innerHTML = html;
+}
+
 
 // --- Initialization ---
 
@@ -664,6 +699,7 @@ async function initDashboard() {
         console.error("FATAL ERROR: market_data_history.json is empty or failed to load. Cannot render Market Breadth or Global Markets.");
     }
 
+    loadAIAnalysis(); // Load AI Analysis first
     loadHiborRates();
     loadFearGreedIndex();
     
