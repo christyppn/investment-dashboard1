@@ -1,152 +1,152 @@
 [
-  {
-    "date": "2025-10-26",
-    "value": 40,
-    "sentiment": "Fear"
-  },
-  {
-    "date": "2025-10-27",
-    "value": 51,
-    "sentiment": "Neutral"
-  },
-  {
-    "date": "2025-10-28",
-    "value": 50,
-    "sentiment": "Neutral"
-  },
-  {
-    "date": "2025-10-29",
-    "value": 51,
-    "sentiment": "Neutral"
-  },
-  {
-    "date": "2025-10-30",
-    "value": 34,
-    "sentiment": "Fear"
-  },
-  {
-    "date": "2025-10-31",
-    "value": 29,
-    "sentiment": "Fear"
-  },
-  {
-    "date": "2025-11-01",
-    "value": 33,
-    "sentiment": "Fear"
-  },
-  {
-    "date": "2025-11-02",
-    "value": 37,
-    "sentiment": "Fear"
-  },
-  {
-    "date": "2025-11-03",
-    "value": 42,
-    "sentiment": "Fear"
-  },
-  {
-    "date": "2025-11-04",
-    "value": 21,
-    "sentiment": "Extreme Fear"
-  },
-  {
-    "date": "2025-11-05",
-    "value": 23,
-    "sentiment": "Extreme Fear"
-  },
-  {
-    "date": "2025-11-06",
-    "value": 27,
-    "sentiment": "Fear"
-  },
-  {
-    "date": "2025-11-07",
-    "value": 24,
-    "sentiment": "Extreme Fear"
-  },
-  {
-    "date": "2025-11-08",
-    "value": 20,
-    "sentiment": "Extreme Fear"
-  },
-  {
-    "date": "2025-11-09",
-    "value": 22,
-    "sentiment": "Extreme Fear"
-  },
-  {
-    "date": "2025-11-10",
-    "value": 29,
-    "sentiment": "Fear"
-  },
-  {
-    "date": "2025-11-11",
-    "value": 26,
-    "sentiment": "Fear"
-  },
-  {
-    "date": "2025-11-12",
-    "value": 24,
-    "sentiment": "Extreme Fear"
-  },
-  {
-    "date": "2025-11-13",
-    "value": 15,
-    "sentiment": "Extreme Fear"
-  },
-  {
-    "date": "2025-11-14",
-    "value": 16,
-    "sentiment": "Extreme Fear"
-  },
-  {
-    "date": "2025-11-15",
-    "value": 10,
-    "sentiment": "Extreme Fear"
-  },
-  {
-    "date": "2025-11-16",
-    "value": 10,
-    "sentiment": "Extreme Fear"
-  },
-  {
-    "date": "2025-11-17",
-    "value": 14,
-    "sentiment": "Extreme Fear"
-  },
-  {
-    "date": "2025-11-18",
-    "value": 11,
-    "sentiment": "Extreme Fear"
-  },
-  {
-    "date": "2025-11-19",
-    "value": 15,
-    "sentiment": "Extreme Fear"
-  },
-  {
-    "date": "2025-11-20",
-    "value": 11,
-    "sentiment": "Extreme Fear"
-  },
-  {
-    "date": "2025-11-21",
-    "value": 14,
-    "sentiment": "Extreme Fear"
-  },
-  {
-    "date": "2025-11-22",
-    "value": 11,
-    "sentiment": "Extreme Fear"
-  },
-  {
-    "date": "2025-11-23",
-    "value": 13,
-    "sentiment": "Extreme Fear"
-  },
-  {
-    "date": "2025-11-24",
-    "value": 19,
-    "sentiment": "Extreme Fear"
-  }
+    {
+        "date": "2025-10-26",
+        "value": 40,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-10-27",
+        "value": 51,
+        "sentiment": "Neutral"
+    },
+    {
+        "date": "2025-10-28",
+        "value": 50,
+        "sentiment": "Neutral"
+    },
+    {
+        "date": "2025-10-29",
+        "value": 51,
+        "sentiment": "Neutral"
+    },
+    {
+        "date": "2025-10-30",
+        "value": 34,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-10-31",
+        "value": 29,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-11-01",
+        "value": 33,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-11-02",
+        "value": 37,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-11-03",
+        "value": 42,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-11-04",
+        "value": 21,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-11-05",
+        "value": 23,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-11-06",
+        "value": 27,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-11-07",
+        "value": 24,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-11-08",
+        "value": 20,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-11-09",
+        "value": 22,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-11-10",
+        "value": 29,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-11-11",
+        "value": 26,
+        "sentiment": "Fear"
+    },
+    {
+        "date": "2025-11-12",
+        "value": 24,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-11-13",
+        "value": 15,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-11-14",
+        "value": 16,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-11-15",
+        "value": 10,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-11-16",
+        "value": 10,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-11-17",
+        "value": 14,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-11-18",
+        "value": 11,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-11-19",
+        "value": 15,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-11-20",
+        "value": 11,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-11-21",
+        "value": 14,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-11-22",
+        "value": 11,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-11-23",
+        "value": 13,
+        "sentiment": "Extreme Fear"
+    },
+    {
+        "date": "2025-11-24",
+        "value": 19,
+        "sentiment": "Extreme Fear"
+    }
 ]
