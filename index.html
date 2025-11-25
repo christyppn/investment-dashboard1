@@ -1580,6 +1580,11 @@
             console.log('Page loaded, 13F tabs are ready');
         });
 
-        </script>
+    <!-- 確保 script.js 在 money_fund.js 之前加載 -->
+    <script src="script.js"></script>
+    <script src="money_fund.js"></script>
+    
+    <!-- 如果您有 fund_flow.js，也請確保它被加載 -->
+    <script src="fund_flow.js"></script> 
 </body>
 </html>
