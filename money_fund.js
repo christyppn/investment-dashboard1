@@ -1,3 +1,5 @@
+// money_fund.js - Final Corrected Version (No auto-run)
+
 const DATA_BASE_URL = './data/';
 
 // --- Helper Functions ---
@@ -41,10 +43,15 @@ function renderFundCard(symbol, name, data) {
 
 // --- Data Loading Functions ---
 
+/**
+ * Loads and renders the money fund data. This function is called by switchTab in script.js.
+ */
 async function loadMoneyFundData() {
     try {
-        const response = await fetch(`${DATA_BASE_URL}money_fund_data.json?v=${new Date().getTime()}`);
-        const data = await response.json();
+        // Use fetchData from script.js if available, otherwise use local fetch
+        const fetchFunc = typeof fetchData === 'function' ? fetchData : (path) => fetch(`${DATA_BASE_URL}${path}?v=${new Date().getTime()}`).then(res => res.json());
+        
+        const data = await fetchFunc("money_fund_data.json");
 
         // The symbols are hardcoded in the HTML
         const fundSymbols = [
@@ -73,9 +80,8 @@ async function loadMoneyFundData() {
     }
 }
 
-// --- Initialization ---
+// Expose the function globally so script.js can call it
+window.loadMoneyFundData = loadMoneyFundData;
 
-document.addEventListener('DOMContentLoaded', () => {
-    loadMoneyFundData();
-});
-
+// --- Initialization (Removed DOMContentLoaded listener) ---
+// The function is now called by script.js when the tab is clicked.
