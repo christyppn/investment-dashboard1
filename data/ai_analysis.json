@@ -1,3 +1,7 @@
 {
-    "analysis": "當前市場情緒為 **Extreme Fear** (指數: 11)。市場處於極度恐懼狀態，通常預示著潛在的超賣和反彈機會。VIX 日內下跌 12.42%，表明市場恐慌情緒緩解，風險偏好回升。主要指數 SPY 和 QQQ 均強勁上漲，顯示市場整體樂觀，科技板塊領漲。\n\n未來 7 天市場預測： **看漲 (Bullish)**。極度恐懼情緒配合波動率下降，可能迎來技術性反彈。"
+    "date": "2025-11-25 05:09:57 UTC",
+    "model": "Rule-Based Analysis Engine",
+    "analysis": "The S&P 500 (SPY) has shown a positive trend over the last five trading days, suggesting strong short-term momentum.",
+    "prediction_7_day": "Slightly Bullish",
+    "confidence": "Medium (Rule-Based)"
 }

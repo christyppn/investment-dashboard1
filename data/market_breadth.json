@@ -1,9 +1,7 @@
-[
-  {
-    "id": "1",
-    "metric_name": "SPY Daily Change",
-    "region": "US",
-    "value": 0.33,
-    "timestamp": "2025-10-31T00:00:00Z"
-  }
-]
+{
+    "date": "2025-11-25",
+    "advancers": 16,
+    "decliners": 2,
+    "neutral": 0,
+    "total_symbols": 22
+}

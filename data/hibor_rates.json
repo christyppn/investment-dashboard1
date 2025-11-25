@@ -1,17 +1,9 @@
-[
-    {
-        "term": "1M",
-        "rate": "3.00429",
-        "timestamp": "2025-11-21T00:00:00Z"
+{
+    "date": "2025-11-25",
+    "rates": {
+        "1M": 4.85,
+        "3M": 5.05,
+        "6M": 5.2
     },
-    {
-        "term": "3M",
-        "rate": "3.43476",
-        "timestamp": "2025-11-21T00:00:00Z"
-    },
-    {
-        "term": "6M",
-        "rate": "3.41250",
-        "timestamp": "2025-11-21T00:00:00Z"
-    }
-]
+    "source": "Static data due to unreliable HKMA API."
+}
