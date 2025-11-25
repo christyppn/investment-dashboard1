@@ -21,7 +21,6 @@ async function fetchData(path) {
         const response = await fetch(`${DATA_DIR}${path}?t=${cacheBuster}`);
         
         if (!response.ok) {
-            // Log the error but return null to allow other parts of the dashboard to load
             console.error(`HTTP error! Status: ${response.status} for ${path}`);
             return null;
         }
@@ -32,7 +31,7 @@ async function fetchData(path) {
     }
 }
 
-// --- Rendering Functions ---
+// --- Rendering Functions (ApexCharts) ---
 
 function renderChart(elementId, seriesData, categories, title, type = 'line') {
     const options = {
@@ -62,15 +61,14 @@ function renderChart(elementId, seriesData, categories, title, type = 'line') {
         grid: { show: false }
     };
     
-    // Clear previous chart and render new one
     const element = document.getElementById(elementId);
     if (element) {
-        element.innerHTML = ''; // Clear existing content
+        element.innerHTML = '';
         new ApexCharts(element, options).render();
     }
 }
 
-// --- Loaders ---
+// --- Loaders for Dashboard Tab ---
 
 async function loadHiborRates() {
     const hiborData = await fetchData("hibor_rates.json");
@@ -160,7 +158,7 @@ async function loadMarketBreadth() {
         <p class="text-muted small">Date: ${breadthData.date} (Total: ${total} symbols)</p>
         <div class="progress" style="height: 25px;">
             <div class="progress-bar bg-success" role="progressbar" style="width: ${advancerPct}%" aria-valuenow="${advancerPct}" aria-valuemin="0" aria-valuemax="100">${advancers} (${advancerPct}%)</div>
-            <div class="progress-bar bg-danger" role="progressbar" style="width: ${declinerPct}%" aria-valuenow="${declinerPct}" aria-valuemin="0" aria-valuemax="100">${decliners} (${declinerPct}%)</div>
+            <div class="progress-bar bg-danger" role="progressbar" style="width: ${decliners}%" aria-valuenow="${decliners}" aria-valuemin="0" aria-valuemax="100">${decliners} (${declinerPct}%)</div>
             <div class="progress-bar bg-secondary" role="progressbar" style="width: ${neutralPct}%" aria-valuenow="${neutralPct}" aria-valuemin="0" aria-valuemax="100">${neutral} (${neutralPct}%)</div>
         </div>
     `;
@@ -182,6 +180,48 @@ function renderGlobalMarkets(symbol) {
     renderChart(containerId, closes, dates, title);
 }
 
+// --- Tab Switching Logic ---
+
+/**
+ * Handles the switching of content tabs.
+ * @param {Event} event - The click event.
+ * @param {string} tabName - The ID of the tab content to show.
+ */
+function switchTab(event, tabName) {
+    // 1. Get all tab content elements and hide them
+    const tabContents = document.querySelectorAll('.tab-content');
+    tabContents.forEach(content => {
+        content.classList.remove('active');
+    });
+
+    // 2. Get all tab buttons and remove active class
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    tabButtons.forEach(button => {
+        button.classList.remove('active');
+    });
+
+    // 3. Show the current tab content and set the button as active
+    const targetContent = document.getElementById(tabName);
+    if (targetContent) {
+        targetContent.classList.add('active');
+    }
+    event.currentTarget.classList.add('active');
+    
+    // 4. Special handling for tabs that need data loading (e.g., money-fund)
+    if (tabName === 'money-fund') {
+        // Assuming loadMoneyFundData is defined in money_fund.js
+        if (typeof loadMoneyFundData === 'function') {
+            loadMoneyFundData();
+        } else {
+            console.error("loadMoneyFundData function not found. Check if money_fund.js is loaded.");
+        }
+    }
+}
+
+// Make switchTab globally accessible for onclick events in HTML
+window.switchTab = switchTab;
+window.renderGlobalMarkets = renderGlobalMarkets; // Also expose renderGlobalMarkets
+
 // --- Initialization ---
 
 /**
@@ -198,17 +238,21 @@ async function initDashboard() {
         document.getElementById('global-markets-container').innerHTML = '<p class="text-danger">Global Markets data is not available.</p>';
     }
 
-    // 2. Load all other data sections
+    // 2. Load all other data sections for the default 'dashboard' tab
     loadHiborRates();
     loadFearGreedIndex();
     loadAIAnalysis();
-    loadMarketBreadth(); // Now explicitly loading market breadth
+    loadMarketBreadth();
 
-    // Make render functions globally accessible for onclick events
-    window.renderGlobalMarkets = renderGlobalMarkets;
-
-    // Initial render with a default symbol (e.g., GSPC for S&P 500)
+    // 3. Initial render for Global Markets
     renderGlobalMarkets('GSPC');
+    
+    // 4. Manually trigger the default tab to show content on load
+    const defaultTabButton = document.querySelector('.tab-btn.active');
+    const defaultTabContentId = defaultTabButton ? defaultTabButton.getAttribute('onclick').match(/'([^']+)'/)[1] : 'dashboard';
+    if (defaultTabButton) {
+        document.getElementById(defaultTabContentId).classList.add('active');
+    }
 }
 
 // Run the initialization when the document is ready
