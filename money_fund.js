@@ -1,4 +1,4 @@
-// money_fund.js - Final Corrected Version (No auto-run)
+// money_fund.js - 最終修復版本 (No auto-run)
 
 const DATA_BASE_URL = './data/';
 
