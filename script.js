@@ -158,7 +158,7 @@ async function loadMarketBreadth() {
         <p class="text-muted small">Date: ${breadthData.date} (Total: ${total} symbols)</p>
         <div class="progress" style="height: 25px;">
             <div class="progress-bar bg-success" role="progressbar" style="width: ${advancerPct}%" aria-valuenow="${advancerPct}" aria-valuemin="0" aria-valuemax="100">${advancers} (${advancerPct}%)</div>
-            <div class="progress-bar bg-danger" role="progressbar" style="width: ${decliners}%" aria-valuenow="${decliners}" aria-valuemin="0" aria-valuemax="100">${decliners} (${declinerPct}%)</div>
+            <div class="progress-bar bg-danger" role="progressbar" style="width: ${declinerPct}%" aria-valuenow="${declinerPct}" aria-valuemin="0" aria-valuemax="100">${decliners} (${declinerPct}%)</div>
             <div class="progress-bar bg-secondary" role="progressbar" style="width: ${neutralPct}%" aria-valuenow="${neutralPct}" aria-valuemin="0" aria-valuemax="100">${neutral} (${neutralPct}%)</div>
         </div>
     `;
@@ -178,6 +178,36 @@ function renderGlobalMarkets(symbol) {
     const title = `${symbol} - Global Market Index`;
 
     renderChart(containerId, closes, dates, title);
+}
+
+// --- Tab-Specific Functions (Stubs for missing functions to prevent errors) ---
+
+// These functions are called by the switchTab logic in index.html but may not be fully implemented.
+// We define them as stubs to prevent JavaScript errors from stopping the tab switching.
+
+function loadNews() {
+    console.log("loadNews called: News content loading logic goes here.");
+    // Placeholder for actual news loading logic
+}
+
+function loadEducation() {
+    console.log("loadEducation called: Education content loading logic goes here.");
+    // Placeholder for actual education loading logic
+}
+
+function displayFavorites() {
+    console.log("displayFavorites called: Favorites content display logic goes here.");
+    // Placeholder for actual favorites display logic
+}
+
+function displayPortfolio() {
+    console.log("displayPortfolio called: Portfolio content display logic goes here.");
+    // Placeholder for actual portfolio display logic
+}
+
+function load13FData(type) {
+    console.log(`load13FData called for type: ${type}. 13F/Consensus loading logic goes here.`);
+    // Placeholder for actual 13F/Consensus loading logic
 }
 
 // --- Tab Switching Logic ---
@@ -205,22 +235,42 @@ function switchTab(event, tabName) {
     if (targetContent) {
         targetContent.classList.add('active');
     }
+    // Use event.currentTarget to ensure the button itself is marked active
     event.currentTarget.classList.add('active');
     
-    // 4. Special handling for tabs that need data loading (e.g., money-fund)
+    // 4. Special handling for tabs that need data loading
     if (tabName === 'money-fund') {
-        // Assuming loadMoneyFundData is defined in money_fund.js
+        // This tab is for "多基金對比" (Multi-Fund Comparison)
         if (typeof loadMoneyFundData === 'function') {
             loadMoneyFundData();
         } else {
             console.error("loadMoneyFundData function not found. Check if money_fund.js is loaded.");
         }
+    } else if (tabName === 'berkshire' || tabName === 'consensus') {
+        // These tabs are for "伯克希爾 13F" and "機構共識"
+        if (typeof load13FData === 'function') {
+            load13FData(tabName);
+        } else {
+            console.error("load13FData function not found. Check if the relevant script is loaded.");
+        }
     }
+    
+    // Call the original functions from the user's index.html for other tabs
+    if (tabName === 'news' && typeof loadNews === 'function') loadNews();
+    if (tabName === 'education' && typeof loadEducation === 'function') loadEducation();
+    if (tabName === 'favorites' && typeof displayFavorites === 'function') displayFavorites();
+    if (tabName === 'portfolio' && typeof displayPortfolio === 'function') displayPortfolio();
 }
 
-// Make switchTab globally accessible for onclick events in HTML
+// Make functions globally accessible for onclick events in HTML
 window.switchTab = switchTab;
-window.renderGlobalMarkets = renderGlobalMarkets; // Also expose renderGlobalMarkets
+window.renderGlobalMarkets = renderGlobalMarkets; 
+window.loadNews = loadNews;
+window.loadEducation = loadEducation;
+window.displayFavorites = displayFavorites;
+window.displayPortfolio = displayPortfolio;
+window.load13FData = load13FData;
+
 
 // --- Initialization ---
 
@@ -249,6 +299,7 @@ async function initDashboard() {
     
     // 4. Manually trigger the default tab to show content on load
     const defaultTabButton = document.querySelector('.tab-btn.active');
+    // Extract the tab name from the onclick attribute: onclick="switchTab(event, 'dashboard')"
     const defaultTabContentId = defaultTabButton ? defaultTabButton.getAttribute('onclick').match(/'([^']+)'/)[1] : 'dashboard';
     if (defaultTabButton) {
         document.getElementById(defaultTabContentId).classList.add('active');
