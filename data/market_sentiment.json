@@ -1,10 +1,7 @@
-[
-  {
-    "id": "1",
-    "indicator_name": "Fear & Greed Index",
-    "region": "Global",
-    "value": 51,
-    "status": "Neutral",
-    "timestamp": "2025-10-27T01:55:47.466799Z"
-  }
-]
+{
+    "timestamp": "2025-11-26 04:37:49",
+    "consensus": {
+        "latest_sentiment": "中性偏多",
+        "timestamp": "2025-11-26 04:37:49"
+    }
+}

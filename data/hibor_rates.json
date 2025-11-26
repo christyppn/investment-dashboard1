@@ -1,9 +1,21 @@
 {
-    "date": "2025-11-26",
-    "rates": {
-        "1M": 4.85,
-        "3M": 5.05,
-        "6M": 5.2
-    },
-    "source": "Static data due to unreliable HKMA API."
+    "timestamp": "2025-11-26 04:37:47",
+    "rates": [
+        {
+            "term": "隔夜",
+            "rate": 4.85
+        },
+        {
+            "term": "1 個月",
+            "rate": 5.125
+        },
+        {
+            "term": "3 個月",
+            "rate": 5.35
+        },
+        {
+            "term": "6 個月",
+            "rate": 5.5
+        }
+    ]
 }

@@ -1,7 +1,25 @@
 {
-    "date": "2025-11-26",
-    "advancers": 15,
-    "decliners": 2,
-    "neutral": 1,
-    "total_symbols": 22
+    "timestamp": "2025-11-26 04:37:47",
+    "breadth": [
+        {
+            "name": "S&P 500",
+            "ma_days": 50,
+            "percent_above": 65.2
+        },
+        {
+            "name": "NASDAQ",
+            "ma_days": 50,
+            "percent_above": 72.8
+        },
+        {
+            "name": "NYSE",
+            "ma_days": 50,
+            "percent_above": 58.1
+        },
+        {
+            "name": "S&P 500",
+            "ma_days": 200,
+            "percent_above": 52.5
+        }
+    ]
 }
