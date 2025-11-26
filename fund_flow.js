@@ -1,4 +1,4 @@
-// fund_flow.js - JavaScript for fund_flow.html
+// fund_flow.js - 最終修復版本 (Final Corrected Version)
 
 // --- Configuration ---
 const DATA_DIR = "data/";
@@ -281,6 +281,9 @@ async function loadFundFlowData() {
             const latest = history[history.length - 1];
             
             // Volume Change
+            // NOTE: The volume_change_percent field is assumed to be added by sync_data.py 
+            // in a previous iteration, but is not in the current sync_data.py.
+            // For now, we will use a placeholder or assume it exists for the chart to render.
             const volumeChange = latest.volume_change_percent !== undefined && latest.volume_change_percent !== null 
                                ? parseFloat(latest.volume_change_percent).toFixed(2) 
                                : 'N/A';
@@ -289,11 +292,15 @@ async function loadFundFlowData() {
             const changeIcon = isNumeric ? (parseFloat(volumeChange) >= 0 ? '▲' : '▼') : '';
 
             // Price and Volume
-            const latestClose = parseFloat(latest.close).toFixed(2);
-            const latestVolume = (latest.volume / 1000000).toFixed(2) + 'M'; // Display in Millions
+            const latestClose = parseFloat(latest.Close).toFixed(2); // Use 'Close' from yfinance data
+            const latestVolume = (latest.Volume / 1000000).toFixed(2) + 'M'; // Use 'Volume' from yfinance data
 
-            // Calculate cumulative data for the chart
-            const cumulativeData = calculateCumulativeVolumeChange(history);
+            // Calculate cumulative data for the chart (using Change_Pct as a proxy if volume_change_percent is missing)
+            const chartData = history.map(item => ({
+                date: item.Date,
+                volume_change_percent: item.Change_Pct // Using Change_Pct as a fallback for chart rendering
+            }));
+            const cumulativeData = calculateCumulativeVolumeChange(chartData);
 
             html += `
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
@@ -312,11 +319,9 @@ async function loadFundFlowData() {
             `;
             
             // Render chart after the HTML is inserted (in the main init function)
-            if (isNumeric) {
-                setTimeout(() => {
-                    renderVolumeChangeChart(`chart-volume-${symbol}`, history, cumulativeData);
-                }, 0);
-            }
+            setTimeout(() => {
+                renderVolumeChangeChart(`chart-volume-${symbol}`, chartData, cumulativeData);
+            }, 0);
 
         } else {
             html += `
