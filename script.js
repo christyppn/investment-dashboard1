@@ -38,13 +38,12 @@ function formatNumber(num, decimals = 2) {
     return num.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-// --- Dashboard Rendering Functions (保持不變，但現在依賴修復後的 fetchData) ---
+// --- Dashboard Rendering Functions ---
 
 async function loadAIAnalysis() {
     const data = await fetchData('ai_analysis.json');
     const container = document.getElementById('ai-analysis-container');
     if (data && data.analysis) {
-        // ... (渲染邏輯) ...
         container.innerHTML = `
             <p style="font-size: 1.1em; line-height: 1.6; color: var(--text-primary);">${data.analysis}</p>
             <p style="margin-top: 15px; font-size: 0.9em; color: var(--text-secondary);">
