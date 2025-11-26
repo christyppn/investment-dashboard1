@@ -1,4 +1,4 @@
-# sync_data.py - Final Corrected Version
+# sync_data.py - 最終修復版本 (Final Corrected Version)
 
 import yfinance as yf
 import pandas as pd
@@ -14,10 +14,6 @@ if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR)
 
 # Symbols to fetch
-# Core Indices: SPY, QQQ, DIA, VIX, Global Markets (HSI, N225, GSPC, IXIC)
-# Sector ETFs: XLK, XLC, XLY, XLP, XLV, XLF, XLE, XLI, XLB, XLU, VNQ
-# Thematic/Other: GLD, ROBO, SMH, IWM
-# Money Market: VFIAX, VMMXX, SWVXX, FXNAX (Note: yfinance may not support all mutual funds)
 SYMBOLS = [
     "SPY", "QQQ", "DIA", "VIX", "HSI", "N225", "GSPC", "IXIC", "BTC-USD",
     "XLK", "XLC", "XLY", "XLP", "XLV", "XLF", "XLE", "XLI", "XLB", "XLU", "VNQ",
@@ -43,7 +39,8 @@ def get_market_data(symbols):
     end_date = datetime.now().strftime('%Y-%m-%d')
     start_date = (datetime.now() - timedelta(days=365 * 3)).strftime('%Y-%m-%d') # 3 years of data
 
-    data = yf.download(symbols, start=start_date, end=end_date, interval="1d", group_by='ticker')
+    # Use max 7 requests per minute to avoid rate limiting
+    data = yf.download(symbols, start=start_date, end=end_date, interval="1d", group_by='ticker', threads=True)
     
     market_data_history = {}
     for symbol in symbols:
@@ -125,7 +122,10 @@ def generate_ai_analysis(market_data):
         last_5_closes = df['Close'].tail(5)
         
         # Trend analysis
-        if last_5_closes.iloc[-1] > last_5_closes.iloc[0]:
+        if len(last_5_closes) < 5:
+            analysis = "Insufficient data for 5-day trend analysis."
+            prediction = "Neutral"
+        elif last_5_closes.iloc[-1] > last_5_closes.iloc[0]:
             trend = "Bullish"
             analysis = "The S&P 500 (SPY) has shown a positive trend over the last five trading days, suggesting strong short-term momentum."
             prediction = "Slightly Bullish"
@@ -152,7 +152,7 @@ def generate_market_breadth(market_data):
     print("Generating market breadth data...")
     
     if not market_data:
-        breadth_data = {"date": datetime.now().strftime('%Y-%m-%d'), "advancers": 0, "decliners": 0, "neutral": 0}
+        breadth_data = {"date": datetime.now().strftime('%Y-%m-%d'), "advancers": 0, "decliners": 0, "neutral": 0, "total_symbols": 0}
         save_json(breadth_data, "market_breadth.json")
         return
 
