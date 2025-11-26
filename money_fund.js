@@ -1,8 +1,33 @@
-// money_fund.js - 最終修復版本 (Final Corrected Version)
+/// money_fund.js - 最終修復版本 (Final Corrected Version)
 
 const DATA_BASE_URL = './data/';
 
 // --- Helper Functions ---
+
+async function fetchData(filename) {
+    // 確保路徑正確，例如：./data/ai_analysis.json
+    const path = DATA_BASE_URL + filename; 
+    try {
+        const response = await fetch(path);
+        
+        // 檢查 HTTP 狀態碼
+        if (!response.ok) {
+            console.error(`HTTP error! status: ${response.status} for ${path}`);
+            // 如果文件不存在 (404)，返回 null
+            if (response.status === 404) {
+                return null;
+            }
+            throw new Error(`Network response was not ok for ${path}`);
+        }
+        
+        // 嘗試解析 JSON
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(`Error fetching or parsing ${path}:`, error);
+        return null;
+    }
+}
 
 function formatChange(change) {
     const isPositive = change >= 0;
@@ -19,7 +44,8 @@ function formatChange(change) {
 async function loadMoneyFundData() {
     const data = await fetchData('money_fund_data.json');
     if (!data || !data.funds) {
-        console.error("Money fund data is missing or invalid.");
+        // 顯示錯誤信息
+        document.getElementById('money-fund').querySelector('.money-fund-grid').innerHTML = '<p class="text-danger">多基金對比數據不可用 (money_fund_data.json 缺失或格式錯誤)。</p>';
         return;
     }
 
