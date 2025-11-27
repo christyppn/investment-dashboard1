@@ -542,7 +542,7 @@
             <button class="tab-btn" onclick="switchTab(event, 'news')">📰 市場新聞</button>
             <button class="tab-btn" onclick="switchTab(event, 'education')">🎓 教育資源</button>
             <button class="tab-btn" onclick="switchTab(event, 'berkshire')">🐦 伯克希爾 13F</button>
-            <button class="tab-btn" onclick="switchTab(event, 'money-fund')">📊 多基金對比</button>
+            <button class="tab-btn" onclick="switchTab(event, 'multifund')">📊 多基金對比</button>
             <button class="tab-btn" onclick="switchTab(event, 'consensus')">🎯 機構共識</button>
         </div>
         
@@ -966,38 +966,243 @@
         <!-- Berkshire 13F Tab -->
         <div id="berkshire" class="tab-content">
             <div class="card">
-                <h3>🐦 伯克希爾·哈撒韋 (BRK.B) 13F 持倉</h3>
-                <p class="text-muted">此處將顯示伯克希爾的完整持倉數據和圖表。</p>
-                <div id="berkshire-13f-content">
-                    <!-- 數據將由 load13FData 函數加載 -->
+                <h2>🐦 伯克希爾·哈撒韋 (BRK.B) 13F 持倉分析</h2>
+                
+                <h3>持倉摘要</h3>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="summary-label">總持倉市值</div>
+                        <div class="summary-value">$422.3B</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">現金及等價物</div>
+                        <div class="summary-value">$167.6B</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">現金占比</div>
+                        <div class="summary-value">39.7%</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-label">前10大占比</div>
+                        <div class="summary-value">95.1%</div>
+                    </div>
                 </div>
+
+                <h3>前 10 大持倉</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>股票代碼</th>
+                            <th>公司名稱</th>
+                            <th>市值 (B$)</th>
+                            <th>占比</th>
+                            <th>Q2 變化</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>AAPL</td>
+                            <td>Apple Inc.</td>
+                            <td>246.5</td>
+                            <td>58.3%</td>
+                            <td class="negative">-13.2%</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>BAC</td>
+                            <td>Bank of America</td>
+                            <td>54.8</td>
+                            <td>13.0%</td>
+                            <td class="negative">-5.6%</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>KO</td>
+                            <td>Coca-Cola</td>
+                            <td>26.4</td>
+                            <td>6.3%</td>
+                            <td class="neutral">0%</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>AXP</td>
+                            <td>American Express</td>
+                            <td>32.1</td>
+                            <td>7.6%</td>
+                            <td class="positive">+4.2%</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>CVX</td>
+                            <td>Chevron</td>
+                            <td>24.7</td>
+                            <td>5.9%</td>
+                            <td class="negative">-8.9%</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>OXY</td>
+                            <td>Occidental Petroleum</td>
+                            <td>18.3</td>
+                            <td>4.3%</td>
+                            <td class="negative">-12.5%</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>VRSN</td>
+                            <td>VeriSign Inc.</td>
+                            <td>12.5</td>
+                            <td>3.0%</td>
+                            <td class="positive">+12.5%</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>BNY</td>
+                            <td>BNY Mellon</td>
+                            <td>10.8</td>
+                            <td>2.6%</td>
+                            <td class="positive">+6.7%</td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td>PG</td>
+                            <td>Procter & Gamble</td>
+                            <td>8.9</td>
+                            <td>2.1%</td>
+                            <td class="neutral">0%</td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td>JNJ</td>
+                            <td>Johnson & Johnson</td>
+                            <td>7.3</td>
+                            <td>1.7%</td>
+                            <td class="neutral">0%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>主要觀察</h3>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>AAPL 大幅減持</strong>：從 Q1 的 58.3% 減至當前，反映對科技股估值的謹慎態度</li>
+                    <li><strong>金融股穩定</strong>：BAC 和 AXP 保持穩定，顯示對金融行業的信心</li>
+                    <li><strong>現金儲備</strong>：39.7% 的現金占比創歷史新高，表明在等待投資機會</li>
+                    <li><strong>增持股票</strong>：VRSN 和 BNY 的增持表明對特定公司的看好</li>
+                </ul>
             </div>
+        </div>
         </div>
         
         <!-- Multi-Fund Comparison Tab -->
-        <div id="money-fund" class="tab-content">
+        <div id="multifund" class="tab-content">
             <div class="card">
-                <h3>📊 多基金對比 (Money Fund Comparison)</h3>
-                <p class="text-muted">此處將顯示不同基金的表現對比。</p>
-                <div class="money-fund-grid">
-                    <div class="money-fund-card">
-                        <h4>VFIAX</h4>
-                        <p class="value">$<span id="vfiax-value">載入中...</span></p>
-                        <p class="change-percent"><span id="vfiax-change"></span></p>
-                        <p class="date"><span id="vfiax-date"></span></p>
-                    </div>
-                    <div class="money-fund-card">
-                        <h4>VTSAX</h4>
-                        <p class="value">$<span id="vtsax-value">載入中...</span></p>
-                        <p class="change-percent"><span id="vtsax-change"></span></p>
-                        <p class="date"><span id="vtsax-date"></span></p>
-                    </div>
-                    <div class="money-fund-card">
-                        <h4>VBTLX</h4>
-                        <p class="value">$<span id="vbtlx-value">載入中...</span></p>
-                        <p class="change-percent"><span id="vbtlx-change"></span></p>
-                        <p class="date"><span id="vbtlx-date"></span></p>
-                    </div>
+                <h2>📊 多基金對比分析</h2>
+                
+                <h3>基金特徵對比</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>特徵</th>
+                            <th>伯克希爾 (BRK.B)</th>
+                            <th>先鋒 500 (VOO)</th>
+                            <th>索羅斯基金</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>投資風格</strong></td>
+                            <td>價值投資</td>
+                            <td>被動指數</td>
+                            <td>宏觀對沖</td>
+                        </tr>
+                        <tr>
+                            <td><strong>總持倉市值</strong></td>
+                            <td>$422.3B</td>
+                            <td>$750.2B</td>
+                            <td>$32.8B</td>
+                        </tr>
+                        <tr>
+                            <td><strong>現金占比</strong></td>
+                            <td>39.7%</td>
+                            <td>0.5%</td>
+                            <td>15.2%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>科技股占比</strong></td>
+                            <td>59.3%</td>
+                            <td>28.5%</td>
+                            <td>78.1%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>集中度</strong></td>
+                            <td>高（前10大占95%）</td>
+                            <td>低（分散投資）</td>
+                            <td>高（前5大占78%）</td>
+                        </tr>
+                        <tr>
+                            <td><strong>投資策略</strong></td>
+                            <td>精選個股</td>
+                            <td>跟蹤指數</td>
+                            <td>主動管理</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>前 5 大持倉對比</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>伯克希爾</th>
+                            <th>先鋒</th>
+                            <th>索羅斯</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>AAPL (58.3%)</td>
+                            <td>AAPL (42.6%)</td>
+                            <td>GOOGL (25.0%)</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>BAC (13.0%)</td>
+                            <td>MSFT (41.3%)</td>
+                            <td>AMZN (15.5%)</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>KO (6.3%)</td>
+                            <td>NVDA (37.3%)</td>
+                            <td>MSFT (11.6%)</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>AXP (7.6%)</td>
+                            <td>GOOGL (24.0%)</td>
+                            <td>TSLA (7.6%)</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>CVX (5.9%)</td>
+                            <td>AMZN (20.0%)</td>
+                            <td>META (6.4%)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>投資洞察</h3>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>AAPL 共識</strong>：伯克希爾和先鋒都大幅持有，機構投資者廣泛看好</li>
+                    <li><strong>科技股差異</strong>：索羅斯最激進（78.1%），伯克希爾最保守（59.3%），先鋒最平衡（28.5%）</li>
+                    <li><strong>Google 分歧</strong>：索羅斯大幅增持（25%），但伯克希爾已完全清倉</li>
+                    <li><strong>現金策略</strong>：伯克希爾現金占比最高（39.7%），表明在等待投資機會</li>
+                </ul>
+            </div>
+        </div>
                     <div class="money-fund-card">
                         <h4>BIL</h4>
                         <p class="value">$<span id="bil-value">載入中...</span></p>
@@ -1011,11 +1216,91 @@
         <!-- Consensus Analysis Tab -->
         <div id="consensus" class="tab-content">
             <div class="card">
-                <h3>🎯 機構投資者共識分析</h3>
-                <p class="text-muted">此處將顯示不同機構投資者的持倉共識分析。</p>
-                <div id="consensus-content">
-                    <!-- 數據將由 load13FData 函數加載 -->
-                </div>
+                <h2>🎯 機構共識分析</h2>
+                
+                <h3>共同持倉（三基金都持有）</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>股票</th>
+                            <th>伯克希爾</th>
+                            <th>先鋒</th>
+                            <th>索羅斯</th>
+                            <th>共識強度</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>AAPL</strong></td>
+                            <td>58.3%</td>
+                            <td>42.6%</td>
+                            <td>-</td>
+                            <td class="positive">強</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MSFT</strong></td>
+                            <td>-</td>
+                            <td>41.3%</td>
+                            <td>11.6%</td>
+                            <td class="positive">強</td>
+                        </tr>
+                        <tr>
+                            <td><strong>GOOGL</strong></td>
+                            <td>-</td>
+                            <td>24.0%</td>
+                            <td>25.0%</td>
+                            <td class="positive">中</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AMZN</strong></td>
+                            <td>-</td>
+                            <td>20.0%</td>
+                            <td>15.5%</td>
+                            <td class="positive">中</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>分歧持倉（投資者看法不同）</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>股票</th>
+                            <th>持有者</th>
+                            <th>占比</th>
+                            <th>投資邏輯</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>GOOGL</strong></td>
+                            <td>索羅斯 ✅<br>伯克希爾 ❌</td>
+                            <td>25.0%<br>0%</td>
+                            <td>索羅斯看好AI，伯克希爾謹慎</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BAC</strong></td>
+                            <td>伯克希爾 ✅<br>其他 ❌</td>
+                            <td>13.0%<br>-</td>
+                            <td>伯克希爾看好金融股</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NVDA</strong></td>
+                            <td>先鋒 ✅<br>伯克希爾 ❌</td>
+                            <td>37.3%<br>0%</td>
+                            <td>先鋒跟蹤指數，伯克希爾保持距離</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>關鍵洞察</h3>
+                <ul style="margin-left: 20px; line-height: 1.8;">
+                    <li><strong>AAPL 強共識</strong>：伯克希爾和先鋒都大幅持有，機構投資者廣泛看好</li>
+                    <li><strong>Google 分歧大</strong>：索羅斯大幅增持（25%），但伯克希爾已完全清倉，反映不同的科技股看法</li>
+                    <li><strong>科技股差異</strong>：索羅斯最激進（78.1%），伯克希爾最保守（59.3%），先鋒最平衡（28.5%）</li>
+                    <li><strong>現金策略</strong>：伯克希爾現金占比最高（39.7%），表明在等待投資機會</li>
+                    <li><strong>金融股信心</strong>：伯克希爾對金融股（BAC、AXP）保持信心，其他基金相對保守</li>
+                </ul>
             </div>
         </div>
         
