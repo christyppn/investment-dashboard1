@@ -767,154 +767,154 @@
   "VIX": [
     {
       "date": "2025-10-20",
-      "close": 18.229999542236328,
-      "change_percent": -12.271419923715232,
+      "close": NaN,
+      "change_percent": NaN,
       "name": "VIX"
     },
     {
       "date": "2025-10-21",
-      "close": 17.8700008392334,
-      "change_percent": -1.974759802757342
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-10-22",
-      "close": 18.600000381469727,
-      "change_percent": 4.085056004214738
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-10-23",
-      "close": 17.299999237060547,
-      "change_percent": -6.9892533212220105
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-10-24",
-      "close": 16.3700008392334,
-      "change_percent": -5.375713519309755
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-10-27",
-      "close": 15.789999961853027,
-      "change_percent": -3.543071763260408
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-10-28",
-      "close": 16.420000076293945,
-      "change_percent": 3.9898677388406023
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-10-29",
-      "close": 16.920000076293945,
-      "change_percent": 3.045066977325206
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-10-30",
-      "close": 16.90999984741211,
-      "change_percent": -0.05910300730935791
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-10-31",
-      "close": 17.440000534057617,
-      "change_percent": 3.1342441834889767
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-03",
-      "close": 17.170000076293945,
-      "change_percent": -1.548167714997506
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-04",
-      "close": 19.0,
-      "change_percent": 10.658124144289749
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-05",
-      "close": 18.010000228881836,
-      "change_percent": -5.210525111148234
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-06",
-      "close": 19.5,
-      "change_percent": 8.273180189796548
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-07",
-      "close": 19.079999923706055,
-      "change_percent": -2.15384654509716
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-10",
-      "close": 17.600000381469727,
-      "change_percent": -7.756811049026757
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-11",
-      "close": 17.280000686645508,
-      "change_percent": -1.8181800448205276
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-12",
-      "close": 17.510000228881836,
-      "change_percent": 1.3310158165333874
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-13",
-      "close": 20.0,
-      "change_percent": 14.22044396670561
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-14",
-      "close": 19.829999923706055,
-      "change_percent": -0.8500003814697288
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-17",
-      "close": 22.3799991607666,
-      "change_percent": 12.859300286794827
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-18",
-      "close": 24.690000534057617,
-      "change_percent": 10.321722340993556
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-19",
-      "close": 23.65999984741211,
-      "change_percent": -4.171732135950002
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-20",
-      "close": 26.420000076293945,
-      "change_percent": 11.665258861714323
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-21",
-      "close": 23.43000030517578,
-      "change_percent": -11.317183052550483
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-24",
-      "close": 20.520000457763672,
-      "change_percent": -12.419973578785138
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-25",
-      "close": 18.559999465942383,
-      "change_percent": -9.551661540434953
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-26",
-      "close": 17.190000534057617,
-      "change_percent": -7.381459974709137
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-27",
-      "close": 17.209999084472656,
-      "change_percent": 0.11633827686867715
+      "close": NaN,
+      "change_percent": NaN
     },
     {
       "date": "2025-11-28",
       "close": NaN,
-      "change_percent": 0.0
+      "change_percent": NaN
     }
   ],
   "HSI": [
@@ -1066,8 +1066,8 @@
     },
     {
       "date": "2025-11-28",
-      "close": 25970.01953125,
-      "change_percent": 0.09284633096653394
+      "close": 25874.26953125,
+      "change_percent": -0.2761903586153802
     }
   ],
   "N225": [
@@ -1219,8 +1219,8 @@
     },
     {
       "date": "2025-11-28",
-      "close": 50125.5703125,
-      "change_percent": -0.0827858271785109
+      "close": 50078.83984375,
+      "change_percent": -0.175935455709042
     }
   ],
   "XLK": [
