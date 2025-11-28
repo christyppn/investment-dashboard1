@@ -94,6 +94,7 @@ def fetch_cnn_fear_greed():
         soup = BeautifulSoup(response.text, 'html.parser')
         
         # The value is usually in a div with class 'market-f-g-index__index-value'
+        # Try to find the value using the most common selector first
         value_element = soup.find('div', class_='market-f-g-index__index-value')
         
         # The sentiment is usually in a div with class 'market-f-g-index__index-label'
@@ -103,7 +104,12 @@ def fetch_cnn_fear_greed():
         date_element = soup.find('div', class_='market-f-g-index__index-date')
 
         if value_element and sentiment_element and date_element:
-            value = int(value_element.text.strip())
+            # Check if the value is a number, otherwise it might be a loading state
+            try:
+                value = int(value_element.text.strip())
+            except ValueError:
+                print("Warning: F&G value is not an integer, possibly a loading state.")
+                return False
             sentiment = sentiment_element.text.strip()
             timestamp = date_element.text.strip().replace("Last updated ", "")
             
@@ -119,7 +125,11 @@ def fetch_cnn_fear_greed():
         # Fallback for different class names
         value_element = soup.find('div', class_='fng-gauge__value')
         if value_element:
-            value = int(value_element.text.strip())
+            try:
+                value = int(value_element.text.strip())
+            except ValueError:
+                print("Warning: F&G value is not an integer in fallback, possibly a loading state.")
+                return False
             sentiment = soup.find('div', class_='fng-gauge__label').text.strip()
             timestamp = soup.find('div', class_='fng-gauge__date').text.strip().replace("Last updated ", "")
             data = {
@@ -144,6 +154,7 @@ def fetch_cnn_fear_greed():
 def fetch_hkma_hibor():
     """Fetches real-time HIBOR rates from HKMA API."""
     # HKMA API for daily HIBOR rates
+    # Using the daily HKD Interest Settlement Rates API (T060303)
     url = "https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily"
     
     try:
@@ -154,7 +165,7 @@ def fetch_hkma_hibor():
         if data and data.get('result') and data['result'].get('records'):
             records = data['result']['records']
             
-            # Find the latest record (assuming records are sorted by date or we take the first one)
+            # The API returns records in descending order of date, so the first record is the latest
             latest_record = records[0] 
             
             # Extract relevant HIBOR terms (1M, 3M, 6M)
@@ -162,6 +173,7 @@ def fetch_hkma_hibor():
             terms = {"M1": "1個月", "M3": "3個月", "M6": "6個月"}
             
             for key, term_name in terms.items():
+                # The correct key in the API is HKD_HIBOR_M1, HKD_HIBOR_M3, etc.
                 rate_key = f"HKD_HIBOR_{key}"
                 if rate_key in latest_record and latest_record[rate_key] is not None:
                     hibor_data.append({
