@@ -1,4 +1,4 @@
-// script.js - 最終修復版本 (Final Corrected Version)
+// script.js - Main JavaScript for index.html
 
 const DATA_BASE_URL = './data/';
 let globalMarketsChart = null;
@@ -38,6 +38,13 @@ function formatNumber(num, decimals = 2) {
     return num.toFixed(decimals).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+function formatChange(change) {
+    const isPositive = change >= 0;
+    const sign = isPositive ? '+' : '';
+    const colorClass = isPositive ? 'text-success' : 'text-danger';
+    return `<span class="${colorClass}">${sign}${change.toFixed(2)}%</span>`;
+}
+
 // --- Dashboard Rendering Functions ---
 
 async function loadAIAnalysis() {
@@ -61,28 +68,30 @@ async function loadAIAnalysis() {
 async function loadFearGreedIndex() {
     const data = await fetchData('fear_greed_index.json');
     const container = document.getElementById('fear-greed-container');
+    
+    if (!container) return;
+
     if (data && data.value !== undefined) {
         const value = data.value;
-        let color, sentiment;
+        const sentiment = data.sentiment;
+        const source = data.source || '未知來源';
+        let color;
 
         if (value >= 75) {
             color = '#ef4444'; // Extreme Greed
-            sentiment = '極度貪婪';
         } else if (value >= 50) {
             color = '#f97316'; // Greed
-            sentiment = '貪婪';
         } else if (value >= 25) {
             color = '#3b82f6'; // Neutral
-            sentiment = '中性';
         } else {
             color = '#22c55e'; // Fear/Extreme Fear
-            sentiment = '恐懼';
         }
 
         container.innerHTML = `
             <div style="font-size: 3em; font-weight: bold; color: ${color};">${value}</div>
             <div style="font-size: 1.2em; font-weight: bold; color: ${color};">${sentiment}</div>
-            <div style="font-size: 0.8em; color: var(--text-secondary); margin-top: 10px;">更新時間: ${data.timestamp}</div>
+            <div style="font-size: 0.8em; color: var(--text-secondary); margin-top: 10px;">來源: ${source}</div>
+            <div style="font-size: 0.8em; color: var(--text-secondary);">更新時間: ${data.timestamp}</div>
             <div class="progress" style="height: 10px; margin-top: 15px;">
                 <div class="progress-bar" role="progressbar" style="width: ${value}%; background-color: ${color};" aria-valuenow="${value}" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
@@ -95,15 +104,19 @@ async function loadFearGreedIndex() {
 async function loadHiborRates() {
     const data = await fetchData('hibor_rates.json');
     const container = document.getElementById('hibor-rates-container');
-    if (data && data.rates) {
-        const latestRates = data.rates.slice(0, 3); // Get top 3
+    
+    if (!container) return;
+
+    if (data && data.rates && data.rates.length > 0) {
+        const latestRates = data.rates;
         let html = '<table class="table" style="font-size: 0.9em;">';
         html += '<thead><tr><th>期限</th><th>利率 (%)</th></tr></thead><tbody>';
         latestRates.forEach(rate => {
             html += `<tr><td>${rate.term}</td><td>${formatNumber(rate.rate, 3)}</td></tr>`;
         });
         html += '</tbody></table>';
-        html += `<p style="font-size: 0.8em; color: var(--text-secondary); margin-top: 10px;">更新時間: ${data.timestamp}</p>`;
+        html += `<p style="font-size: 0.8em; color: var(--text-secondary); margin-top: 10px;">數據日期: ${latestRates[0].date}</p>`;
+        html += `<p style="font-size: 0.8em; color: var(--text-secondary);">抓取時間: ${data.timestamp}</p>`;
         container.innerHTML = html;
     } else {
         container.innerHTML = '<p class="text-danger">HIBOR 利率數據不可用。</p>';
@@ -113,6 +126,9 @@ async function loadHiborRates() {
 async function loadMarketBreadth() {
     const data = await fetchData('market_breadth.json');
     const container = document.getElementById('market-breadth-container');
+    
+    if (!container) return;
+
     if (data && data.breadth) {
         let html = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">';
         
@@ -146,6 +162,8 @@ async function renderGlobalMarkets(symbol) {
     const data = await fetchData('market_data_history.json');
     const container = document.getElementById('global-markets-chart');
     
+    if (!container) return;
+
     if (!data || !data[symbol]) {
         container.innerHTML = `<p class="text-danger">指數 ${symbol} 的歷史數據不可用。</p>`;
         return;
@@ -287,22 +305,12 @@ function switchTab(event, tabName) {
 
 // --- Placeholder/Stub Functions (Preventing errors from missing functions) ---
 
-// ... (其他佔位函數保持不變) ...
-function loadNews() {
-    console.log("Loading news data...");
-}
-
-function loadEducation() {
-    console.log("Loading education content...");
-}
-
-function downloadPDF() {
-    alert("PDF 下載功能尚未實現");
-}
-
-function downloadCSV() {
-    alert("CSV 下載功能尚未實現");
-}
+function displayPortfolio() { console.log("displayPortfolio called (stub)"); }
+function performScreening() { console.log("performScreening called (stub)"); }
+function displayFavorites() { console.log("displayFavorites called (stub)"); }
+function displayFinancialMetrics() { console.log("displayFinancialMetrics called (stub)"); }
+function loadNews() { console.log("loadNews called (stub)"); }
+function loadEducation() { console.log("loadEducation called (stub)"); }
 
 // --- Initialization ---
 
@@ -316,15 +324,11 @@ function initDashboard() {
     // 2. Initial render of Global Markets (e.g., S&P 500)
     renderGlobalMarkets('GSPC');
 
-    // 3. Initial load of other tabs' data if needed (e.g., Portfolio/Favorites from localStorage)
-    displayPortfolio();
-    displayFavorites();
+    // Make render functions globally accessible for onclick events
+    window.renderGlobalMarkets = renderGlobalMarkets;
+    window.switchTab = switchTab; // Expose switchTab globally
+    window.load13FData = load13FData; // Expose load13FData globally
 }
 
 // Run the initialization when the document is ready
 document.addEventListener("DOMContentLoaded", initDashboard);
-
-// Make render function globally accessible for onclick events
-window.renderGlobalMarkets = renderGlobalMarkets;
-window.switchTab = switchTab; // Expose switchTab globally
-window.load13FData = load13FData; // Expose load13FData globally
