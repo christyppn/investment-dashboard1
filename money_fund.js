@@ -1,4 +1,4 @@
-/// money_fund.js - 最終修復版本 (Final Corrected Version)
+// money_fund.js - Final Corrected Version
 
 const DATA_BASE_URL = './data/';
 
@@ -32,7 +32,7 @@ async function fetchData(filename) {
 function formatChange(change) {
     const isPositive = change >= 0;
     const sign = isPositive ? '+' : '';
-    const colorClass = isPositive ? 'positive' : 'negative';
+    const colorClass = isPositive ? 'text-success' : 'text-danger';
     return `<span class="${colorClass}">${sign}${change.toFixed(2)}%</span>`;
 }
 
@@ -43,9 +43,12 @@ function formatChange(change) {
  */
 async function loadMoneyFundData() {
     const data = await fetchData('money_fund_data.json');
-    if (!data || !data.funds) {
-        // 顯示錯誤信息
-        document.getElementById('money-fund').querySelector('.money-fund-grid').innerHTML = '<p class="text-danger">多基金對比數據不可用 (money_fund_data.json 缺失或格式錯誤)。</p>';
+    const container = document.getElementById('money-fund-grid'); // Assuming you have a container with this ID
+
+    if (!container) return;
+
+    if (!data || !data.funds || data.funds.length === 0) {
+        container.innerHTML = '<p class="text-danger">多基金對比數據不可用 (money_fund_data.json 缺失或格式錯誤)。</p>';
         return;
     }
 
