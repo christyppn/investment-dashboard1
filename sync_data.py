@@ -1,25 +1,44 @@
-# sync_data.py - 最終修復版本 (Final Corrected Version)
-
-import yfinance as yf
-import pandas as pd
 import requests
 import json
-from datetime import datetime, timedelta
-import time
 import os
+import time
+from datetime import datetime, timedelta
+import yfinance as yf
+import pandas as pd
+from bs4 import BeautifulSoup
 
 # --- Configuration ---
 DATA_DIR = "data"
-if not os.path.exists(DATA_DIR):
-    os.makedirs(DATA_DIR)
 
-# Symbols to fetch
-SYMBOLS = [
-    "SPY", "QQQ", "DIA", "VIX", "HSI", "N225", "GSPC", "IXIC", "BTC-USD",
-    "XLK", "XLC", "XLY", "XLP", "XLV", "XLF", "XLE", "XLI", "XLB", "XLU", "VNQ",
-    "GLD", "ROBO", "SMH", "IWM",
-    "VFIAX", "VMMXX", "SWVXX", "FXNAX"
-]
+# Yahoo Finance Symbols (Confirmed symbols for all required data points)
+YAHOO_SYMBOLS = {
+    # Market Breadth (US) - Standard ETF tickers
+    "SPY": "SPY",
+    "QQQ": "QQQ",
+    "DIA": "DIA",
+    # Global Indices and VIX - Yahoo Finance uses ^ prefix for indices
+    "GSPC": "^GSPC", # S&P 500
+    "IXIC": "^IXIC", # NASDAQ
+    "VIX": "^VIX", 
+    "HSI": "^HSI", # Confirmed Yahoo Finance symbol for Hang Seng Index
+    "N225": "^N225", # Confirmed Yahoo Finance symbol for Nikkei 225
+    # Sector ETFs (11)
+    "XLK": "XLK", "XLC": "XLC", "XLY": "XLY", "XLP": "XLP", "XLV": "XLV", "XLF": "XLF", 
+    "XLE": "XLE", "XLI": "XLI", "XLB": "XLB", "XLU": "XLU", "VNQ": "VNQ",
+    # Thematic/Commodity ETFs (4)
+    "GLD": "GLD", "ROBO": "ROBO", "SMH": "SMH", "IWM": "IWM",
+    # Money Market Funds (4) - Using original mutual fund symbols (yfinance supports them)
+    "VFIAX": "VFIAX",
+    "VTSAX": "VTSAX",
+    "VBTLX": "VBTLX",
+    "BIL": "BIL", # Using BIL ETF as a proxy for money market fund data, as VMMXX is often problematic
+}
+
+# List of symbols to fetch (keys from the mapping)
+SYMBOLS_TO_FETCH = list(YAHOO_SYMBOLS.keys())
+
+# Ensure data directory exists
+os.makedirs(DATA_DIR, exist_ok=True)
 
 # --- Helper Functions ---
 
@@ -28,107 +47,225 @@ def save_json(data, filename):
     path = os.path.join(DATA_DIR, filename)
     try:
         with open(path, 'w', encoding='utf-8') as f:
-            json.dump(data, f, ensure_ascii=False, indent=4)
-        # Removed print statement to prevent pollution
+            json.dump(data, f, ensure_ascii=False, indent=2)
     except Exception as e:
-        # Removed print statement to prevent pollution
-        pass
+        print(f"Error saving {filename}: {e}")
 
-def get_market_data(symbols):
-    """Fetches historical data for a list of symbols using yfinance."""
-    end_date = datetime.now().strftime('%Y-%m-%d')
-    start_date = (datetime.now() - timedelta(days=365)).strftime('%Y-%m-%d')
-    
-    data = yf.download(symbols, start=start_date, end=end_date, interval="1d")
-    
-    if data.empty:
-        return {}
+def process_yahoo_data(symbol, df):
+    """
+    Processes raw yfinance DataFrame to calculate daily changes,
+    and includes the critical division-by-zero check and 30-day truncation.
+    """
+    if df.empty:
+        return []
 
-    history_data = {}
-    for symbol in symbols:
-        if ('Close', symbol) in data.columns:
-            closes = data['Close'][symbol].dropna()
-            if not closes.empty:
-                history_data[symbol] = [
-                    {"date": date.strftime('%Y-%m-%d'), "close": close, "name": symbol}
-                    for date, close in closes.items()
-                ]
-    return history_data
+    # Calculate daily percentage change for Close price
+    df['change_percent'] = df['Close'].pct_change() * 100
+    
+    # Clean up and format
+    df = df.reset_index()
+    if pd.api.types.is_datetime64_any_dtype(df['Date']):
+        df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
+    
+    # Select and rename columns for final output
+    df = df.rename(columns={'Date': 'date', 'Close': 'close'})
+    df = df[['date', 'close', 'change_percent']]
+    
+    # Convert to list of dictionaries
+    time_series_list = df.to_dict('records')
+    
+    # Remove the first row (NaN change)
+    if time_series_list:
+        time_series_list.pop(0)
 
-def generate_market_breadth():
-    """Generates a dummy market breadth data structure."""
-    # In a real scenario, this would involve complex calculations.
-    # For now, we use a static structure to ensure the file is valid.
+    # Final Optimization: Only keep the latest 30 trading days for frontend display
+    return time_series_list[-30:]
+
+# --- Data Fetching Functions ---
+
+def fetch_cnn_fear_greed():
+    """Scrapes the current US Fear & Greed Index value from CNNMoney."""
+    url = "https://money.cnn.com/data/fear-and-greed/"
+    headers = {'User-Agent': 'Mozilla/5.0'}
     
-    # Dummy data for demonstration
-    breadth_data = [
-        {"name": "S&P 500", "ma_days": 50, "percent_above": 65.2},
-        {"name": "NASDAQ", "ma_days": 50, "percent_above": 72.8},
-        {"name": "NYSE", "ma_days": 50, "percent_above": 58.1},
-        {"name": "S&P 500", "ma_days": 200, "percent_above": 52.5},
-    ]
+    try:
+        response = requests.get(url, headers=headers, timeout=10 )
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        # The value is usually in a div with class 'market-f-g-index__index-value'
+        value_element = soup.find('div', class_='market-f-g-index__index-value')
+        
+        # The sentiment is usually in a div with class 'market-f-g-index__index-label'
+        sentiment_element = soup.find('div', class_='market-f-g-index__index-label')
+        
+        # The timestamp is usually in a div with class 'market-f-g-index__index-date'
+        date_element = soup.find('div', class_='market-f-g-index__index-date')
+
+        if value_element and sentiment_element and date_element:
+            value = int(value_element.text.strip())
+            sentiment = sentiment_element.text.strip()
+            timestamp = date_element.text.strip().replace("Last updated ", "")
+            
+            data = {
+                "timestamp": timestamp,
+                "value": value,
+                "sentiment": sentiment,
+                "source": "CNNMoney (US)"
+            }
+            save_json(data, "fear_greed_index.json")
+            return True
+        
+        # Fallback for different class names
+        value_element = soup.find('div', class_='fng-gauge__value')
+        if value_element:
+            value = int(value_element.text.strip())
+            sentiment = soup.find('div', class_='fng-gauge__label').text.strip()
+            timestamp = soup.find('div', class_='fng-gauge__date').text.strip().replace("Last updated ", "")
+            data = {
+                "timestamp": timestamp,
+                "value": value,
+                "sentiment": sentiment,
+                "source": "CNNMoney (US)"
+            }
+            save_json(data, "fear_greed_index.json")
+            return True
+
+        print("Warning: Could not find F&G data elements on CNN page.")
+        return False
+        
+    except requests.RequestException as e:
+        print(f"Error fetching CNN Fear & Greed Index: {e}")
+        return False
+    except Exception as e:
+        print(f"An unexpected error occurred during F&G scrape: {e}")
+        return False
+
+def fetch_hkma_hibor():
+    """Fetches real-time HIBOR rates from HKMA API."""
+    # HKMA API for daily HIBOR rates
+    url = "https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily"
     
-    return {
+    try:
+        response = requests.get(url, timeout=10 )
+        response.raise_for_status()
+        data = response.json()
+        
+        if data and data.get('result') and data['result'].get('records'):
+            records = data['result']['records']
+            
+            # Find the latest record (assuming records are sorted by date or we take the first one)
+            latest_record = records[0] 
+            
+            # Extract relevant HIBOR terms (1M, 3M, 6M)
+            hibor_data = []
+            terms = {"M1": "1個月", "M3": "3個月", "M6": "6個月"}
+            
+            for key, term_name in terms.items():
+                rate_key = f"HKD_HIBOR_{key}"
+                if rate_key in latest_record and latest_record[rate_key] is not None:
+                    hibor_data.append({
+                        "term": term_name,
+                        "rate": float(latest_record[rate_key]),
+                        "date": latest_record['end_of_day']
+                    })
+            
+            if hibor_data:
+                save_json({
+                    "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                    "rates": hibor_data
+                }, "hibor_rates.json")
+                return True
+            else:
+                print("Warning: HIBOR data found but specific terms (1M, 3M, 6M) are missing.")
+                return False
+        else:
+            print("Error: HKMA API returned no valid records.")
+            return False
+            
+    except requests.RequestException as e:
+        print(f"Error fetching HKMA HIBOR: {e}")
+        return False
+    except Exception as e:
+        print(f"An unexpected error occurred during HIBOR fetch: {e}")
+        return False
+
+def fetch_market_data():
+    """Fetches time series data for all configured symbols from Yahoo Finance using yfinance."""
+    
+    # Calculate start date for the last 30 trading days (approx 45 calendar days)
+    start_date = (datetime.now() - timedelta(days=45)).strftime('%Y-%m-%d')
+    
+    # Initialize data structures for combined output
+    market_data_history = {}
+    money_fund_data = [] # Changed to list to hold all fund data
+    
+    # Symbols to fetch in batches
+    yahoo_symbols_list = list(YAHOO_SYMBOLS.values())
+    
+    # Fetch all data in one go
+    df_all = yf.download(yahoo_symbols_list, start=start_date, interval="1d", auto_adjust=False)
+    
+    if df_all.empty:
+        print("Error: Yahoo Finance returned no data for all symbols.")
+        return
+
+    for symbol_key, yahoo_symbol in YAHOO_SYMBOLS.items():
+        try:
+            # Extract the data for the specific symbol
+            if isinstance(df_all['Close'], pd.DataFrame):
+                df = df_all.loc[:, (slice(None), yahoo_symbol)].droplevel(1, axis=1)
+            else:
+                # Handle case where only one symbol was fetched (df_all is a Series)
+                df = df_all
+            
+            if not df.empty:
+                # Process and truncate the data
+                processed_data = process_yahoo_data(symbol_key, df)
+                
+                # Separate data based on symbol type
+                if symbol_key in ["VFIAX", "VTSAX", "VBTLX", "BIL"]:
+                    # Money Fund Data: Only need the latest data point
+                    if processed_data:
+                        latest_data = processed_data[-1]
+                        money_fund_data.append({
+                            "symbol": symbol_key,
+                            "latest_price": latest_data['close'],
+                            "daily_change_percent": latest_data['change_percent'],
+                            "date": latest_data['date']
+                        })
+                else:
+                    # Market Breadth and Global Market Data: Need the 30-day history
+                    # We need to add the full name for the chart legend
+                    if processed_data:
+                        # Add full name to the first element for chart legend
+                        processed_data[0]['name'] = symbol_key 
+                        market_data_history[symbol_key] = processed_data
+            
+        except Exception as e:
+            print(f"An unexpected error occurred for {symbol_key} ({yahoo_symbol}): {e}")
+
+    # Save the combined data files
+    save_json(market_data_history, "market_data_history.json")
+    
+    # Save money fund data
+    save_json({
         "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-        "breadth": breadth_data
-    }
-
-def generate_money_fund_data():
-    """Generates dummy money fund data."""
-    # Dummy data for demonstration
-    return {
-        "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-        "funds": [
-            {"symbol": "VFIAX", "latest_price": 450.25, "daily_change_percent": 0.85, "date": (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')},
-            {"symbol": "VTSAX", "latest_price": 120.10, "daily_change_percent": 0.72, "date": (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')},
-            {"symbol": "VBTLX", "latest_price": 10.50, "daily_change_percent": -0.05, "date": (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')},
-            {"symbol": "BIL", "latest_price": 91.88, "daily_change_percent": 0.01, "date": (datetime.now() - timedelta(days=1)).strftime('%Y-%m-%d')},
-        ]
-    }
+        "funds": money_fund_data
+    }, "money_fund_data.json")
 
 def generate_dummy_data():
-    """Generates dummy data for all required JSON files."""
+    """Generates dummy data for files not covered by real-time fetching."""
     
-    # 1. AI Analysis
+    # 1. AI Analysis (Static for now)
     ai_analysis = {
         "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         "sentiment": "Bullish",
         "analysis": "市場情緒持續樂觀，主要指數在科技股帶動下創下新高。建議關注半導體和人工智能相關領域的長期投資機會。"
     }
     save_json(ai_analysis, 'ai_analysis.json')
-
-    # 2. Fear & Greed Index
-    fear_greed = {
-        "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-        "value": 78
-    }
-    save_json(fear_greed, 'fear_greed_index.json')
-
-    # 3. HIBOR Rates (Dummy)
-    hibor_rates = {
-        "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-        "rates": [
-            {"term": "隔夜", "rate": 4.850},
-            {"term": "1 個月", "rate": 5.125},
-            {"term": "3 個月", "rate": 5.350},
-            {"term": "6 個月", "rate": 5.500},
-        ]
-    }
-    save_json(hibor_rates, 'hibor_rates.json')
-
-    # 4. Market Breadth
-    market_breadth = generate_market_breadth()
-    save_json(market_breadth, 'market_breadth.json')
-
-    # 5. Market Data History (for Global Markets Chart)
-    market_history = get_market_data(SYMBOLS)
-    save_json(market_history, 'market_data_history.json')
-
-    # 6. Money Fund Data
-    money_fund_data = generate_money_fund_data()
-    save_json(money_fund_data, 'money_fund_data.json')
     
-    # 7. 13F Data (Dummy)
+    # 2. 13F Data (Dummy)
     f13_data = {
         "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         "holdings": [
@@ -139,7 +276,7 @@ def generate_dummy_data():
     }
     save_json(f13_data, '13f-data.json')
     
-    # 8. Market Sentiment (Dummy for Consensus)
+    # 3. Market Sentiment (Dummy for Consensus)
     market_sentiment = {
         "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         "consensus": {
@@ -149,6 +286,21 @@ def generate_dummy_data():
     }
     save_json(market_sentiment, 'market_sentiment.json')
 
+# --- Main Execution ---
 
 if __name__ == "__main__":
+    print("Starting data synchronization script...")
+    
+    # 1. Generate Dummy Data (for files not fetched live)
     generate_dummy_data()
+    
+    # 2. Fetch US Fear & Greed Index (Scraping)
+    fetch_cnn_fear_greed()
+    
+    # 3. Fetch HIBOR rates (HKMA API)
+    fetch_hkma_hibor()
+    
+    # 4. Fetch Market Data (Indices, ETFs, Money Funds) using Yahoo Finance (yfinance)
+    fetch_market_data()
+    
+    print("Data synchronization complete.")
