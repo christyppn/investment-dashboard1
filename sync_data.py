@@ -93,15 +93,16 @@ def fetch_cnn_fear_greed():
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
         
-        # The value is usually in a div with class 'market-f-g-index__index-value'
         # Try to find the value using the most common selector first
         value_element = soup.find('div', class_='market-f-g-index__index-value')
-        
-        # The sentiment is usually in a div with class 'market-f-g-index__index-label'
         sentiment_element = soup.find('div', class_='market-f-g-index__index-label')
-        
-        # The timestamp is usually in a div with class 'market-f-g-index__index-date'
         date_element = soup.find('div', class_='market-f-g-index__index-date')
+        
+        # Fallback for the new CNN structure (as seen in the user's latest screenshot)
+        if not value_element:
+            value_element = soup.find('div', class_='fng-gauge__value')
+            sentiment_element = soup.find('div', class_='fng-gauge__label')
+            date_element = soup.find('div', class_='fng-gauge__date')
 
         if value_element and sentiment_element and date_element:
             # Check if the value is a number, otherwise it might be a loading state
@@ -113,25 +114,6 @@ def fetch_cnn_fear_greed():
             sentiment = sentiment_element.text.strip()
             timestamp = date_element.text.strip().replace("Last updated ", "")
             
-            data = {
-                "timestamp": timestamp,
-                "value": value,
-                "sentiment": sentiment,
-                "source": "CNNMoney (US)"
-            }
-            save_json(data, "fear_greed_index.json")
-            return True
-        
-        # Fallback for different class names
-        value_element = soup.find('div', class_='fng-gauge__value')
-        if value_element:
-            try:
-                value = int(value_element.text.strip())
-            except ValueError:
-                print("Warning: F&G value is not an integer in fallback, possibly a loading state.")
-                return False
-            sentiment = soup.find('div', class_='fng-gauge__label').text.strip()
-            timestamp = soup.find('div', class_='fng-gauge__date').text.strip().replace("Last updated ", "")
             data = {
                 "timestamp": timestamp,
                 "value": value,
@@ -179,7 +161,8 @@ def fetch_hkma_hibor():
                 rate_key = f"HKD_HIBOR_{key}"
                 # The rate is a string, we need to convert it to float.
                 # The API returns the Interest Settlement Rate (ISR), which is the HIBOR fixing.
-                if rate_key in latest_record and latest_record[rate_key] is not None:
+                # We also check if the value is not a placeholder like 'N.A.'
+                if rate_key in latest_record and latest_record[rate_key] is not None and latest_record[rate_key] not in ['N.A.', '']:
                     hibor_data.append({
                         "term": term_name,
                         "rate": float(latest_record[rate_key]),
@@ -187,7 +170,7 @@ def fetch_hkma_hibor():
                     })
             
             # Manually add Overnight rate from a different field if available
-            if 'OVERNIGHT' in latest_record and latest_record['OVERNIGHT'] is not None:
+            if 'OVERNIGHT' in latest_record and latest_record['OVERNIGHT'] is not None and latest_record['OVERNIGHT'] not in ['N.A.', '']:
                 hibor_data.insert(0, {
                     "term": "隔夜",
                     "rate": float(latest_record['OVERNIGHT']),
