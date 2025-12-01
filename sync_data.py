@@ -175,6 +175,7 @@ def fetch_hkma_hibor():
             for key, term_name in terms.items():
                 # The correct key in the API is HKD_HIBOR_M1, HKD_HIBOR_M3, etc.
                 rate_key = f"HKD_HIBOR_{key}"
+                # The rate is a string, we need to convert it to float
                 if rate_key in latest_record and latest_record[rate_key] is not None:
                     hibor_data.append({
                         "term": term_name,
