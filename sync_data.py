@@ -155,6 +155,8 @@ def fetch_hkma_hibor():
     """Fetches real-time HIBOR rates from HKMA API."""
     # HKMA API for daily HIBOR rates
     # Using the daily HKD Interest Settlement Rates API (T060303)
+    # The previous API was for historical data. We will use the daily monetary statistics API for the latest fixing.
+    # Note: The daily monetary statistics API does not provide the full HIBOR fixing list, so we stick to the monthly bulletin API for the full list, but check for the correct field.
     url = "https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily"
     
     try:
@@ -175,13 +177,22 @@ def fetch_hkma_hibor():
             for key, term_name in terms.items():
                 # The correct key in the API is HKD_HIBOR_M1, HKD_HIBOR_M3, etc.
                 rate_key = f"HKD_HIBOR_{key}"
-                # The rate is a string, we need to convert it to float
+                # The rate is a string, we need to convert it to float.
+                # The API returns the Interest Settlement Rate (ISR), which is the HIBOR fixing.
                 if rate_key in latest_record and latest_record[rate_key] is not None:
                     hibor_data.append({
                         "term": term_name,
                         "rate": float(latest_record[rate_key]),
                         "date": latest_record['end_of_day']
                     })
+            
+            # Manually add Overnight rate from a different field if available
+            if 'OVERNIGHT' in latest_record and latest_record['OVERNIGHT'] is not None:
+                hibor_data.insert(0, {
+                    "term": "隔夜",
+                    "rate": float(latest_record['OVERNIGHT']),
+                    "date": latest_record['end_of_day']
+                })
             
             if hibor_data:
                 save_json({
