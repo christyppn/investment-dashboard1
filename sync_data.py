@@ -9,7 +9,6 @@ from bs4 import BeautifulSoup
 
 # --- Configuration ---
 DATA_DIR = "data"
-# ... (LOG_FILE definition removed for clean final version) ...
 
 # Yahoo Finance Symbols (Confirmed symbols for all required data points)
 YAHOO_SYMBOLS = {
@@ -62,22 +61,15 @@ def fetch_cnn_fear_greed():
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
         
-        # Try to find the value using the most common selector first
-        value_element = soup.find('div', class_='market-f-g-index__index-value')
-        sentiment_element = soup.find('div', class_='market-f-g-index__index-label')
-        date_element = soup.find('div', class_='market-f-g-index__index-date')
-        
-        # Fallback for the new CNN structure
-        if not value_element:
-            value_element = soup.find('div', class_='fng-gauge__value')
-            sentiment_element = soup.find('div', class_='fng-gauge__label')
-            date_element = soup.find('div', class_='fng-gauge__date')
+        # Final, confirmed selectors based on live inspection
+        value_element = soup.find('div', class_='fng-gauge__value')
+        sentiment_element = soup.find('div', class_='fng-gauge__label')
+        date_element = soup.find('div', class_='fng-gauge__date')
 
         if value_element and sentiment_element and date_element:
             try:
                 value = int(value_element.text.strip())
             except ValueError:
-                # If value is not an integer, it's a failure.
                 raise ValueError(f"F&G value is not an integer: {value_element.text.strip()}")
             
             sentiment = sentiment_element.text.strip()
@@ -98,7 +90,7 @@ def fetch_cnn_fear_greed():
         # On any failure (request, parsing, value error), save an error state
         error_data = {
             "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            "value": 0, # Use 0 or a placeholder
+            "value": 0,
             "sentiment": "ERROR",
             "source": f"Fetch Failed: {str(e)[:50]}..."
         }
@@ -122,6 +114,17 @@ def fetch_hkma_hibor():
             hibor_data = []
             terms = {"M1": "1個月", "M3": "3個月", "M6": "6個月"}
             
+            # Manually add Overnight rate
+            if 'OVERNIGHT' in latest_record and latest_record['OVERNIGHT'] is not None and latest_record['OVERNIGHT'] not in ['N.A.', '']:
+                try:
+                    hibor_data.insert(0, {
+                        "term": "隔夜",
+                        "rate": float(latest_record['OVERNIGHT']),
+                        "date": latest_record['end_of_day']
+                    })
+                except ValueError:
+                    print(f"Warning: Could not convert Overnight rate {latest_record['OVERNIGHT']} to float.")
+            
             for key, term_name in terms.items():
                 rate_key = f"HKD_HIBOR_{key}"
                 # Check for valid rate and not a placeholder
@@ -134,17 +137,6 @@ def fetch_hkma_hibor():
                         })
                     except ValueError:
                         print(f"Warning: Could not convert HIBOR rate {latest_record[rate_key]} to float for {term_name}.")
-            
-            # Manually add Overnight rate
-            if 'OVERNIGHT' in latest_record and latest_record['OVERNIGHT'] is not None and latest_record['OVERNIGHT'] not in ['N.A.', '']:
-                try:
-                    hibor_data.insert(0, {
-                        "term": "隔夜",
-                        "rate": float(latest_record['OVERNIGHT']),
-                        "date": latest_record['end_of_day']
-                    })
-                except ValueError:
-                    print(f"Warning: Could not convert Overnight rate {latest_record['OVERNIGHT']} to float.")
             
             if hibor_data:
                 save_json({
