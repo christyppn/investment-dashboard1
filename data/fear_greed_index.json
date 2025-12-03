@@ -1,4 +1,6 @@
 {
-    "timestamp": "2025-11-28 01:16:46",
-    "value": 78
+  "timestamp": "2025-12-03 06:56:04",
+  "value": 0,
+  "sentiment": "ERROR",
+  "source": "Fetch Failed: Could not find F&G data elements on CNN page...."
 }

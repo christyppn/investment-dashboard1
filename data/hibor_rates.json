@@ -1,21 +1,11 @@
 {
-    "timestamp": "2025-11-28 01:16:46",
-    "rates": [
-        {
-            "term": "隔夜",
-            "rate": 4.85
-        },
-        {
-            "term": "1 個月",
-            "rate": 5.125
-        },
-        {
-            "term": "3 個月",
-            "rate": 5.35
-        },
-        {
-            "term": "6 個月",
-            "rate": 5.5
-        }
-    ]
+  "timestamp": "2025-12-03 06:56:05",
+  "rates": [
+    {
+      "term": "ERROR",
+      "rate": 0.0,
+      "date": "N/A"
+    }
+  ],
+  "error_message": "Fetch Failed: HIBOR data found but specific terms (1M, 3M, 6M) a..."
 }
