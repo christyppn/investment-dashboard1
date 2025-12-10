@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-04 01:58:10",
+  "timestamp": "2025-12-10 06:36:08",
   "rates": [
     {
       "term": "ERROR",
@@ -7,5 +7,5 @@
       "date": "N/A"
     }
   ],
-  "error_message": "Fetch Failed: HIBOR data found but specific terms (1M, 3M, 6M) a..."
+  "error_message": "Fetch Failed: HIBOR data found but no valid 1M, 3M, or 6M terms ..."
 }
