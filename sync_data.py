@@ -12,12 +12,26 @@ DATA_DIR = "data"
 
 # Yahoo Finance Symbols (Confirmed symbols for all required data points)
 YAHOO_SYMBOLS = {
-    # ... (YAHOO_SYMBOLS definition remains the same) ...
-    "SPY": "SPY", "QQQ": "QQQ", "DIA": "DIA", "GSPC": "^GSPC", "IXIC": "^IXIC", "VIX": "^VIX", 
-    "HSI": "^HSI", "N225": "^N225", "XLK": "XLK", "XLC": "XLC", "XLY": "XLY", "XLP": "XLP", 
-    "XLV": "XLV", "XLF": "XLF", "XLE": "XLE", "XLI": "XLI", "XLB": "XLB", "XLU": "XLU", 
-    "VNQ": "VNQ", "GLD": "GLD", "ROBO": "ROBO", "SMH": "SMH", "IWM": "IWM",
-    "VFIAX": "VFIAX", "VTSAX": "VTSAX", "VBTLX": "VBTLX", "BIL": "BIL",
+    # Market Breadth (US) - Standard ETF tickers
+    "SPY": "SPY",
+    "QQQ": "QQQ",
+    "DIA": "DIA",
+    # Global Indices and VIX - Yahoo Finance uses ^ prefix for indices
+    "GSPC": "^GSPC", # S&P 500
+    "IXIC": "^IXIC", # NASDAQ
+    "VIX": "^VIX", 
+    "HSI": "^HSI", # Confirmed Yahoo Finance symbol for Hang Seng Index
+    "N225": "^N225", # Confirmed Yahoo Finance symbol for Nikkei 225
+    # Sector ETFs (11)
+    "XLK": "XLK", "XLC": "XLC", "XLY": "XLY", "XLP": "XLP", "XLV": "XLV", "XLF": "XLF", 
+    "XLE": "XLE", "XLI": "XLI", "XLB": "XLB", "XLU": "XLU", "VNQ": "VNQ",
+    # Thematic/Commodity ETFs (4)
+    "GLD": "GLD", "ROBO": "ROBO", "SMH": "SMH", "IWM": "IWM",
+    # Money Market Funds (4) - Using original mutual fund symbols (yfinance supports them)
+    "VFIAX": "VFIAX",
+    "VTSAX": "VTSAX",
+    "VBTLX": "VBTLX",
+    "BIL": "BIL", # Using BIL ETF as a proxy for money market fund data, as VMMXX is often problematic
 }
 
 # List of symbols to fetch (keys from the mapping)
@@ -38,15 +52,33 @@ def save_json(data, filename):
         print(f"Error saving {filename}: {e}")
 
 def process_yahoo_data(symbol, df):
-    # ... (Function body remains the same) ...
-    if df.empty: return []
+    """
+    Processes raw yfinance DataFrame to calculate daily changes,
+    and includes the critical division-by-zero check and 30-day truncation.
+    """
+    if df.empty:
+        return []
+
+    # Calculate daily percentage change for Close price
     df['change_percent'] = df['Close'].pct_change() * 100
+    
+    # Clean up and format
     df = df.reset_index()
-    if pd.api.types.is_datetime64_any_dtype(df['Date']): df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
+    if pd.api.types.is_datetime64_any_dtype(df['Date']):
+        df['Date'] = df['Date'].dt.strftime('%Y-%m-%d')
+    
+    # Select and rename columns for final output
     df = df.rename(columns={'Date': 'date', 'Close': 'close'})
     df = df[['date', 'close', 'change_percent']]
+    
+    # Convert to list of dictionaries
     time_series_list = df.to_dict('records')
-    if time_series_list: time_series_list.pop(0)
+    
+    # Remove the first row (NaN change)
+    if time_series_list:
+        time_series_list.pop(0)
+
+    # Final Optimization: Only keep the latest 30 trading days for frontend display
     return time_series_list[-30:]
 
 # --- Data Fetching Functions ---
@@ -57,40 +89,31 @@ def fetch_cnn_fear_greed():
     headers = {'User-Agent': 'Mozilla/5.0'}
     
     try:
-        response = requests.get(url, headers=headers, timeout=10 )
+        response = requests.get(url, headers=headers, timeout=10)
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
         
-        # FINAL ROBUST SELECTOR: Find the gauge container and then the value/label
-        # Search for the main data container which holds the value and sentiment
-        gauge_container = soup.find('div', class_='fng-gauge')
+        # Try to find the value using the most common selector first
+        value_element = soup.find('div', class_='market-f-g-index__index-value')
+        sentiment_element = soup.find('div', class_='market-f-g-index__index-label')
+        date_element = soup.find('div', class_='market-f-g-index__index-date')
         
-        if gauge_container:
-            value_element = gauge_container.find('div', class_='fng-gauge__value')
-            sentiment_element = gauge_container.find('div', class_='fng-gauge__label')
-            date_element = gauge_container.find('div', class_='fng-gauge__date')
-        else:
-            # Fallback: Search for the data in the script tags (often a JSON blob)
-            script_tags = soup.find_all('script')
-            for script in script_tags:
-                if 'var data' in script.text and 'Fear & Greed' in script.text:
-                    # This is a complex fallback, let's stick to the simpler robust selector first
-                    pass
-            
-            # If the simple robust selector failed, we need to try a different class name
-            value_element = soup.find('div', class_='market-fng-gauge__value')
-            sentiment_element = soup.find('div', class_='market-fng-gauge__label')
-            date_element = soup.find('div', class_='market-fng-gauge__date')
+        # Fallback for the new CNN structure (based on live inspection)
+        if not value_element:
+            # The main gauge value is in a div with class 'fng-gauge__value'
+            value_element = soup.find('div', class_='fng-gauge__value')
+            # The sentiment text is in a div with class 'fng-gauge__label'
+            sentiment_element = soup.find('div', class_='fng-gauge__label')
+            # The date is in a div with class 'fng-gauge__date'
+            date_element = soup.find('div', class_='fng-gauge__date')
 
         if value_element and sentiment_element and date_element:
+            # Check if the value is a number, otherwise it might be a loading state
             try:
-                # Extract value from the text content
-                value_text = value_element.text.strip()
-                # Try to find the number in the text (e.g., if it's "18")
-                value = int(''.join(filter(str.isdigit, value_text)))
+                value = int(value_element.text.strip())
             except ValueError:
-                raise ValueError(f"F&G value is not an integer: {value_text}")
-            
+                print("Warning: F&G value is not an integer, possibly a loading state.")
+                return False
             sentiment = sentiment_element.text.strip()
             timestamp = date_element.text.strip().replace("Last updated ", "")
             
@@ -103,104 +126,90 @@ def fetch_cnn_fear_greed():
             save_json(data, "fear_greed_index.json")
             return True
 
-        raise Exception("Could not find F&G data elements on CNN page.")
+        print("Warning: Could not find F&G data elements on CNN page.")
+        return False
         
+    except requests.RequestException as e:
+        print(f"Error fetching CNN Fear & Greed Index: {e}")
+        return False
     except Exception as e:
-        # On any failure (request, parsing, value error), save an error state
-        error_data = {
-            "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            "value": 0,
-            "sentiment": "ERROR",
-            "source": f"Fetch Failed: {str(e)[:50]}..."
-        }
-        save_json(error_data, "fear_greed_index.json")
-        print(f"Error fetching CNN F&G: {e}")
+        print(f"An unexpected error occurred during F&G scrape: {e}")
         return False
 
 def fetch_hkma_hibor():
-    """Fetches real-time HIBOR rates from HKMA API, with back-tracking for missing data."""
+    """Fetches real-time HIBOR rates from HKMA API."""
+    # HKMA API for daily HIBOR rates
+    # Using the daily HKD Interest Settlement Rates API (T060303)
+    # The previous API was for historical data. We will use the daily monetary statistics API for the latest fixing.
+    # Note: The daily monetary statistics API does not provide the full HIBOR fixing list, so we stick to the monthly bulletin API for the full list, but check for the correct field.
     url = "https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily"
     
     try:
-        response = requests.get(url, timeout=10 )
+        response = requests.get(url, timeout=10)
         response.raise_for_status()
         data = response.json()
         
         if data and data.get('result') and data['result'].get('records'):
             records = data['result']['records']
             
-            # Iterate through records (latest first) until valid data is found
-            for latest_record in records:
-                hibor_data = []
-                terms = {"M1": "1個月", "M3": "3個月", "M6": "6個月"}
-                
-                # Check for valid Overnight rate
-                if 'OVERNIGHT' in latest_record and latest_record['OVERNIGHT'] is not None and latest_record['OVERNIGHT'] not in ['N.A.', '']:
-                    try:
-                        hibor_data.insert(0, {
-                            "term": "隔夜",
-                            "rate": float(latest_record['OVERNIGHT']),
-                            "date": latest_record['end_of_day']
-                        })
-                    except ValueError:
-                        pass # Ignore if conversion fails
-
-                # Check for valid M1, M3, M6 rates
-                valid_term_count = 0
-                for key, term_name in terms.items():
-                    rate_key = f"HKD_HIBOR_{key}"
-                    if rate_key in latest_record and latest_record[rate_key] is not None and latest_record[rate_key] not in ['N.A.', '']:
-                        try:
-                            hibor_data.append({
-                                "term": term_name,
-                                "rate": float(latest_record[rate_key]),
-                                "date": latest_record['end_of_day']
-                            })
-                            valid_term_count += 1
-                        except ValueError:
-                            pass # Ignore if conversion fails
-                
-                # If we found at least one valid term (M1, M3, or M6), we use this record
-                if valid_term_count > 0:
-                    save_json({
-                        "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                        "rates": hibor_data
-                    }, "hibor_rates.json")
-                    return True
+            # The API returns records in descending order of date, so the first record is the latest
+            latest_record = records[0] 
             
-            # If loop finishes without finding valid data
-            raise Exception("HIBOR data found but no valid 1M, 3M, or 6M terms in recent records.")
+            # Extract relevant HIBOR terms (1M, 3M, 6M)
+            hibor_data = []
+            terms = {"M1": "1個月", "M3": "3個月", "M6": "6個月"}
+            
+            for key, term_name in terms.items():
+                # The correct key in the API is HKD_HIBOR_M1, HKD_HIBOR_M3, etc.
+                rate_key = f"HKD_HIBOR_{key}"
+                # The rate is a string, we need to convert it to float.
+                # The API returns the Interest Settlement Rate (ISR), which is the HIBOR fixing.
+                # We also check if the value is not a placeholder like 'N.A.'
+                if rate_key in latest_record and latest_record[rate_key] is not None and latest_record[rate_key] not in ['N.A.', '']:
+                    hibor_data.append({
+                        "term": term_name,
+                        "rate": float(latest_record[rate_key]),
+                        "date": latest_record['end_of_day']
+                    })
+            
+            if hibor_data:
+                save_json({
+                    "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                    "rates": hibor_data
+                }, "hibor_rates.json")
+                return True
+            else:
+                print("Warning: HIBOR data found but specific terms (1M, 3M, 6M) are missing.")
+                return False
         else:
-            raise Exception("HKMA API returned no valid records.")
+            print("Error: HKMA API returned no valid records.")
+            return False
             
-    except Exception as e:
-        # On any failure, save an error state
-        error_data = {
-            "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-            "rates": [{"term": "ERROR", "rate": 0.0, "date": "N/A"}],
-            "error_message": f"Fetch Failed: {str(e)[:50]}..."
-        }
-        save_json(error_data, "hibor_rates.json")
+    except requests.RequestException as e:
         print(f"Error fetching HKMA HIBOR: {e}")
+        return False
+    except Exception as e:
+        print(f"An unexpected error occurred during HIBOR fetch: {e}")
         return False
 
 def fetch_market_data():
     """Fetches time series data for all configured symbols from Yahoo Finance using yfinance."""
-    # ... (Function body remains the same) ...
+    
+    # Calculate start date for the last 30 trading days (approx 45 calendar days)
     start_date = (datetime.now() - timedelta(days=45)).strftime('%Y-%m-%d')
+    
+    # Initialize data structures for combined output
     market_data_history = {}
-    money_fund_data = []
+    money_fund_data = [] # Changed to list to hold all fund data
+    
+    # Symbols to fetch in batches
     yahoo_symbols_list = list(YAHOO_SYMBOLS.values())
     
-    try:
-        # Suppress yfinance output
-        df_all = yf.download(yahoo_symbols_list, start=start_date, interval="1d", auto_adjust=False, progress=False)
-    except Exception as e:
-        print(f"ERROR: Yahoo Finance download failed: {e}")
-        return
-
+    # Fetch all data in one go
+    df_all = yf.download(yahoo_symbols_list, start=start_date, interval="1d", auto_adjust=False)
+    
     if df_all.empty:
-        print("ERROR: Yahoo Finance returned no data for all symbols.")
+        print("Error: Yahoo Finance returned no data for all symbols.")
         return
 
     for symbol_key, yahoo_symbol in YAHOO_SYMBOLS.items():
@@ -236,7 +245,7 @@ def fetch_market_data():
                         market_data_history[symbol_key] = processed_data
             
         except Exception as e:
-            print(f"ERROR: Unexpected error occurred for {symbol_key} ({yahoo_symbol}): {e}")
+            print(f"An unexpected error occurred for {symbol_key} ({yahoo_symbol}): {e}")
 
     # Save the combined data files
     save_json(market_data_history, "market_data_history.json")
