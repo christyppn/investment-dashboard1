@@ -1,10 +1,15 @@
 {
-    "timestamp": "2025-12-12 03:53:03",
+    "timestamp": "2025-12-12 04:00:12",
+    "fund_name": "伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q3 2025)",
+    "total_value": 422.38,
+    "cash_ratio": 167.68,
+    "top_10_ratio": 85.2,
+    "quarterly_change": -2.5,
     "holdings": [
         {
             "symbol": "AAPL",
-            "value": 246.5,
-            "change": -13.2
+            "value": 150.5,
+            "change": 1.2
         },
         {
             "symbol": "BAC",
