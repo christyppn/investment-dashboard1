@@ -99,12 +99,44 @@ def fetch_cnn_fear_greed():
         response.raise_for_status()
         html_content = response.text
 
-        # Strategy 1: Fallback to BeautifulSoup scraping (using the latest observed selectors)
+        # Strategy 1: Look for the hidden JSON data block (most stable method)
+        match = re.search(r'\"fear_and_greed\":\{(.+?)\}', html_content)
+        if match:
+            # Reconstruct the JSON string
+            json_str = '{"fear_and_greed":{' + match.group(1) + '}}'
+            # Clean up the JSON string (remove trailing comma if present)
+            json_str = re.sub(r',\s*\}', '}', json_str)
+            
+            try:
+                data = json.loads(json_str)
+                fg_data = data['fear_and_greed']
+                value = int(fg_data['score'])
+                sentiment = fg_data['rating']
+                
+                final_data = {
+                    "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                    "value": value,
+                    "sentiment": sentiment,
+                    "source": "CNNMoney (US) - Hidden JSON"
+                }
+                save_json(final_data, 'fear_greed_index.json')
+                print("Successfully fetched Fear & Greed Index via Hidden JSON.")
+                return True
+            except (json.JSONDecodeError, KeyError, ValueError):
+                # JSON parsing failed, fall through to scraping
+                pass
+
+        # Strategy 2: Fallback to BeautifulSoup scraping (using the latest observed selectors)
         soup = BeautifulSoup(html_content, 'html.parser')
         
-        # New selectors based on manual inspection
-        score_element = soup.find('div', class_='market-f-g-index__index-value') or soup.find('div', class_='fng-gauge__value')
-        sentiment_element = soup.find('div', class_='market-f-g-index__index-label') or soup.find('div', class_='fng-gauge__label')
+        # Try multiple known selectors for the score and sentiment
+        score_element = soup.find('div', class_='market-f-g-index__index-value') or \
+                        soup.find('div', class_='fng-gauge__value') or \
+                        soup.find('div', class_='fng-circle__score')
+                        
+        sentiment_element = soup.find('div', class_='market-f-g-index__index-label') or \
+                            soup.find('div', class_='fng-gauge__label') or \
+                            soup.find('div', class_='fng-circle__label')
         
         if score_element and sentiment_element:
             try:
@@ -118,13 +150,13 @@ def fetch_cnn_fear_greed():
                     "source": "CNNMoney (US) - Scraping Fallback"
                 }
                 save_json(final_data, 'fear_greed_index.json')
-                print("Successfully fetched Fear & Greed Index via scraping.")
+                print("Successfully fetched Fear & Greed Index via Scraping Fallback.")
                 return True
             except ValueError:
                 pass # Value is not an integer, likely an error state on the page
 
-        # If scraping fails, write error and return
-        error_data["source"] = "Fetch Failed: Could not find F&G data elements on CNN page via scraping."
+        # If all strategies fail, write error and return
+        error_data["source"] = "Fetch Failed: Could not find F&G data elements on CNN page via all methods."
         save_json(error_data, 'fear_greed_index.json')
         return False
 
@@ -160,6 +192,7 @@ def fetch_hkma_hibor():
         data_date = "N/A"
         
         for record in records:
+            # Check if all required keys have valid, non-null values
             if all(record.get(key) is not None for key in keys):
                 data_date = record['end_of_day']
                 valid_rates = {
@@ -245,14 +278,20 @@ def generate_dummy_data():
     ai_analysis = {
         "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         "sentiment": "Bullish",
-        "analysis": "市場情緒持續樂觀，主要指數在科技股帶動下創下新高。建議關注半導體和人工智能相關領域的長期投資機會。"
+        "analysis": "市場情緒持續樂觀，主要指數在科技股帶動下創下新高。建議關注半導體和人工智能相關領域的長期投資機會。",
+        "rating": "Bullish"
     }
     save_json(ai_analysis, 'ai_analysis.json')
     
     f13_data = {
         "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+        "fund_name": "伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q3 2025)",
+        "total_value": 422.38,
+        "cash_ratio": 167.68,
+        "top_10_ratio": 85.2,
+        "quarterly_change": -2.5,
         "holdings": [
-            {"symbol": "AAPL", "value": 246.5, "change": -13.2},
+            {"symbol": "AAPL", "value": 150.5, "change": 1.2},
             {"symbol": "BAC", "value": 54.8, "change": -5.6},
             {"symbol": "KO", "value": 26.4, "change": 0.0},
         ]
