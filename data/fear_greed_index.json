@@ -1,6 +1,6 @@
 {
-  "timestamp": "2025-12-11 01:23:20",
-  "value": 0,
-  "sentiment": "ERROR",
-  "source": "Fetch Failed: Could not find F&G data elements on CNN page...."
+    "timestamp": "2025-12-12 03:53:03",
+    "value": 0,
+    "sentiment": "ERROR",
+    "source": "Fetch Failed: Could not find F&G data elements on CNN page via scraping."
 }

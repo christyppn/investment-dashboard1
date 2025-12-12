@@ -1,11 +1,22 @@
 {
-  "timestamp": "2025-12-11 01:23:21",
-  "rates": [
-    {
-      "term": "ERROR",
-      "rate": 0.0,
-      "date": "N/A"
-    }
-  ],
-  "error_message": "Fetch Failed: HIBOR data found but no valid 1M, 3M, or 6M terms ..."
+    "timestamp": "2025-12-12 03:53:05",
+    "data_date": "2025-11-28",
+    "rates": [
+        {
+            "term": "Overnight",
+            "rate": 3.0869
+        },
+        {
+            "term": "1個月",
+            "rate": 3.18286
+        },
+        {
+            "term": "3個月",
+            "rate": 3.17167
+        },
+        {
+            "term": "6個月",
+            "rate": 3.22929
+        }
+    ]
 }
