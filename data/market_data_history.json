@@ -148,8 +148,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 681.760009765625,
+            "change_percent": -1.0752025375860397
         }
     ],
     "QQQ": [
@@ -301,8 +301,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 613.6199951171875,
+            "change_percent": -1.9118292857712271
         }
     ],
     "DIA": [
@@ -454,8 +454,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 485.3999938964844,
+            "change_percent": -0.506282666575919
         }
     ],
     "GSPC": [
@@ -607,8 +607,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 6827.41015625,
+            "change_percent": -1.0663649289958
         }
     ],
     "IXIC": [
@@ -760,8 +760,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 23195.169921875,
+            "change_percent": -1.689801769130872
         }
     ],
     "VIX": [
@@ -913,8 +913,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 15.739999771118164,
+            "change_percent": 5.9932617291983625
         }
     ],
     "HSI": [
@@ -1066,8 +1066,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": 25864.83984375,
-            "change_percent": 1.3095315416504105
+            "close": 25976.7890625,
+            "change_percent": 1.7480234471302314
         }
     ],
     "N225": [
@@ -1219,8 +1219,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": 50642.7109375,
-            "change_percent": 0.9848499364937036
+            "close": 50836.55078125,
+            "change_percent": 1.371379156008934
         }
     ],
     "XLK": [
@@ -1372,8 +1372,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 143.69000244140625,
+            "change_percent": -2.8924773562129524
         }
     ],
     "XLC": [
@@ -1525,8 +1525,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 116.55000305175781,
+            "change_percent": -0.22257898490710692
         }
     ],
     "XLY": [
@@ -1678,8 +1678,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 120.69999694824219,
+            "change_percent": 0.43268151251951714
         }
     ],
     "XLP": [
@@ -1831,8 +1831,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 79.41999816894531,
+            "change_percent": 0.7867958035233436
         }
     ],
     "XLV": [
@@ -1984,8 +1984,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 154.05999755859375,
+            "change_percent": 0.3125379097645098
         }
     ],
     "XLF": [
@@ -2137,8 +2137,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 54.95000076293945,
+            "change_percent": 0.14580250157103514
         }
     ],
     "XLE": [
@@ -2290,8 +2290,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 45.5099983215332,
+            "change_percent": -0.9791139510520241
         }
     ],
     "XLI": [
@@ -2443,8 +2443,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 156.74000549316406,
+            "change_percent": -0.6276486788759583
         }
     ],
     "XLB": [
@@ -2596,8 +2596,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 45.150001525878906,
+            "change_percent": 0.06649511237672989
         }
     ],
     "XLU": [
@@ -2749,8 +2749,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 42.83000183105469,
+            "change_percent": -0.4879160780800418
         }
     ],
     "VNQ": [
@@ -2902,8 +2902,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 89.44999694824219,
+            "change_percent": -0.1228233735486639
         }
     ],
     "GLD": [
@@ -3055,8 +3055,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 395.44000244140625,
+            "change_percent": 0.5594579039939429
         }
     ],
     "ROBO": [
@@ -3208,8 +3208,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 70.44999694824219,
+            "change_percent": -1.9894273230620985
         }
     ],
     "SMH": [
@@ -3361,8 +3361,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 354.1199951171875,
+            "change_percent": -4.521561344040526
         }
     ],
     "IWM": [
@@ -3514,8 +3514,8 @@
         },
         {
             "date": "2025-12-12",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 253.85000610351562,
+            "change_percent": -1.5321884703211164
         }
     ]
 }
