@@ -83,80 +83,37 @@ def process_yahoo_data(symbol, df):
 
 # --- Data Fetching Functions ---
 
-def fetch_cnn_fear_greed():
-    """Fetches the US Fear & Greed Index from CNNMoney using a robust method."""
-    url = "https://money.cnn.com/data/fear-and-greed/"
+def fetch_alternative_fng():
+    """Fetches the Crypto Fear & Greed Index from Alternative.me API."""
+    url = "https://api.alternative.me/fng/"
     error_data = {
         "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         "value": 0,
         "sentiment": "ERROR",
-        "source": "Fetch Failed: Could not find F&G data elements on CNN page."
+        "source": "Fetch Failed: Alternative.me API error."
     }
     
     try:
-        headers = {"User-Agent": _get_user_agent()}
-        response = requests.get(url, headers=headers, timeout=15)
+        response = requests.get(url, timeout=15)
         response.raise_for_status()
-        html_content = response.text
-
-        # Strategy 1: Look for the hidden JSON data block (most stable method)
-        match = re.search(r'\"fear_and_greed\":\{(.+?)\}', html_content)
-        if match:
-            # Reconstruct the JSON string
-            json_str = '{"fear_and_greed":{' + match.group(1) + '}}'
-            # Clean up the JSON string (remove trailing comma if present)
-            json_str = re.sub(r',\s*\}', '}', json_str)
+        data = response.json()
+        
+        if data and data.get('data') and len(data['data']) > 0:
+            fng_data = data['data'][0]
+            value = int(fng_data.get('value', 0))
+            sentiment = fng_data.get('value_classification', 'ERROR')
             
-            try:
-                data = json.loads(json_str)
-                fg_data = data['fear_and_greed']
-                value = int(fg_data['score'])
-                sentiment = fg_data['rating']
-                
-                final_data = {
-                    "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                    "value": value,
-                    "sentiment": sentiment,
-                    "source": "CNNMoney (US) - Hidden JSON"
-                }
-                save_json(final_data, 'fear_greed_index.json')
-                print("Successfully fetched Fear & Greed Index via Hidden JSON.")
-                return True
-            except (json.JSONDecodeError, KeyError, ValueError):
-                # JSON parsing failed, fall through to scraping
-                pass
-
-        # Strategy 2: Fallback to BeautifulSoup scraping (using the latest observed selectors)
-        soup = BeautifulSoup(html_content, 'html.parser')
+            final_data = {
+                "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                "value": value,
+                "sentiment": sentiment,
+                "source": "Alternative.me (Crypto) API"
+            }
+            save_json(final_data, 'fear_greed_index.json')
+            print("Successfully fetched Fear & Greed Index from Alternative.me API.")
+            return True
         
-        # Try multiple known selectors for the score and sentiment
-        score_element = soup.find('div', class_='market-f-g-index__index-value') or \
-                        soup.find('div', class_='fng-gauge__value') or \
-                        soup.find('div', class_='fng-circle__score')
-                        
-        sentiment_element = soup.find('div', class_='market-f-g-index__index-label') or \
-                            soup.find('div', class_='fng-gauge__label') or \
-                            soup.find('div', class_='fng-circle__label')
-        
-        if score_element and sentiment_element:
-            try:
-                value = int(score_element.text.strip())
-                sentiment = sentiment_element.text.strip()
-                
-                final_data = {
-                    "timestamp": datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                    "value": value,
-                    "sentiment": sentiment,
-                    "source": "CNNMoney (US) - Scraping Fallback"
-                }
-                save_json(final_data, 'fear_greed_index.json')
-                print("Successfully fetched Fear & Greed Index via Scraping Fallback.")
-                return True
-            except ValueError:
-                pass # Value is not an integer, likely an error state on the page
-
-        # If all strategies fail, write error and return
-        error_data["source"] = "Fetch Failed: Could not find F&G data elements on CNN page via all methods."
+        error_data["source"] = "Fetch Failed: Alternative.me API returned no data."
         save_json(error_data, 'fear_greed_index.json')
         return False
 
@@ -313,7 +270,7 @@ def generate_dummy_data():
 if __name__ == "__main__":
     print("Starting data synchronization script...")
     generate_dummy_data()
-    fetch_cnn_fear_greed()
+    fetch_alternative_fng() # Changed from fetch_cnn_fear_greed()
     fetch_hkma_hibor()
     fetch_market_data()
     print("Data synchronization complete.")
