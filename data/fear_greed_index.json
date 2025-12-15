@@ -1,6 +1,6 @@
 {
-    "timestamp": "2025-12-15 01:25:17",
-    "value": 0,
-    "sentiment": "ERROR",
-    "source": "Fetch Failed: Could not find F&G data elements on CNN page via all methods."
+    "timestamp": "2025-12-15 01:58:51",
+    "value": 16,
+    "sentiment": "Extreme Fear",
+    "source": "Alternative.me (Crypto) API"
 }
