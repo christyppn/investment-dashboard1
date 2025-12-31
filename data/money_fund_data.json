@@ -1,5 +1,5 @@
 {
-    "timestamp": "2025-12-30 01:23:28",
+    "timestamp": "2025-12-31 01:24:33",
     "funds": [
         {
             "symbol": "VFIAX",
@@ -21,8 +21,8 @@
         },
         {
             "symbol": "BIL",
-            "latest_price": NaN,
-            "daily_change_percent": 0.0,
+            "latest_price": 91.37000274658203,
+            "daily_change_percent": 0.010948047464598432,
             "date": "2025-12-30"
         }
     ]
