@@ -1,29 +1,29 @@
 {
-    "timestamp": "2025-12-31 01:24:33",
+    "timestamp": "2026-01-01 01:42:12",
     "funds": [
         {
             "symbol": "VFIAX",
             "latest_price": NaN,
             "daily_change_percent": 0.0,
-            "date": "2025-12-30"
+            "date": "2025-12-31"
         },
         {
             "symbol": "VTSAX",
             "latest_price": NaN,
             "daily_change_percent": 0.0,
-            "date": "2025-12-30"
+            "date": "2025-12-31"
         },
         {
             "symbol": "VBTLX",
             "latest_price": NaN,
             "daily_change_percent": 0.0,
-            "date": "2025-12-30"
+            "date": "2025-12-31"
         },
         {
             "symbol": "BIL",
-            "latest_price": 91.37000274658203,
-            "daily_change_percent": 0.010948047464598432,
-            "date": "2025-12-30"
+            "latest_price": 91.37999725341797,
+            "daily_change_percent": 0.010938498999135682,
+            "date": "2025-12-31"
         }
     ]
 }
