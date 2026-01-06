@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-01-06 03:39:17",
+    "timestamp": "2026-01-06 03:50:12",
     "funds": [
         {
             "symbol": "VFIAX",
@@ -9,6 +9,12 @@
         },
         {
             "symbol": "VTSAX",
+            "latest_price": NaN,
+            "daily_change_percent": 0.0,
+            "date": "2026-01-06"
+        },
+        {
+            "symbol": "VBTLX",
             "latest_price": NaN,
             "daily_change_percent": 0.0,
             "date": "2026-01-06"
