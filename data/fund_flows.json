@@ -1,10 +1,12 @@
-[
-  {
-    "id": "1",
-    "region": "US",
-    "sector": "Technology (XLK Volume)",
-    "flow_type": "Volume",
-    "amount": 7583495,
-    "timestamp": "2025-10-27T00:00:00Z"
-  }
-]
+{
+    "timestamp": "2026-01-08 05:37:16",
+    "method": "Alpha Vantage weekly price*volume proxy, not official flow data.",
+    "flows": [
+        {
+            "symbol": "SPY",
+            "latest_week": "2026-01-07",
+            "prev_week": "2026-01-02",
+            "flow_proxy_usd_bn": -37.18
+        }
+    ]
+}

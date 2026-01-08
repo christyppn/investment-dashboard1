@@ -1,25 +1,4 @@
 {
-    "timestamp": "2025-11-28 01:16:46",
-    "breadth": [
-        {
-            "name": "S&P 500",
-            "ma_days": 50,
-            "percent_above": 65.2
-        },
-        {
-            "name": "NASDAQ",
-            "ma_days": 50,
-            "percent_above": 72.8
-        },
-        {
-            "name": "NYSE",
-            "ma_days": 50,
-            "percent_above": 58.1
-        },
-        {
-            "name": "S&P 500",
-            "ma_days": 200,
-            "percent_above": 52.5
-        }
-    ]
+    "timestamp": "2026-01-08 05:37:47",
+    "advance_decline": {}
 }
