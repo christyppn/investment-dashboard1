@@ -1,15 +1,10 @@
 {
     "SPY": [
         {
-            "date": "2025-11-26",
-            "close": 679.6799926757812,
-            "change_percent": 0.6903459171132775,
-            "name": "SPY"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "SPY"
         },
         {
             "date": "2025-11-28",
@@ -148,21 +143,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 689.5800170898438,
+            "change_percent": -0.3223400177244651
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "QQQ": [
         {
-            "date": "2025-11-26",
-            "close": 614.27001953125,
-            "change_percent": 0.8835758106361391,
-            "name": "QQQ"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "QQQ"
         },
         {
             "date": "2025-11-28",
@@ -301,21 +296,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 624.02001953125,
+            "change_percent": 0.09624917993369397
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "DIA": [
         {
-            "date": "2025-11-26",
-            "close": 474.3500061035156,
-            "change_percent": 0.6727818407000319,
-            "name": "DIA"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "DIA"
         },
         {
             "date": "2025-11-28",
@@ -454,21 +449,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 489.9599914550781,
+            "change_percent": -0.9401334453810528
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "GSPC": [
         {
-            "date": "2025-11-26",
-            "close": 6812.60986328125,
-            "change_percent": 0.6906711511012631,
-            "name": "GSPC"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "GSPC"
         },
         {
             "date": "2025-11-28",
@@ -607,21 +602,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 6920.93017578125,
+            "change_percent": -0.3439923431013958
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "IXIC": [
         {
-            "date": "2025-11-26",
-            "close": 23214.689453125,
-            "change_percent": 0.8212584809258683,
-            "name": "IXIC"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "IXIC"
         },
         {
             "date": "2025-11-28",
@@ -755,26 +750,26 @@
         },
         {
             "date": "2026-01-06",
-            "close": 23547.171875,
-            "change_percent": 0.6469171009111152
+            "close": 23547.169921875,
+            "change_percent": 0.646908752731945
         },
         {
             "date": "2026-01-07",
+            "close": 23584.275390625,
+            "change_percent": 0.1575793136632031
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "VIX": [
         {
-            "date": "2025-11-26",
-            "close": 17.190000534057617,
-            "change_percent": -7.381459974709137,
-            "name": "VIX"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "VIX"
         },
         {
             "date": "2025-11-28",
@@ -913,21 +908,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 15.380000114440918,
+            "change_percent": 4.2711872165486
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "HSI": [
         {
-            "date": "2025-11-26",
-            "close": 25928.080078125,
-            "change_percent": 0.1294839874159015,
-            "name": "HSI"
-        },
-        {
             "date": "2025-11-27",
             "close": 25945.9296875,
-            "change_percent": 0.06884277324512578
+            "change_percent": 0.06884277324512578,
+            "name": "HSI"
         },
         {
             "date": "2025-11-28",
@@ -1061,26 +1056,26 @@
         },
         {
             "date": "2026-01-06",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 26710.44921875,
+            "change_percent": 1.3785465997350421
         },
         {
             "date": "2026-01-07",
-            "close": 26546.580078125,
-            "change_percent": 0.7565871870326868
+            "close": 26458.94921875,
+            "change_percent": -0.9415790724457529
+        },
+        {
+            "date": "2026-01-08",
+            "close": NaN,
+            "change_percent": 0.0
         }
     ],
     "N225": [
         {
-            "date": "2025-11-26",
-            "close": 49559.0703125,
-            "change_percent": 1.848663509043269,
-            "name": "N225"
-        },
-        {
             "date": "2025-11-27",
             "close": 50167.1015625,
-            "change_percent": 1.2268818728156106
+            "change_percent": 1.2268818728156106,
+            "name": "N225"
         },
         {
             "date": "2025-11-28",
@@ -1214,26 +1209,26 @@
         },
         {
             "date": "2026-01-06",
+            "close": 52518.078125,
+            "change_percent": 1.3220920602806663
+        },
+        {
+            "date": "2026-01-07",
             "close": NaN,
             "change_percent": 0.0
         },
         {
-            "date": "2026-01-07",
-            "close": 52321.51171875,
-            "change_percent": 0.9428603705258221
+            "date": "2026-01-08",
+            "close": 51615.62890625,
+            "change_percent": -1.718359184054774
         }
     ],
     "XLK": [
         {
-            "date": "2025-11-26",
-            "close": 141.88999938964844,
-            "change_percent": 1.183772169069086,
-            "name": "XLK"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "XLK"
         },
         {
             "date": "2025-11-28",
@@ -1372,21 +1367,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 146.52999877929688,
+            "change_percent": -0.08182415423229061
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "XLC": [
         {
-            "date": "2025-11-26",
-            "close": 114.45999908447266,
-            "change_percent": 0.1399790275091961,
-            "name": "XLC"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "XLC"
         },
         {
             "date": "2025-11-28",
@@ -1525,21 +1520,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 117.08999633789062,
+            "change_percent": -0.2045559442755751
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "XLY": [
         {
-            "date": "2025-11-26",
-            "close": 117.5,
-            "change_percent": 0.6855210562795699,
-            "name": "XLY"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "XLY"
         },
         {
             "date": "2025-11-28",
@@ -1678,21 +1673,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 120.9000015258789,
+            "change_percent": -0.14041312412143014
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "XLP": [
         {
-            "date": "2025-11-26",
-            "close": 78.91000366210938,
-            "change_percent": 1.0889138228291406,
-            "name": "XLP"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "XLP"
         },
         {
             "date": "2025-11-28",
@@ -1831,21 +1826,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 76.62000274658203,
+            "change_percent": -1.097196928782207
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "XLV": [
         {
-            "date": "2025-11-26",
-            "close": 158.4199981689453,
-            "change_percent": -0.2204485067059614,
-            "name": "XLV"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "XLV"
         },
         {
             "date": "2025-11-28",
@@ -1984,21 +1979,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 159.66000366210938,
+            "change_percent": 0.9931098491919199
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "XLF": [
         {
-            "date": "2025-11-26",
-            "close": 52.95000076293945,
-            "change_percent": 0.7803575185910239,
-            "name": "XLF"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "XLF"
         },
         {
             "date": "2025-11-28",
@@ -2137,21 +2132,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 55.61000061035156,
+            "change_percent": -1.4007108052379258
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "XLE": [
         {
-            "date": "2025-11-26",
-            "close": 44.63999938964844,
-            "change_percent": 0.7561202621942487,
-            "name": "XLE"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "XLE"
         },
         {
             "date": "2025-11-28",
@@ -2290,21 +2285,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 45.130001068115234,
+            "change_percent": -1.1174371786886517
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "XLI": [
         {
-            "date": "2025-11-26",
-            "close": 152.8000030517578,
-            "change_percent": 0.579255459069894,
-            "name": "XLI"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "XLI"
         },
         {
             "date": "2025-11-28",
@@ -2443,21 +2438,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 158.97000122070312,
+            "change_percent": -1.88248547792208
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "XLB": [
         {
-            "date": "2025-11-26",
-            "close": 44.44499969482422,
-            "change_percent": 1.2299303736274636,
-            "name": "XLB"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "XLB"
         },
         {
             "date": "2025-11-28",
@@ -2596,21 +2591,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 46.68000030517578,
+            "change_percent": -1.7263151469983584
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "XLU": [
         {
-            "date": "2025-11-26",
-            "close": 44.994998931884766,
-            "change_percent": 1.3286795829458908,
-            "name": "XLU"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "XLU"
         },
         {
             "date": "2025-11-28",
@@ -2749,21 +2744,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 41.869998931884766,
+            "change_percent": -2.4236796066781308
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "VNQ": [
         {
-            "date": "2025-11-26",
-            "close": 91.04000091552734,
-            "change_percent": 0.4413079529704822,
-            "name": "VNQ"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "VNQ"
         },
         {
             "date": "2025-11-28",
@@ -2902,21 +2897,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 88.5,
+            "change_percent": -0.9734840772569031
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "GLD": [
         {
-            "date": "2025-11-26",
-            "close": 383.1199951171875,
-            "change_percent": 0.7998338908444147,
-            "name": "GLD"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "GLD"
         },
         {
             "date": "2025-11-28",
@@ -3055,21 +3050,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 409.2300109863281,
+            "change_percent": -0.9559953917111952
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "ROBO": [
         {
-            "date": "2025-11-26",
-            "close": 67.31999969482422,
-            "change_percent": 1.2026504692272955,
-            "name": "ROBO"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "ROBO"
         },
         {
             "date": "2025-11-28",
@@ -3208,21 +3203,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 72.70999908447266,
+            "change_percent": -0.6015070843854775
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "SMH": [
         {
-            "date": "2025-11-26",
-            "close": 347.7099914550781,
-            "change_percent": 2.264633824974993,
-            "name": "SMH"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "SMH"
         },
         {
             "date": "2025-11-28",
@@ -3361,21 +3356,21 @@
         },
         {
             "date": "2026-01-07",
+            "close": 385.0199890136719,
+            "change_percent": -0.6707616057653465
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
     ],
     "IWM": [
         {
-            "date": "2025-11-26",
-            "close": 247.3000030517578,
-            "change_percent": 0.885243799502522,
-            "name": "IWM"
-        },
-        {
             "date": "2025-11-27",
             "close": NaN,
-            "change_percent": 0.0
+            "change_percent": 0.0,
+            "name": "IWM"
         },
         {
             "date": "2025-11-28",
@@ -3514,6 +3509,11 @@
         },
         {
             "date": "2026-01-07",
+            "close": 255.47999572753906,
+            "change_percent": -0.23429821781767446
+        },
+        {
+            "date": "2026-01-08",
             "close": NaN,
             "change_percent": 0.0
         }
