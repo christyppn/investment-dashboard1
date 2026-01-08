@@ -1,0 +1,45 @@
+name: Sync Investment Data
+
+on:
+  # 設置為每日運行，例如每天 UTC 時間 00:00
+  schedule:
+    - cron: '0 0 * * *'
+  # 允許手動觸發
+  workflow_dispatch:
+
+# 關鍵修復：授予 Actions 寫入權限
+permissions:
+  contents: write
+
+jobs:
+  sync-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+        # 關鍵修復：確保 Actions 可以拉取完整的歷史記錄，以便提交
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run python sync_data.py
+        # 關鍵修復：直接運行 sync_data.py，因為它現在位於正確的工作目錄
+        run: python sync_data.py
+        env:
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          ALPHA_VANTAGE_API_KEY: ${{ secrets.ALPHA_VANTAGE_API_KEY }}
+
+      - name: Commit and Push Data
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions@github.com'
+          git add data/*.json sync_data.log
+          # 使用 git push --force 確保覆蓋遠程更改
+          git commit -am "Update investment data - $(date +'%Y-%m-%d %H:%M:%S UTC')" && git push
