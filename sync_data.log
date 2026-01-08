@@ -13,3 +13,18 @@
 2026-01-08 05:16:00,434 - INFO - Successfully saved data to data/money_fund_data.json
 2026-01-08 05:16:00,434 - INFO - Successfully fetched market data from Yahoo Finance.
 2026-01-08 05:16:00,434 - INFO - Data synchronization complete.
+2026-01-08 05:22:24,051 - INFO - Starting data synchronization script...
+2026-01-08 05:22:24,051 - INFO - Successfully saved data to data/ai_analysis.json
+2026-01-08 05:22:24,052 - INFO - Successfully saved data to data/13f-data.json
+2026-01-08 05:22:24,052 - INFO - Successfully saved data to data/market_sentiment.json
+2026-01-08 05:22:24,052 - INFO - Successfully generated dummy data.
+2026-01-08 05:22:24,290 - INFO - Successfully saved data to data/fear_greed_index.json
+2026-01-08 05:22:24,290 - INFO - Successfully fetched Fear & Greed Index from Alternative.me API.
+2026-01-08 05:22:25,499 - WARNING - HIBOR data is old. Date: 2025-12-31. Max freshness: 5 days.
+2026-01-08 05:22:25,499 - INFO - Successfully saved data to data/hibor_rates.json
+2026-01-08 05:22:25,499 - INFO - Successfully fetched HIBOR rates.
+2026-01-08 05:22:25,502 - INFO - Failed to create TzCache, reason: Error creating TzCache folder: '/home/runner/.cache/py-yfinance' reason: [Errno 17] File exists: '/home/runner/.cache/py-yfinance'. TzCache will not be used. Tip: You can direct cache to use a different location with 'set_tz_cache_location(mylocation)'
+2026-01-08 05:22:27,187 - INFO - Successfully saved data to data/market_data_history.json
+2026-01-08 05:22:27,188 - INFO - Successfully saved data to data/money_fund_data.json
+2026-01-08 05:22:27,188 - INFO - Successfully fetched market data from Yahoo Finance.
+2026-01-08 05:22:27,188 - INFO - Data synchronization complete.
