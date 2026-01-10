@@ -148,8 +148,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 694.0700073242188,
+            "change_percent": 0.6613388484590255
         }
     ],
     "QQQ": [
@@ -301,8 +301,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 626.6500244140625,
+            "change_percent": 0.9960278502977538
         }
     ],
     "DIA": [
@@ -454,8 +454,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 495.0199890136719,
+            "change_percent": 0.5055509797466717
         }
     ],
     "GSPC": [
@@ -607,8 +607,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 6966.27978515625,
+            "change_percent": 0.6475487031883276
         }
     ],
     "IXIC": [
@@ -755,13 +755,13 @@
         },
         {
             "date": "2026-01-08",
-            "close": 23480.015625,
-            "change_percent": -0.44208970968562245
+            "close": 23480.01953125,
+            "change_percent": -0.44207314674574727
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 23671.345703125,
+            "change_percent": 0.8148467322199648
         }
     ],
     "VIX": [
@@ -913,8 +913,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 14.489999771118164,
+            "change_percent": -6.213592556624336
         }
     ],
     "HSI": [
@@ -1061,13 +1061,13 @@
         },
         {
             "date": "2026-01-08",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 26149.310546875,
+            "change_percent": -1.1702606528893322
         },
         {
             "date": "2026-01-09",
-            "close": 26278.6796875,
-            "change_percent": -0.6813178020019461
+            "close": 26231.7890625,
+            "change_percent": 0.3154137294639092
         }
     ],
     "N225": [
@@ -1214,13 +1214,13 @@
         },
         {
             "date": "2026-01-08",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 51117.26171875,
+            "change_percent": -1.6256477185430107
         },
         {
             "date": "2026-01-09",
-            "close": 51596.4609375,
-            "change_percent": -0.7034364894344725
+            "close": 51939.890625,
+            "change_percent": 1.6092976786905133
         }
     ],
     "XLK": [
@@ -1372,8 +1372,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 146.14999389648438,
+            "change_percent": 1.3241738287446347
         }
     ],
     "XLC": [
@@ -1525,8 +1525,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 117.91000366210938,
+            "change_percent": 0.36601999735166313
         }
     ],
     "XLY": [
@@ -1678,8 +1678,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 124.41000366210938,
+            "change_percent": 1.212175004360283
         }
     ],
     "XLP": [
@@ -1831,8 +1831,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 79.25,
+            "change_percent": 1.0326332654041037
         }
     ],
     "XLV": [
@@ -1984,8 +1984,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 157.30999755859375,
+            "change_percent": -0.5122676344591515
         }
     ],
     "XLF": [
@@ -2137,8 +2137,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 55.72999954223633,
+            "change_percent": -0.30411803041521246
         }
     ],
     "XLE": [
@@ -2290,8 +2290,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 46.66999816894531,
+            "change_percent": 0.2577850351267674
         }
     ],
     "XLI": [
@@ -2443,8 +2443,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 161.92999267578125,
+            "change_percent": 1.0988290734570194
         }
     ],
     "XLB": [
@@ -2596,8 +2596,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 48.2599983215332,
+            "change_percent": 1.5999964663856892
         }
     ],
     "XLU": [
@@ -2749,8 +2749,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 42.5099983215332,
+            "change_percent": 1.2383820487748887
         }
     ],
     "VNQ": [
@@ -2902,8 +2902,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 89.47000122070312,
+            "change_percent": 0.2015906633779485
         }
     ],
     "GLD": [
@@ -3055,8 +3055,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 414.4700012207031,
+            "change_percent": 0.7242001159325273
         }
     ],
     "ROBO": [
@@ -3208,8 +3208,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 73.19999694824219,
+            "change_percent": 0.7293226815070497
         }
     ],
     "SMH": [
@@ -3361,8 +3361,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 389.2200012207031,
+            "change_percent": 2.7019868957532944
         }
     ],
     "IWM": [
@@ -3514,8 +3514,8 @@
         },
         {
             "date": "2026-01-09",
-            "close": NaN,
-            "change_percent": 0.0
+            "close": 260.2300109863281,
+            "change_percent": 0.7589042691880543
         }
     ]
 }
