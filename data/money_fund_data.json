@@ -1,22 +1,22 @@
 {
-    "timestamp": "2026-01-10 01:22:52",
+    "timestamp": "2026-01-11 01:42:05",
     "funds": [
         {
             "symbol": "VFIAX",
-            "latest_price": NaN,
-            "daily_change_percent": 0.0,
+            "latest_price": 643.2100219726562,
+            "daily_change_percent": 0.6509716390191489,
             "date": "2026-01-09"
         },
         {
             "symbol": "VTSAX",
-            "latest_price": NaN,
-            "daily_change_percent": 0.0,
+            "latest_price": 166.67999267578125,
+            "daily_change_percent": 0.6582501129273943,
             "date": "2026-01-09"
         },
         {
             "symbol": "VBTLX",
-            "latest_price": NaN,
-            "daily_change_percent": 0.0,
+            "latest_price": 9.779999732971191,
+            "daily_change_percent": 0.20491294692979167,
             "date": "2026-01-09"
         },
         {
