@@ -203,3 +203,37 @@
 2026-01-11 01:42:52,848 - ERROR - Error fetching sentiment history: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-12&to=2026-01-11&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
 2026-01-11 01:42:52,849 - INFO - Successfully saved data to data/market_sentiment_history.json
 2026-01-11 01:42:52,849 - INFO - Data synchronization complete.
+2026-01-12 01:28:44,617 - INFO - Starting data synchronization script...
+2026-01-12 01:28:44,618 - INFO - Successfully saved data to data/ai_analysis.json
+2026-01-12 01:28:44,618 - INFO - Successfully saved data to data/13f-data.json
+2026-01-12 01:28:44,618 - INFO - Successfully saved data to data/market_sentiment.json
+2026-01-12 01:28:44,618 - INFO - Successfully generated dummy data.
+2026-01-12 01:28:44,719 - INFO - Successfully saved data to data/fear_greed_index.json
+2026-01-12 01:28:44,719 - INFO - Successfully fetched Fear & Greed Index from Alternative.me API.
+2026-01-12 01:28:46,002 - WARNING - HIBOR data is old. Date: 2025-12-31. Max freshness: 5 days.
+2026-01-12 01:28:46,002 - INFO - Successfully saved data to data/hibor_rates.json
+2026-01-12 01:28:46,002 - INFO - Successfully fetched HIBOR rates.
+2026-01-12 01:28:47,669 - INFO - Successfully saved data to data/market_data_history.json
+2026-01-12 01:28:47,669 - INFO - Successfully saved data to data/money_fund_data.json
+2026-01-12 01:28:47,670 - INFO - Successfully fetched market data from Yahoo Finance.
+2026-01-12 01:28:48,007 - WARNING - No weekly data for QQQ from Alpha Vantage.
+2026-01-12 01:28:48,064 - WARNING - No weekly data for IWM from Alpha Vantage.
+2026-01-12 01:28:48,064 - INFO - Successfully saved data to data/fund_flows.json
+2026-01-12 01:28:56,489 - WARNING - Attempt 1/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^GSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5EGSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-12 01:29:01,549 - WARNING - Attempt 2/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^GSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5EGSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-12 01:29:11,603 - WARNING - Attempt 3/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^GSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5EGSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-12 01:29:11,603 - ERROR - All 3 attempts failed for https://finnhub.io/api/v1/index/constituents?symbol=^GSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0.
+2026-01-12 01:29:11,604 - ERROR - Error fetching breadth for sp500: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5EGSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-12 01:29:11,662 - WARNING - Attempt 1/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^NDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5ENDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-12 01:29:16,714 - WARNING - Attempt 2/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^NDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5ENDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-12 01:29:26,768 - WARNING - Attempt 3/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^NDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5ENDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-12 01:29:26,768 - ERROR - All 3 attempts failed for https://finnhub.io/api/v1/index/constituents?symbol=^NDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0.
+2026-01-12 01:29:26,768 - ERROR - Error fetching breadth for nasdaq100: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5ENDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-12 01:29:26,769 - INFO - Successfully saved data to data/market_breadth.json
+2026-01-12 01:29:26,842 - WARNING - Attempt 1/3 failed for https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-13&to=2026-01-12&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-13&to=2026-01-12&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-12 01:29:31,898 - WARNING - Attempt 2/3 failed for https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-13&to=2026-01-12&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-13&to=2026-01-12&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-12 01:29:41,953 - WARNING - Attempt 3/3 failed for https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-13&to=2026-01-12&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-13&to=2026-01-12&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-12 01:29:41,953 - ERROR - All 3 attempts failed for https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-13&to=2026-01-12&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0.
+2026-01-12 01:29:41,954 - ERROR - Error fetching sentiment history: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-13&to=2026-01-12&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-12 01:29:41,955 - INFO - Successfully saved data to data/market_sentiment_history.json
+2026-01-12 01:29:41,955 - INFO - Data synchronization complete.
