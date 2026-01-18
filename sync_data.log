@@ -410,3 +410,38 @@
 2026-01-17 01:22:46,602 - ERROR - Error fetching sentiment history: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-18&to=2026-01-17&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
 2026-01-17 01:22:46,603 - INFO - Successfully saved data to data/market_sentiment_history.json
 2026-01-17 01:22:46,603 - INFO - Data synchronization complete.
+2026-01-18 01:40:39,676 - INFO - Starting data synchronization script...
+2026-01-18 01:40:39,677 - INFO - Successfully saved data to data/ai_analysis.json
+2026-01-18 01:40:39,677 - INFO - Successfully saved data to data/13f-data.json
+2026-01-18 01:40:39,677 - INFO - Successfully saved data to data/market_sentiment.json
+2026-01-18 01:40:39,677 - INFO - Successfully generated dummy data.
+2026-01-18 01:40:39,952 - INFO - Successfully saved data to data/fear_greed_index.json
+2026-01-18 01:40:39,952 - INFO - Successfully fetched Fear & Greed Index from Alternative.me API.
+2026-01-18 01:40:41,343 - WARNING - HIBOR data is old. Date: 2025-12-31. Max freshness: 5 days.
+2026-01-18 01:40:41,344 - INFO - Successfully saved data to data/hibor_rates.json
+2026-01-18 01:40:41,344 - INFO - Successfully fetched HIBOR rates.
+2026-01-18 01:40:41,346 - INFO - Failed to create TzCache, reason: Error creating TzCache folder: '/home/runner/.cache/py-yfinance' reason: [Errno 17] File exists: '/home/runner/.cache/py-yfinance'. TzCache will not be used. Tip: You can direct cache to use a different location with 'set_tz_cache_location(mylocation)'
+2026-01-18 01:40:43,519 - INFO - Successfully saved data to data/market_data_history.json
+2026-01-18 01:40:43,520 - INFO - Successfully saved data to data/money_fund_data.json
+2026-01-18 01:40:43,520 - INFO - Successfully fetched market data from Yahoo Finance.
+2026-01-18 01:40:44,218 - WARNING - No weekly data for QQQ from Alpha Vantage.
+2026-01-18 01:40:44,354 - WARNING - No weekly data for IWM from Alpha Vantage.
+2026-01-18 01:40:44,354 - INFO - Successfully saved data to data/fund_flows.json
+2026-01-18 01:40:44,530 - WARNING - Attempt 1/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^GSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5EGSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-18 01:40:49,679 - WARNING - Attempt 2/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^GSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5EGSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-18 01:40:59,818 - WARNING - Attempt 3/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^GSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5EGSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-18 01:40:59,818 - ERROR - All 3 attempts failed for https://finnhub.io/api/v1/index/constituents?symbol=^GSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0.
+2026-01-18 01:40:59,818 - ERROR - Error fetching breadth for sp500: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5EGSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-18 01:40:59,954 - WARNING - Attempt 1/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^NDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5ENDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-18 01:41:05,101 - WARNING - Attempt 2/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^NDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5ENDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-18 01:41:15,238 - WARNING - Attempt 3/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^NDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5ENDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-18 01:41:15,239 - ERROR - All 3 attempts failed for https://finnhub.io/api/v1/index/constituents?symbol=^NDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0.
+2026-01-18 01:41:15,239 - ERROR - Error fetching breadth for nasdaq100: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5ENDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-18 01:41:15,240 - INFO - Successfully saved data to data/market_breadth.json
+2026-01-18 01:41:15,402 - WARNING - Attempt 1/3 failed for https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-19&to=2026-01-18&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-19&to=2026-01-18&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-18 01:41:20,552 - WARNING - Attempt 2/3 failed for https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-19&to=2026-01-18&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-19&to=2026-01-18&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-18 01:41:30,695 - WARNING - Attempt 3/3 failed for https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-19&to=2026-01-18&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-19&to=2026-01-18&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-18 01:41:30,695 - ERROR - All 3 attempts failed for https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-19&to=2026-01-18&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0.
+2026-01-18 01:41:30,695 - ERROR - Error fetching sentiment history: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-19&to=2026-01-18&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-18 01:41:30,697 - INFO - Successfully saved data to data/market_sentiment_history.json
+2026-01-18 01:41:30,697 - INFO - Data synchronization complete.
