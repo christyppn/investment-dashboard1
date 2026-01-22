@@ -1,12 +1,12 @@
 {
-    "timestamp": "2026-01-21 01:27:51",
+    "timestamp": "2026-01-22 01:27:46",
     "method": "Alpha Vantage weekly price*volume proxy, not official flow data.",
     "flows": [
         {
             "symbol": "SPY",
-            "latest_week": "2026-01-20",
+            "latest_week": "2026-01-21",
             "prev_week": "2026-01-16",
-            "flow_proxy_usd_bn": -197.66
+            "flow_proxy_usd_bn": -112.41
         }
     ]
 }
