@@ -689,3 +689,38 @@
 2026-01-25 01:44:23,841 - ERROR - Error fetching sentiment history: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-26&to=2026-01-25&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
 2026-01-25 01:44:23,843 - INFO - Successfully saved data to data/market_sentiment_history.json
 2026-01-25 01:44:23,843 - INFO - Data synchronization complete.
+2026-01-26 01:42:59,171 - INFO - Starting data synchronization script...
+2026-01-26 01:42:59,171 - INFO - Successfully saved data to data/ai_analysis.json
+2026-01-26 01:42:59,172 - INFO - Successfully saved data to data/13f-data.json
+2026-01-26 01:42:59,172 - INFO - Successfully saved data to data/market_sentiment.json
+2026-01-26 01:42:59,172 - INFO - Successfully generated dummy data.
+2026-01-26 01:42:59,287 - INFO - Successfully saved data to data/fear_greed_index.json
+2026-01-26 01:42:59,287 - INFO - Successfully fetched Fear & Greed Index from Alternative.me API.
+2026-01-26 01:43:00,662 - WARNING - HIBOR data is old. Date: 2025-12-31. Max freshness: 5 days.
+2026-01-26 01:43:00,662 - INFO - Successfully saved data to data/hibor_rates.json
+2026-01-26 01:43:00,662 - INFO - Successfully fetched HIBOR rates.
+2026-01-26 01:43:00,665 - INFO - Failed to create TzCache, reason: Error creating TzCache folder: '/home/runner/.cache/py-yfinance' reason: [Errno 17] File exists: '/home/runner/.cache/py-yfinance'. TzCache will not be used. Tip: You can direct cache to use a different location with 'set_tz_cache_location(mylocation)'
+2026-01-26 01:43:02,096 - INFO - Successfully saved data to data/market_data_history.json
+2026-01-26 01:43:02,097 - INFO - Successfully saved data to data/money_fund_data.json
+2026-01-26 01:43:02,097 - INFO - Successfully fetched market data from Yahoo Finance.
+2026-01-26 01:43:02,394 - WARNING - No weekly data for QQQ from Alpha Vantage.
+2026-01-26 01:43:02,464 - WARNING - No weekly data for IWM from Alpha Vantage.
+2026-01-26 01:43:02,464 - INFO - Successfully saved data to data/fund_flows.json
+2026-01-26 01:43:22,541 - WARNING - Attempt 1/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^GSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: HTTPSConnectionPool(host='finnhub.io', port=443): Read timed out. (read timeout=20)
+2026-01-26 01:43:47,608 - WARNING - Attempt 2/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^GSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: HTTPSConnectionPool(host='finnhub.io', port=443): Read timed out. (read timeout=20)
+2026-01-26 01:44:17,673 - WARNING - Attempt 3/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^GSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: HTTPSConnectionPool(host='finnhub.io', port=443): Read timed out. (read timeout=20)
+2026-01-26 01:44:17,673 - ERROR - All 3 attempts failed for https://finnhub.io/api/v1/index/constituents?symbol=^GSPC&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0.
+2026-01-26 01:44:17,673 - ERROR - Error fetching breadth for sp500: HTTPSConnectionPool(host='finnhub.io', port=443): Read timed out. (read timeout=20)
+2026-01-26 01:44:18,152 - WARNING - Attempt 1/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^NDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5ENDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-26 01:44:40,170 - WARNING - Attempt 2/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^NDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5ENDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-26 01:44:50,342 - WARNING - Attempt 3/3 failed for https://finnhub.io/api/v1/index/constituents?symbol=^NDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5ENDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-26 01:44:50,342 - ERROR - All 3 attempts failed for https://finnhub.io/api/v1/index/constituents?symbol=^NDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0.
+2026-01-26 01:44:50,342 - ERROR - Error fetching breadth for nasdaq100: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/index/constituents?symbol=%5ENDX&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-26 01:44:50,344 - INFO - Successfully saved data to data/market_breadth.json
+2026-01-26 01:44:50,566 - WARNING - Attempt 1/3 failed for https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-27&to=2026-01-26&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-27&to=2026-01-26&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-26 01:44:55,646 - WARNING - Attempt 2/3 failed for https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-27&to=2026-01-26&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-27&to=2026-01-26&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-26 01:45:05,838 - WARNING - Attempt 3/3 failed for https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-27&to=2026-01-26&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-27&to=2026-01-26&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-26 01:45:05,839 - ERROR - All 3 attempts failed for https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-27&to=2026-01-26&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0.
+2026-01-26 01:45:05,839 - ERROR - Error fetching sentiment history: 403 Client Error: Forbidden for url: https://finnhub.io/api/v1/news-sentiment?symbol=SPY&from=2025-12-27&to=2026-01-26&token=d45b85hr01qsugt9ijugd45b85hr01qsugt9ijv0
+2026-01-26 01:45:05,840 - INFO - Successfully saved data to data/market_sentiment_history.json
+2026-01-26 01:45:05,840 - INFO - Data synchronization complete.
