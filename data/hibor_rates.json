@@ -1,22 +1,11 @@
 {
-    "timestamp": "2026-02-03 01:54:53",
-    "data_date": "2025-12-31",
+    "timestamp": "2026-02-04 01:49:46",
     "rates": [
         {
-            "term": "Overnight",
-            "rate": 4.38226
-        },
-        {
-            "term": "1個月",
-            "rate": 3.07548
-        },
-        {
-            "term": "3個月",
-            "rate": 2.93244
-        },
-        {
-            "term": "6個月",
-            "rate": 2.9947
+            "term": "ERROR",
+            "rate": 0.0,
+            "date": "N/A"
         }
-    ]
+    ],
+    "error_message": "Fetch Failed: Network or API Error: HTTPSConnectionPool(host='api.hkma.gov.hk', port=443): Read timed out. (read timeout=15)..."
 }
