@@ -1,4 +1,9 @@
 {
-    "timestamp": "2026-02-05 01:52:05",
-    "advance_decline": {}
+    "timestamp": "2026-02-05 06:30:57",
+    "advancing_issues": 0,
+    "declining_issues": 0,
+    "new_highs": 0,
+    "new_lows": 0,
+    "a_d_line": 0,
+    "source": "Fetch Failed: Alpha Vantage API returned no sector data."
 }

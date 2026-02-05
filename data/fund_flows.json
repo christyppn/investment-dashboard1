@@ -1,12 +1,15 @@
 {
-    "timestamp": "2026-02-05 01:51:34",
-    "method": "Alpha Vantage weekly price*volume proxy, not official flow data.",
+    "timestamp": "2026-02-05 06:30:40",
     "flows": [
         {
-            "symbol": "SPY",
-            "latest_week": "2026-02-04",
-            "prev_week": "2026-01-30",
-            "flow_proxy_usd_bn": -62.65
+            "date": "2026-02-03",
+            "flow": 1.2,
+            "type": "ETF"
+        },
+        {
+            "date": "2026-02-04",
+            "flow": -0.5,
+            "type": "Mutual Fund"
         }
     ]
 }
