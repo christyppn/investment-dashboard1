@@ -1154,3 +1154,22 @@
 2026-02-08 02:13:52,552 - INFO - Successfully fetched market data from Yahoo Finance.
 2026-02-08 02:13:52,773 - INFO - Successfully saved data to data/market_breadth.json
 2026-02-08 02:13:52,774 - INFO - Data synchronization complete.
+2026-02-09 01:58:19,291 - INFO - Starting data synchronization script...
+2026-02-09 01:58:19,291 - INFO - Successfully saved data to data/ai_analysis.json
+2026-02-09 01:58:19,291 - INFO - Successfully saved data to data/13f-data.json
+2026-02-09 01:58:19,291 - INFO - Successfully saved data to data/market_sentiment.json
+2026-02-09 01:58:19,292 - INFO - Successfully saved data to data/fund_flows.json
+2026-02-09 01:58:19,292 - INFO - Successfully saved data to data/market_sentiment_history.json
+2026-02-09 01:58:19,292 - INFO - Successfully saved data to data/market_breadth.json
+2026-02-09 01:58:19,292 - INFO - Successfully generated dummy data.
+2026-02-09 01:58:19,412 - INFO - Successfully saved data to data/fear_greed_index.json
+2026-02-09 01:58:19,412 - INFO - Successfully fetched Fear & Greed Index from Alternative.me API.
+2026-02-09 01:58:20,558 - WARNING - HIBOR data is old. Date: 2026-01-30. Max freshness: 5 days.
+2026-02-09 01:58:20,558 - INFO - Successfully saved data to data/hibor_rates.json
+2026-02-09 01:58:20,558 - INFO - Successfully fetched HIBOR rates.
+2026-02-09 01:58:20,561 - INFO - Failed to create TzCache, reason: Error creating TzCache folder: '/home/runner/.cache/py-yfinance' reason: [Errno 17] File exists: '/home/runner/.cache/py-yfinance'. TzCache will not be used. Tip: You can direct cache to use a different location with 'set_tz_cache_location(mylocation)'
+2026-02-09 01:58:21,845 - INFO - Successfully saved data to data/market_data_history.json
+2026-02-09 01:58:21,845 - INFO - Successfully saved data to data/money_fund_data.json
+2026-02-09 01:58:21,845 - INFO - Successfully fetched market data from Yahoo Finance.
+2026-02-09 01:58:21,967 - INFO - Successfully saved data to data/market_breadth.json
+2026-02-09 01:58:21,968 - INFO - Data synchronization complete.
