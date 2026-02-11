@@ -1,9 +1,9 @@
 {
-    "timestamp": "2026-02-11 02:04:06",
-    "advancing_issues": 0,
-    "declining_issues": 0,
-    "new_highs": 0,
-    "new_lows": 0,
-    "a_d_line": 0,
-    "source": "Fetch Failed: Alpha Vantage API returned no sector data."
+    "timestamp": "2026-02-11 02:53:07",
+    "advancing_issues": 1850,
+    "declining_issues": 1240,
+    "new_highs": 125,
+    "new_lows": 45,
+    "a_d_line": 610,
+    "source": "Dummy Data (Fallback)"
 }
