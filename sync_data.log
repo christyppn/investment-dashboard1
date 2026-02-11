@@ -1211,3 +1211,22 @@
 2026-02-10 02:08:31,360 - INFO - Successfully fetched market data from Yahoo Finance.
 2026-02-10 02:08:31,459 - INFO - Successfully saved data to data/market_breadth.json
 2026-02-10 02:08:31,460 - INFO - Data synchronization complete.
+2026-02-11 02:04:03,191 - INFO - Starting data synchronization script...
+2026-02-11 02:04:03,446 - INFO - Successfully saved data to data/fear_greed_index.json
+2026-02-11 02:04:03,446 - INFO - Successfully fetched Fear & Greed Index from Alternative.me API.
+2026-02-11 02:04:03,447 - INFO - Successfully saved data to data/ai_analysis.json
+2026-02-11 02:04:03,447 - INFO - Successfully saved data to data/13f-data.json
+2026-02-11 02:04:03,448 - INFO - Successfully saved data to data/market_sentiment.json
+2026-02-11 02:04:03,448 - INFO - Successfully saved data to data/fund_flows.json
+2026-02-11 02:04:03,448 - INFO - Successfully saved data to data/market_sentiment_history.json
+2026-02-11 02:04:03,448 - INFO - Successfully saved data to data/market_breadth.json
+2026-02-11 02:04:03,448 - INFO - Successfully generated dummy data.
+2026-02-11 02:04:04,690 - WARNING - HIBOR data is old. Date: 2026-01-30. Max freshness: 5 days.
+2026-02-11 02:04:04,690 - INFO - Successfully saved data to data/hibor_rates.json
+2026-02-11 02:04:04,690 - INFO - Successfully fetched HIBOR rates.
+2026-02-11 02:04:04,693 - INFO - Failed to create TzCache, reason: Error creating TzCache folder: '/home/runner/.cache/py-yfinance' reason: [Errno 17] File exists: '/home/runner/.cache/py-yfinance'. TzCache will not be used. Tip: You can direct cache to use a different location with 'set_tz_cache_location(mylocation)'
+2026-02-11 02:04:06,260 - INFO - Successfully saved data to data/market_data_history.json
+2026-02-11 02:04:06,261 - INFO - Successfully saved data to data/money_fund_data.json
+2026-02-11 02:04:06,261 - INFO - Successfully fetched market data from Yahoo Finance.
+2026-02-11 02:04:06,451 - INFO - Successfully saved data to data/market_breadth.json
+2026-02-11 02:04:06,452 - INFO - Data synchronization complete.
