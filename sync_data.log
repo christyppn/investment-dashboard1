@@ -1651,3 +1651,22 @@
 2026-03-04 01:49:31,809 - INFO - Successfully saved data to data/market_breadth.json
 2026-03-04 01:49:31,809 - INFO - Successfully generated dummy data.
 2026-03-04 01:49:31,809 - INFO - Data synchronization complete.
+2026-03-05 01:52:04,115 - INFO - Starting data synchronization script...
+2026-03-05 01:52:04,381 - INFO - Successfully saved data to data/fear_greed_index.json
+2026-03-05 01:52:04,381 - INFO - Successfully fetched Fear & Greed Index from Alternative.me API.
+2026-03-05 01:52:05,364 - WARNING - HIBOR data is old. Date: 2026-02-27. Max freshness: 5 days.
+2026-03-05 01:52:05,365 - INFO - Successfully saved data to data/hibor_rates.json
+2026-03-05 01:52:05,365 - INFO - Successfully fetched HIBOR rates.
+2026-03-05 01:52:05,367 - INFO - Failed to create TzCache, reason: Error creating TzCache folder: '/home/runner/.cache/py-yfinance' reason: [Errno 17] File exists: '/home/runner/.cache/py-yfinance'. TzCache will not be used. Tip: You can direct cache to use a different location with 'set_tz_cache_location(mylocation)'
+2026-03-05 01:52:06,866 - INFO - Successfully saved data to data/market_data_history.json
+2026-03-05 01:52:06,866 - INFO - Successfully saved data to data/money_fund_data.json
+2026-03-05 01:52:06,867 - INFO - Successfully fetched market data from Yahoo Finance.
+2026-03-05 01:52:06,986 - INFO - Successfully saved data to data/market_breadth.json
+2026-03-05 01:52:06,988 - INFO - Successfully saved data to data/ai_analysis.json
+2026-03-05 01:52:06,988 - INFO - Successfully saved data to data/13f-data.json
+2026-03-05 01:52:06,989 - INFO - Successfully saved data to data/market_sentiment.json
+2026-03-05 01:52:06,989 - INFO - Successfully saved data to data/fund_flows.json
+2026-03-05 01:52:06,989 - INFO - Successfully saved data to data/market_sentiment_history.json
+2026-03-05 01:52:06,989 - INFO - Successfully saved data to data/market_breadth.json
+2026-03-05 01:52:06,990 - INFO - Successfully generated dummy data.
+2026-03-05 01:52:06,990 - INFO - Data synchronization complete.
