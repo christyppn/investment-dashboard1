@@ -2686,3 +2686,27 @@
 2026-04-21 02:14:14,148 - INFO - Successfully saved data to data/market_breadth.json
 2026-04-21 02:14:14,148 - INFO - Successfully generated dummy data.
 2026-04-21 02:14:14,148 - INFO - Data synchronization complete.
+2026-04-22 02:12:07,045 - INFO - Starting data synchronization script...
+2026-04-22 02:12:07,176 - INFO - Successfully saved data to data/fear_greed_index.json
+2026-04-22 02:12:07,176 - INFO - Successfully fetched Fear & Greed Index from Alternative.me API.
+2026-04-22 02:12:08,380 - WARNING - HIBOR data is old. Date: 2026-03-31. Max freshness: 5 days.
+2026-04-22 02:12:08,380 - INFO - Successfully saved data to data/hibor_rates.json
+2026-04-22 02:12:08,380 - INFO - Successfully fetched HIBOR rates.
+2026-04-22 02:12:09,397 - ERROR - $^VIX: possibly delisted; no price data found  (1d 2026-03-08 -> 2026-04-21)
+2026-04-22 02:12:09,870 - ERROR - 
+1 Failed download:
+2026-04-22 02:12:09,870 - ERROR - ['^VIX']: possibly delisted; no price data found  (1d 2026-03-08 -> 2026-04-21)
+2026-04-22 02:12:09,962 - INFO - Successfully saved data to data/market_data_history.json
+2026-04-22 02:12:09,962 - INFO - Successfully saved data to data/money_fund_data.json
+2026-04-22 02:12:09,962 - INFO - Successfully fetched market data from Yahoo Finance.
+2026-04-22 02:12:10,116 - INFO - Successfully fetched financial ratios for SPY.
+2026-04-22 02:12:10,245 - INFO - Successfully fetched financial ratios for QQQ.
+2026-04-22 02:12:10,246 - INFO - Successfully saved data to data/financial_ratios.json
+2026-04-22 02:12:11,318 - INFO - Successfully saved data to data/market_breadth.json
+2026-04-22 02:12:11,319 - INFO - Successfully saved data to data/13f-data.json
+2026-04-22 02:12:11,320 - INFO - Successfully saved data to data/market_sentiment.json
+2026-04-22 02:12:11,320 - INFO - Successfully saved data to data/fund_flows.json
+2026-04-22 02:12:11,320 - INFO - Successfully saved data to data/market_sentiment_history.json
+2026-04-22 02:12:11,320 - INFO - Successfully saved data to data/market_breadth.json
+2026-04-22 02:12:11,320 - INFO - Successfully generated dummy data.
+2026-04-22 02:12:11,320 - INFO - Data synchronization complete.
