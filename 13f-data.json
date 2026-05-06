@@ -1,0 +1,60 @@
+{
+    "timestamp": "2026-04-10 00:12:44",
+    "fund_name": "伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q1 2026)",
+    "total_value": 387.35,
+    "cash_ratio": 166.88,
+    "top_10_ratio": 84.69,
+    "quarterly_change": -3.89,
+    "holdings": [
+        {
+            "symbol": "AAPL",
+            "value": 156.28,
+            "change": -0.02
+        },
+        {
+            "symbol": "BAC",
+            "value": 51.71,
+            "change": 0.56
+        },
+        {
+            "symbol": "KO",
+            "value": 28.49,
+            "change": -0.06
+        },
+        {
+            "symbol": "AMZN",
+            "value": 13.54,
+            "change": 0.79
+        },
+        {
+            "symbol": "AXP",
+            "value": 10.13,
+            "change": -2.69
+        },
+        {
+            "symbol": "CVX",
+            "value": 9.11,
+            "change": 5.55
+        },
+        {
+            "symbol": "OXY",
+            "value": 3.81,
+            "change": -0.17
+        },
+        {
+            "symbol": "MCO",
+            "value": 4.84,
+            "change": 0.27
+        },
+        {
+            "symbol": "VRSN",
+            "value": 2.16,
+            "change": 0.79
+        },
+        {
+            "symbol": "HPQ",
+            "value": 0.6,
+            "change": -0.63
+        }
+    ]
+}
