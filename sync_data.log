@@ -3032,3 +3032,27 @@
 2026-05-06 02:34:14,966 - INFO - Successfully saved data to data/market_breadth.json
 2026-05-06 02:34:14,966 - INFO - Successfully generated dummy data.
 2026-05-06 02:34:14,966 - INFO - Data synchronization complete.
+2026-05-07 02:36:24,940 - INFO - Starting data synchronization script...
+2026-05-07 02:36:25,193 - INFO - Successfully saved data to data/fear_greed_index.json
+2026-05-07 02:36:25,193 - INFO - Successfully fetched Fear & Greed Index from Alternative.me API.
+2026-05-07 02:36:40,947 - WARNING - Attempt 1/3 failed for https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily: HTTPSConnectionPool(host='api.hkma.gov.hk', port=443): Read timed out. (read timeout=15)
+2026-05-07 02:37:01,426 - WARNING - Attempt 2/3 failed for https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily: HTTPSConnectionPool(host='api.hkma.gov.hk', port=443): Read timed out. (read timeout=15)
+2026-05-07 02:37:26,930 - WARNING - Attempt 3/3 failed for https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily: HTTPSConnectionPool(host='api.hkma.gov.hk', port=443): Read timed out. (read timeout=15)
+2026-05-07 02:37:26,930 - ERROR - All 3 attempts failed for https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily.
+2026-05-07 02:37:26,930 - INFO - Successfully saved data to data/hibor_rates.json
+2026-05-07 02:37:26,930 - ERROR - Failed to fetch HIBOR data: HTTPSConnectionPool(host='api.hkma.gov.hk', port=443): Read timed out. (read timeout=15)
+2026-05-07 02:37:26,932 - INFO - Failed to create TzCache, reason: Error creating TzCache folder: '/home/runner/.cache/py-yfinance' reason: [Errno 17] File exists: '/home/runner/.cache/py-yfinance'. TzCache will not be used. Tip: You can direct cache to use a different location with 'set_tz_cache_location(mylocation)'
+2026-05-07 02:37:28,482 - INFO - Successfully saved data to data/market_data_history.json
+2026-05-07 02:37:28,482 - INFO - Successfully saved data to data/money_fund_data.json
+2026-05-07 02:37:28,482 - INFO - Successfully fetched market data from Yahoo Finance.
+2026-05-07 02:37:28,620 - INFO - Successfully fetched financial ratios for SPY.
+2026-05-07 02:37:28,742 - INFO - Successfully fetched financial ratios for QQQ.
+2026-05-07 02:37:28,742 - INFO - Successfully saved data to data/financial_ratios.json
+2026-05-07 02:37:28,844 - INFO - Successfully saved data to data/market_breadth.json
+2026-05-07 02:37:28,845 - INFO - Successfully saved data to data/13f-data.json
+2026-05-07 02:37:28,846 - INFO - Successfully saved data to data/market_sentiment.json
+2026-05-07 02:37:28,846 - INFO - Successfully saved data to data/fund_flows.json
+2026-05-07 02:37:28,846 - INFO - Successfully saved data to data/market_sentiment_history.json
+2026-05-07 02:37:28,846 - INFO - Successfully saved data to data/market_breadth.json
+2026-05-07 02:37:28,846 - INFO - Successfully generated dummy data.
+2026-05-07 02:37:28,846 - INFO - Data synchronization complete.
