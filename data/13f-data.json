@@ -1,59 +1,59 @@
 {
-    "timestamp": "2026-05-18 02:57:43",
+    "timestamp": "2026-05-19 02:53:54",
     "fund_name": "伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q1 2026)",
-    "total_value": 445.85,
-    "cash_ratio": 152.99,
-    "top_10_ratio": 84.39,
-    "quarterly_change": 3.29,
+    "total_value": 423.47,
+    "cash_ratio": 171.84,
+    "top_10_ratio": 86.94,
+    "quarterly_change": -4.87,
     "holdings": [
         {
             "symbol": "AAPL",
-            "value": 154.99,
-            "change": -2.53
+            "value": 141.05,
+            "change": -2.89
         },
         {
             "symbol": "BAC",
-            "value": 51.24,
-            "change": -2.45
+            "value": 53.05,
+            "change": -2.14
         },
         {
             "symbol": "KO",
-            "value": 28.17,
-            "change": -1.94
+            "value": 28.72,
+            "change": -1.35
         },
         {
             "symbol": "AMZN",
-            "value": 17.24,
-            "change": -0.47
+            "value": 18.64,
+            "change": -3.11
         },
         {
             "symbol": "AXP",
-            "value": 9.6,
-            "change": 3.01
+            "value": 11.63,
+            "change": -1.87
         },
         {
             "symbol": "CVX",
-            "value": 5.81,
-            "change": -1.97
+            "value": 9.32,
+            "change": 3.27
         },
         {
             "symbol": "OXY",
-            "value": 5.99,
-            "change": 0.66
+            "value": 4.15,
+            "change": -4.17
         },
         {
             "symbol": "MCO",
-            "value": 3.03,
-            "change": 1.94
+            "value": 2.1,
+            "change": -2.22
         },
         {
             "symbol": "VRSN",
-            "value": 2.19,
-            "change": -0.88
+            "value": 1.88,
+            "change": 0.45
         },
         {
             "symbol": "HPQ",
-            "value": 1.69,
+            "value": 1.83,
             "change": 0.87
         }
     ]
