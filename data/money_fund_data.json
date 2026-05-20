@@ -1,29 +1,29 @@
 {
-    "timestamp": "2026-05-19 02:53:54",
+    "timestamp": "2026-05-20 02:54:26",
     "funds": [
         {
             "symbol": "VOO",
-            "latest_price": 678.9099731445312,
-            "daily_change_percent": -0.07800972785977356,
-            "date": "2026-05-18"
+            "latest_price": 674.5900268554688,
+            "daily_change_percent": -0.636306205527315,
+            "date": "2026-05-19"
         },
         {
             "symbol": "VTI",
-            "latest_price": 362.3599853515625,
-            "daily_change_percent": -0.10475957794644497,
-            "date": "2026-05-18"
+            "latest_price": 360.05999755859375,
+            "daily_change_percent": -0.6347245518120048,
+            "date": "2026-05-19"
         },
         {
             "symbol": "BND",
-            "latest_price": 72.69000244140625,
-            "daily_change_percent": -0.06873167972443195,
-            "date": "2026-05-18"
+            "latest_price": 72.44999694824219,
+            "daily_change_percent": -0.3301767576050385,
+            "date": "2026-05-19"
         },
         {
             "symbol": "BIL",
-            "latest_price": 91.52999877929688,
-            "daily_change_percent": 0.0,
-            "date": "2026-05-18"
+            "latest_price": 91.55000305175781,
+            "daily_change_percent": 0.021855427431138885,
+            "date": "2026-05-19"
         }
     ]
 }
