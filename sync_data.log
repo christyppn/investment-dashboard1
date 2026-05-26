@@ -3531,3 +3531,50 @@
 2026-05-25 03:31:03,051 - INFO - Successfully saved data to data/market_breadth.json
 2026-05-25 03:31:03,051 - INFO - Successfully generated dummy data.
 2026-05-25 03:31:03,052 - INFO - Data synchronization complete.
+2026-05-26 02:50:51,193 - INFO - Starting data synchronization script...
+2026-05-26 02:50:51,289 - INFO - Successfully saved data to data/fear_greed_index.json
+2026-05-26 02:50:51,290 - INFO - Successfully fetched Fear & Greed Index from Alternative.me API.
+2026-05-26 02:50:52,581 - WARNING - HIBOR data is old. Date: 2026-04-30. Max freshness: 5 days.
+2026-05-26 02:50:52,582 - INFO - Successfully saved data to data/hibor_rates.json
+2026-05-26 02:50:52,582 - INFO - Successfully fetched HIBOR rates.
+2026-05-26 02:50:53,790 - ERROR - Could not process data for SPY: 'Date'
+2026-05-26 02:50:53,791 - ERROR - Could not process data for QQQ: 'Date'
+2026-05-26 02:50:53,793 - ERROR - Could not process data for DIA: 'Date'
+2026-05-26 02:50:53,794 - ERROR - Could not process data for GSPC: 'Date'
+2026-05-26 02:50:53,796 - ERROR - Could not process data for IXIC: 'Date'
+2026-05-26 02:50:53,798 - ERROR - Could not process data for VIX: 'Date'
+2026-05-26 02:50:53,799 - ERROR - Could not process data for HSI: 'Date'
+2026-05-26 02:50:53,801 - ERROR - Could not process data for N225: 'Date'
+2026-05-26 02:50:53,802 - ERROR - Could not process data for XLK: 'Date'
+2026-05-26 02:50:53,804 - ERROR - Could not process data for XLC: 'Date'
+2026-05-26 02:50:53,805 - ERROR - Could not process data for XLY: 'Date'
+2026-05-26 02:50:53,807 - ERROR - Could not process data for XLP: 'Date'
+2026-05-26 02:50:53,808 - ERROR - Could not process data for XLV: 'Date'
+2026-05-26 02:50:53,810 - ERROR - Could not process data for XLF: 'Date'
+2026-05-26 02:50:53,811 - ERROR - Could not process data for XLE: 'Date'
+2026-05-26 02:50:53,813 - ERROR - Could not process data for XLI: 'Date'
+2026-05-26 02:50:53,815 - ERROR - Could not process data for XLB: 'Date'
+2026-05-26 02:50:53,816 - ERROR - Could not process data for XLU: 'Date'
+2026-05-26 02:50:53,818 - ERROR - Could not process data for VNQ: 'Date'
+2026-05-26 02:50:53,819 - ERROR - Could not process data for GLD: 'Date'
+2026-05-26 02:50:53,821 - ERROR - Could not process data for ROBO: 'Date'
+2026-05-26 02:50:53,822 - ERROR - Could not process data for SMH: 'Date'
+2026-05-26 02:50:53,824 - ERROR - Could not process data for IWM: 'Date'
+2026-05-26 02:50:53,825 - ERROR - Could not process data for VOO: 'Date'
+2026-05-26 02:50:53,827 - ERROR - Could not process data for VTI: 'Date'
+2026-05-26 02:50:53,829 - ERROR - Could not process data for BND: 'Date'
+2026-05-26 02:50:53,830 - ERROR - Could not process data for BIL: 'Date'
+2026-05-26 02:50:53,831 - INFO - Successfully saved data to data/market_data_history.json
+2026-05-26 02:50:53,831 - INFO - Successfully saved data to data/money_fund_data.json
+2026-05-26 02:50:53,831 - INFO - Successfully fetched market data from Yahoo Finance.
+2026-05-26 02:50:53,994 - INFO - Successfully fetched financial ratios for SPY.
+2026-05-26 02:50:54,132 - INFO - Successfully fetched financial ratios for QQQ.
+2026-05-26 02:50:54,132 - INFO - Successfully saved data to data/financial_ratios.json
+2026-05-26 02:50:54,195 - INFO - Successfully saved data to data/market_breadth.json
+2026-05-26 02:50:54,197 - INFO - Successfully saved data to data/13f-data.json
+2026-05-26 02:50:54,197 - INFO - Successfully saved data to data/market_sentiment.json
+2026-05-26 02:50:54,198 - INFO - Successfully saved data to data/fund_flows.json
+2026-05-26 02:50:54,198 - INFO - Successfully saved data to data/market_sentiment_history.json
+2026-05-26 02:50:54,198 - INFO - Successfully saved data to data/market_breadth.json
+2026-05-26 02:50:54,198 - INFO - Successfully generated dummy data.
+2026-05-26 02:50:54,198 - INFO - Data synchronization complete.
