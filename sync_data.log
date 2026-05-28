@@ -3625,3 +3625,51 @@
 2026-05-27 03:29:03,889 - INFO - Successfully saved data to data/market_breadth.json
 2026-05-27 03:29:03,889 - INFO - Successfully generated dummy data.
 2026-05-27 03:29:03,889 - INFO - Data synchronization complete.
+2026-05-28 02:49:42,820 - INFO - Starting data synchronization script...
+2026-05-28 02:49:43,101 - INFO - Successfully saved data to data/fear_greed_index.json
+2026-05-28 02:49:43,102 - INFO - Successfully fetched Fear & Greed Index from Alternative.me API.
+2026-05-28 02:49:44,120 - WARNING - HIBOR data is old. Date: 2026-04-30. Max freshness: 5 days.
+2026-05-28 02:49:44,120 - INFO - Successfully saved data to data/hibor_rates.json
+2026-05-28 02:49:44,120 - INFO - Successfully fetched HIBOR rates.
+2026-05-28 02:49:44,123 - INFO - Failed to create TzCache, reason: Error creating TzCache folder: '/home/runner/.cache/py-yfinance' reason: [Errno 17] File exists: '/home/runner/.cache/py-yfinance'. TzCache will not be used. Tip: You can direct cache to use a different location with 'set_tz_cache_location(mylocation)'
+2026-05-28 02:49:46,345 - ERROR - Could not process data for SPY: 'Date'
+2026-05-28 02:49:46,347 - ERROR - Could not process data for QQQ: 'Date'
+2026-05-28 02:49:46,349 - ERROR - Could not process data for DIA: 'Date'
+2026-05-28 02:49:46,351 - ERROR - Could not process data for GSPC: 'Date'
+2026-05-28 02:49:46,353 - ERROR - Could not process data for IXIC: 'Date'
+2026-05-28 02:49:46,355 - ERROR - Could not process data for VIX: 'Date'
+2026-05-28 02:49:46,356 - ERROR - Could not process data for HSI: 'Date'
+2026-05-28 02:49:46,358 - ERROR - Could not process data for N225: 'Date'
+2026-05-28 02:49:46,360 - ERROR - Could not process data for XLK: 'Date'
+2026-05-28 02:49:46,362 - ERROR - Could not process data for XLC: 'Date'
+2026-05-28 02:49:46,363 - ERROR - Could not process data for XLY: 'Date'
+2026-05-28 02:49:46,365 - ERROR - Could not process data for XLP: 'Date'
+2026-05-28 02:49:46,367 - ERROR - Could not process data for XLV: 'Date'
+2026-05-28 02:49:46,368 - ERROR - Could not process data for XLF: 'Date'
+2026-05-28 02:49:46,370 - ERROR - Could not process data for XLE: 'Date'
+2026-05-28 02:49:46,372 - ERROR - Could not process data for XLI: 'Date'
+2026-05-28 02:49:46,374 - ERROR - Could not process data for XLB: 'Date'
+2026-05-28 02:49:46,375 - ERROR - Could not process data for XLU: 'Date'
+2026-05-28 02:49:46,377 - ERROR - Could not process data for VNQ: 'Date'
+2026-05-28 02:49:46,378 - ERROR - Could not process data for GLD: 'Date'
+2026-05-28 02:49:46,380 - ERROR - Could not process data for ROBO: 'Date'
+2026-05-28 02:49:46,381 - ERROR - Could not process data for SMH: 'Date'
+2026-05-28 02:49:46,383 - ERROR - Could not process data for IWM: 'Date'
+2026-05-28 02:49:46,384 - ERROR - Could not process data for VOO: 'Date'
+2026-05-28 02:49:46,386 - ERROR - Could not process data for VTI: 'Date'
+2026-05-28 02:49:46,387 - ERROR - Could not process data for BND: 'Date'
+2026-05-28 02:49:46,389 - ERROR - Could not process data for BIL: 'Date'
+2026-05-28 02:49:46,389 - INFO - Successfully saved data to data/market_data_history.json
+2026-05-28 02:49:46,389 - INFO - Successfully saved data to data/money_fund_data.json
+2026-05-28 02:49:46,390 - INFO - Successfully fetched market data from Yahoo Finance.
+2026-05-28 02:49:46,697 - INFO - Successfully fetched financial ratios for SPY.
+2026-05-28 02:49:46,968 - INFO - Successfully fetched financial ratios for QQQ.
+2026-05-28 02:49:46,969 - INFO - Successfully saved data to data/financial_ratios.json
+2026-05-28 02:49:47,148 - INFO - Successfully saved data to data/market_breadth.json
+2026-05-28 02:49:47,149 - INFO - Successfully saved data to data/13f-data.json
+2026-05-28 02:49:47,149 - INFO - Successfully saved data to data/market_sentiment.json
+2026-05-28 02:49:47,149 - INFO - Successfully saved data to data/fund_flows.json
+2026-05-28 02:49:47,150 - INFO - Successfully saved data to data/market_sentiment_history.json
+2026-05-28 02:49:47,150 - INFO - Successfully saved data to data/market_breadth.json
+2026-05-28 02:49:47,150 - INFO - Successfully generated dummy data.
+2026-05-28 02:49:47,150 - INFO - Data synchronization complete.
