@@ -1,60 +1,60 @@
 {
-    "timestamp": "2026-06-03 03:45:37",
+    "timestamp": "2026-06-04 03:40:51",
     "fund_name": "伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q1 2026)",
-    "total_value": 384.59,
-    "cash_ratio": 163.68,
-    "top_10_ratio": 86.68,
-    "quarterly_change": 4.41,
+    "total_value": 385.56,
+    "cash_ratio": 170.15,
+    "top_10_ratio": 86.26,
+    "quarterly_change": 1.44,
     "holdings": [
         {
             "symbol": "AAPL",
-            "value": 151.14,
-            "change": 0.59
+            "value": 144.36,
+            "change": 0.08
         },
         {
             "symbol": "BAC",
-            "value": 54.6,
-            "change": 0.96
+            "value": 50.38,
+            "change": -2.49
         },
         {
             "symbol": "KO",
-            "value": 28.74,
-            "change": -0.08
+            "value": 29.06,
+            "change": -1.87
         },
         {
             "symbol": "AMZN",
-            "value": 16.94,
-            "change": 0.45
+            "value": 14.42,
+            "change": -3.27
         },
         {
             "symbol": "AXP",
-            "value": 9.61,
-            "change": -0.72
+            "value": 10.47,
+            "change": 0.59
         },
         {
             "symbol": "CVX",
-            "value": 7.12,
-            "change": 0.16
+            "value": 7.42,
+            "change": 3.67
         },
         {
             "symbol": "OXY",
-            "value": 5.44,
-            "change": 5.65
+            "value": 6.3,
+            "change": 0.08
         },
         {
             "symbol": "MCO",
-            "value": 4.85,
-            "change": -2.06
+            "value": 3.56,
+            "change": 0.72
         },
         {
             "symbol": "VRSN",
-            "value": 2.8,
-            "change": 1.19
+            "value": 2.14,
+            "change": 0.69
         },
         {
             "symbol": "HPQ",
-            "value": 0.69,
-            "change": 0.29
+            "value": 0.98,
+            "change": -0.06
         }
     ]
 }
