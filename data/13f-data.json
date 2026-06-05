@@ -1,60 +1,60 @@
 {
-    "timestamp": "2026-06-04 03:40:51",
+    "timestamp": "2026-06-05 03:28:25",
     "fund_name": "伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q1 2026)",
-    "total_value": 385.56,
-    "cash_ratio": 170.15,
-    "top_10_ratio": 86.26,
-    "quarterly_change": 1.44,
+    "total_value": 448.57,
+    "cash_ratio": 174.2,
+    "top_10_ratio": 87.96,
+    "quarterly_change": 3.44,
     "holdings": [
         {
             "symbol": "AAPL",
-            "value": 144.36,
-            "change": 0.08
+            "value": 143.5,
+            "change": 2.42
         },
         {
             "symbol": "BAC",
-            "value": 50.38,
-            "change": -2.49
+            "value": 56.19,
+            "change": 3.98
         },
         {
             "symbol": "KO",
-            "value": 29.06,
-            "change": -1.87
+            "value": 29.52,
+            "change": 1.81
         },
         {
             "symbol": "AMZN",
-            "value": 14.42,
-            "change": -3.27
+            "value": 18.5,
+            "change": 1.96
         },
         {
             "symbol": "AXP",
-            "value": 10.47,
-            "change": 0.59
+            "value": 10.22,
+            "change": 2.68
         },
         {
             "symbol": "CVX",
-            "value": 7.42,
-            "change": 3.67
+            "value": 8.21,
+            "change": 4.96
         },
         {
             "symbol": "OXY",
-            "value": 6.3,
-            "change": 0.08
+            "value": 6.82,
+            "change": -7.66
         },
         {
             "symbol": "MCO",
-            "value": 3.56,
-            "change": 0.72
+            "value": 4.78,
+            "change": 0.83
         },
         {
             "symbol": "VRSN",
-            "value": 2.14,
-            "change": 0.69
+            "value": 1.08,
+            "change": -0.82
         },
         {
             "symbol": "HPQ",
-            "value": 0.98,
-            "change": -0.06
+            "value": 1.81,
+            "change": 0.93
         }
     ]
 }
