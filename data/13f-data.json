@@ -1,60 +1,60 @@
 {
-    "timestamp": "2026-06-08 03:40:32",
+    "timestamp": "2026-06-09 02:49:44",
     "fund_name": "伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q1 2026)",
-    "total_value": 445.64,
-    "cash_ratio": 170.51,
-    "top_10_ratio": 86.38,
-    "quarterly_change": 2.9,
+    "total_value": 381.48,
+    "cash_ratio": 163.76,
+    "top_10_ratio": 87.4,
+    "quarterly_change": 3.25,
     "holdings": [
         {
             "symbol": "AAPL",
-            "value": 145.39,
-            "change": 1.55
+            "value": 143.44,
+            "change": 0.91
         },
         {
             "symbol": "BAC",
-            "value": 55.1,
-            "change": 0.09
+            "value": 58.96,
+            "change": 3.58
         },
         {
             "symbol": "KO",
-            "value": 25.47,
-            "change": 1.21
+            "value": 26.34,
+            "change": -0.21
         },
         {
             "symbol": "AMZN",
-            "value": 16.76,
-            "change": -0.3
+            "value": 14.0,
+            "change": 1.78
         },
         {
             "symbol": "AXP",
-            "value": 11.35,
-            "change": 1.11
+            "value": 8.58,
+            "change": 3.77
         },
         {
             "symbol": "CVX",
-            "value": 7.59,
-            "change": 5.13
+            "value": 6.62,
+            "change": 1.76
         },
         {
             "symbol": "OXY",
-            "value": 5.26,
-            "change": 5.05
+            "value": 4.99,
+            "change": 4.46
         },
         {
             "symbol": "MCO",
-            "value": 2.99,
-            "change": -0.31
+            "value": 2.74,
+            "change": -1.3
         },
         {
             "symbol": "VRSN",
-            "value": 2.96,
-            "change": -0.73
+            "value": 1.71,
+            "change": -1.16
         },
         {
             "symbol": "HPQ",
-            "value": 1.07,
-            "change": -0.23
+            "value": 1.44,
+            "change": 0.78
         }
     ]
 }
