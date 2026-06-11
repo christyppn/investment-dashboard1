@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-06-10 03:25:13",
+    "timestamp": "2026-06-11 03:37:19",
     "rates": [
         {
             "term": "ERROR",
@@ -7,5 +7,5 @@
             "date": "N/A"
         }
     ],
-    "error_message": "Fetch Failed: Network or API Error: 502 Server Error: Bad Gateway for url: https://api.hkma.gov.hk/public/market-data-and-statistics/mon..."
+    "error_message": "Fetch Failed: Network or API Error: HTTPSConnectionPool(host='api.hkma.gov.hk', port=443): Read timed out. (read timeout=15)..."
 }
