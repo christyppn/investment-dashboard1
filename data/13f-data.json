@@ -1,60 +1,60 @@
 {
-    "timestamp": "2026-06-17 03:43:55",
+    "timestamp": "2026-06-18 03:36:31",
     "fund_name": "伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q1 2026)",
-    "total_value": 405.97,
-    "cash_ratio": 174.63,
-    "top_10_ratio": 83.15,
-    "quarterly_change": 2.39,
+    "total_value": 390.28,
+    "cash_ratio": 159.24,
+    "top_10_ratio": 81.76,
+    "quarterly_change": 3.6,
     "holdings": [
         {
             "symbol": "AAPL",
-            "value": 147.65,
-            "change": -0.39
-        },
-        {
-            "symbol": "BAC",
-            "value": 53.06,
-            "change": -2.26
-        },
-        {
-            "symbol": "KO",
-            "value": 25.7,
-            "change": 1.37
-        },
-        {
-            "symbol": "AMZN",
-            "value": 15.6,
-            "change": -1.68
-        },
-        {
-            "symbol": "AXP",
-            "value": 9.18,
-            "change": 2.98
-        },
-        {
-            "symbol": "CVX",
-            "value": 9.2,
-            "change": -3.54
-        },
-        {
-            "symbol": "OXY",
-            "value": 3.67,
-            "change": -3.95
-        },
-        {
-            "symbol": "MCO",
-            "value": 2.92,
-            "change": -0.14
-        },
-        {
-            "symbol": "VRSN",
-            "value": 1.66,
+            "value": 158.56,
             "change": -1.9
         },
         {
+            "symbol": "BAC",
+            "value": 50.71,
+            "change": -0.85
+        },
+        {
+            "symbol": "KO",
+            "value": 29.46,
+            "change": -1.25
+        },
+        {
+            "symbol": "AMZN",
+            "value": 15.43,
+            "change": 1.24
+        },
+        {
+            "symbol": "AXP",
+            "value": 8.19,
+            "change": 2.96
+        },
+        {
+            "symbol": "CVX",
+            "value": 9.56,
+            "change": 2.3
+        },
+        {
+            "symbol": "OXY",
+            "value": 4.65,
+            "change": 1.36
+        },
+        {
+            "symbol": "MCO",
+            "value": 2.44,
+            "change": 1.33
+        },
+        {
+            "symbol": "VRSN",
+            "value": 2.23,
+            "change": -1.82
+        },
+        {
             "symbol": "HPQ",
-            "value": 1.13,
-            "change": -0.35
+            "value": 1.01,
+            "change": 0.62
         }
     ]
 }
