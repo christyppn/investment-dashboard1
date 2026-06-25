@@ -4251,3 +4251,24 @@
 2026-06-24 02:54:14,983 - INFO - Successfully saved data to data/market_breadth.json
 2026-06-24 02:54:14,983 - INFO - Successfully generated dummy data.
 2026-06-24 02:54:14,983 - INFO - Data synchronization complete.
+2026-06-25 02:53:34,413 - INFO - Starting data synchronization script...
+2026-06-25 02:53:34,493 - INFO - Successfully saved data to data/fear_greed_index.json
+2026-06-25 02:53:34,493 - INFO - Successfully fetched Fear & Greed Index from Alternative.me API.
+2026-06-25 02:53:35,696 - WARNING - HIBOR data is old. Date: 2026-05-29. Max freshness: 5 days.
+2026-06-25 02:53:35,696 - INFO - Successfully saved data to data/hibor_rates.json
+2026-06-25 02:53:35,696 - INFO - Successfully fetched HIBOR rates.
+2026-06-25 02:53:35,699 - INFO - Failed to create TzCache, reason: Error creating TzCache folder: '/home/runner/.cache/py-yfinance' reason: [Errno 17] File exists: '/home/runner/.cache/py-yfinance'. TzCache will not be used. Tip: You can direct cache to use a different location with 'set_tz_cache_location(mylocation)'
+2026-06-25 02:53:36,982 - INFO - Successfully saved data to data/market_data_history.json
+2026-06-25 02:53:36,982 - INFO - Successfully saved data to data/money_fund_data.json
+2026-06-25 02:53:36,982 - INFO - Successfully fetched market data from Yahoo Finance.
+2026-06-25 02:53:37,146 - INFO - Successfully fetched financial ratios for SPY.
+2026-06-25 02:53:37,286 - INFO - Successfully fetched financial ratios for QQQ.
+2026-06-25 02:53:37,286 - INFO - Successfully saved data to data/financial_ratios.json
+2026-06-25 02:53:37,332 - INFO - Successfully saved data to data/market_breadth.json
+2026-06-25 02:53:37,333 - INFO - Successfully saved data to data/13f-data.json
+2026-06-25 02:53:37,334 - INFO - Successfully saved data to data/market_sentiment.json
+2026-06-25 02:53:37,334 - INFO - Successfully saved data to data/fund_flows.json
+2026-06-25 02:53:37,334 - INFO - Successfully saved data to data/market_sentiment_history.json
+2026-06-25 02:53:37,335 - INFO - Successfully saved data to data/market_breadth.json
+2026-06-25 02:53:37,335 - INFO - Successfully generated dummy data.
+2026-06-25 02:53:37,335 - INFO - Data synchronization complete.
