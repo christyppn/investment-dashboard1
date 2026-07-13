@@ -1,60 +1,60 @@
 {
-    "timestamp": "2026-07-12 02:26:19",
+    "timestamp": "2026-07-13 02:27:54",
     "fund_name": "伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q1 2026)",
-    "total_value": 408.36,
-    "cash_ratio": 157.22,
-    "top_10_ratio": 80.99,
-    "quarterly_change": 3.15,
+    "total_value": 441.68,
+    "cash_ratio": 179.22,
+    "top_10_ratio": 81.1,
+    "quarterly_change": 2.9,
     "holdings": [
         {
             "symbol": "AAPL",
-            "value": 144.99,
-            "change": -1.44
+            "value": 149.12,
+            "change": -2.33
         },
         {
             "symbol": "BAC",
-            "value": 51.82,
-            "change": 5.41
+            "value": 51.94,
+            "change": -6.8
         },
         {
             "symbol": "KO",
-            "value": 27.94,
-            "change": 0.98
+            "value": 29.89,
+            "change": 1.57
         },
         {
             "symbol": "AMZN",
-            "value": 15.43,
-            "change": 1.89
+            "value": 16.75,
+            "change": -1.91
         },
         {
             "symbol": "AXP",
-            "value": 9.53,
-            "change": 2.96
+            "value": 11.93,
+            "change": 3.49
         },
         {
             "symbol": "CVX",
-            "value": 9.39,
-            "change": 5.81
+            "value": 9.3,
+            "change": 0.74
         },
         {
             "symbol": "OXY",
-            "value": 3.44,
-            "change": 0.46
+            "value": 6.92,
+            "change": 3.86
         },
         {
             "symbol": "MCO",
-            "value": 2.72,
-            "change": 2.64
+            "value": 4.2,
+            "change": -2.28
         },
         {
             "symbol": "VRSN",
-            "value": 2.67,
-            "change": -1.71
+            "value": 2.76,
+            "change": -0.05
         },
         {
             "symbol": "HPQ",
-            "value": 1.19,
-            "change": 0.16
+            "value": 1.12,
+            "change": 0.27
         }
     ]
 }
