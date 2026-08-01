@@ -1,22 +1,11 @@
 {
-    "timestamp": "2026-07-31 02:28:52",
-    "data_date": "2026-06-30",
+    "timestamp": "2026-08-01 02:28:59",
     "rates": [
         {
-            "term": "Overnight",
-            "rate": 3.84024
-        },
-        {
-            "term": "1個月",
-            "rate": 2.93976
-        },
-        {
-            "term": "3個月",
-            "rate": 2.96679
-        },
-        {
-            "term": "6個月",
-            "rate": 3.1369
+            "term": "ERROR",
+            "rate": 0.0,
+            "date": "N/A"
         }
-    ]
+    ],
+    "error_message": "Fetch Failed: Network or API Error: 502 Server Error: Bad Gateway for url: https://api.hkma.gov.hk/public/market-data-and-statistics/mon..."
 }
