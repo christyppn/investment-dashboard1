@@ -1,60 +1,60 @@
 {
-    "timestamp": "2026-08-25 01:02:48",
+    "timestamp": "2026-08-26 01:04:26",
     "fund_name": "伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q2 2026)",
-    "total_value": 395.28,
-    "cash_ratio": 161.92,
-    "top_10_ratio": 86.96,
-    "quarterly_change": -1.54,
+    "total_value": 382.51,
+    "cash_ratio": 160.38,
+    "top_10_ratio": 85.97,
+    "quarterly_change": 1.87,
     "holdings": [
         {
             "symbol": "AAPL",
-            "value": 145.57,
-            "change": 0.06
+            "value": 159.56,
+            "change": 2.99
         },
         {
             "symbol": "BAC",
-            "value": 51.7,
-            "change": -5.78
+            "value": 56.48,
+            "change": 6.08
         },
         {
             "symbol": "KO",
-            "value": 28.84,
-            "change": 1.82
+            "value": 27.69,
+            "change": 0.28
         },
         {
             "symbol": "AMZN",
-            "value": 16.56,
-            "change": 2.34
+            "value": 17.03,
+            "change": 0.1
         },
         {
             "symbol": "AXP",
-            "value": 11.44,
-            "change": 2.14
+            "value": 10.83,
+            "change": 3.02
         },
         {
             "symbol": "CVX",
-            "value": 6.02,
-            "change": 5.23
+            "value": 7.07,
+            "change": -0.53
         },
         {
             "symbol": "OXY",
-            "value": 3.53,
-            "change": 1.91
+            "value": 5.63,
+            "change": 6.33
         },
         {
             "symbol": "MCO",
-            "value": 2.07,
-            "change": 2.01
+            "value": 2.39,
+            "change": -0.27
         },
         {
             "symbol": "VRSN",
-            "value": 1.16,
-            "change": -1.22
+            "value": 1.99,
+            "change": 1.04
         },
         {
             "symbol": "HPQ",
-            "value": 1.36,
-            "change": 0.74
+            "value": 1.55,
+            "change": -0.61
         }
     ]
 }
