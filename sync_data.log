@@ -5733,3 +5733,26 @@
 2026-08-31 03:24:25,496 - INFO - Successfully saved data to data/market_breadth.json
 2026-08-31 03:24:25,496 - INFO - Successfully generated dummy data.
 2026-08-31 03:24:25,496 - INFO - Data synchronization complete.
+2026-09-01 03:24:09,510 - INFO - Starting data synchronization script...
+2026-09-01 03:24:09,775 - INFO - Successfully saved data to data/fear_greed_index.json
+2026-09-01 03:24:09,775 - INFO - Successfully fetched Fear & Greed Index from Alternative.me API.
+2026-09-01 03:24:26,115 - WARNING - Attempt 1/3 failed for https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily: HTTPSConnectionPool(host='api.hkma.gov.hk', port=443): Read timed out. (read timeout=15)
+2026-09-01 03:24:46,734 - WARNING - Attempt 2/3 failed for https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily: HTTPSConnectionPool(host='api.hkma.gov.hk', port=443): Read timed out. (read timeout=15)
+2026-09-01 03:25:12,256 - WARNING - Attempt 3/3 failed for https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily: HTTPSConnectionPool(host='api.hkma.gov.hk', port=443): Read timed out. (read timeout=15)
+2026-09-01 03:25:12,256 - ERROR - All 3 attempts failed for https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily.
+2026-09-01 03:25:12,257 - INFO - Successfully saved data to data/hibor_rates.json
+2026-09-01 03:25:12,257 - ERROR - Failed to fetch HIBOR data: HTTPSConnectionPool(host='api.hkma.gov.hk', port=443): Read timed out. (read timeout=15)
+2026-09-01 03:25:15,620 - INFO - Successfully saved data to data/market_data_history.json
+2026-09-01 03:25:15,620 - INFO - Successfully saved data to data/money_fund_data.json
+2026-09-01 03:25:15,621 - INFO - Successfully fetched market data from Yahoo Finance.
+2026-09-01 03:25:15,907 - INFO - Successfully fetched financial ratios for SPY.
+2026-09-01 03:25:16,122 - INFO - Successfully fetched financial ratios for QQQ.
+2026-09-01 03:25:16,122 - INFO - Successfully saved data to data/financial_ratios.json
+2026-09-01 03:25:17,539 - INFO - Successfully saved data to data/market_breadth.json
+2026-09-01 03:25:17,540 - INFO - Successfully saved data to data/13f-data.json
+2026-09-01 03:25:17,540 - INFO - Successfully saved data to data/market_sentiment.json
+2026-09-01 03:25:17,541 - INFO - Successfully saved data to data/fund_flows.json
+2026-09-01 03:25:17,541 - INFO - Successfully saved data to data/market_sentiment_history.json
+2026-09-01 03:25:17,541 - INFO - Successfully saved data to data/market_breadth.json
+2026-09-01 03:25:17,541 - INFO - Successfully generated dummy data.
+2026-09-01 03:25:17,541 - INFO - Data synchronization complete.
