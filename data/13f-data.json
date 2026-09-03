@@ -1,60 +1,60 @@
 {
-    "timestamp": "2026-09-02 02:43:23",
+    "timestamp": "2026-09-03 02:48:43",
     "fund_name": "伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q2 2026)",
-    "total_value": 428.1,
-    "cash_ratio": 159.03,
-    "top_10_ratio": 88.85,
-    "quarterly_change": 4.91,
+    "total_value": 442.15,
+    "cash_ratio": 168.83,
+    "top_10_ratio": 81.4,
+    "quarterly_change": -2.07,
     "holdings": [
         {
             "symbol": "AAPL",
-            "value": 158.9,
-            "change": -2.77
+            "value": 155.78,
+            "change": 0.06
         },
         {
             "symbol": "BAC",
-            "value": 57.3,
-            "change": 2.18
+            "value": 55.55,
+            "change": 4.83
         },
         {
             "symbol": "KO",
-            "value": 28.68,
-            "change": -0.21
+            "value": 26.37,
+            "change": 1.26
         },
         {
             "symbol": "AMZN",
-            "value": 15.8,
-            "change": -1.2
+            "value": 17.38,
+            "change": 2.13
         },
         {
             "symbol": "AXP",
-            "value": 11.26,
-            "change": 1.76
+            "value": 8.38,
+            "change": -3.06
         },
         {
             "symbol": "CVX",
-            "value": 7.26,
-            "change": 2.08
+            "value": 9.46,
+            "change": 2.8
         },
         {
             "symbol": "OXY",
-            "value": 3.91,
-            "change": 7.86
+            "value": 5.8,
+            "change": -3.94
         },
         {
             "symbol": "MCO",
-            "value": 3.03,
-            "change": 2.97
+            "value": 4.99,
+            "change": 1.81
         },
         {
             "symbol": "VRSN",
-            "value": 2.54,
-            "change": -0.93
+            "value": 2.39,
+            "change": 1.66
         },
         {
             "symbol": "HPQ",
-            "value": 1.16,
-            "change": -0.9
+            "value": 1.96,
+            "change": -0.14
         }
     ]
 }
