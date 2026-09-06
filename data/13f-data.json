@@ -1,60 +1,60 @@
 {
-    "timestamp": "2026-09-05 02:48:26",
+    "timestamp": "2026-09-06 02:45:17",
     "fund_name": "伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q2 2026)",
-    "total_value": 410.87,
-    "cash_ratio": 166.33,
-    "top_10_ratio": 88.93,
-    "quarterly_change": -3.04,
+    "total_value": 431.35,
+    "cash_ratio": 154.03,
+    "top_10_ratio": 80.78,
+    "quarterly_change": 0.65,
     "holdings": [
         {
             "symbol": "AAPL",
-            "value": 145.92,
-            "change": -1.95
+            "value": 157.1,
+            "change": 2.53
         },
         {
             "symbol": "BAC",
-            "value": 57.69,
-            "change": 1.21
+            "value": 56.07,
+            "change": 4.91
         },
         {
             "symbol": "KO",
-            "value": 26.83,
-            "change": -0.33
+            "value": 28.69,
+            "change": 1.1
         },
         {
             "symbol": "AMZN",
-            "value": 19.4,
-            "change": 1.25
+            "value": 10.74,
+            "change": 3.66
         },
         {
             "symbol": "AXP",
-            "value": 11.41,
-            "change": -1.06
+            "value": 8.09,
+            "change": -1.48
         },
         {
             "symbol": "CVX",
-            "value": 8.85,
-            "change": 0.02
+            "value": 5.04,
+            "change": -3.94
         },
         {
             "symbol": "OXY",
-            "value": 6.82,
-            "change": -2.03
+            "value": 6.71,
+            "change": 6.9
         },
         {
             "symbol": "MCO",
-            "value": 2.83,
-            "change": -0.02
+            "value": 3.97,
+            "change": -2.69
         },
         {
             "symbol": "VRSN",
-            "value": 1.24,
-            "change": 0.29
+            "value": 2.74,
+            "change": -0.26
         },
         {
             "symbol": "HPQ",
-            "value": 0.51,
-            "change": -0.95
+            "value": 1.17,
+            "change": 0.99
         }
     ]
 }
