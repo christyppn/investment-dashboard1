@@ -1,60 +1,60 @@
 {
-    "timestamp": "2026-09-19 02:59:45",
+    "timestamp": "2026-09-20 03:13:28",
     "fund_name": "伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q2 2026)",
-    "total_value": 446.62,
-    "cash_ratio": 167.46,
-    "top_10_ratio": 86.25,
-    "quarterly_change": -4.49,
+    "total_value": 409.93,
+    "cash_ratio": 175.54,
+    "top_10_ratio": 84.84,
+    "quarterly_change": -0.33,
     "holdings": [
         {
             "symbol": "AAPL",
-            "value": 147.66,
-            "change": -1.6
+            "value": 153.08,
+            "change": 0.38
         },
         {
             "symbol": "BAC",
-            "value": 54.87,
-            "change": -0.44
+            "value": 53.93,
+            "change": 0.35
         },
         {
             "symbol": "KO",
-            "value": 25.02,
-            "change": 1.34
-        },
-        {
-            "symbol": "AMZN",
-            "value": 16.46,
-            "change": -1.44
-        },
-        {
-            "symbol": "AXP",
-            "value": 11.52,
+            "value": 27.69,
             "change": -1.38
         },
         {
+            "symbol": "AMZN",
+            "value": 12.95,
+            "change": 0.81
+        },
+        {
+            "symbol": "AXP",
+            "value": 11.47,
+            "change": 0.81
+        },
+        {
             "symbol": "CVX",
-            "value": 7.28,
-            "change": -4.37
+            "value": 5.75,
+            "change": -5.37
         },
         {
             "symbol": "OXY",
-            "value": 5.39,
-            "change": 4.12
+            "value": 5.02,
+            "change": 0.44
         },
         {
             "symbol": "MCO",
-            "value": 4.11,
-            "change": 1.98
+            "value": 2.62,
+            "change": 0.17
         },
         {
             "symbol": "VRSN",
-            "value": 1.54,
-            "change": 1.79
+            "value": 2.73,
+            "change": -1.33
         },
         {
             "symbol": "HPQ",
-            "value": 1.54,
-            "change": 0.48
+            "value": 0.75,
+            "change": 0.47
         }
     ]
 }
