@@ -6391,3 +6391,23 @@
 2026-09-29 04:03:49,868 - INFO - Successfully saved data to data/market_breadth.json
 2026-09-29 04:03:49,868 - INFO - Successfully generated dummy data.
 2026-09-29 04:03:49,868 - INFO - Data synchronization complete.
+2026-09-30 03:49:36,525 - INFO - Starting data synchronization script...
+2026-09-30 03:49:36,620 - INFO - Successfully saved data to data/fear_greed_index.json
+2026-09-30 03:49:36,620 - INFO - Successfully fetched Fear & Greed Index from Alternative.me API.
+2026-09-30 03:49:37,847 - WARNING - HIBOR data is old. Date: 2026-08-31. Max freshness: 5 days.
+2026-09-30 03:49:37,847 - INFO - Successfully saved data to data/hibor_rates.json
+2026-09-30 03:49:37,847 - INFO - Successfully fetched HIBOR rates.
+2026-09-30 03:49:39,176 - INFO - Successfully saved data to data/market_data_history.json
+2026-09-30 03:49:39,177 - INFO - Successfully saved data to data/money_fund_data.json
+2026-09-30 03:49:39,177 - INFO - Successfully fetched market data from Yahoo Finance.
+2026-09-30 03:49:39,352 - INFO - Successfully fetched financial ratios for SPY.
+2026-09-30 03:49:39,504 - INFO - Successfully fetched financial ratios for QQQ.
+2026-09-30 03:49:39,504 - INFO - Successfully saved data to data/financial_ratios.json
+2026-09-30 03:49:39,576 - INFO - Successfully saved data to data/market_breadth.json
+2026-09-30 03:49:39,577 - INFO - Successfully saved data to data/13f-data.json
+2026-09-30 03:49:39,578 - INFO - Successfully saved data to data/market_sentiment.json
+2026-09-30 03:49:39,578 - INFO - Successfully saved data to data/fund_flows.json
+2026-09-30 03:49:39,578 - INFO - Successfully saved data to data/market_sentiment_history.json
+2026-09-30 03:49:39,579 - INFO - Successfully saved data to data/market_breadth.json
+2026-09-30 03:49:39,579 - INFO - Successfully generated dummy data.
+2026-09-30 03:49:39,579 - INFO - Data synchronization complete.
