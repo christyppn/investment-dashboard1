@@ -6545,3 +6545,27 @@
 2026-10-06 04:41:40,826 - INFO - Successfully saved data to data/market_breadth.json
 2026-10-06 04:41:40,826 - INFO - Successfully generated dummy data.
 2026-10-06 04:41:40,826 - INFO - Data synchronization complete.
+2026-10-07 04:07:34,256 - INFO - Starting data synchronization script...
+2026-10-07 04:07:34,499 - INFO - Successfully saved data to data/fear_greed_index.json
+2026-10-07 04:07:34,499 - INFO - Successfully fetched Fear & Greed Index from Alternative.me API.
+2026-10-07 04:07:35,331 - WARNING - Attempt 1/3 failed for https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily: 502 Server Error: Bad Gateway for url: https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily
+2026-10-07 04:07:40,931 - WARNING - Attempt 2/3 failed for https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily: 502 Server Error: Bad Gateway for url: https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily
+2026-10-07 04:07:51,664 - WARNING - Attempt 3/3 failed for https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily: 502 Server Error: Bad Gateway for url: https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily
+2026-10-07 04:07:51,664 - ERROR - All 3 attempts failed for https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily.
+2026-10-07 04:07:51,665 - INFO - Successfully saved data to data/hibor_rates.json
+2026-10-07 04:07:51,665 - ERROR - Failed to fetch HIBOR data: 502 Server Error: Bad Gateway for url: https://api.hkma.gov.hk/public/market-data-and-statistics/monthly-statistical-bulletin/er-ir/hk-interbank-ir-daily
+2026-10-07 04:07:51,668 - INFO - Failed to create TzCache, reason: Error creating TzCache folder: '/home/runner/.cache/py-yfinance' reason: [Errno 17] File exists: '/home/runner/.cache/py-yfinance'. TzCache will not be used. Tip: You can direct cache to use a different location with 'set_tz_cache_location(mylocation)'
+2026-10-07 04:07:53,003 - INFO - Successfully saved data to data/market_data_history.json
+2026-10-07 04:07:53,004 - INFO - Successfully saved data to data/money_fund_data.json
+2026-10-07 04:07:53,004 - INFO - Successfully fetched market data from Yahoo Finance.
+2026-10-07 04:07:53,130 - INFO - Successfully fetched financial ratios for SPY.
+2026-10-07 04:07:53,271 - INFO - Successfully fetched financial ratios for QQQ.
+2026-10-07 04:07:53,271 - INFO - Successfully saved data to data/financial_ratios.json
+2026-10-07 04:07:53,420 - INFO - Successfully saved data to data/market_breadth.json
+2026-10-07 04:07:53,421 - INFO - Successfully saved data to data/13f-data.json
+2026-10-07 04:07:53,422 - INFO - Successfully saved data to data/market_sentiment.json
+2026-10-07 04:07:53,422 - INFO - Successfully saved data to data/fund_flows.json
+2026-10-07 04:07:53,422 - INFO - Successfully saved data to data/market_sentiment_history.json
+2026-10-07 04:07:53,423 - INFO - Successfully saved data to data/market_breadth.json
+2026-10-07 04:07:53,423 - INFO - Successfully generated dummy data.
+2026-10-07 04:07:53,423 - INFO - Data synchronization complete.
