@@ -1,15 +1,15 @@
 [
     {
         "symbol": "SPY",
-        "timestamp": "2026-10-07 04:07:53",
-        "pe_ratio": 25.172155,
+        "timestamp": "2026-10-08 04:19:49",
+        "pe_ratio": 24.675882,
         "dividend_yield": 0.99,
         "source": "Yahoo Finance"
     },
     {
         "symbol": "QQQ",
-        "timestamp": "2026-10-07 04:07:53",
-        "pe_ratio": 30.96268,
+        "timestamp": "2026-10-08 04:19:49",
+        "pe_ratio": 29.014034,
         "dividend_yield": 0.42,
         "source": "Yahoo Finance"
     }
