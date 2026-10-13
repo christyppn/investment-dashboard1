@@ -1,13 +1,13 @@
 {
-    "timestamp": "2026-10-12 04:09:51",
+    "timestamp": "2026-10-13 05:18:56",
     "history": [
         {
-            "date": "2026-10-05",
+            "date": "2026-10-06",
             "sentiment": "Greed",
             "value": 65
         },
         {
-            "date": "2026-10-09",
+            "date": "2026-10-10",
             "sentiment": "Neutral",
             "value": 50
         }
