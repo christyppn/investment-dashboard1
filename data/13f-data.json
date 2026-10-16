@@ -1,60 +1,60 @@
 {
-    "timestamp": "2026-10-15 03:02:01",
+    "timestamp": "2026-10-16 02:59:23",
     "fund_name": "伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q2 2026)",
-    "total_value": 421.04,
-    "cash_ratio": 154.96,
-    "top_10_ratio": 86.48,
-    "quarterly_change": 1.8,
+    "total_value": 419.86,
+    "cash_ratio": 150.57,
+    "top_10_ratio": 87.42,
+    "quarterly_change": -1.06,
     "holdings": [
         {
             "symbol": "AAPL",
-            "value": 145.28,
-            "change": 0.32
+            "value": 150.9,
+            "change": -2.25
         },
         {
             "symbol": "BAC",
-            "value": 57.09,
-            "change": 0.2
+            "value": 58.59,
+            "change": -6.29
         },
         {
             "symbol": "KO",
-            "value": 29.51,
-            "change": 0.15
+            "value": 26.31,
+            "change": 0.62
         },
         {
             "symbol": "AMZN",
-            "value": 13.81,
-            "change": 4.97
+            "value": 18.74,
+            "change": 2.29
         },
         {
             "symbol": "AXP",
-            "value": 9.23,
-            "change": 1.38
+            "value": 9.32,
+            "change": -1.45
         },
         {
             "symbol": "CVX",
-            "value": 5.27,
-            "change": 3.1
+            "value": 9.9,
+            "change": -0.36
         },
         {
             "symbol": "OXY",
-            "value": 4.23,
-            "change": -1.22
+            "value": 3.63,
+            "change": -5.57
         },
         {
             "symbol": "MCO",
-            "value": 4.08,
-            "change": 2.6
+            "value": 2.14,
+            "change": -2.35
         },
         {
             "symbol": "VRSN",
-            "value": 1.2,
-            "change": 1.71
+            "value": 1.9,
+            "change": 1.36
         },
         {
             "symbol": "HPQ",
-            "value": 1.71,
-            "change": 0.82
+            "value": 1.41,
+            "change": 0.81
         }
     ]
 }
