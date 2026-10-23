@@ -1,60 +1,60 @@
 {
-    "timestamp": "2026-10-22 03:09:47",
+    "timestamp": "2026-10-23 03:14:05",
     "fund_name": "伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q2 2026)",
-    "total_value": 410.92,
-    "cash_ratio": 168.52,
-    "top_10_ratio": 82.26,
-    "quarterly_change": 0.86,
+    "total_value": 429.69,
+    "cash_ratio": 172.83,
+    "top_10_ratio": 88.49,
+    "quarterly_change": 0.88,
     "holdings": [
         {
             "symbol": "AAPL",
-            "value": 159.64,
-            "change": 0.81
+            "value": 148.77,
+            "change": 1.29
         },
         {
             "symbol": "BAC",
-            "value": 54.68,
-            "change": -3.73
+            "value": 54.26,
+            "change": 0.81
         },
         {
             "symbol": "KO",
-            "value": 27.64,
-            "change": -1.81
+            "value": 27.28,
+            "change": 1.97
         },
         {
             "symbol": "AMZN",
-            "value": 12.61,
-            "change": 4.23
+            "value": 10.89,
+            "change": 1.86
         },
         {
             "symbol": "AXP",
-            "value": 10.54,
-            "change": 2.6
+            "value": 8.92,
+            "change": 3.19
         },
         {
             "symbol": "CVX",
-            "value": 6.98,
-            "change": -0.6
+            "value": 8.59,
+            "change": 2.26
         },
         {
             "symbol": "OXY",
-            "value": 4.47,
-            "change": 7.01
+            "value": 4.87,
+            "change": -7.73
         },
         {
             "symbol": "MCO",
-            "value": 3.9,
-            "change": 1.18
+            "value": 2.29,
+            "change": -1.68
         },
         {
             "symbol": "VRSN",
-            "value": 1.13,
-            "change": -1.85
+            "value": 2.31,
+            "change": -0.63
         },
         {
             "symbol": "HPQ",
-            "value": 0.56,
-            "change": -0.47
+            "value": 0.95,
+            "change": -0.45
         }
     ]
 }
