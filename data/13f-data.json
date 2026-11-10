@@ -1,60 +1,60 @@
 {
-    "timestamp": "2026-11-09 04:29:27",
+    "timestamp": "2026-11-10 05:50:11",
     "fund_name": "伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q2 2026)",
-    "total_value": 402.71,
-    "cash_ratio": 177.32,
-    "top_10_ratio": 85.79,
-    "quarterly_change": 4.57,
+    "total_value": 382.0,
+    "cash_ratio": 174.98,
+    "top_10_ratio": 82.95,
+    "quarterly_change": -2.46,
     "holdings": [
         {
             "symbol": "AAPL",
-            "value": 149.88,
-            "change": 2.27
+            "value": 152.12,
+            "change": 2.6
         },
         {
             "symbol": "BAC",
-            "value": 53.8,
-            "change": -5.81
+            "value": 54.55,
+            "change": 4.26
         },
         {
             "symbol": "KO",
-            "value": 27.83,
-            "change": -1.38
+            "value": 28.11,
+            "change": 1.22
         },
         {
             "symbol": "AMZN",
-            "value": 17.1,
-            "change": -2.76
+            "value": 12.31,
+            "change": 4.34
         },
         {
             "symbol": "AXP",
-            "value": 8.41,
-            "change": 3.42
+            "value": 9.68,
+            "change": 2.03
         },
         {
             "symbol": "CVX",
-            "value": 9.95,
-            "change": 3.08
+            "value": 7.56,
+            "change": -1.92
         },
         {
             "symbol": "OXY",
-            "value": 5.17,
-            "change": -2.42
+            "value": 5.74,
+            "change": 7.15
         },
         {
             "symbol": "MCO",
-            "value": 2.99,
-            "change": 1.86
+            "value": 3.05,
+            "change": -1.0
         },
         {
             "symbol": "VRSN",
-            "value": 2.93,
-            "change": -1.6
+            "value": 2.17,
+            "change": 1.2
         },
         {
             "symbol": "HPQ",
-            "value": 0.91,
-            "change": -0.45
+            "value": 0.52,
+            "change": 0.7
         }
     ]
 }
