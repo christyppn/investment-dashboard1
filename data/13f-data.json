@@ -1,60 +1,60 @@
 {
-    "timestamp": "2026-11-10 05:50:11",
+    "timestamp": "2026-11-11 04:32:40",
     "fund_name": "伯克希爾·哈撒韋 (BRK.B) 13F 持倉 (Q2 2026)",
-    "total_value": 382.0,
-    "cash_ratio": 174.98,
-    "top_10_ratio": 82.95,
-    "quarterly_change": -2.46,
+    "total_value": 436.63,
+    "cash_ratio": 173.39,
+    "top_10_ratio": 86.33,
+    "quarterly_change": -3.54,
     "holdings": [
         {
             "symbol": "AAPL",
-            "value": 152.12,
-            "change": 2.6
+            "value": 157.5,
+            "change": -0.64
         },
         {
             "symbol": "BAC",
-            "value": 54.55,
-            "change": 4.26
+            "value": 52.2,
+            "change": -3.43
         },
         {
             "symbol": "KO",
-            "value": 28.11,
-            "change": 1.22
+            "value": 25.31,
+            "change": 1.3
         },
         {
             "symbol": "AMZN",
-            "value": 12.31,
-            "change": 4.34
+            "value": 19.73,
+            "change": -3.5
         },
         {
             "symbol": "AXP",
-            "value": 9.68,
-            "change": 2.03
+            "value": 8.62,
+            "change": -0.21
         },
         {
             "symbol": "CVX",
-            "value": 7.56,
-            "change": -1.92
+            "value": 9.75,
+            "change": -4.75
         },
         {
             "symbol": "OXY",
-            "value": 5.74,
-            "change": 7.15
-        },
-        {
-            "symbol": "MCO",
-            "value": 3.05,
-            "change": -1.0
-        },
-        {
-            "symbol": "VRSN",
-            "value": 2.17,
+            "value": 4.71,
             "change": 1.2
         },
         {
+            "symbol": "MCO",
+            "value": 3.76,
+            "change": -1.38
+        },
+        {
+            "symbol": "VRSN",
+            "value": 2.79,
+            "change": -1.0
+        },
+        {
             "symbol": "HPQ",
-            "value": 0.52,
-            "change": 0.7
+            "value": 1.4,
+            "change": 0.22
         }
     ]
 }
