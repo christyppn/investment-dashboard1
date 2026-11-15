@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-11-14 04:47:55",
+    "timestamp": "2026-11-15 04:39:58",
     "funds": [
         {
             "symbol": "VOO",
@@ -17,12 +17,6 @@
             "symbol": "BND",
             "latest_price": 70.55999755859375,
             "daily_change_percent": -0.12739414768757618,
-            "date": "2026-11-13"
-        },
-        {
-            "symbol": "BIL",
-            "latest_price": 91.52999877929688,
-            "daily_change_percent": 0.03278555114412107,
             "date": "2026-11-13"
         }
     ]
