@@ -7478,3 +7478,26 @@
 2026-11-19 05:46:36,270 - INFO - Successfully saved data to data/market_breadth.json
 2026-11-19 05:46:36,270 - INFO - Successfully generated dummy data.
 2026-11-19 05:46:36,270 - INFO - Data synchronization complete.
+2026-11-20 05:35:24,077 - INFO - Starting data synchronization script...
+2026-11-20 05:35:24,237 - INFO - Successfully saved data to data/fear_greed_index.json
+2026-11-20 05:35:24,237 - INFO - Successfully fetched Fear & Greed Index from Alternative.me API.
+2026-11-20 05:35:25,194 - WARNING - HIBOR data is old. Date: 2026-10-30. Max freshness: 5 days.
+2026-11-20 05:35:25,197 - INFO - Successfully saved data to data/hibor_rates.json
+2026-11-20 05:35:25,197 - INFO - Successfully fetched HIBOR rates.
+2026-11-20 05:35:26,670 - ERROR - 
+1 Failed download:
+2026-11-20 05:35:26,670 - ERROR - ['SPY']: OperationalError('database is locked')
+2026-11-20 05:35:26,729 - INFO - Successfully saved data to data/market_data_history.json
+2026-11-20 05:35:26,732 - INFO - Successfully saved data to data/money_fund_data.json
+2026-11-20 05:35:26,732 - INFO - Successfully fetched market data from Yahoo Finance.
+2026-11-20 05:35:26,995 - INFO - Successfully fetched financial ratios for SPY.
+2026-11-20 05:35:27,154 - INFO - Successfully fetched financial ratios for QQQ.
+2026-11-20 05:35:27,154 - INFO - Successfully saved data to data/financial_ratios.json
+2026-11-20 05:35:27,311 - INFO - Successfully saved data to data/market_breadth.json
+2026-11-20 05:35:27,312 - INFO - Successfully saved data to data/13f-data.json
+2026-11-20 05:35:27,312 - INFO - Successfully saved data to data/market_sentiment.json
+2026-11-20 05:35:27,314 - INFO - Successfully saved data to data/fund_flows.json
+2026-11-20 05:35:27,317 - INFO - Successfully saved data to data/market_sentiment_history.json
+2026-11-20 05:35:27,319 - INFO - Successfully saved data to data/market_breadth.json
+2026-11-20 05:35:27,319 - INFO - Successfully generated dummy data.
+2026-11-20 05:35:27,319 - INFO - Data synchronization complete.
